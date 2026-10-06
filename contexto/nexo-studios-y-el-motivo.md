@@ -5,7 +5,7 @@ Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas 
 > **Estado (oct. 2026): todo está en etapa de pilotos.** Ningún programa de la grilla salió todavía al aire de forma regular.
 > - Tercer Tiempo: piloto grabado, dom 4/10, 20–22 h.
 > - Pequeños Grandes Sabios: piloto en YouTube con delay, jue 1/10, 17–18 h.
-> - El Motivo: piloto en vivo privado (señal no listada, sin audiencia), mar 6/10, 18–20 h, con Paula conectada desde Bogotá. Invitado: Fede Aguirre.
+> - El Motivo: piloto grabado, mar 6/10, 19–21 h, sale por Somos Como Somos. Paula conectada en vivo desde Bogotá. Invitado: Fede Aguirre. La caja de herramientas es una interfaz web en pantalla (`caja-de-herramientas/`).
 > - Exitosa Yo y Sex and the Baires: pilotos esta semana (datos pendientes).
 > - Las escaletas de piloto van en `pilotos/`, en formato para celular.
 
@@ -16,7 +16,7 @@ Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas 
 - **Dirección:** Hipólito Yrigoyen 4716, San Martín, GBA · IG @nexo.studios.ar · WA +54 9 11 6745-1909 · www.nexostudios.com.ar
 - **Sectores del piso:** 1) Conducción (escritorio de listones, hasta 6 al aire) · 2) Entrevistas (dos sillones + mesa baja) · 3) Live set (música, multitrack, live sessions).
 - **Equipamiento:** 3 PTZ OpterCam GA5500N 4K + 2 Insta360 Link 2C Pro · 6 Shure MV7+ · Rodecaster Pro II · Behringer X2442USB (24 ch) · Elgato Stream Deck XL · Sony MDR-7506, Shure SE215, talkback, Smart TV 50″ 4K · 4 E-Image EL-1152 + Par LED 54 RGB.
-- **Equipo:** Producción ejecutiva Lorena Rizzo · Producción general Fabricio Ortega, Martina Nagel · Dirección general Federico Aguirre, Nicolás Lahargou · Marketing Julián Barreiro · Producción técnica Néstor Mago.
+- **Equipo:** Producción ejecutiva Lorena Rizzo · Producción general Fabricio Ortega (Martina Nagel ya no está en Nexo, oct. 2026) · Dirección general Federico Aguirre, Nicolás Lahargou · Marketing Julián Barreiro · Producción técnica Néstor Mago.
 
 ### Grilla 2026 (temporada lanzamiento 2026/2027)
 
