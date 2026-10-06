@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>El Motivo · Escaleta piloto</title>
+<link href="fonts/local.css" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 14mm 13mm 16mm; }
+  :root {
+    --acc: #e8611a; --acc2: #f59a1e; --acc-soft: #fdf1e8; --acc-line: #f6c9a8;
+    --ink: #111; --mut: #5b5b5b; --line: #e3e3e3; --soft: #f6f6f6;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Inter, sans-serif; color: var(--ink); font-size: 10pt; line-height: 1.4; background: #fff; }
+  .anton { font-family: Anton, sans-serif; letter-spacing: .01em; }
+  .bc { font-family: "Barlow Condensed", sans-serif; font-weight: 700; }
+  .lbl { font-size: 6.6pt; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); font-weight: 500; }
+
+  /* Portada */
+  .hero { background: #000; border-radius: 10px; padding: 14px 20px 18px; text-align: center; }
+  .hero img.logo { width: 76%; display: block; margin: 0 auto; }
+  .kicker { color: var(--acc); font-weight: 700; font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase; text-align: center; margin: 14px 0 4px; }
+  h1 { font-family: Anton, sans-serif; font-weight: 400; font-size: 25pt; text-align: center; margin: 0; line-height: 1.15; }
+  h1 span { color: var(--acc); }
+  .sub { text-align: center; color: #333; font-size: 10.5pt; margin: 8px 40px 10px; }
+  .nexo { display: block; width: 120px; margin: 4px auto 14px; }
+  .ficha { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .ficha div { padding: 9px 14px 10px; border-bottom: 1px solid var(--line); }
+  .ficha div:nth-child(odd) { border-right: 1px solid var(--line); }
+  .ficha div:nth-last-child(-n+2) { border-bottom: 0; }
+  .ficha b { display: block; font-weight: 600; font-size: 10.5pt; margin-top: 3px; }
+  .alert { background: var(--acc-soft); border-left: 4px solid var(--acc); color: #8a3208; font-weight: 600; border-radius: 6px; padding: 10px 14px; margin: 14px 0 6px; font-size: 9.4pt; }
+
+  h2 { break-after: avoid; font-family: Anton, sans-serif; font-weight: 400; font-size: 15pt; margin: 22px 0 10px; text-transform: uppercase; }
+  h2::before { content: "/"; color: var(--acc); margin-right: 8px; font-style: italic; }
+  .break { break-before: page; }
+  .keep { break-inside: avoid; }
+
+  /* Escala */
+  .bar { display: flex; height: 34px; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  .bar div { display: flex; align-items: center; justify-content: center; font-size: 7pt; font-weight: 700; color: #fff; }
+  .ticks { display: flex; justify-content: space-between; font-size: 7pt; margin: 4px 0 12px; font-family: "Barlow Condensed"; font-weight: 700; color: #333; }
+  .list { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 62px 1fr 40px; align-items: center; padding: 8px 14px; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .row .t { font-family: "Barlow Condensed"; font-weight: 700; font-size: 12pt; color: var(--acc); }
+  .row .n { font-weight: 600; font-size: 10.5pt; }
+  .row .d { color: var(--mut); font-size: 8.4pt; }
+  .row .m { text-align: right; font-family: "Barlow Condensed"; font-weight: 700; color: #555; }
+  .row.pre { background: var(--soft); }
+  .row.pre .n { font-weight: 400; color: #555; }
+
+  .cast { display: grid; grid-template-columns: 62px 1fr; padding: 8px 14px; border-bottom: 1px solid var(--line); align-items: center; }
+  .cast:last-child { border-bottom: 0; }
+  .cast .r { font-family: "Barlow Condensed"; font-weight: 700; color: var(--acc); font-size: 10pt; }
+  .cast .n { font-weight: 500; }
+  .cast .d { color: var(--mut); font-size: 8.4pt; }
+
+  /* Bloques */
+  .blk { border: 1px solid var(--line); border-top: 4px solid var(--acc); border-radius: 8px; margin: 0 0 16px; overflow: hidden; }
+  .bh { background: var(--acc-soft); padding: 10px 16px 12px; }
+  .tag { display: inline-block; background: var(--acc); color: #fff; font-size: 7pt; font-weight: 700; border-radius: 4px; padding: 2px 8px; margin-right: 8px; vertical-align: 3px; }
+  .bh .ti { font-family: Anton, sans-serif; font-size: 14.5pt; text-transform: uppercase; }
+  .bh .hr { margin-top: 3px; font-family: "Barlow Condensed"; font-weight: 700; font-size: 12pt; }
+  .bh .hr em { font-style: normal; color: var(--acc); margin: 0 6px; }
+  .bh .hr small { font-family: Inter; font-weight: 500; font-size: 6.6pt; letter-spacing: .16em; color: var(--mut); text-transform: uppercase; }
+  .pie { margin: 10px 0 2px; background: #fff7f0; border-left: 4px solid var(--acc); border-radius: 4px; padding: 8px 14px; }
+  .pie .who { font-size: 6.6pt; letter-spacing: .16em; color: var(--acc); font-weight: 700; text-transform: uppercase; }
+  .pie p { margin: 2px 0 0; font-style: italic; font-size: 10.6pt; }
+  .sec { padding: 10px 16px; border-top: 1px solid var(--line); }
+  .mm { display: grid; grid-template-columns: 48px 1fr; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .mm:last-child { border-bottom: 0; }
+  .mm .t { font-family: "Barlow Condensed"; font-weight: 700; color: var(--acc); font-size: 11pt; }
+  .mm b { font-weight: 600; display: block; }
+  .mm span { color: var(--mut); font-size: 9pt; }
+  .q { background: var(--soft); border-radius: 4px; padding: 5px 10px; margin: 5px 0; font-style: italic; font-size: 9.3pt; }
+  .note { font-size: 9pt; color: #333; margin: 4px 0 0; }
+  .note b { color: var(--acc); }
+  .tec { display: grid; grid-template-columns: 70px 1fr; row-gap: 4px; margin-top: 6px; font-size: 9pt; }
+  .tec .k { font-size: 6.6pt; letter-spacing: .14em; color: var(--mut); font-weight: 500; padding-top: 2px; }
+
+  /* Anexos */
+  .rules { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .rules .r { display: grid; grid-template-columns: 34px 1fr; padding: 8px 14px; border-bottom: 1px solid var(--line); }
+  .rules .r:last-child { border-bottom: 0; }
+  .rules .r .i { font-family: "Barlow Condensed"; font-weight: 700; font-size: 12pt; color: var(--acc); }
+  .rules .r b { font-weight: 600; }
+  .rules .r span { color: var(--mut); font-size: 9pt; display: block; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chips span { border: 1px solid var(--acc-line); background: var(--acc-soft); border-radius: 20px; padding: 3px 10px; font-size: 8.4pt; }
+  .gx { display: grid; grid-template-columns: 46px 1fr; padding: 6px 14px; border-bottom: 1px solid var(--line); font-size: 9.4pt; }
+  .gx:last-child { border-bottom: 0; }
+  .gx .i { font-family: "Barlow Condensed"; font-weight: 700; color: var(--acc); }
+  .tone { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tone div { background: #000; color: #fff; border-radius: 8px; padding: 12px 14px; }
+  .tone b { font-family: Anton; font-weight: 400; font-size: 12pt; color: var(--acc2); display: block; margin-bottom: 4px; }
+  .tone span { font-size: 9pt; color: #ddd; }
+  .hz .gx { grid-template-columns: 58px 1fr; }
+  .hz .gx .i { font-size: 11pt; }
+  .hz b { display: block; font-weight: 600; }
+  .hz span { color: var(--mut); font-size: 9pt; }
+  .chk { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .chk .h { display: flex; justify-content: space-between; padding: 8px 14px; background: var(--soft); font-weight: 700; font-size: 9pt; }
+  .chk .c { display: grid; grid-template-columns: 22px 1fr auto; gap: 6px; padding: 7px 14px; border-top: 1px solid var(--line); font-size: 9.4pt; align-items: center; }
+  .chk .c i { width: 13px; height: 13px; border: 1.5px solid #999; border-radius: 3px; display: inline-block; }
+  .chk .c em { font-style: normal; color: var(--acc); font-weight: 600; font-size: 8.4pt; }
+  .foot { text-align: center; color: var(--mut); font-size: 8pt; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="hero"><img class="logo" src="img/motivo.jpg" alt="El Motivo · Ideas que conectan"></div>
+<div class="kicker">Guion técnico y escaleta · Programa piloto</div>
+<h1>MARTES · <span>HISTORIAS DE GENTE QUE SE ANIMÓ</span></h1>
+<p class="sub">Un invitado que está en el medio de su motivo, tres ciudades y dos horas en vivo. No es un programa de éxitos: es un programa de procesos.</p>
+<img class="nexo" src="img/nexo_s.png" alt="Nexo Studios">
+
+<div class="ficha">
+  <div><span class="lbl">Fecha</span><b>Mar 06 Oct 2026</b></div>
+  <div><span class="lbl">Al aire</span><b class="bc" style="font-size:13pt">18:00 – 20:00 (ARG)</b></div>
+  <div><span class="lbl">Lugar</span><b>Nexo Studios · San Martín</b></div>
+  <div><span class="lbl">Salida</span><b>Somos Como Somos · YouTube</b></div>
+  <div><span class="lbl">En cámara</span><b>3 conductores + 1 invitado</b></div>
+  <div><span class="lbl">Estructura</span><b>7 bloques · sin tandas</b></div>
+</div>
+
+<div class="alert">Tres ciudades, tres horarios: el aire empieza a las 18:00 en Buenos Aires, a las 16:00 en Bogotá y a las 23:00 en Ibiza. El invitado entra al aire a las 18:10 y tiene que estar en el estudio a las 17:50.</div>
+
+<h2>Las 2 horas a escala</h2>
+<div class="bar">
+  <div style="flex:10;background:#9a9a9a">AP</div>
+  <div style="flex:35;background:#e8611a">B1</div>
+  <div style="flex:20;background:#f08a2c">B2</div>
+  <div style="flex:15;background:#c94f12">B3</div>
+  <div style="flex:20;background:#f5a524">B4</div>
+  <div style="flex:15;background:#de6d1f">B5</div>
+  <div style="flex:5;background:#555">CI</div>
+</div>
+<div class="ticks"><span>18:00</span><span>18:30</span><span>19:00</span><span>19:30</span><span>20:00</span></div>
+
+<div class="list">
+  <div class="row"><span class="t">18:00</span><div><div class="n">Apertura · Los tres</div><div class="d">Qué es El Motivo, pase a Bogotá y la pregunta del día</div></div><span class="m">10'</span></div>
+  <div class="row"><span class="t">18:10</span><div><div class="n">B1 · El motivo</div><div class="d">La entrevista central: la historia como proceso, no como currículum · Fabricio</div></div><span class="m">35'</span></div>
+  <div class="row"><span class="t">18:45</span><div><div class="n">B2 · La caja de herramientas</div><div class="d">Seis preguntas concretas y el objeto del invitado en cámara</div></div><span class="m">20'</span></div>
+  <div class="row"><span class="t">19:05</span><div><div class="n">B3 · El motivo de la calle</div><div class="d">El material grabado en la semana, visto y comentado en vivo</div></div><span class="m">15'</span></div>
+  <div class="row"><span class="t">19:20</span><div><div class="n">B4 · Bogotá</div><div class="d">El bloque de Paula: un invitado o un tema desde Colombia</div></div><span class="m">20'</span></div>
+  <div class="row"><span class="t">19:40</span><div><div class="n">B5 · El chat pregunta</div><div class="d">Las preguntas las contesta el invitado, no la conducción · Roko</div></div><span class="m">15'</span></div>
+  <div class="row"><span class="t">19:55</span><div><div class="n">Cierre · ¿Cuál es tu motivo?</div></div><span class="m">5'</span></div>
+</div>
+
+<div class="keep"><h2 class="keep">Al aire</h2>
+<div class="list keep">
+  <div class="cast"><span class="r">COND</span><div><div class="n">Fabricio Benjamín Ortega</div><div class="d">Conducción. Abre, da los pases y lleva la entrevista central.</div></div></div>
+  <div class="cast"><span class="r">CO</span><div><div class="n">Rodrigo "Roko" García</div><div class="d">Co-conducción en el piso. La repregunta, el chiste que afloja y el dueño del chat.</div></div></div>
+  <div class="cast"><span class="r">CO</span><div><div class="n">Paula González · desde Bogotá</div><div class="d">Co-conducción remota. Entra en la apertura y es la dueña del bloque de las 19:20.</div></div></div>
+  <div class="cast"><span class="r">INV</span><div><div class="n">[Invitado a confirmar]</div><div class="d">Entra a las 18:10 y se queda hasta el cierre. Trae algo para mostrar.</div></div></div>
+  <div class="cast"><span class="r">PROD</span><div><div class="n">Martina Nagel</div><div class="d">Producción en piso. Como Fabricio está al aire, ella lleva los tiempos y las señas.</div></div></div>
+  <div class="cast"><span class="r">TÉC</span><div><div class="n">Néstor Mago</div><div class="d">Producción técnica: cámaras, audio, enlace con Bogotá y emisión.</div></div></div>
+</div></div>
+
+<!-- ESCALETA -->
+<h2 class="break">Escaleta minuto a minuto</h2>
+
+<div class="blk keep">
+  <div class="bh">
+    <div><span class="tag">AP</span><span class="ti">Apertura · Los tres</span></div>
+    <div class="hr">18:00 – 18:10<em>10'</em><small>Buenos Aires + Bogotá</small></div>
+    <div class="pie"><div class="who">Fabricio</div><p>"Buenas tardes en Buenos Aires, buenas tardes en Bogotá y buenas noches en España. Esto es El Motivo. Acá no se viene a contar lo bien que te fue: se viene a contar cómo lo hiciste."</p></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Minuto a minuto</div>
+    <div class="mm"><span class="t">18:00</span><div><b>Cabecera</b><span>Cortina de apertura con el logo y el arco de las tres ciudades.</span></div></div>
+    <div class="mm"><span class="t">18:01</span><div><b>Saludo en el piso</b><span>Fabricio y Roko. Qué es El Motivo en dos frases y que hoy es el primero.</span></div></div>
+    <div class="mm"><span class="t">18:03</span><div><b>Pase a Bogotá</b><span>Paula saluda en vivo, cuenta cómo está la ciudad hoy y qué trae para las 19:20.</span></div></div>
+    <div class="mm"><span class="t">18:06</span><div><b>La pregunta del día</b><span>Se presenta al invitado sin contar todavía su historia, y la pregunta que va a atravesar las dos horas.</span></div></div>
+    <div class="mm"><span class="t">18:09</span><div><b>Pase al invitado</b><span>"Lo hacemos pasar."</span></div></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>CAM 1 general del escritorio · PTZ sobre quien habla</span>
+      <span class="k">AUDIO</span><span>Cortina de apertura · micros de Fabricio y Roko · retorno de Bogotá abierto</span>
+      <span class="k">GRÁFICA</span><span>Cabecera · mosca El Motivo fija · zócalos de los tres · pantalla dividida BA/Bogotá · placa con la pregunta del día</span>
+      <span class="k">LUZ</span><span>Baño ámbar en los paneles · la X de Nexo apagada</span>
+    </div>
+  </div>
+</div>
+
+<div class="blk">
+  <div class="bh keep">
+    <div><span class="tag">B1</span><span class="ti">El motivo</span></div>
+    <div class="hr">18:10 – 18:45<em>35'</em><small>Entrevista central</small></div>
+    <div class="pie"><div class="who">Fabricio</div><p>"Antes de que nos cuentes a qué te dedicás, contanos qué estabas haciendo el día antes de arrancar."</p></div>
+  </div>
+  <div class="sec keep">
+    <div class="lbl">Minuto a minuto</div>
+    <div class="mm"><span class="t">18:10</span><div><b>Entra el invitado</b><span>Saludo, se sienta y entra el zócalo. Una línea sobre qué hace hoy.</span></div></div>
+    <div class="mm"><span class="t">18:12</span><div><b>Lo de antes</b><span>Qué había antes de la idea: trabajo, ciudad, edad y qué le faltaba.</span></div></div>
+    <div class="mm"><span class="t">18:22</span><div><b>El día que casi lo deja</b><span>La fecha concreta. Qué hubo que romper, vender o dejar para seguir.</span></div></div>
+    <div class="mm"><span class="t">18:34</span><div><b>Quién le dio una mano</b><span>Una persona con nombre. Y qué está haciendo esta semana para sostenerlo.</span></div></div>
+    <div class="mm"><span class="t">18:43</span><div><b>Aviso del chat · Roko</b><span>"El chat está abierto: a las siete y cuarenta las preguntas las contesta el invitado."</span></div></div>
+    <div class="mm"><span class="t">18:44</span><div><b>Pase</b><span>"Ya nos contaste cómo fue. Ahora vamos a lo concreto."</span></div></div>
+  </div>
+  <div class="sec keep">
+    <div class="lbl">Disparadores</div>
+    <div class="q">"¿Qué fecha marcarías en el calendario como el día uno?"</div>
+    <div class="q">"¿Qué dijo tu familia cuando lo contaste?"</div>
+    <div class="q">"¿Cuánta plata tenías cuando arrancaste?"</div>
+    <div class="q">"¿Hubo una noche en que pensaste en largar todo? ¿Qué pasó al otro día?"</div>
+    <div class="q">"¿Qué estás haciendo esta semana? No hace cinco años: esta semana."</div>
+    <p class="note"><b>Proceso, no currículum.</b> Si el invitado empieza a enumerar logros, Roko lo baja a una fecha: "Pará, ¿eso cuándo fue?".</p>
+  </div>
+  <div class="sec keep">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>PTZ en primer plano del invitado · PTZ de Fabricio · Insta360 de contraplano a Roko</span>
+      <span class="k">AUDIO</span><span>Micros abiertos, sin cortina debajo</span>
+      <span class="k">GRÁFICA</span><span>Zócalo del invitado con nombre y lo que hace · placa con las fechas clave de su historia</span>
+    </div>
+  </div>
+</div>
+
+<div class="blk">
+  <div class="bh keep">
+    <div><span class="tag">B2</span><span class="ti">La caja de herramientas</span></div>
+    <div class="hr">18:45 – 19:05<em>20'</em><small>Lo que se lleva el que mira</small></div>
+    <div class="pie"><div class="who">Roko</div><p>"Bueno, ya nos inspiraste. Ahora decinos qué tiene que hacer el que está mirando el miércoles a la mañana."</p></div>
+  </div>
+  <div class="sec keep">
+    <div class="lbl">Minuto a minuto · las seis preguntas</div>
+    <div class="mm"><span class="t">18:45</span><div><b>El primer paso</b><span>Qué hizo la primera semana, cuando no tenía nada. La versión aburrida y real.</span></div></div>
+    <div class="mm"><span class="t">18:48</span><div><b>La herramienta concreta</b><span>El programa, la máquina, el cuaderno o el método que usa todos los días. Se muestra en cámara.</span></div></div>
+    <div class="mm"><span class="t">18:52</span><div><b>Cómo se aprende el oficio</b><span>Dónde se estudia, quién enseña, cuánto cuesta y cuánto tarda.</span></div></div>
+    <div class="mm"><span class="t">18:55</span><div><b>El error que costó caro</b><span>Lo que haría distinto. Es lo que más se recorta para redes.</span></div></div>
+    <div class="mm"><span class="t">18:58</span><div><b>Cómo se sostiene</b><span>De qué vive hoy, con números si los quiere dar.</span></div></div>
+    <div class="mm"><span class="t">19:01</span><div><b>A quién llamar</b><span>Con qué otra persona hay que hablar para seguir. El programa deja un contacto.</span></div></div>
+    <div class="mm"><span class="t">19:04</span><div><b>Pase a la calle</b><span>"Y esta semana salimos a preguntarle a la gente."</span></div></div>
+    <p class="note"><b>Con nombres, no con generalidades.</b> Si contesta "hay muchos cursos", se repregunta: "¿Cuál hiciste vos?".</p>
+  </div>
+  <div class="sec keep">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>Insta360 en plano detalle del objeto sobre el escritorio · PTZ del invitado</span>
+      <span class="k">AUDIO</span><span>SFX corto al pasar de una pregunta a la otra</span>
+      <span class="k">GRÁFICA</span><span>Placa Caja de herramientas · zócalo por cada una de las seis · zócalo con datos concretos (dónde, cuánto, contacto)</span>
+    </div>
+  </div>
+</div>
+
+<div class="blk keep">
+  <div class="bh">
+    <div><span class="tag">B3</span><span class="ti">El motivo de la calle</span></div>
+    <div class="hr">19:05 – 19:20<em>15'</em><small>El material de la semana</small></div>
+    <div class="pie"><div class="who">Fabricio</div><p>"Esta semana salimos a la calle con una sola pregunta: ¿cuánto vale tu tiempo? Mirá lo que nos contestaron."</p></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Minuto a minuto</div>
+    <div class="mm"><span class="t">19:05</span><div><b>Presentación del VT</b><span>Una línea: dónde se grabó y qué se preguntó.</span></div></div>
+    <div class="mm"><span class="t">19:06</span><div><b>VT · ¿Cuánto vale tu tiempo?</b><span>De 6 a 8 minutos, subtitulado.</span></div></div>
+    <div class="mm"><span class="t">19:14</span><div><b>Comentario de los tres</b><span>Qué respuesta los sorprendió. Paula suma cómo se contestaría en Bogotá.</span></div></div>
+    <div class="mm"><span class="t">19:17</span><div><b>La respuesta del invitado</b><span>"¿Y vos qué hubieras contestado?"</span></div></div>
+    <div class="mm"><span class="t">19:19</span><div><b>Pase a Bogotá</b><span>"Nos vamos a Colombia. Paula."</span></div></div>
+    <p class="note"><b>Si no hay VT,</b> la pregunta se hace a la mesa y al chat, y el bloque se acorta a 10 minutos a favor del B1.</p>
+  </div>
+  <div class="sec">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>VT a pantalla completa · recuadro con la mesa para las reacciones</span>
+      <span class="k">AUDIO</span><span>Audio del VT arriba · micros abiertos al volver</span>
+      <span class="k">GRÁFICA</span><span>Separador El motivo de la calle · subtítulos en el VT</span>
+    </div>
+  </div>
+</div>
+
+<div class="blk keep">
+  <div class="bh">
+    <div><span class="tag">B4</span><span class="ti">Bogotá</span></div>
+    <div class="hr">19:20 – 19:40<em>20'</em><small>Desde Colombia · Paula</small></div>
+    <div class="pie"><div class="who">Paula</div><p>"Desde Bogotá, donde son las cinco y veinte de la tarde. Hoy les traigo a alguien que también se animó, pero de este lado."</p></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Minuto a minuto</div>
+    <div class="mm"><span class="t">19:20</span><div><b>Pase de Fabricio</b><span>Paula a pantalla completa.</span></div></div>
+    <div class="mm"><span class="t">19:21</span><div><b>Qué trae Paula</b><span>Presenta a su invitado o el tema desde Colombia.</span></div></div>
+    <div class="mm"><span class="t">19:23</span><div><b>Entrevista o columna</b><span>Lo conduce Paula. El piso escucha y entra solo con preguntas.</span></div></div>
+    <div class="mm"><span class="t">19:35</span><div><b>Mirada cruzada</b><span>El invitado del piso le pregunta algo a Bogotá, y al revés.</span></div></div>
+    <div class="mm"><span class="t">19:39</span><div><b>Pase al chat</b><span>Paula: "Roko, ¿qué está diciendo la gente?"</span></div></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Disparadores</div>
+    <div class="q">"¿Esto en Colombia se hace igual?"</div>
+    <div class="q">"¿Qué se ve distinto desde allá?"</div>
+    <div class="q">"¿Qué le dirías al de Buenos Aires que quiere hacer lo mismo?"</div>
+    <p class="note"><b>Plan B:</b> si se cae la conexión, Paula entra por audio con foto fija y el bloque pasa a 10 minutos. Lo que sobra va al chat.</p>
+  </div>
+  <div class="sec">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>Bogotá a pantalla completa · pantalla dividida en la mirada cruzada</span>
+      <span class="k">AUDIO</span><span>Retorno a Bogotá por talkback · delay medido en la prueba</span>
+      <span class="k">GRÁFICA</span><span>Separador Bogotá · zócalos de Paula y de su invitado</span>
+    </div>
+  </div>
+</div>
+
+<div class="blk keep">
+  <div class="bh">
+    <div><span class="tag">B5</span><span class="ti">El chat pregunta</span></div>
+    <div class="hr">19:40 – 19:55<em>15'</em><small>Roko lee, contesta el invitado</small></div>
+    <div class="pie"><div class="who">Roko</div><p>"Ahora mandan ustedes. Y acá la regla es clara: nosotros no contestamos nada."</p></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Minuto a minuto</div>
+    <div class="mm"><span class="t">19:40</span><div><b>Primera pregunta</b><span>Roko la lee con el nombre de usuario.</span></div></div>
+    <div class="mm"><span class="t">19:41</span><div><b>Ronda de preguntas</b><span>De cinco a seis. El invitado contesta en dos minutos como máximo.</span></div></div>
+    <div class="mm"><span class="t">19:52</span><div><b>La que elige el invitado</b><span>Se le muestran tres y elige cuál contestar.</span></div></div>
+    <div class="mm"><span class="t">19:54</span><div><b>Pase al cierre</b><span>"Y ahora la última, la de siempre."</span></div></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Preguntas de reserva · si el chat está flojo</div>
+    <div class="q">"¿Cuánto tardaste en vivir de esto?"</div>
+    <div class="q">"¿Lo volverías a hacer?"</div>
+    <div class="q">"¿Qué hacés el día que no tenés ganas?"</div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>PTZ del invitado · general para las reacciones</span>
+      <span class="k">GRÁFICA</span><span>Pregunta del chat en pantalla con el usuario</span>
+    </div>
+  </div>
+</div>
+
+<div class="blk keep">
+  <div class="bh">
+    <div><span class="tag">CI</span><span class="ti">Cierre · ¿Cuál es tu motivo?</span></div>
+    <div class="hr">19:55 – 20:00<em>5'</em><small>La pregunta de todos los programas</small></div>
+    <div class="pie"><div class="who">Fabricio</div><p>"La última pregunta, la que le vamos a hacer a cada invitado que pase por acá: ¿cuál es tu motivo?"</p></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Minuto a minuto</div>
+    <div class="mm"><span class="t">19:55</span><div><b>La pregunta al invitado</b><span>Sin apuro. Es la frase que cierra el clip principal.</span></div></div>
+    <div class="mm"><span class="t">19:57</span><div><b>La misma, al que mira</b><span>Fabricio a cámara: "Y vos, ¿cuál es tu motivo? Dejalo en el chat."</span></div></div>
+    <div class="mm"><span class="t">19:58</span><div><b>Saludo de los tres</b><span>Paula desde Bogotá y los dos del piso. Próximo martes a las 18.</span></div></div>
+    <div class="mm"><span class="t">19:59</span><div><b>Placa final</b><span>Redes + by NEXO Studios + Somos Como Somos. Se enciende la X de Nexo. Fin 20:00.</span></div></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Técnica</div>
+    <div class="tec">
+      <span class="k">CÁMARA</span><span>CAM 1 general · plano de Fabricio a cámara · pantalla dividida para el saludo</span>
+      <span class="k">AUDIO</span><span>Cortina de cierre arriba en el saludo</span>
+      <span class="k">LUZ</span><span>Se enciende la X iluminada</span>
+    </div>
+  </div>
+</div>
+
+<!-- ANEXOS -->
+<h2 class="break">El invitado · qué tiene que traer</h2>
+<div class="rules keep">
+  <div class="r"><span class="i">1</span><div><b>Una hora y media</b><span>Entra a las 18:10 y se queda hasta el cierre. Llega 20 minutos antes.</span></div></div>
+  <div class="r"><span class="i">2</span><div><b>Algo para mostrar</b><span>El producto, la herramienta o una foto del primer día. Lo que se ve se clipea.</span></div></div>
+  <div class="r"><span class="i">3</span><div><b>Una historia con fechas</b><span>Cuándo empezó, cuándo casi larga, cuándo cambió.</span></div></div>
+  <div class="r"><span class="i">4</span><div><b>Los temas que no se tocan</b><span>Se avisan antes, en el brief de las 17:50, y no se tocan. Lo demás se pregunta.</span></div></div>
+  <div class="r"><span class="i">5</span><div><b>Un contacto para dejar</b><span>La persona o el lugar que recomienda para "A quién llamar".</span></div></div>
+</div>
+
+<div class="keep"><h2 class="keep">El motivo de la calle · próximas preguntas</h2>
+<p class="note" style="margin-top:0">Una pregunta por semana. Alimenta el B3 y las redes entre programa y programa.</p>
+<div class="chips"><span>¿Cuánto vale tu tiempo?</span><span>¿Cuál es tu sueño?</span><span>El oficio de al lado</span><span>La pregunta incómoda</span></div></div>
+
+<div class="keep"><h2 class="keep">Gráfica</h2>
+<div class="list keep">
+  <div class="gx"><span class="i">G01</span><span>Cabecera de apertura con el arco de las tres ciudades</span></div>
+  <div class="gx"><span class="i">G02</span><span>Mosca El Motivo fija en una esquina</span></div>
+  <div class="gx"><span class="i">G03</span><span>Zócalos: Fabricio, Roko, Paula (Bogotá) e invitado</span></div>
+  <div class="gx"><span class="i">G04</span><span>Pantalla dividida Buenos Aires / Bogotá</span></div>
+  <div class="gx"><span class="i">G05</span><span>Placa con la pregunta del día</span></div>
+  <div class="gx"><span class="i">G06</span><span>Placa con las fechas clave del invitado</span></div>
+  <div class="gx"><span class="i">G07</span><span>Placa Caja de herramientas + 6 zócalos de pregunta</span></div>
+  <div class="gx"><span class="i">G08</span><span>Separador El motivo de la calle + VT subtitulado</span></div>
+  <div class="gx"><span class="i">G09</span><span>Separador Bogotá</span></div>
+  <div class="gx"><span class="i">G10</span><span>Preguntas del chat en pantalla</span></div>
+  <div class="gx"><span class="i">G11</span><span>Placa "¿Cuál es tu motivo?"</span></div>
+  <div class="gx"><span class="i">G12</span><span>Placa final + redes + by NEXO Studios + Somos Como Somos</span></div>
+</div>
+<p class="note">El logo va siempre sobre negro pleno (#000) para que no aparezca un recuadro gris.</p></div>
+
+<div class="keep"><h2 class="keep">Tono del programa</h2>
+<div class="tone keep">
+  <div><b>PROCESO, NO CURRÍCULUM</b><span>Fechas, números y nombres. Si suena a LinkedIn, se repregunta.</span></div>
+  <div><b>EL QUE MIRA SE LLEVA ALGO</b><span>Cada programa deja una herramienta que se pueda usar el miércoles a la mañana.</span></div>
+  <div><b>BOGOTÁ NO ES UN SALUDO</b><span>Paula tiene su bloque y su invitado. La región entra de verdad.</span></div>
+</div></div>
+
+<h2>Horario de hoy</h2>
+<div class="list hz keep">
+  <div class="gx"><span class="i">14:00</span><div><b>Llegada técnica</b><span>Armado del escritorio, preset de luz ámbar, mosca y placas cargadas en técnica.</span></div></div>
+  <div class="gx"><span class="i">15:00</span><div><b>Prueba de audio</b><span>Micros del piso, consola y cortinas.</span></div></div>
+  <div class="gx"><span class="i">15:30</span><div><b>Prueba con Bogotá</b><span>Imagen, audio, retorno y delay con Paula.</span></div></div>
+  <div class="gx"><span class="i">16:00</span><div><b>Prueba de emisión</b><span>Clave de transmisión del canal Somos Como Somos y señal de prueba privada.</span></div></div>
+  <div class="gx"><span class="i">16:30</span><div><b>Repaso de escaleta</b><span>Fabricio, Roko y Martina: pies, pases y tiempos.</span></div></div>
+  <div class="gx"><span class="i">17:00</span><div><b>Ensayo</b><span>Apertura, pases a Bogotá y cierre, con técnica.</span></div></div>
+  <div class="gx"><span class="i">17:30</span><div><b>Paula en stand-by</b><span>Conectada y con retorno.</span></div></div>
+  <div class="gx"><span class="i">17:50</span><div><b>Llega el invitado</b><span>Micro, objeto en la mesa y temas que no se tocan.</span></div></div>
+  <div class="gx"><span class="i">17:58</span><div><b>En posición</b><span>Cuenta regresiva.</span></div></div>
+  <div class="gx"><span class="i">18:00</span><div><b>Al aire</b><span>Dos horas de corrido, sin tandas.</span></div></div>
+  <div class="gx"><span class="i">20:00</span><div><b>Fuera de aire</b><span>Foto con el invitado para redes. Control del material: se revisa el audio, se copia y se verifica la copia.</span></div></div>
+  <div class="gx"><span class="i">20:30</span><div><b>Devolución</b><span>Qué funcionó, qué se corta y los tiempos reales de cada bloque.</span></div></div>
+</div>
+
+<div class="keep"><h2 class="keep">Antes de salir</h2>
+<div class="chk keep">
+  <div class="h"><span>Checklist</span><span>0 / 10</span></div>
+  <div class="c"><i></i><span>Invitado confirmado: nombre, a qué se dedica, fechas clave y temas que no se tocan</span><em>Producción</em></div>
+  <div class="c"><i></i><span>Objeto del invitado para la caja de herramientas</span><em>Producción</em></div>
+  <div class="c"><i></i><span>Pregunta del día definida</span><em>Fabricio</em></div>
+  <div class="c"><i></i><span>Invitado o tema del bloque Bogotá</span><em>Paula</em></div>
+  <div class="c"><i></i><span>VT de la calle editado y subtitulado</span><em>Post</em></div>
+  <div class="c"><i></i><span>Enlace con Bogotá probado con retorno</span><em>El Mago</em></div>
+  <div class="c"><i></i><span>Clave de transmisión del canal probada</span><em>El Mago</em></div>
+  <div class="c"><i></i><span>Zócalos y placas G01 a G12 cargados</span><em>Dirección</em></div>
+  <div class="c"><i></i><span>Moderación del chat asignada y preguntas de reserva impresas</span><em>Martina</em></div>
+  <div class="c"><i></i><span>Grabación probada: máster y copia de seguridad · X de Nexo apagada</span><em>El Mago</em></div>
+</div></div>
+
+<div class="foot">El Motivo · Ideas que conectan · by NEXO Studios · Somos Como Somos<br>Piloto 06.10.2026 · 18:00 (ARG)</div>
+</body>
+</html>
