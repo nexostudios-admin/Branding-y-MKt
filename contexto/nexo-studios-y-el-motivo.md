@@ -2,6 +2,13 @@
 
 Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas (oct. 2026).
 
+> **Estado (oct. 2026): todo está en etapa de pilotos.** Ningún programa de la grilla salió todavía al aire de forma regular.
+> - Tercer Tiempo: piloto grabado, dom 4/10, 20–22 h.
+> - Pequeños Grandes Sabios: piloto en YouTube con delay, jue 1/10, 17–18 h.
+> - El Motivo: piloto en vivo privado (señal no listada, sin audiencia), mar 6/10, 18–20 h, con Paula conectada desde Bogotá. Invitado: Fede Aguirre.
+> - Exitosa Yo y Sex and the Baires: pilotos esta semana (datos pendientes).
+> - Las escaletas de piloto van en `pilotos/`, en formato para celular.
+
 ## Nexo Studios
 
 - **Qué es:** centro integral de contenido (podcast, streaming, música, audiovisual). Produce, emite y posproduce en la misma casa.
