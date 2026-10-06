@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Motivo · Escaleta piloto</title>
+<link href="fonts/local.css" rel="stylesheet">
+<style>
+  /* Página de celular: proporción de pantalla de teléfono, una columna */
+  @page { size: 100mm 222mm; margin: 6mm 5.5mm 7mm; }
+  :root {
+    --acc: #e8611a; --acc2: #f59a1e; --acc-soft: #fdf1e8;
+    --ink: #111; --mut: #555; --line: #e2e2e2; --soft: #f5f5f5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; }
+  body { font-family: Inter, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.38; }
+  @media screen { body { max-width: 440px; margin: 0 auto; padding: 16px; } }
+  .lbl { font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); font-weight: 500; }
+  .keep { break-inside: avoid; }
+  .break { break-before: page; }
+
+  /* Portada */
+  .hero { background: #000; border-radius: 8px; padding: 8px 6px 10px; }
+  .hero img { width: 100%; display: block; }
+  .kicker { color: var(--acc); font-weight: 700; font-size: 7.5pt; letter-spacing: .12em; text-transform: uppercase; text-align: center; margin: 10px 0 2px; }
+  h1 { font-family: Anton, sans-serif; font-weight: 400; font-size: 19pt; text-align: center; margin: 0; line-height: 1.12; }
+  h1 span { color: var(--acc); display: block; }
+  .sub { text-align: center; color: #333; font-size: 10pt; margin: 6px 4px 8px; }
+  .nexo { display: block; width: 92px; margin: 0 auto 10px; }
+  .ficha { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .ficha div { display: flex; justify-content: space-between; gap: 10px; padding: 6px 10px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .ficha div:last-child { border-bottom: 0; }
+  .ficha b { font-weight: 600; text-align: right; font-size: 10pt; }
+  .alert { background: var(--acc-soft); border-left: 4px solid var(--acc); color: #8a3208; font-weight: 600; border-radius: 6px; padding: 8px 10px; margin: 10px 0 0; font-size: 9.6pt; }
+
+  h2 { font-family: Anton, sans-serif; font-weight: 400; font-size: 15pt; margin: 4px 0 8px; text-transform: uppercase; break-after: avoid; }
+  h2::before { content: "/"; color: var(--acc); margin-right: 6px; font-style: italic; }
+  h2.sp { margin-top: 16px; }
+
+  /* Escala y resumen */
+  .bar { display: flex; height: 26px; border-radius: 5px; overflow: hidden; }
+  .bar div { display: flex; align-items: center; justify-content: center; font-size: 7pt; font-weight: 700; color: #fff; }
+  .ticks { display: flex; justify-content: space-between; font-size: 8pt; margin: 3px 0 10px; font-family: "Barlow Condensed"; font-weight: 700; }
+  .list { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 46px 1fr 28px; gap: 4px; align-items: center; padding: 7px 10px; border-bottom: 1px solid var(--line); break-inside: avoid; }
+  .row:last-child { border-bottom: 0; }
+  .t { font-family: "Barlow Condensed"; font-weight: 700; font-size: 12.5pt; color: var(--acc); }
+  .row .n { font-weight: 600; }
+  .row .d, .cast .d { color: var(--mut); font-size: 9pt; }
+  .row .m { text-align: right; font-family: "Barlow Condensed"; font-weight: 700; color: #555; font-size: 11pt; }
+  .cast { display: grid; grid-template-columns: 46px 1fr; gap: 4px; padding: 7px 10px; border-bottom: 1px solid var(--line); break-inside: avoid; }
+  .cast:last-child { border-bottom: 0; }
+  .cast .r { font-family: "Barlow Condensed"; font-weight: 700; color: var(--acc); font-size: 11pt; padding-top: 1px; }
+  .cast .n { font-weight: 600; }
+  .cast.inv { background: var(--acc-soft); }
+
+  /* Bloques */
+  .bh { background: var(--acc-soft); border-top: 4px solid var(--acc); border-radius: 8px 8px 0 0; padding: 8px 10px 10px; break-inside: avoid; break-after: avoid; }
+  .tag { display: inline-block; background: var(--acc); color: #fff; font-size: 8pt; font-weight: 700; border-radius: 4px; padding: 1px 7px; margin-right: 6px; vertical-align: 3px; }
+  .bh .ti { font-family: Anton, sans-serif; font-size: 15pt; text-transform: uppercase; line-height: 1.1; }
+  .bh .hr { margin-top: 3px; font-family: "Barlow Condensed"; font-weight: 700; font-size: 13pt; }
+  .bh .hr em { font-style: normal; color: var(--acc); margin: 0 5px; }
+  .bh .hr small { font-family: Inter; font-weight: 500; font-size: 7pt; letter-spacing: .12em; color: var(--mut); text-transform: uppercase; }
+  .pie { margin-top: 8px; background: #fff; border-left: 4px solid var(--acc); border-radius: 4px; padding: 7px 10px; }
+  .pie .who { font-size: 7pt; letter-spacing: .14em; color: var(--acc); font-weight: 700; text-transform: uppercase; }
+  .pie p { margin: 2px 0 0; font-style: italic; font-size: 10.5pt; }
+  .sec { padding: 8px 2px 4px; }
+  .sec > .lbl { display: block; margin: 2px 0 2px; }
+  .mm { display: grid; grid-template-columns: 44px 1fr; padding: 6px 0; border-bottom: 1px dashed var(--line); break-inside: avoid; }
+  .mm:last-child { border-bottom: 0; }
+  .mm b { font-weight: 600; display: block; }
+  .mm span.t { color: var(--acc); font-size: 12.5pt; }
+  .mm span { color: var(--mut); font-size: 9.6pt; }
+  .q { background: var(--soft); border-radius: 4px; padding: 6px 9px; margin: 5px 0; font-style: italic; font-size: 10pt; break-inside: avoid; }
+  .note { font-size: 9.6pt; margin: 6px 0 0; break-inside: avoid; }
+  .note b { color: var(--acc); }
+  .opt { border: 1.5px dashed var(--acc); border-radius: 6px; padding: 7px 10px; margin: 8px 0 2px; font-size: 9.6pt; break-inside: avoid; }
+  .opt b { color: var(--acc); }
+  .tec { border-top: 1px solid var(--line); padding-top: 6px; margin-top: 4px; break-inside: avoid; }
+  .tec div { display: grid; grid-template-columns: 58px 1fr; gap: 4px; font-size: 9.4pt; padding: 2px 0; }
+  .tec .k { font-size: 7pt; letter-spacing: .1em; color: var(--mut); font-weight: 600; padding-top: 2px; }
+  .end { height: 6px; }
+
+  /* Anexos */
+  .r { display: grid; grid-template-columns: 26px 1fr; padding: 7px 10px; border-bottom: 1px solid var(--line); break-inside: avoid; }
+  .r:last-child { border-bottom: 0; }
+  .r .i { font-family: "Barlow Condensed"; font-weight: 700; font-size: 12pt; color: var(--acc); }
+  .r b { font-weight: 600; display: block; }
+  .r span { color: var(--mut); font-size: 9.4pt; }
+  .gx { display: grid; grid-template-columns: 36px 1fr; padding: 5px 10px; border-bottom: 1px solid var(--line); font-size: 9.8pt; break-inside: avoid; }
+  .gx:last-child { border-bottom: 0; }
+  .gx .i { font-family: "Barlow Condensed"; font-weight: 700; color: var(--acc); }
+  .hz .gx { grid-template-columns: 48px 1fr; padding: 6px 10px; }
+  .hz .gx .i { font-size: 12pt; }
+  .hz b { display: block; font-weight: 600; }
+  .hz span span { color: var(--mut); font-size: 9.4pt; }
+  .tone div { background: #000; color: #fff; border-radius: 8px; padding: 9px 12px; margin-bottom: 6px; break-inside: avoid; }
+  .tone b { font-family: Anton; font-weight: 400; font-size: 12pt; color: var(--acc2); display: block; }
+  .tone span { font-size: 9.6pt; color: #ddd; }
+  .chk { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .chk .h { display: flex; justify-content: space-between; padding: 6px 10px; background: var(--soft); font-weight: 700; font-size: 9pt; }
+  .chk .c { display: grid; grid-template-columns: 20px 1fr; gap: 4px; padding: 6px 10px; border-top: 1px solid var(--line); font-size: 9.8pt; break-inside: avoid; }
+  .chk .c i { width: 13px; height: 13px; border: 1.5px solid #999; border-radius: 3px; display: inline-block; margin-top: 2px; }
+  .chk .c em { display: block; font-style: normal; color: var(--acc); font-weight: 600; font-size: 8.6pt; }
+  .foot { text-align: center; color: var(--mut); font-size: 8pt; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="hero"><img src="img/motivo.jpg" alt="El Motivo · Ideas que conectan"></div>
+<div class="kicker">Guion técnico y escaleta · Piloto</div>
+<h1>MARTES · <span>HISTORIAS DE GENTE QUE SE ANIMÓ</span></h1>
+<p class="sub">Para el primer programa arrancamos por casa: Fede Aguirre, el que canta y el que construyó este estudio.</p>
+<img class="nexo" src="img/nexo_s.png" alt="Nexo Studios">
+
+<div class="ficha">
+  <div><span class="lbl">Fecha</span><b>Mar 06 Oct 2026</b></div>
+  <div><span class="lbl">Al aire</span><b>18:00 – 20:00 (ARG)</b></div>
+  <div><span class="lbl">Lugar</span><b>Nexo Studios · San Martín</b></div>
+  <div><span class="lbl">Salida</span><b>Somos Como Somos · YouTube</b></div>
+  <div><span class="lbl">Invitado</span><b>Fede Aguirre</b></div>
+  <div><span class="lbl">Estructura</span><b>7 bloques · sin tandas</b></div>
+</div>
+
+<div class="alert">18:00 en Buenos Aires · 16:00 en Bogotá · 23:00 en Ibiza. Fede entra al aire a las 18:10 y está en el piso a las 17:50.</div>
+
+<h2 class="break">Las 2 horas</h2>
+<div class="bar">
+  <div style="flex:10;background:#9a9a9a">AP</div>
+  <div style="flex:35;background:#e8611a">B1</div>
+  <div style="flex:20;background:#f08a2c">B2</div>
+  <div style="flex:15;background:#c94f12">B3</div>
+  <div style="flex:20;background:#f5a524">B4</div>
+  <div style="flex:15;background:#de6d1f">B5</div>
+  <div style="flex:5;background:#555">CI</div>
+</div>
+<div class="ticks"><span>18:00</span><span>18:30</span><span>19:00</span><span>19:30</span><span>20:00</span></div>
+
+<div class="list">
+  <div class="row"><span class="t">18:00</span><div><div class="n">Apertura</div><div class="d">Los tres al aire y la pregunta del día</div></div><span class="m">10'</span></div>
+  <div class="row"><span class="t">18:10</span><div><div class="n">B1 · El motivo</div><div class="d">De cantar a construir un estudio</div></div><span class="m">35'</span></div>
+  <div class="row"><span class="t">18:45</span><div><div class="n">B2 · Caja de herramientas</div><div class="d">Seis preguntas concretas y el objeto en cámara</div></div><span class="m">20'</span></div>
+  <div class="row"><span class="t">19:05</span><div><div class="n">B3 · El motivo de la calle</div><div class="d">El VT de la semana, comentado</div></div><span class="m">15'</span></div>
+  <div class="row"><span class="t">19:20</span><div><div class="n">B4 · Bogotá</div><div class="d">El bloque de Paula</div></div><span class="m">20'</span></div>
+  <div class="row"><span class="t">19:40</span><div><div class="n">B5 · El chat pregunta</div><div class="d">Contesta Fede, no la conducción</div></div><span class="m">15'</span></div>
+  <div class="row"><span class="t">19:55</span><div><div class="n">Cierre</div><div class="d">¿Cuál es tu motivo?</div></div><span class="m">5'</span></div>
+</div>
+
+<h2 class="sp">Al aire</h2>
+<div class="list">
+  <div class="cast"><span class="r">COND</span><div><div class="n">Fabricio Benjamín Ortega</div><div class="d">Abre, da los pases y lleva la entrevista central.</div></div></div>
+  <div class="cast"><span class="r">CO</span><div><div class="n">Rodrigo "Roko" García</div><div class="d">En el piso. La repregunta, el chiste que afloja y el dueño del chat.</div></div></div>
+  <div class="cast"><span class="r">CO</span><div><div class="n">Paula González · Bogotá</div><div class="d">Entra en la apertura y es la dueña del bloque de las 19:20.</div></div></div>
+  <div class="cast inv"><span class="r">INV</span><div><div class="n">Fede Aguirre</div><div class="d">Cantante. Director general de Nexo Studios junto a Nico Lahargou.</div></div></div>
+</div>
+<h2 class="sp">Detrás de cámara</h2>
+<div class="list">
+  <div class="cast"><span class="r">DIR</span><div><div class="n">Nico Lahargou</div><div class="d">Dirige solo el piloto: Fede está del otro lado de la cámara.</div></div></div>
+  <div class="cast"><span class="r">PROD</span><div><div class="n">Martina Nagel</div><div class="d">Tiempos y señas al aire, porque Fabricio conduce.</div></div></div>
+  <div class="cast"><span class="r">TÉC</span><div><div class="n">Néstor Mago</div><div class="d">Cámaras, audio, enlace con Bogotá y emisión.</div></div></div>
+</div>
+
+<!-- APERTURA -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">AP</span><span class="ti">Apertura</span></div>
+  <div class="hr">18:00 – 18:10<em>10'</em><small>Buenos Aires + Bogotá</small></div>
+  <div class="pie"><div class="who">Fabricio</div><p>"Buenas tardes en Buenos Aires, en Bogotá, y buenas noches en España. Esto es El Motivo. Y para el primer programa arrancamos por casa: el invitado de hoy es uno de los que levantó este estudio."</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Minuto a minuto</span>
+  <div class="mm"><span class="t">18:00</span><div><b>Cabecera</b><span>Cortina con el logo y el arco de las tres ciudades.</span></div></div>
+  <div class="mm"><span class="t">18:01</span><div><b>Saludo en el piso</b><span>Fabricio y Roko. Qué es El Motivo en dos frases y que hoy es el primero.</span></div></div>
+  <div class="mm"><span class="t">18:03</span><div><b>Pase a Bogotá</b><span>Paula saluda y adelanta qué trae para las 19:20.</span></div></div>
+  <div class="mm"><span class="t">18:06</span><div><b>La pregunta del día</b><span>"¿Qué hay que soltar para que una pasión se vuelva un proyecto?" Se presenta a Fede sin contar su historia.</span></div></div>
+  <div class="mm"><span class="t">18:09</span><div><b>Pase</b><span>"Lo hacemos pasar. Aunque, en realidad, está en su casa."</span></div></div>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>CAM 1 general · PTZ sobre quien habla</span></div>
+    <div><span class="k">AUDIO</span><span>Cortina de apertura · retorno de Bogotá abierto</span></div>
+    <div><span class="k">GRÁFICA</span><span>Cabecera · mosca fija · zócalos de los tres · pantalla dividida · placa con la pregunta</span></div>
+    <div><span class="k">LUZ</span><span>Baño ámbar en los paneles · X de Nexo apagada</span></div>
+  </div>
+</div>
+
+<!-- B1 -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">B1</span><span class="ti">El motivo</span></div>
+  <div class="hr">18:10 – 18:45<em>35'</em><small>De cantar a construir</small></div>
+  <div class="pie"><div class="who">Fabricio</div><p>"Fede, antes de que existiera Nexo, ¿qué estabas haciendo? ¿Dónde cantabas?"</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Minuto a minuto</span>
+  <div class="mm"><span class="t">18:10</span><div><b>Entra Fede</b><span>Saludo y zócalo: cantante y director de Nexo Studios.</span></div></div>
+  <div class="mm"><span class="t">18:12</span><div><b>El que canta</b><span>Cómo empezó con la música: la primera canción, el primer escenario, qué escuchaba.</span></div></div>
+  <div class="mm"><span class="t">18:22</span><div><b>De cantar a construir</b><span>Cuándo decidió armar un estudio y el día que casi no abre. Qué hubo que soltar.</span></div></div>
+  <div class="mm"><span class="t">18:34</span><div><b>Nico y el equipo</b><span>Cómo arrancó con Nico Lahargou, cómo se reparten la dirección y qué está haciendo Nexo esta semana.</span></div></div>
+  <div class="mm"><span class="t">18:43</span><div><b>Aviso del chat · Roko</b><span>"El chat está abierto: a las 19:40 contesta Fede."</span></div></div>
+  <div class="mm"><span class="t">18:44</span><div><b>Pase</b><span>"Ya nos contaste cómo fue. Ahora vamos a lo concreto."</span></div></div>
+</div>
+<div class="sec">
+  <span class="lbl">Disparadores</span>
+  <div class="q">"¿Cuál fue tu primer escenario y cuánta gente había?"</div>
+  <div class="q">"¿Qué te dio más miedo: subirte a cantar o firmar por el estudio?"</div>
+  <div class="q">"¿Cuánta plata hizo falta para abrir Nexo y de dónde salió?"</div>
+  <div class="q">"¿Qué discuten con Nico y quién gana?"</div>
+  <div class="q">"¿Seguís cantando o el estudio se comió al cantante?"</div>
+  <p class="note"><b>No es un aviso de Nexo.</b> Si la charla se pone institucional, Roko la baja a una fecha o a una anécdota: "Pará, ¿eso cuándo fue?".</p>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>PTZ en primer plano de Fede · PTZ de Fabricio · Insta360 a Roko</span></div>
+    <div><span class="k">AUDIO</span><span>Micros abiertos, sin cortina debajo</span></div>
+    <div><span class="k">GRÁFICA</span><span>Zócalo de Fede · placa con sus fechas clave</span></div>
+  </div>
+</div>
+
+<!-- B2 -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">B2</span><span class="ti">La caja de herramientas</span></div>
+  <div class="hr">18:45 – 19:05<em>20'</em><small>Lo que se lleva el que mira</small></div>
+  <div class="pie"><div class="who">Roko</div><p>"Ya nos inspiraste. Ahora decile al que quiere cantar, o armar su propio espacio, qué hace el miércoles a la mañana."</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Las seis preguntas</span>
+  <div class="mm"><span class="t">18:45</span><div><b>El primer paso</b><span>Qué hizo la primera semana, cuando no tenía nada. La versión aburrida y real.</span></div></div>
+  <div class="mm"><span class="t">18:48</span><div><b>La herramienta concreta</b><span>En cámara: el micrófono, el instrumento o el primer equipo que compró para Nexo. Por qué ese.</span></div></div>
+  <div class="mm"><span class="t">18:52</span><div><b>Cómo se aprende el oficio</b><span>Dónde estudió canto, producción o dirección, con quién y cuánto cuesta.</span></div></div>
+  <div class="mm"><span class="t">18:55</span><div><b>El error que costó caro</b><span>En la música o en el estudio. Lo que haría distinto.</span></div></div>
+  <div class="mm"><span class="t">18:58</span><div><b>Cómo se sostiene</b><span>De qué vive un cantante que dirige un estudio, y cuánto de cada cosa.</span></div></div>
+  <div class="mm"><span class="t">19:01</span><div><b>A quién llamar</b><span>A quién tiene que ir a ver el que quiere cantar o abrir un espacio.</span></div></div>
+    <p class="note"><b>Con nombres, no con generalidades.</b> Si contesta "hay muchos cursos", se repregunta: "¿Cuál hiciste vos?".</p>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>Insta360 en plano detalle del objeto · PTZ de Fede</span></div>
+        <div><span class="k">GRÁFICA</span><span>Placa Caja de herramientas · un zócalo por pregunta · datos concretos en pantalla</span></div>
+  </div>
+</div>
+
+<!-- B3 -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">B3</span><span class="ti">El motivo de la calle</span></div>
+  <div class="hr">19:05 – 19:20<em>15'</em><small>El material de la semana</small></div>
+  <div class="pie"><div class="who">Fabricio</div><p>"Esta semana salimos a la calle con una sola pregunta: ¿cuánto vale tu tiempo? Mirá lo que nos contestaron."</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Minuto a minuto</span>
+  <div class="mm"><span class="t">19:05</span><div><b>Presentación del VT</b><span>Dónde se grabó y qué se preguntó.</span></div></div>
+  <div class="mm"><span class="t">19:06</span><div><b>VT</b><span>De 6 a 8 minutos, subtitulado.</span></div></div>
+  <div class="mm"><span class="t">19:14</span><div><b>Comentario de los tres</b><span>Qué respuesta los sorprendió. Paula suma cómo se contestaría en Bogotá.</span></div></div>
+  <div class="mm"><span class="t">19:17</span><div><b>La respuesta de Fede</b><span>"¿Y vos? ¿Cuánto vale una hora tuya cantando?"</span></div></div>
+  <div class="mm"><span class="t">19:19</span><div><b>Pase a Bogotá</b><span>"Nos vamos a Colombia. Paula."</span></div></div>
+  <p class="note"><b>Si no hay VT,</b> la pregunta se hace a la mesa y al chat, y el bloque baja a 10 minutos a favor del B1.</p>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>VT a pantalla completa · recuadro con la mesa</span></div>
+    <div><span class="k">AUDIO</span><span>Audio del VT arriba · micros abiertos al volver</span></div>
+    <div><span class="k">GRÁFICA</span><span>Separador El motivo de la calle · subtítulos</span></div>
+  </div>
+</div>
+
+<!-- B4 -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">B4</span><span class="ti">Bogotá</span></div>
+  <div class="hr">19:20 – 19:40<em>20'</em><small>Desde Colombia · Paula</small></div>
+  <div class="pie"><div class="who">Paula</div><p>"Desde Bogotá, donde son las cinco y veinte de la tarde. Hoy les traigo a alguien que también se animó, pero de este lado."</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Minuto a minuto</span>
+  <div class="mm"><span class="t">19:20</span><div><b>Qué trae Paula</b><span>Pase de Fabricio. Paula presenta su invitado o su tema desde Colombia.</span></div></div>
+  <div class="mm"><span class="t">19:23</span><div><b>Entrevista o columna</b><span>Conduce Paula. El piso escucha y entra solo con preguntas.</span></div></div>
+  <div class="mm"><span class="t">19:35</span><div><b>Mirada cruzada</b><span>Fede le pregunta algo a Bogotá, y al revés.</span></div></div>
+  <div class="mm"><span class="t">19:39</span><div><b>Pase al chat</b><span>"Roko, ¿qué está diciendo la gente?"</span></div></div>
+</div>
+<div class="sec">
+  <span class="lbl">Disparadores</span>
+    <div class="q">"¿Cómo está la escena de la música y el streaming en Bogotá?"</div>
+  <div class="q">"¿Qué le dirías al de Buenos Aires que quiere hacer lo mismo?"</div>
+  <p class="note"><b>Plan B:</b> si se cae la conexión, Paula entra por audio con foto fija y el bloque baja a 10 minutos.</p>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>Bogotá a pantalla completa · pantalla dividida en la mirada cruzada</span></div>
+    <div><span class="k">AUDIO</span><span>Retorno por talkback · delay medido en la prueba</span></div>
+    <div><span class="k">GRÁFICA</span><span>Separador Bogotá · zócalos de Paula y su invitado</span></div>
+  </div>
+</div>
+
+<!-- B5 -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">B5</span><span class="ti">El chat pregunta</span></div>
+  <div class="hr">19:40 – 19:55<em>15'</em><small>Roko lee, contesta Fede</small></div>
+  <div class="pie"><div class="who">Roko</div><p>"Ahora mandan ustedes. Y la regla es clara: nosotros no contestamos nada."</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Minuto a minuto</span>
+  <div class="mm"><span class="t">19:40</span><div><b>Primera pregunta</b><span>Roko la lee con el nombre de usuario.</span></div></div>
+  <div class="mm"><span class="t">19:41</span><div><b>Ronda</b><span>De cinco a seis preguntas. Fede contesta en dos minutos como máximo.</span></div></div>
+  <div class="mm"><span class="t">19:52</span><div><b>La que elige Fede</b><span>Se le muestran tres y elige cuál contestar.</span></div></div>
+  <div class="mm"><span class="t">19:54</span><div><b>Pase al cierre</b><span>"Y ahora la última, la de siempre."</span></div></div>
+</div>
+<div class="sec">
+  <span class="lbl">De reserva, si el chat está flojo</span>
+  <div class="q">"¿Cuánto tardaste en vivir de la música?"</div>
+  <div class="q">"¿Volverías a abrir un estudio?"</div>
+  <div class="q">"¿Qué canción te representa hoy?"</div>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>PTZ de Fede · general para las reacciones</span></div>
+    <div><span class="k">GRÁFICA</span><span>Pregunta del chat en pantalla con el usuario</span></div>
+  </div>
+</div>
+
+<!-- CIERRE -->
+<div class="break"></div>
+<div class="bh">
+  <div><span class="tag">CI</span><span class="ti">¿Cuál es tu motivo?</span></div>
+  <div class="hr">19:55 – 20:00<em>5'</em><small>La pregunta de todos los programas</small></div>
+  <div class="pie"><div class="who">Fabricio</div><p>"Fede, la última, la que le vamos a hacer a cada uno que pase por acá: ¿cuál es tu motivo?"</p></div>
+</div>
+<div class="sec">
+  <span class="lbl">Minuto a minuto</span>
+  <div class="mm"><span class="t">19:55</span><div><b>La pregunta a Fede</b><span>Sin apuro. Es la frase que cierra el clip principal.</span></div></div>
+  <div class="mm"><span class="t">19:57</span><div><b>La misma, al que mira</b><span>Fabricio a cámara: "Y vos, ¿cuál es tu motivo? Dejalo en el chat."</span></div></div>
+  <div class="mm"><span class="t">19:58</span><div><b>Saludo de los tres</b><span>Paula desde Bogotá y los dos del piso. Próximo martes a las 18.</span></div></div>
+  <div class="mm"><span class="t">19:59</span><div><b>Placa final</b><span>Redes + by NEXO Studios + Somos Como Somos. Se enciende la X. Fin 20:00.</span></div></div>
+  <div class="opt"><b>Opcional · a confirmar con Fede:</b> que cierre cantando un minuto en el live set después de su respuesta. Si canta, el "al que mira" se dice sobre la placa final. Técnica: micro extra y pista cargada.</div>
+  <div class="tec">
+    <div><span class="k">CÁMARA</span><span>CAM 1 general · Fabricio a cámara · pantalla dividida para el saludo</span></div>
+    <div><span class="k">AUDIO</span><span>Cortina de cierre arriba en el saludo</span></div>
+    <div><span class="k">LUZ</span><span>Se enciende la X iluminada</span></div>
+  </div>
+</div>
+
+<!-- ANEXOS -->
+<h2 class="break">Brief con Fede</h2>
+<div class="list">
+  <div class="r"><span class="i">1</span><div><b>Hora y media al aire</b><span>Entra a las 18:10 y se queda hasta el cierre. En el piso a las 17:50.</span></div></div>
+  <div class="r"><span class="i">2</span><div><b>Algo para mostrar</b><span>Micrófono, instrumento, el primer equipo de Nexo o una foto del primer show.</span></div></div>
+  <div class="r"><span class="i">3</span><div><b>Fechas clave</b><span>Primer escenario, el día que decidió abrir Nexo, la apertura.</span></div></div>
+  <div class="r"><span class="i">4</span><div><b>Temas que no se tocan</b><span>Se avisan antes y no se tocan. Lo demás se pregunta.</span></div></div>
+  <div class="r"><span class="i">5</span><div><b>Un contacto para dejar</b><span>Para "A quién llamar".</span></div></div>
+  <div class="r"><span class="i">6</span><div><b>¿Canta en el cierre?</b><span>Sí o no, y qué canción, para cargar la pista.</span></div></div>
+</div>
+
+<h2 class="break">Gráfica</h2>
+<div class="list">
+  <div class="gx"><span class="i">G01</span><span>Cabecera con el arco de las tres ciudades</span></div>
+  <div class="gx"><span class="i">G02</span><span>Mosca El Motivo fija</span></div>
+  <div class="gx"><span class="i">G03</span><span>Zócalos: Fabricio, Roko, Paula (Bogotá) y Fede Aguirre · Cantante · Director de Nexo Studios</span></div>
+  <div class="gx"><span class="i">G04</span><span>Pantalla dividida Buenos Aires / Bogotá</span></div>
+  <div class="gx"><span class="i">G05</span><span>Placa con la pregunta del día</span></div>
+  <div class="gx"><span class="i">G06</span><span>Placa con las fechas clave de Fede</span></div>
+  <div class="gx"><span class="i">G07</span><span>Placa Caja de herramientas + 6 zócalos</span></div>
+  <div class="gx"><span class="i">G08</span><span>Separador El motivo de la calle + VT</span></div>
+  <div class="gx"><span class="i">G09</span><span>Separador Bogotá</span></div>
+  <div class="gx"><span class="i">G10</span><span>Preguntas del chat en pantalla</span></div>
+  <div class="gx"><span class="i">G11</span><span>Placa "¿Cuál es tu motivo?"</span></div>
+  <div class="gx"><span class="i">G12</span><span>Placa final + redes + NEXO + Somos Como Somos</span></div>
+</div>
+<p class="note">El logo va siempre sobre negro pleno (#000).</p>
+
+<h2 class="break">Tono</h2>
+<div class="tone">
+  <div><b>PROCESO, NO CURRÍCULUM</b><span>Fechas, números y nombres. Si suena a LinkedIn, se repregunta.</span></div>
+  <div><b>EL QUE MIRA SE LLEVA ALGO</b><span>Una herramienta que se pueda usar el miércoles a la mañana.</span></div>
+  <div><b>BOGOTÁ NO ES UN SALUDO</b><span>Paula tiene su bloque y su invitado.</span></div>
+  <div><b>EN CASA, PERO SIN AVISO</b><span>El invitado es de Nexo: se cuenta la historia, no se vende el estudio.</span></div>
+</div>
+
+<h2 class="break">Horario de hoy</h2>
+<div class="list hz">
+  <div class="gx"><span class="i">14:00</span><span><b>Llegada técnica</b><span>Escritorio, luz ámbar, mosca y placas.</span></span></div>
+  <div class="gx"><span class="i">15:00</span><span><b>Prueba de audio</b><span>Micros, consola y cortinas. Pista de Fede si canta.</span></span></div>
+  <div class="gx"><span class="i">15:30</span><span><b>Prueba con Bogotá</b><span>Imagen, audio, retorno y delay.</span></span></div>
+  <div class="gx"><span class="i">16:00</span><span><b>Prueba de emisión</b><span>Clave del canal y señal de prueba privada.</span></span></div>
+  <div class="gx"><span class="i">16:30</span><span><b>Repaso de escaleta</b><span>Fabricio, Roko, Martina y Nico.</span></span></div>
+  <div class="gx"><span class="i">17:00</span><span><b>Ensayo</b><span>Apertura, pases a Bogotá y cierre.</span></span></div>
+  <div class="gx"><span class="i">17:30</span><span><b>Paula en stand-by</b><span>Conectada y con retorno.</span></span></div>
+  <div class="gx"><span class="i">17:50</span><span><b>Fede en el piso</b><span>Micro, objeto en la mesa y brief.</span></span></div>
+  <div class="gx"><span class="i">18:00</span><span><b>Al aire</b><span>Dos horas de corrido.</span></span></div>
+  <div class="gx"><span class="i">20:00</span><span><b>Fuera de aire</b><span>Foto para redes. Se revisa, se copia y se verifica el material.</span></span></div>
+  <div class="gx"><span class="i">20:30</span><span><b>Devolución</b><span>Qué funcionó, qué se corta y los tiempos reales.</span></span></div>
+</div>
+
+<h2 class="break">Antes de salir</h2>
+<div class="chk">
+  <div class="h"><span>Checklist</span><span>0 / 10</span></div>
+  <div class="c"><i></i><span>Brief con Fede: fechas, temas vedados y contacto<em>Martina</em></span></div>
+  <div class="c"><i></i><span>Objeto de Fede en la mesa<em>Martina</em></span></div>
+  <div class="c"><i></i><span>¿Canta en el cierre? Micro y pista en técnica<em>Fede · El Mago</em></span></div>
+  <div class="c"><i></i><span>Invitado o tema del bloque Bogotá<em>Paula</em></span></div>
+  <div class="c"><i></i><span>VT de la calle editado y subtitulado<em>Post</em></span></div>
+  <div class="c"><i></i><span>Enlace con Bogotá probado con retorno<em>El Mago</em></span></div>
+  <div class="c"><i></i><span>Clave de transmisión del canal probada<em>El Mago</em></span></div>
+  <div class="c"><i></i><span>Zócalos y placas G01 a G12 cargados<em>Nico</em></span></div>
+  <div class="c"><i></i><span>Moderación del chat y preguntas de reserva<em>Martina</em></span></div>
+  <div class="c"><i></i><span>Máster y copia de seguridad · X apagada<em>El Mago</em></span></div>
+</div>
+
+<div class="foot">El Motivo · Ideas que conectan<br>by NEXO Studios · Somos Como Somos<br>Piloto 06.10.2026 · 18:00 (ARG)</div>
+</body>
+</html>
