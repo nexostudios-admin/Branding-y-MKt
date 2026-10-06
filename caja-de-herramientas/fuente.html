@@ -128,7 +128,8 @@ body.bg-negro .fondo-negro { background: radial-gradient(1200px 700px at 78% 0%,
 #abrir { position: fixed; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 9; font: 600 13px var(--texto); color: var(--hueso); background: rgba(20,17,16,.85); border: 1px solid var(--linea); border-radius: 999px; padding: 9px 16px; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s; }
 body.raton #abrir { opacity: 1; pointer-events: auto; }
 #abrir:hover, #abrir:focus-visible { opacity: 1; pointer-events: auto; outline: 2px solid var(--naranja); }
-body.salida #abrir { display: none; }
+body.salida #abrir, body.salida #panel { display: none !important; }
+body.salida { cursor: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .vista, .vista.on, .casillero { transition: none; }
@@ -203,7 +204,7 @@ body.salida #abrir { display: none; }
     <h3>Caja de herramientas</h3>
     <button type="button" class="mini" id="cerrar">Ocultar (E)</button>
   </div>
-  <p class="nota">Lo que cargás acá aparece en pantalla al instante y queda guardado en este navegador.</p>
+  <p class="nota">Lo que cargás acá aparece en pantalla al instante y queda guardado en este navegador. Si tenés abierta la ventana de salida (#salida al final del link), se actualiza sola.</p>
 
   <h4>En pantalla</h4>
   <div class="botones" id="b-vistas">
@@ -220,7 +221,7 @@ body.salida #abrir { display: none; }
     <button type="button" data-bg="verde">Verde chroma</button>
     <button type="button" data-bg="transparente">Transparente</button>
   </div>
-  <p class="nota">Transparente sirve en OBS como fuente de navegador. Verde, para capturar la ventana y recortar con chroma.</p>
+  <p class="nota">Negro para la caja a pantalla completa. Verde para el zócalo: en vMix se recorta con chroma key sobre la cámara.</p>
 
   <h4>Invitado</h4>
   <label for="i-nombre">Nombre</label><input id="i-nombre" type="text" autocomplete="off">
@@ -402,7 +403,7 @@ body.salida #abrir { display: none; }
     else if (k === "c") vista("cierre");
     else if (k === "x" || k === "escape") vista("limpia");
     else if (k === "b") fondo();
-    else if (k === "e") panel();
+    else if (k === "e") { if (!esSalida) panel(); }
     else if (k === "r") { S.abiertas = [false, false, false, false, false, false]; guardar(); render(); }
     else if (k === "f") {
       if (!document.fullscreenElement && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () {});
@@ -467,8 +468,22 @@ body.salida #abrir { display: none; }
     guardar(); armarPanel(); render(); aviso("Respuestas vaciadas.");
   });
 
-  // #salida en el link = solo la gráfica, sin botón de producción (para OBS o la ventana de salida)
-  if (location.hash === "#salida") document.body.classList.add("salida");
+  // Dos ventanas en la misma compu: #control (panel abierto) y #salida (solo la gráfica, la que captura vMix).
+  // Se sincronizan por el almacenamiento del navegador: lo que se toca en una aparece en la otra.
+  var esSalida = location.hash === "#salida";
+  if (esSalida) document.body.classList.add("salida");
+  if (location.hash === "#control") $("panel").hidden = false;
+  window.addEventListener("storage", function (ev) {
+    if (ev.key !== CLAVE || !ev.newValue) return;
+    try {
+      var d = JSON.parse(ev.newValue);
+      if (!d || !Array.isArray(d.herr) || d.herr.length !== 6) return;
+      S = Object.assign(S, d);
+      var escribiendo = document.activeElement && $("panel").contains(document.activeElement) && /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+      if (!escribiendo) armarPanel();
+      render();
+    } catch (e) {}
+  });
 
   // El botón de producción aparece solo al mover el mouse, así no queda en la salida
   var quieto;

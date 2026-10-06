@@ -3,33 +3,36 @@
 Gráfica en pantalla para el bloque 2 de El Motivo. Es una sola página 16:9 (1920×1080) que se escala a la ventana.
 
 - **Online:** https://claude.ai/artifact/LayefcwvbcTUbwavWuoirr (privada hasta que se comparta).
-- **Local / OBS:** `El_Motivo_caja_de_herramientas.html`. Se abre con doble clic en Chrome, o como fuente de navegador en OBS (archivo local, 1920×1080). No necesita login.
+- **En el estudio:** `El_Motivo_caja_de_herramientas.html`, abierto en Chrome en la compu de vMix. No necesita login.
 
-## Cómo se usa
+## Armado con vMix: dos ventanas
 
-1. Tecla `E`: abre el panel de producción. Se cargan el invitado y las respuestas cortas de las seis herramientas. Todo queda guardado en ese navegador.
-2. Tecla `E` de nuevo: se oculta el panel y queda solo la gráfica.
-3. Durante la grabación:
+Se abre el mismo archivo dos veces en Chrome. Las dos ventanas se sincronizan solas.
+
+1. **Ventana de salida:** el link termina en `#salida` (por ejemplo `file:///C:/.../El_Motivo_caja_de_herramientas.html#salida`). Muestra solo la gráfica, sin panel ni mouse. Se pone a pantalla completa (`F`) en un monitor libre, o se deja en una ventana de 1920×1080.
+2. **Ventana de control:** el link termina en `#control`. Tiene el panel abierto para cargar las respuestas y los botones para cambiar lo que se ve.
+3. **En vMix:** Add Input → Desktop Capture, y se elige la ventana o el monitor de salida.
+   - Caja a pantalla completa: fondo **negro**, input directo al programa.
+   - Zócalo sobre la cámara de Fede: fondo **verde** y, en las opciones del input, Colour Key / Chroma Key en verde. Se usa como overlay.
+
+Las teclas funcionan en cualquiera de las dos ventanas, la que esté en foco.
+
+## Teclas
 
 | Tecla | Qué hace |
 | --- | --- |
 | `1`–`6` | Esa herramienta en grande |
 | `→` `←` | Siguiente / anterior |
 | `0` | Vista general con las seis |
-| `Z` | Zócalo de la herramienta actual, para ir sobre la cámara |
+| `Z` | Zócalo de la herramienta actual |
 | `C` | Cierre del bloque: las seis + "¿Cuál es tu motivo?" |
 | `X` | Pantalla limpia |
-| `B` | Fondo: negro, verde chroma o transparente |
+| `B` | Fondo: negro, verde o transparente |
+| `E` | Panel de producción (no se abre en la ventana de salida) |
 | `F` | Pantalla completa |
 | `R` | Vuelve a cerrar las seis |
 
-En el Stream Deck: acción "Tecla de acceso directo" con estas teclas, con la ventana de la caja en foco.
-
-## Fondos
-
-- **Negro:** para poner la caja a pantalla completa.
-- **Transparente:** en OBS como fuente de navegador, el zócalo queda encima de la cámara.
-- **Verde:** para capturar la ventana de Chrome y recortar con chroma.
+Con el Stream Deck: acción "Tecla de acceso directo", con la ventana de control en foco. Si el Stream Deck ya maneja vMix, conviene dejar estas teclas en una página aparte.
 
 ## Pasar los datos a otra compu
 
