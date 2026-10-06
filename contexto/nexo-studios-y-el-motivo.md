@@ -5,7 +5,7 @@ Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas 
 > **Estado (oct. 2026): todo está en etapa de pilotos.** Ningún programa de la grilla salió todavía al aire de forma regular.
 > - Tercer Tiempo: piloto grabado, dom 4/10, 20–22 h.
 > - Pequeños Grandes Sabios: piloto en YouTube con delay, jue 1/10, 17–18 h.
-> - El Motivo: piloto grabado, mar 6/10, 19–21 h, sale por Somos Como Somos. Paula conectada en vivo desde Bogotá como co-conductora: no hay invitado desde Bogotá, ella hace parte de las preguntas (6 bloques, sin bloque Bogotá). Invitado: Fede Aguirre. La caja de herramientas es una interfaz web en pantalla (`caja-de-herramientas/`).
+> - El Motivo: piloto grabado, mar 6/10, 19–20 h (el piloto y el programa duran **1 hora**), sale por Somos Como Somos. Paula conectada en vivo desde Bogotá como co-conductora: no hay invitado desde Bogotá, ella hace parte de las preguntas (6 bloques, sin bloque Bogotá). Invitado: Fede Aguirre. La caja de herramientas es una interfaz web en pantalla (`caja-de-herramientas/`).
 > - Exitosa Yo y Sex and the Baires: pilotos esta semana (datos pendientes).
 > - Las escaletas de piloto van en `pilotos/`, en formato para celular.
 
@@ -29,7 +29,7 @@ Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas 
 | Sex and the Baires | Streaming en vivo, 80–90 min, semanal | A definir | Mujeres 33–52 · salud femenina, cuidado personal, bienestar, indumentaria, farmacia, bebidas |
 | Exitosa Yo (EY Podcast) | Podcast entrevistas, 40–55 min, semanal | A definir | Mujeres que emprenden/dirigen · fintech, bancos, educación, software, coworking, seguros |
 | Tercer Tiempo | Streaming, mesa de seis, 2 h | Mié y dom 20–22 h | Amigos/fútbol · bebidas, gastronomía, deportivas, automotriz, tecnología, telefonía |
-| **El Motivo** | Magazine urbano en streaming, 2 h | **Mar 18–20 h (ARG)** | Gente que armó algo desde cero (AR/CO/ES) · **viajes, remesas y fintech, telecom, educación, marcas regionales** |
+| **El Motivo** | Magazine urbano en streaming, 1 h (las carpetas dicen 2 h) | **Mar 18–20 h (ARG)** | Gente que armó algo desde cero (AR/CO/ES) · **viajes, remesas y fintech, telecom, educación, marcas regionales** |
 | Pequeños Grandes Sabios | Streaming IRL kids, 45–60 min | A definir | Familias · alimentos, librería, edtech, retail familiar, RSE |
 
 ### Sponsoreo (tres niveles, todos "a convenir")
