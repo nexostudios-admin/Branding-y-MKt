@@ -2,7 +2,8 @@
 
 Gráfica en pantalla para el bloque 2 de El Motivo. Es una sola página 16:9 (1920×1080) que se escala a la ventana.
 
-- **Online:** https://claude.ai/artifact/LayefcwvbcTUbwavWuoirr (privada hasta que se comparta).
+- **Página web:** https://nexostudios-admin.github.io/Branding-y-MKt/caja-de-herramientas/ (cuando GitHub Pages esté activado: Settings → Pages → Deploy from a branch → `master` / root).
+- **Online en Claude:** https://claude.ai/artifact/LayefcwvbcTUbwavWuoirr (privada hasta que se comparta).
 - **En el estudio:** `El_Motivo_caja_de_herramientas.html`, abierto en Chrome en la compu de vMix. No necesita login.
 
 ## Armado con vMix: dos ventanas
@@ -33,6 +34,15 @@ Las teclas funcionan en cualquiera de las dos ventanas, la que esté en foco.
 | `R` | Vuelve a cerrar las seis |
 
 Con el Stream Deck: acción "Tecla de acceso directo", con la ventana de control en foco. Si el Stream Deck ya maneja vMix, conviene dejar estas teclas en una página aparte.
+
+## Un invitado por programa
+
+En el panel (`E`), en "Invitado":
+
+- **Nuevo invitado:** arranca una caja vacía. Cada invitado queda guardado en la lista.
+- **Invitado en pantalla:** se elige de la lista cuál sale.
+- **Copiar link de este invitado** (solo en la página web): un link con todas las respuestas adentro. Se abre en la compu de vMix y el invitado queda cargado ahí.
+- **Borrar este invitado:** pide tocar dos veces.
 
 ## Pasar los datos a otra compu
 

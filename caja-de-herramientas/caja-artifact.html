@@ -108,9 +108,9 @@ body.bg-negro .fondo-negro { background: radial-gradient(1200px 700px at 78% 0%,
 #panel h4 { font-family: var(--cond); font-weight: 700; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--ambar); margin: 22px 0 8px; }
 #panel .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 #panel label { display: block; font-size: 12px; color: var(--gris); margin: 8px 0 4px; }
-#panel input, #panel textarea { width: 100%; box-sizing: border-box; background: #1a1614; border: 1px solid var(--linea); border-radius: 8px; color: var(--hueso); font: inherit; padding: 8px 10px; }
+#panel input, #panel textarea, #panel select { width: 100%; box-sizing: border-box; background: #1a1614; border: 1px solid var(--linea); border-radius: 8px; color: var(--hueso); font: inherit; padding: 8px 10px; }
 #panel textarea { resize: vertical; min-height: 54px; }
-#panel input:focus, #panel textarea:focus, #panel button:focus-visible { outline: 2px solid var(--naranja); outline-offset: 1px; }
+#panel input:focus, #panel textarea:focus, #panel select:focus, #panel button:focus-visible { outline: 2px solid var(--naranja); outline-offset: 1px; }
 .herr { border: 1px solid var(--linea); border-radius: 10px; padding: 10px 12px 12px; margin-bottom: 10px; }
 .herr .cab-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .herr .cab-h b { font-family: var(--display); font-weight: 400; font-size: 17px; text-transform: uppercase; }
@@ -224,6 +224,14 @@ body.salida { cursor: none; }
   <p class="nota">Negro para la caja a pantalla completa. Verde para el zócalo: en vMix se recorta con chroma key sobre la cámara.</p>
 
   <h4>Invitado</h4>
+  <label for="i-lista">Invitado en pantalla</label>
+  <select id="i-lista"></select>
+  <div class="botones" style="margin-top:8px">
+    <button type="button" id="b-nuevo">Nuevo invitado</button>
+    <button type="button" id="b-borrar">Borrar este invitado</button>
+    <button type="button" id="b-link" hidden>Copiar link de este invitado</button>
+  </div>
+  <p class="nota" id="n-link" hidden>El link lleva todas las respuestas: abrilo en la compu de vMix y el invitado queda cargado.</p>
   <label for="i-nombre">Nombre</label><input id="i-nombre" type="text" autocomplete="off">
   <label for="i-desc">Qué hace</label><input id="i-desc" type="text" autocomplete="off">
   <label for="i-link">Dónde está la caja completa (link o @usuario)</label><input id="i-link" type="text" autocomplete="off">
@@ -267,6 +275,9 @@ body.salida { cursor: none; }
   ];
 
   var CLAVE = "el-motivo-caja-v1";
+  function nuevoId() { return "i" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function vacias() { return HERRAMIENTAS.map(function () { return { resp: "", dato: "" }; }); }
+  function fichaDe(s) { return { id: s.id, nombre: s.nombre, desc: s.desc, link: s.link, herr: s.herr }; }
   var FONDOS = ["negro", "verde", "transparente"];
 
   function estadoInicial() {
@@ -274,7 +285,8 @@ body.salida { cursor: none; }
       nombre: "Fede Aguirre",
       desc: "Cantante · Director de Nexo Studios",
       link: "@nexo.studios.ar",
-      herr: HERRAMIENTAS.map(function () { return { resp: "", dato: "" }; }),
+      herr: vacias(),
+      id: "fede-aguirre", invitados: [],
       vista: "general", idx: 0, fondo: "negro",
       abiertas: [false, false, false, false, false, false]
     };
@@ -286,7 +298,38 @@ body.salida { cursor: none; }
     if (guardado && Array.isArray(guardado.herr) && guardado.herr.length === 6) S = Object.assign(S, guardado);
   } catch (e) { /* sin almacenamiento: sigue con el estado inicial */ }
 
-  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(S)); } catch (e) {} }
+  // Cada invitado queda guardado en la lista; S tiene a la vista el que está en pantalla.
+  if (!S.id) S.id = nuevoId();
+  if (!Array.isArray(S.invitados)) S.invitados = [];
+  function sincronizarLista() {
+    var f = fichaDe(S), i = S.invitados.findIndex(function (x) { return x.id === S.id; });
+    if (i < 0) S.invitados.push(f); else S.invitados[i] = f;
+  }
+  sincronizarLista();
+  function guardar() { sincronizarLista(); try { localStorage.setItem(CLAVE, JSON.stringify(S)); } catch (e) {} }
+  function elegir(id) {
+    var f = S.invitados.find(function (x) { return x.id === id; }); if (!f) return;
+    S.id = f.id; S.nombre = f.nombre; S.desc = f.desc; S.link = f.link;
+    S.herr = f.herr.map(function (h) { return { resp: h.resp, dato: h.dato }; });
+    S.abiertas = [false, false, false, false, false, false]; S.vista = "general"; S.idx = 0;
+  }
+
+  // Link con el invitado adentro: ?invitado=... (sirve en la página publicada, no en el archivo local)
+  function codificar(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  function decodificar(t) { t = t.replace(/-/g, "+").replace(/_/g, "/"); while (t.length % 4) t += "="; return JSON.parse(decodeURIComponent(escape(atob(t)))); }
+  try {
+    var q = new URLSearchParams(location.search).get("invitado");
+    if (q) {
+      var d = decodificar(q);
+      if (d && Array.isArray(d.herr) && d.herr.length === 6) {
+        var id = d.id || nuevoId();
+        S.invitados = S.invitados.filter(function (x) { return x.id !== id; });
+        S.invitados.push({ id: id, nombre: String(d.nombre || ""), desc: String(d.desc || ""), link: String(d.link || ""), herr: d.herr.map(function (h) { return { resp: String(h.resp || ""), dato: String(h.dato || "") }; }) });
+        elegir(id);
+      }
+      history.replaceState(null, "", location.pathname + location.hash);
+    }
+  } catch (e) { /* link roto: sigue con lo guardado */ }
 
   var $ = function (id) { return document.getElementById(id); };
   function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : String(t); return d.innerHTML; }
@@ -419,13 +462,16 @@ body.salida { cursor: none; }
         '<label for="r-' + i + '">Respuesta corta, como va en pantalla</label><textarea id="r-' + i + '" rows="2"></textarea>' +
         '<label for="d-' + i + '">Datos concretos, separados por ·</label><input id="d-' + i + '" type="text" autocomplete="off" placeholder="Lugar · costo · contacto"></div>';
     }).join("");
+    $("i-lista").innerHTML = S.invitados.map(function (f) {
+      return '<option value="' + esc(f.id) + '"' + (f.id === S.id ? " selected" : "") + ">" + esc(f.nombre || "Sin nombre") + "</option>";
+    }).join("");
     $("i-nombre").value = S.nombre; $("i-desc").value = S.desc; $("i-link").value = S.link;
     HERRAMIENTAS.forEach(function (_, i) { $("r-" + i).value = S.herr[i].resp; $("d-" + i).value = S.herr[i].dato; });
   }
 
   $("panel").addEventListener("input", function (ev) {
     var id = ev.target.id;
-    if (id === "i-nombre") S.nombre = ev.target.value;
+    if (id === "i-nombre") { S.nombre = ev.target.value; var op = $("i-lista").selectedOptions[0]; if (op) op.textContent = S.nombre || "Sin nombre"; }
     else if (id === "i-desc") S.desc = ev.target.value;
     else if (id === "i-link") S.link = ev.target.value;
     else if (/^r-\d$/.test(id)) S.herr[Number(id.slice(2))].resp = ev.target.value;
@@ -443,8 +489,35 @@ body.salida { cursor: none; }
   $("abrir").addEventListener("click", function () { panel(true); });
   $("cerrar").addEventListener("click", function () { panel(false); });
 
+  $("i-lista").addEventListener("change", function (ev) { guardar(); elegir(ev.target.value); guardar(); armarPanel(); render(); aviso("En pantalla: " + (S.nombre || "Sin nombre")); });
+  $("b-nuevo").addEventListener("click", function () {
+    guardar();
+    S.id = nuevoId(); S.nombre = "Nuevo invitado"; S.desc = ""; S.herr = vacias();
+    S.abiertas = [false, false, false, false, false, false]; S.vista = "general"; S.idx = 0;
+    guardar(); armarPanel(); render(); $("i-nombre").focus(); $("i-nombre").select();
+  });
+  $("b-borrar").addEventListener("click", function () {
+    var b = $("b-borrar");
+    if (S.invitados.length < 2) { aviso("Tiene que quedar al menos un invitado."); return; }
+    if (b.dataset.seguro !== "1") { b.dataset.seguro = "1"; b.textContent = "Tocá de nuevo para borrar"; setTimeout(function () { b.dataset.seguro = ""; b.textContent = "Borrar este invitado"; }, 3000); return; }
+    var fuera = S.nombre;
+    S.invitados = S.invitados.filter(function (x) { return x.id !== S.id; });
+    elegir(S.invitados[S.invitados.length - 1].id);
+    b.dataset.seguro = ""; b.textContent = "Borrar este invitado";
+    guardar(); armarPanel(); render(); aviso("Borrado: " + fuera);
+  });
+  var publicada = /^https?:$/.test(location.protocol) && window.top === window;
+  $("b-link").hidden = !publicada; $("n-link").hidden = !publicada;
+  $("b-link").addEventListener("click", function () {
+    var url = location.origin + location.pathname + "?invitado=" + codificar(fichaDe(S)) + "#control";
+    $("i-json").value = url;
+    var ok = function () { aviso("Link copiado. Mandalo a la compu de vMix."); };
+    var fallo = function () { $("i-json").select(); aviso("Seleccioné el link: copialo con Ctrl+C."); };
+    try { navigator.clipboard.writeText(url).then(ok, fallo); } catch (e) { fallo(); }
+  });
+
   $("b-copiar").addEventListener("click", function () {
-    var txt = JSON.stringify({ nombre: S.nombre, desc: S.desc, link: S.link, herr: S.herr });
+    var txt = JSON.stringify(fichaDe(S));
     $("i-json").value = txt;
     var ok = function () { aviso("Datos copiados. Pegalos en la otra compu y tocá Cargar."); };
     var fallo = function () { $("i-json").select(); aviso("Seleccioné los datos: copialos con Ctrl+C."); };
@@ -454,6 +527,7 @@ body.salida { cursor: none; }
     try {
       var d = JSON.parse($("i-json").value);
       if (!d || !Array.isArray(d.herr) || d.herr.length !== 6) throw new Error();
+      guardar(); S.id = d.id || nuevoId();
       S.nombre = d.nombre || ""; S.desc = d.desc || ""; S.link = d.link || "";
       S.herr = d.herr.map(function (h) { return { resp: String(h.resp || ""), dato: String(h.dato || "") }; });
       guardar(); armarPanel(); render(); aviso("Datos cargados.");
