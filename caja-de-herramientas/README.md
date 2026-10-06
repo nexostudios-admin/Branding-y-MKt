@@ -1,24 +1,37 @@
 # El Motivo · Caja de herramientas
 
-Gráfica en pantalla para el bloque 2 de El Motivo. Es una sola página 16:9 (1920×1080) que se escala a la ventana.
+Una sola página con tres modos, según cómo termina el link:
 
-- **Página web:** https://nexostudios-admin.github.io/Branding-y-MKt/caja-de-herramientas/ (cuando GitHub Pages esté activado: Settings → Pages → Deploy from a branch → `master` / root).
-- **Online en Claude:** https://claude.ai/artifact/LayefcwvbcTUbwavWuoirr (privada hasta que se comparta).
-- **En el estudio:** `El_Motivo_caja_de_herramientas.html`, abierto en Chrome en la compu de vMix. No necesita login.
+| Link | Para quién | Qué muestra |
+| --- | --- | --- |
+| sin nada al final | El público | La caja de cada invitado: sus seis herramientas, el top 3 y el cierre ("¿Cuál es tu motivo?", su yo del pasado y del futuro). Solo aparecen los invitados marcados como "Mostrar en la página pública". |
+| `#control` | Producción | La gráfica de TV y el panel para cargar todo. |
+| `#salida` | vMix | Solo la gráfica 16:9, sin panel ni mouse. |
 
-## Armado con vMix: dos ventanas
+- **Online:** https://claude.ai/artifact/LayefcwvbcTUbwavWuoirr (privada hasta que se comparta desde el menú Compartir).
+- **Archivo local de respaldo:** `El_Motivo_caja_de_herramientas.html` (sin guardado online).
 
-Se abre el mismo archivo dos veces en Chrome. Las dos ventanas se sincronizan solas.
+## Cargar un invitado y guardarlo online
 
-1. **Ventana de salida:** el link termina en `#salida` (por ejemplo `file:///C:/.../El_Motivo_caja_de_herramientas.html#salida`). Muestra solo la gráfica, sin panel ni mouse. Se pone a pantalla completa (`F`) en un monitor libre, o se deja en una ventana de 1920×1080.
-2. **Ventana de control:** el link termina en `#control`. Tiene el panel abierto para cargar las respuestas y los botones para cambiar lo que se ve.
-3. **En vMix:** Add Input → Desktop Capture, y se elige la ventana o el monitor de salida.
-   - Caja a pantalla completa: fondo **negro**, input directo al programa.
-   - Zócalo sobre la cámara de Fede: fondo **verde** y, en las opciones del input, Colour Key / Chroma Key en verde. Se usa como overlay.
+1. Abrir el link con `#control`. En "Invitado": elegirlo o tocar "Nuevo invitado".
+2. Completar las seis herramientas (título, guía, respuesta corta, datos), el top 3 y el cierre.
+3. Tildar "Mostrar en la página pública" cuando ya se pueda ver.
+4. **Guardar en la página.** La página pública y las otras ventanas se actualizan solas.
 
-Las teclas funcionan en cualquiera de las dos ventanas, la que esté en foco.
+No guardar durante la grabación: la ventana de salida se recarga.
 
-## Teclas
+Lo que se edita y no se guarda queda como borrador en ese navegador ("Hay cambios sin guardar"). "Descartar cambios" vuelve a lo guardado.
+
+Si guardar no está disponible (archivo local, o el link compartido como público), "Copiar datos" y pasárselos a Claude para publicarlos.
+
+## Armado con vMix
+
+En la compu de vMix, dos ventanas de Chrome con el mismo link: una con `#control` y otra con `#salida`. Se sincronizan solas. En vMix: Add Input → Desktop Capture → la ventana o el monitor de salida.
+
+- Pantalla completa: fondo **negro**.
+- Zócalo sobre la cámara: fondo **verde** y Chroma Key en ese input.
+
+## Teclas (en `#control` o `#salida`)
 
 | Tecla | Qué hace |
 | --- | --- |
@@ -26,34 +39,15 @@ Las teclas funcionan en cualquiera de las dos ventanas, la que esté en foco.
 | `→` `←` | Siguiente / anterior |
 | `0` | Vista general con las seis |
 | `Z` | Zócalo de la herramienta actual |
-| `C` | Cierre del bloque: las seis + "¿Cuál es tu motivo?" |
-| `T` | Top 3: abre la placa y descubre de a uno |
+| `T` | Top 3: abre la placa y cada toque descubre uno, del 3 al 1 |
+| `C` | Cierre de la caja: las seis + "¿Cuál es tu motivo?" |
+| `Y` | Qué le diría a su yo del pasado y del futuro |
 | `X` | Pantalla limpia |
 | `B` | Fondo: negro, verde o transparente |
-| `E` | Panel de producción (no se abre en la ventana de salida) |
+| `E` | Panel de producción (solo en `#control`) |
 | `F` | Pantalla completa |
 | `R` | Vuelve a cerrar las seis |
 
-Con el Stream Deck: acción "Tecla de acceso directo", con la ventana de control en foco. Si el Stream Deck ya maneja vMix, conviene dejar estas teclas en una página aparte.
+## Editar el código
 
-## Un invitado por programa
-
-En el panel (`E`), en "Invitado":
-
-- **Nuevo invitado:** arranca una caja vacía. Cada invitado queda guardado en la lista.
-- **Invitado en pantalla:** se elige de la lista cuál sale.
-- **Copiar link de este invitado** (solo en la página web): un link con todas las respuestas adentro. Se abre en la compu de vMix y el invitado queda cargado ahí.
-- **Borrar este invitado:** pide tocar dos veces.
-
-## Títulos por invitado y Top 3
-
-- Cada uno de los seis casilleros tiene **título y guía editables** por invitado. Vacíos, quedan los del formato. Fede ya viene con los suyos: El primer show, La herramienta concreta, Cómo se aprende el oficio, Vender la visión, El error que costó caro, A quién llamar.
-- **Top 3** (tecla `T`): la primera vez abre la placa con los tres tapados; cada toque descubre uno, del 3 al 1. Título, nombres y una línea por nombre se cargan en el panel.
-
-## Pasar los datos a otra compu
-
-Cada navegador guarda sus propios datos. Para cargar las respuestas en la compu de técnica: "Copiar datos" en una, pegarlos en el cuadro de la otra y "Cargar datos pegados".
-
-## Editar
-
-Se edita `fuente.html` y se corre `python3 build.py`, que arma la versión online (`caja-artifact.html`) y la local.
+Se edita `fuente.html` y se corre `python3 build.py`, que arma la versión online (`caja-artifact.html`), el archivo local y `index.html`. Los datos publicados viven en `datos/caja.json`.
