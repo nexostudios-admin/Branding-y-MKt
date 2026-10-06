@@ -213,7 +213,7 @@ body:not(.modo-publico) #publico { display: none; }
 <main id="publico" aria-label="La caja de herramientas">
   <header class="pub-cab">
     <img class="pub-logo" src="{{LOGO}}" alt="El Motivo · Ideas que conectan">
-    <p class="pub-kick">El Motivo · Martes en Somos Como Somos</p>
+    <p class="pub-kick">El Motivo · Miércoles en Somos Como Somos</p>
     <h1 class="pub-h1">La caja de <em>herramientas</em></h1>
     <p class="pub-intro">Cada programa, el invitado deja seis herramientas para el que quiere arrancar algo: el primer paso, lo que usa todos los días, dónde se aprende, lo que haría distinto y a quién llamar. Acá quedan todas, para volver cuando haga falta.</p>
   </header>
@@ -486,7 +486,7 @@ body:not(.modo-publico) #publico { display: none; }
     var visibles = W.invitados.filter(function (x) { return x.visible; });
     if (!visibles.length) {
       $("p-tabs").innerHTML = "";
-      $("p-invitado").innerHTML = '<div class="pub-vacio"><b>La primera caja llega después del programa.</b><span>Cuando salga el primer martes, acá van a estar las seis herramientas del invitado.</span></div>';
+      $("p-invitado").innerHTML = '<div class="pub-vacio"><b>La primera caja llega después del programa.</b><span>Cuando salga el primer programa, acá van a estar las seis herramientas del invitado.</span></div>';
       return;
     }
     var lista = visibles.slice().reverse();     // el último programa primero
