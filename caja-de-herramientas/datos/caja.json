@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "invitados": [
     {
       "id": "fede-aguirre",
@@ -9,15 +9,65 @@
       "visible": false,
       "link": "@nexo.studios.ar",
       "herr": [
-        { "tit": "El primer show", "guia": "Cómo lanzó su primer show como cantante de tributos.", "resp": "", "dato": "" },
-        { "tit": "", "guia": "", "resp": "", "dato": "" },
-        { "tit": "", "guia": "", "resp": "", "dato": "" },
-        { "tit": "Vender la visión", "guia": "Lo que le enseñó el network marketing: la convicción y vender la visión.", "resp": "", "dato": "" },
-        { "tit": "El error que costó caro", "guia": "En la música o en el estudio.", "resp": "", "dato": "" },
-        { "tit": "", "guia": "", "resp": "", "dato": "" }
+        {
+          "tit": "El primer show",
+          "guia": "Cómo lanzó su primer show como cantante de tributos.",
+          "resp": "",
+          "dato": ""
+        },
+        {
+          "tit": "El tip para animarse",
+          "guia": "Un consejo para que el que mira se anime a emprender o a hacer lo que lo apasiona.",
+          "resp": "",
+          "dato": ""
+        },
+        {
+          "tit": "",
+          "guia": "",
+          "resp": "",
+          "dato": ""
+        },
+        {
+          "tit": "Vender la visión",
+          "guia": "Lo que le enseñó el network marketing: la convicción y vender la visión.",
+          "resp": "",
+          "dato": ""
+        },
+        {
+          "tit": "El error que costó caro",
+          "guia": "En la música o en el estudio.",
+          "resp": "",
+          "dato": ""
+        },
+        {
+          "tit": "",
+          "guia": "",
+          "resp": "",
+          "dato": ""
+        }
       ],
-      "top": { "titulo": "Con quién compartiría escenario", "items": [ { "n": "", "d": "" }, { "n": "", "d": "" }, { "n": "", "d": "" } ] },
-      "cierre": { "motivo": "", "pasado": "", "futuro": "" }
+      "top": {
+        "titulo": "Con quién compartiría escenario",
+        "items": [
+          {
+            "n": "",
+            "d": ""
+          },
+          {
+            "n": "",
+            "d": ""
+          },
+          {
+            "n": "",
+            "d": ""
+          }
+        ]
+      },
+      "cierre": {
+        "motivo": "",
+        "pasado": "",
+        "futuro": ""
+      }
     }
   ]
 }
