@@ -27,6 +27,7 @@ Las teclas funcionan en cualquiera de las dos ventanas, la que esté en foco.
 | `0` | Vista general con las seis |
 | `Z` | Zócalo de la herramienta actual |
 | `C` | Cierre del bloque: las seis + "¿Cuál es tu motivo?" |
+| `T` | Top 3: abre la placa y descubre de a uno |
 | `X` | Pantalla limpia |
 | `B` | Fondo: negro, verde o transparente |
 | `E` | Panel de producción (no se abre en la ventana de salida) |
@@ -43,6 +44,11 @@ En el panel (`E`), en "Invitado":
 - **Invitado en pantalla:** se elige de la lista cuál sale.
 - **Copiar link de este invitado** (solo en la página web): un link con todas las respuestas adentro. Se abre en la compu de vMix y el invitado queda cargado ahí.
 - **Borrar este invitado:** pide tocar dos veces.
+
+## Títulos por invitado y Top 3
+
+- Cada uno de los seis casilleros tiene **título y guía editables** por invitado. Vacíos, quedan los del formato. Fede ya viene con los suyos: El primer show, La herramienta concreta, Cómo se aprende el oficio, Vender la visión, El error que costó caro, A quién llamar.
+- **Top 3** (tecla `T`): la primera vez abre la placa con los tres tapados; cada toque descubre uno, del 3 al 1. Título, nombres y una línea por nombre se cargan en el panel.
 
 ## Pasar los datos a otra compu
 

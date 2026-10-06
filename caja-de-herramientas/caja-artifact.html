@@ -86,6 +86,16 @@ body.bg-negro .fondo-negro { background: radial-gradient(1200px 700px at 78% 0%,
 .zocalo .firma { position: absolute; right: 26px; top: -46px; font-family: var(--display); font-size: 34px; letter-spacing: .04em; color: var(--hueso); text-shadow: 0 2px 10px rgba(0,0,0,.8); }
 .zocalo .firma em { font-style: normal; color: var(--naranja); }
 
+/* Top 3 */
+.top3 { position: absolute; left: 110px; right: 110px; top: 300px; bottom: 150px; display: grid; grid-template-rows: repeat(3, 1fr); gap: 24px; }
+.top3 .item { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 30px; border: 2px solid var(--linea); border-radius: 18px; padding: 0 40px; background: rgba(20,17,16,.86); transition: border-color .4s, box-shadow .4s; }
+.top3 .item .pos { font-family: var(--display); font-size: 150px; line-height: .9; color: transparent; -webkit-text-stroke: 2px var(--gris); text-align: center; }
+.top3 .item .n { font-family: var(--display); font-size: 84px; line-height: 1; text-transform: uppercase; }
+.top3 .item .d { font-size: 34px; color: var(--gris); margin-top: 6px; }
+.top3 .item .tapa { font-family: var(--cond); font-weight: 700; font-size: 40px; letter-spacing: .3em; color: var(--linea); }
+.top3 .item.ver { border-color: var(--naranja); box-shadow: 0 0 50px rgba(232,97,26,.25); }
+.top3 .item.ver .pos { color: var(--naranja); -webkit-text-stroke: 0; }
+
 /* Cierre */
 .cierre { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 640px; gap: 70px; padding: 110px 110px 150px; }
 .cierre ol { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; }
@@ -192,7 +202,16 @@ body.salida { cursor: none; }
       <div class="pie"><span>Ideas que conectan</span><span class="linea"></span><span>by <b>NEXO</b> Studios · Somos Como Somos</span></div>
     </section>
 
-    <!-- 5 · Limpia: no se ve nada -->
+    <!-- 5 · Top 3 -->
+    <section class="vista fondo-negro" id="v-top" aria-label="Top 3">
+      <div class="cab">
+        <div style="min-width:0"><div class="kick" id="t-kick"></div><h1 id="t-tit" style="font-size:80px"></h1></div>
+      </div>
+      <div class="top3" id="t-lista"></div>
+      <div class="pie"><span>Ideas que conectan</span><span class="linea"></span><span>by <b>NEXO</b> Studios</span></div>
+    </section>
+
+    <!-- 6 · Limpia: no se ve nada -->
     <section class="vista" id="v-limpia" aria-label="Pantalla limpia"></section>
   </div>
 </div>
@@ -213,6 +232,7 @@ body.salida { cursor: none; }
     <button type="button" data-n="3">4</button><button type="button" data-n="4">5</button><button type="button" data-n="5">6</button>
     <button type="button" data-vista="zocalo">Zócalo (Z)</button>
     <button type="button" data-vista="cierre">Cierre (C)</button>
+    <button type="button" id="b-top">Top 3 (T)</button>
     <button type="button" data-vista="limpia">Limpia (X)</button>
   </div>
   <h4>Fondo</h4>
@@ -236,7 +256,12 @@ body.salida { cursor: none; }
   <label for="i-desc">Qué hace</label><input id="i-desc" type="text" autocomplete="off">
   <label for="i-link">Dónde está la caja completa (link o @usuario)</label><input id="i-link" type="text" autocomplete="off">
 
+  <h4>Top 3</h4>
+  <label for="t-titulo">Título de la placa</label><input id="t-titulo" type="text" autocomplete="off">
+  <div id="p-top"></div>
+
   <h4>Las seis herramientas</h4>
+  <p class="nota">El título y la guía se pueden cambiar para cada invitado. Si los dejás vacíos, quedan los del formato.</p>
   <div id="p-herr"></div>
 
   <h4>Teclado y Stream Deck</h4>
@@ -246,6 +271,7 @@ body.salida { cursor: none; }
     <kbd>0</kbd><span>Vista general</span>
     <kbd>Z</kbd><span>Zócalo de la herramienta actual</span>
     <kbd>C</kbd><span>Cierre del bloque</span>
+    <kbd>T</kbd><span>Top 3: la primera vez abre la placa, cada toque descubre uno (del 3 al 1)</span>
     <kbd>X</kbd><span>Pantalla limpia</span>
     <kbd>B</kbd><span>Cambiar fondo</span>
     <kbd>E</kbd><span>Mostrar u ocultar este panel</span>
@@ -274,10 +300,22 @@ body.salida { cursor: none; }
     { tit: "A quién llamar", guia: "Con quién hay que hablar para seguir.", ico: '<path d="M18 8h8l4 12-6 4a32 32 0 0 0 16 16l4-6 12 4v8a6 6 0 0 1-6 6C26 52 12 38 12 14a6 6 0 0 1 6-6z"/>' }
   ];
 
-  var CLAVE = "el-motivo-caja-v1";
+  var CLAVE = "el-motivo-caja-v2";
   function nuevoId() { return "i" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
-  function vacias() { return HERRAMIENTAS.map(function () { return { resp: "", dato: "" }; }); }
-  function fichaDe(s) { return { id: s.id, nombre: s.nombre, desc: s.desc, link: s.link, herr: s.herr }; }
+  function vacias() { return HERRAMIENTAS.map(function () { return { resp: "", dato: "", tit: "", guia: "" }; }); }
+  function limpiarHerr(h) { h = h || {}; return { resp: String(h.resp || ""), dato: String(h.dato || ""), tit: String(h.tit || ""), guia: String(h.guia || "") }; }
+  function topVacio() { return { titulo: "Con quién compartiría escenario", items: [{ n: "", d: "" }, { n: "", d: "" }, { n: "", d: "" }] }; }
+  function limpiarTop(t) { t = t || topVacio(); return { titulo: String(t.titulo || ""), items: [0, 1, 2].map(function (i) { var x = (t.items || [])[i] || {}; return { n: String(x.n || ""), d: String(x.d || "") }; }) }; }
+  // Título y guía de cada casillero: los del invitado si los cambiaron, si no los del formato
+  function titDe(i) { return (S.herr[i] && S.herr[i].tit) || HERRAMIENTAS[i].tit; }
+  function guiaDe(i) { return (S.herr[i] && S.herr[i].guia) || HERRAMIENTAS[i].guia; }
+  var ICO_LIBRE = '<path d="M32 6l6 18h18l-14 11 5 19-15-11-15 11 5-19L8 24h18z"/>';
+  function icoDe(i) {
+    var t = titDe(i).toLowerCase();
+    var m = HERRAMIENTAS.find(function (x) { return x.tit.toLowerCase() === t; });
+    return m ? m.ico : (S.herr[i] && S.herr[i].tit ? ICO_LIBRE : HERRAMIENTAS[i].ico);
+  }
+  function fichaDe(s) { return { id: s.id, nombre: s.nombre, desc: s.desc, link: s.link, herr: s.herr, top: s.top }; }
   var FONDOS = ["negro", "verde", "transparente"];
 
   function estadoInicial() {
@@ -285,7 +323,14 @@ body.salida { cursor: none; }
       nombre: "Fede Aguirre",
       desc: "Cantante · Director de Nexo Studios",
       link: "@nexo.studios.ar",
-      herr: vacias(),
+      herr: (function () {
+        var v = vacias();
+        v[0].tit = "El primer show"; v[0].guia = "Cómo lanzó su primer show como cantante de tributos.";
+        v[3].tit = "Vender la visión"; v[3].guia = "Lo que le enseñó el network marketing: la convicción y vender la visión.";
+        v[4].tit = "El error que costó caro"; v[4].guia = "En la música o en el estudio.";
+        return v;
+      })(),
+      top: topVacio(), topVis: 0,
       id: "fede-aguirre", invitados: [],
       vista: "general", idx: 0, fondo: "negro",
       abiertas: [false, false, false, false, false, false]
@@ -300,6 +345,7 @@ body.salida { cursor: none; }
 
   // Cada invitado queda guardado en la lista; S tiene a la vista el que está en pantalla.
   if (!S.id) S.id = nuevoId();
+  S.herr = S.herr.map(limpiarHerr); S.top = limpiarTop(S.top); if (typeof S.topVis !== "number") S.topVis = 0;
   if (!Array.isArray(S.invitados)) S.invitados = [];
   function sincronizarLista() {
     var f = fichaDe(S), i = S.invitados.findIndex(function (x) { return x.id === S.id; });
@@ -310,7 +356,7 @@ body.salida { cursor: none; }
   function elegir(id) {
     var f = S.invitados.find(function (x) { return x.id === id; }); if (!f) return;
     S.id = f.id; S.nombre = f.nombre; S.desc = f.desc; S.link = f.link;
-    S.herr = f.herr.map(function (h) { return { resp: h.resp, dato: h.dato }; });
+    S.herr = f.herr.map(limpiarHerr); S.top = limpiarTop(f.top); S.topVis = 0;
     S.abiertas = [false, false, false, false, false, false]; S.vista = "general"; S.idx = 0;
   }
 
@@ -324,7 +370,7 @@ body.salida { cursor: none; }
       if (d && Array.isArray(d.herr) && d.herr.length === 6) {
         var id = d.id || nuevoId();
         S.invitados = S.invitados.filter(function (x) { return x.id !== id; });
-        S.invitados.push({ id: id, nombre: String(d.nombre || ""), desc: String(d.desc || ""), link: String(d.link || ""), herr: d.herr.map(function (h) { return { resp: String(h.resp || ""), dato: String(h.dato || "") }; }) });
+        S.invitados.push({ id: id, nombre: String(d.nombre || ""), desc: String(d.desc || ""), link: String(d.link || ""), herr: d.herr.map(limpiarHerr), top: limpiarTop(d.top) });
         elegir(id);
       }
       history.replaceState(null, "", location.pathname + location.hash);
@@ -354,7 +400,7 @@ body.salida { cursor: none; }
     document.body.classList.remove("bg-negro", "bg-verde", "bg-transparente");
     document.body.classList.add("bg-" + S.fondo);
 
-    ["general", "foco", "zocalo", "cierre", "limpia"].forEach(function (v) {
+    ["general", "foco", "zocalo", "cierre", "top", "limpia"].forEach(function (v) {
       $("v-" + v).classList.toggle("on", S.vista === v);
     });
 
@@ -363,18 +409,18 @@ body.salida { cursor: none; }
     $("g-grilla").innerHTML = HERRAMIENTAS.map(function (h, i) {
       var r = S.herr[i].resp;
       var cls = "casillero" + (S.abiertas[i] ? " abierta" : "") + (i === S.idx && S.vista === "general" ? " actual" : "");
-      return '<div class="' + cls + '"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true">' + h.ico + '</svg>' +
-        '<div class="num">' + (i + 1) + '</div><div class="tit">' + esc(h.tit) + '</div>' +
-        '<div class="resp">' + esc(S.abiertas[i] && r ? r : h.guia) + '</div></div>';
+      return '<div class="' + cls + '"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true">' + icoDe(i) + '</svg>' +
+        '<div class="num">' + (i + 1) + '</div><div class="tit">' + esc(titDe(i)) + '</div>' +
+        '<div class="resp">' + esc(S.abiertas[i] && r ? r : guiaDe(i)) + '</div></div>';
     }).join("");
 
     // Foco
     var i = S.idx, h = HERRAMIENTAS[i], r = S.herr[i].resp;
     $("f-num").textContent = i + 1;
     $("f-kick").textContent = "Caja de herramientas · " + (i + 1) + " de 6 · " + S.nombre;
-    $("f-tit").textContent = h.tit;
+    $("f-tit").textContent = titDe(i);
     var fr = $("f-resp");
-    fr.textContent = r || h.guia;
+    fr.textContent = r || guiaDe(i);
     fr.classList.toggle("vacia", !r);
     $("f-datos").innerHTML = datosDe(i).map(function (d) { return "<span>" + esc(d) + "</span>"; }).join("");
     $("f-puntos").innerHTML = HERRAMIENTAS.map(function (_, j) {
@@ -384,14 +430,24 @@ body.salida { cursor: none; }
 
     // Zócalo
     $("z-num").textContent = i + 1;
-    $("z-tit").textContent = h.tit;
-    $("z-resp").textContent = r || h.guia;
+    $("z-tit").textContent = titDe(i);
+    $("z-resp").textContent = r || guiaDe(i);
     $("z-dato").textContent = datosDe(i).join("  ·  ") || S.nombre;
+
+    // Top 3: se descubre de a uno, del 3 al 1
+    $("t-kick").textContent = "Top 3 · " + S.nombre;
+    $("t-tit").textContent = S.top.titulo || "Top 3";
+    $("t-lista").innerHTML = S.top.items.map(function (x, j) {
+      var ver = j >= 3 - S.topVis;
+      return '<div class="item' + (ver ? " ver" : "") + '"><div class="pos">' + (j + 1) + '</div><div>' +
+        (ver ? '<div class="n">' + esc(x.n || "—") + '</div>' + (x.d ? '<div class="d">' + esc(x.d) + '</div>' : "")
+             : '<div class="tapa">· · ·</div>') + '</div></div>';
+    }).join("");
 
     // Cierre
     $("c-kick").textContent = "Las seis herramientas de " + S.nombre;
     $("c-lista").innerHTML = HERRAMIENTAS.map(function (hh, j) {
-      return '<li><span class="n">' + (j + 1) + '</span><div><span class="t">' + esc(hh.tit) + '</span><span class="r">' + esc(S.herr[j].resp || "—") + '</span></div></li>';
+      return '<li><span class="n">' + (j + 1) + '</span><div><span class="t">' + esc(titDe(j)) + '</span><span class="r">' + esc(S.herr[j].resp || "—") + '</span></div></li>';
     }).join("");
     $("c-link").textContent = S.link || "";
     $("c-qr").hidden = !S.link;
@@ -401,6 +457,9 @@ body.salida { cursor: none; }
     Array.prototype.forEach.call(document.querySelectorAll("#b-vistas button"), function (b) {
       var activo = b.dataset.vista ? (b.dataset.vista === S.vista) : (S.vista === "foco" && Number(b.dataset.n) === S.idx);
       b.classList.toggle("activo", activo);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#b-top"), function (b) {
+      b.classList.toggle("activo", S.vista === "top");
     });
     Array.prototype.forEach.call(document.querySelectorAll("#b-fondo button"), function (b) {
       b.classList.toggle("activo", b.dataset.bg === S.fondo);
@@ -444,6 +503,7 @@ body.salida { cursor: none; }
     else if (k === "arrowleft" || k === "pageup") { ev.preventDefault(); mover(-1); }
     else if (k === "z") vista("zocalo");
     else if (k === "c") vista("cierre");
+    else if (k === "t") { if (S.vista !== "top") { S.topVis = 0; vista("top"); } else { S.topVis = Math.min(3, S.topVis + 1); guardar(); render(); } }
     else if (k === "x" || k === "escape") vista("limpia");
     else if (k === "b") fondo();
     else if (k === "e") { if (!esSalida) panel(); }
@@ -457,8 +517,10 @@ body.salida { cursor: none; }
   /* ---------- Panel ---------- */
   function armarPanel() {
     $("p-herr").innerHTML = HERRAMIENTAS.map(function (h, i) {
-      return '<div class="herr"><div class="cab-h"><b><span>' + (i + 1) + '</span>' + esc(h.tit) + '</b>' +
-        '<button type="button" class="mini" data-ver="' + i + '">Mostrar</button></div><small>' + esc(h.guia) + '</small>' +
+      return '<div class="herr"><div class="cab-h"><b><span>' + (i + 1) + '</span>' + esc(titDe(i)) + '</b>' +
+        '<button type="button" class="mini" data-ver="' + i + '">Mostrar</button></div>' +
+        '<label for="ti-' + i + '">Título</label><input id="ti-' + i + '" type="text" autocomplete="off" placeholder="' + esc(h.tit) + '">' +
+        '<label for="gu-' + i + '">Guía (se ve hasta que hay respuesta)</label><input id="gu-' + i + '" type="text" autocomplete="off" placeholder="' + esc(h.guia) + '">' +
         '<label for="r-' + i + '">Respuesta corta, como va en pantalla</label><textarea id="r-' + i + '" rows="2"></textarea>' +
         '<label for="d-' + i + '">Datos concretos, separados por ·</label><input id="d-' + i + '" type="text" autocomplete="off" placeholder="Lugar · costo · contacto"></div>';
     }).join("");
@@ -466,7 +528,14 @@ body.salida { cursor: none; }
       return '<option value="' + esc(f.id) + '"' + (f.id === S.id ? " selected" : "") + ">" + esc(f.nombre || "Sin nombre") + "</option>";
     }).join("");
     $("i-nombre").value = S.nombre; $("i-desc").value = S.desc; $("i-link").value = S.link;
-    HERRAMIENTAS.forEach(function (_, i) { $("r-" + i).value = S.herr[i].resp; $("d-" + i).value = S.herr[i].dato; });
+    HERRAMIENTAS.forEach(function (_, i) { $("r-" + i).value = S.herr[i].resp; $("d-" + i).value = S.herr[i].dato; $("ti-" + i).value = S.herr[i].tit; $("gu-" + i).value = S.herr[i].guia; });
+    $("p-top").innerHTML = [0, 1, 2].map(function (j) {
+      return '<div class="herr"><b style="font-family:var(--display);font-weight:400;font-size:17px"><span style="color:var(--naranja)">' + (j + 1) + '</span></b>' +
+        '<label for="tn-' + j + '">Nombre</label><input id="tn-' + j + '" type="text" autocomplete="off">' +
+        '<label for="td-' + j + '">Una línea (por qué)</label><input id="td-' + j + '" type="text" autocomplete="off"></div>';
+    }).join("");
+    $("t-titulo").value = S.top.titulo;
+    [0, 1, 2].forEach(function (j) { $("tn-" + j).value = S.top.items[j].n; $("td-" + j).value = S.top.items[j].d; });
   }
 
   $("panel").addEventListener("input", function (ev) {
@@ -476,6 +545,11 @@ body.salida { cursor: none; }
     else if (id === "i-link") S.link = ev.target.value;
     else if (/^r-\d$/.test(id)) S.herr[Number(id.slice(2))].resp = ev.target.value;
     else if (/^d-\d$/.test(id)) S.herr[Number(id.slice(2))].dato = ev.target.value;
+    else if (/^ti-\d$/.test(id)) { S.herr[Number(id.slice(3))].tit = ev.target.value; var bt = ev.target.closest(".herr").querySelector(".cab-h b"); bt.lastChild.textContent = titDe(Number(id.slice(3))); }
+    else if (/^gu-\d$/.test(id)) S.herr[Number(id.slice(3))].guia = ev.target.value;
+    else if (id === "t-titulo") S.top.titulo = ev.target.value;
+    else if (/^tn-\d$/.test(id)) S.top.items[Number(id.slice(3))].n = ev.target.value;
+    else if (/^td-\d$/.test(id)) S.top.items[Number(id.slice(3))].d = ev.target.value;
     else return;
     guardar(); render();
   });
@@ -485,6 +559,7 @@ body.salida { cursor: none; }
     else if (b.dataset.n) mostrar(Number(b.dataset.n));
     else if (b.dataset.vista) vista(b.dataset.vista);
     else if (b.dataset.bg) fondo(b.dataset.bg);
+    else if (b.id === "b-top") { if (S.vista !== "top") { S.topVis = 0; vista("top"); } else { S.topVis = Math.min(3, S.topVis + 1); guardar(); render(); } }
   });
   $("abrir").addEventListener("click", function () { panel(true); });
   $("cerrar").addEventListener("click", function () { panel(false); });
@@ -492,7 +567,7 @@ body.salida { cursor: none; }
   $("i-lista").addEventListener("change", function (ev) { guardar(); elegir(ev.target.value); guardar(); armarPanel(); render(); aviso("En pantalla: " + (S.nombre || "Sin nombre")); });
   $("b-nuevo").addEventListener("click", function () {
     guardar();
-    S.id = nuevoId(); S.nombre = "Nuevo invitado"; S.desc = ""; S.herr = vacias();
+    S.id = nuevoId(); S.nombre = "Nuevo invitado"; S.desc = ""; S.herr = vacias(); S.top = topVacio(); S.topVis = 0;
     S.abiertas = [false, false, false, false, false, false]; S.vista = "general"; S.idx = 0;
     guardar(); armarPanel(); render(); $("i-nombre").focus(); $("i-nombre").select();
   });
@@ -529,14 +604,14 @@ body.salida { cursor: none; }
       if (!d || !Array.isArray(d.herr) || d.herr.length !== 6) throw new Error();
       guardar(); S.id = d.id || nuevoId();
       S.nombre = d.nombre || ""; S.desc = d.desc || ""; S.link = d.link || "";
-      S.herr = d.herr.map(function (h) { return { resp: String(h.resp || ""), dato: String(h.dato || "") }; });
+      S.herr = d.herr.map(limpiarHerr); S.top = limpiarTop(d.top);
       guardar(); armarPanel(); render(); aviso("Datos cargados.");
     } catch (e) { aviso("No se pudo leer: pegá el texto completo que copiaste con Copiar datos."); }
   });
   $("b-vaciar").addEventListener("click", function () {
     var b = $("b-vaciar");
     if (b.dataset.seguro !== "1") { b.dataset.seguro = "1"; b.textContent = "Tocá de nuevo para vaciar"; setTimeout(function () { b.dataset.seguro = ""; b.textContent = "Vaciar respuestas"; }, 3000); return; }
-    S.herr = HERRAMIENTAS.map(function () { return { resp: "", dato: "" }; });
+    S.herr = S.herr.map(function (h) { return { resp: "", dato: "", tit: h.tit, guia: h.guia }; });
     S.abiertas = [false, false, false, false, false, false];
     b.dataset.seguro = ""; b.textContent = "Vaciar respuestas";
     guardar(); armarPanel(); render(); aviso("Respuestas vaciadas.");

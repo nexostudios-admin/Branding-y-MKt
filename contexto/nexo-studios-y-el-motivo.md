@@ -11,6 +11,10 @@ Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas 
 
 ## Nexo Studios
 
+> **Estado (oct. 2026): el estudio todavía no se lanzó.** El plan: una inauguración, y desde ahí alquilar horas de estudio y sostener los cinco programas propios.
+>
+> **Cómo se armó el equipo:** Nico subió una historia a Instagram, la vio Roko y le contó que conocía a Fabricio como productor. Así llegó Fabricio a Nexo.
+
 - **Qué es:** centro integral de contenido (podcast, streaming, música, audiovisual). Produce, emite y posproduce en la misma casa.
 - **Claim:** "Historias que conectan" / "Un espacio donde todo conecta".
 - **Dirección:** Hipólito Yrigoyen 4716, San Martín, GBA · IG @nexo.studios.ar · WA +54 9 11 6745-1909 · www.nexostudios.com.ar
