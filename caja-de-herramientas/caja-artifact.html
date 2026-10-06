@@ -404,7 +404,7 @@ body:not(.modo-publico) #publico { display: none; }
   var VISTAS = ["general", "foco", "zocalo", "top", "cierre", "yo", "limpia"];
 
   var $ = function (id) { return document.getElementById(id); };
-  function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : String(t); return d.innerHTML; }
+  function esc(t) { var d = document.createElement("div"); d.textContent = t == null ? "" : String(t); return d.innerHTML.replace(/"/g, "&quot;"); }
   function str(x) { return x == null ? "" : String(x); }
   function clonar(o) { return JSON.parse(JSON.stringify(o)); }
   function nuevoId() { return "i" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
