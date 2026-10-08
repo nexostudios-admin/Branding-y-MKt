@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pequeños Grandes Sabios · Escaleta piloto 2</title>
+<link href="fonts/local.css" rel="stylesheet">
+<style>
+  /* Página de celular, una columna. Identidad del primer piloto: blanco, un color por bloque, Orbitron + Space Grotesk + Inter. */
+  @page { size: 100mm 222mm; margin: 6mm 5.5mm 7mm; }
+  :root {
+    --ink: #14161c; --mut: #5e6472; --line: #e3e6ec; --soft: #f5f6f9; --azul: #1f6fe0;
+    --b1: #f2b705; --b2: #2f7de1; --b3: #2fa84f; --b4: #f07c1e; --b5: #e84a8a; --b6: #8a4fd8; --b7: #e23b3b; --pre: #8a909c;
+    --tit: "Orbitron", "Arial Black", sans-serif; --sg: "Space Grotesk", "Inter", sans-serif; --txt: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: var(--ink); }
+  body { font-family: var(--txt); font-size: 10.5pt; line-height: 1.4; }
+  @media screen { body { max-width: 440px; margin: 0 auto; padding: 16px; } }
+  .break { break-before: page; }
+  .keep { break-inside: avoid; }
+  .lbl { font-family: var(--sg); font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); font-weight: 600; }
+
+  /* Portada */
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .top img { width: 70px; }
+  .top span { font-family: var(--sg); font-weight: 700; font-size: 7pt; letter-spacing: .12em; color: var(--azul); text-align: right; text-transform: uppercase; line-height: 1.3; }
+  .hero { display: grid; grid-template-columns: 112px 1fr; gap: 10px; align-items: center; margin: 12px 0 8px; }
+  .hero img { width: 112px; }
+  .hero .k { font-family: var(--sg); font-weight: 700; font-size: 7pt; letter-spacing: .12em; color: var(--azul); text-transform: uppercase; }
+  .hero h1 { font-family: var(--sg); font-weight: 700; font-size: 19pt; line-height: 1.02; margin: 2px 0 0; }
+  .sub { font-size: 10pt; color: #333; margin: 0 0 10px; }
+  .ficha { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .ficha div { display: flex; justify-content: space-between; gap: 10px; padding: 6px 10px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .ficha div:last-child { border-bottom: 0; }
+  .ficha b { font-weight: 600; text-align: right; font-size: 10pt; }
+  .nuevo { background: #eef4ff; border-left: 4px solid var(--azul); border-radius: 6px; padding: 8px 10px; margin-top: 10px; font-size: 9.6pt; }
+  .nuevo b { color: var(--azul); }
+  .nuevo ul { margin: 4px 0 0; padding-left: 16px; }
+  .nuevo li { margin: 2px 0; }
+
+  h2 { font-family: var(--sg); font-weight: 700; font-size: 14pt; margin: 4px 0 8px; break-after: avoid; }
+  h2::before { content: "x "; color: var(--azul); font-family: var(--tit); font-size: 11pt; }
+  h2.sp { margin-top: 16px; }
+
+  /* Resumen */
+  .list { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 40px 1fr 44px; gap: 6px; align-items: center; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: 0; }
+  .tag { display: inline-block; font-family: var(--tit); font-weight: 700; font-size: 7.5pt; color: #fff; border-radius: 5px; padding: 2px 6px; text-align: center; }
+  .row .n { font-weight: 600; }
+  .row .m { text-align: right; font-family: var(--tit); font-weight: 500; font-size: 8pt; color: var(--mut); }
+  .cast { display: grid; grid-template-columns: 52px 1fr; gap: 6px; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  .cast:last-child { border-bottom: 0; }
+  .cast .r { font-family: var(--tit); font-weight: 700; font-size: 7.5pt; color: var(--azul); padding-top: 3px; }
+  .cast .n { font-weight: 600; }
+  .cast .d { color: var(--mut); font-size: 9pt; }
+
+  /* Bloques */
+  .bh { border-top: 4px solid var(--c, var(--azul)); background: var(--soft); border-radius: 8px 8px 0 0; padding: 8px 10px 9px; break-after: avoid; }
+  .bh .tag { background: var(--c); margin-right: 6px; vertical-align: 2px; }
+  .bh .ti { font-family: var(--sg); font-weight: 700; font-size: 14pt; }
+  .bh .hr { font-family: var(--tit); font-weight: 700; font-size: 9pt; margin-top: 4px; }
+  .bh .hr em { font-style: normal; color: var(--mut); font-weight: 500; margin-left: 8px; }
+  .bh .ob { font-weight: 600; margin-top: 6px; font-size: 10pt; }
+  .sec { padding: 8px 2px 2px; break-inside: avoid; }
+  .sec ul { margin: 3px 0 0; padding-left: 16px; }
+  .sec li { margin: 3px 0; }
+  .q { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--c, var(--azul)); border-radius: 6px; padding: 6px 9px; margin: 5px 0; font-size: 10pt; break-inside: avoid; }
+  .q b { font-weight: 600; display: block; }
+  .q span { color: var(--mut); font-size: 9pt; }
+  .tec { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 6px; font-size: 9.2pt; color: #333; }
+  .tec b { font-family: var(--sg); font-size: 7pt; letter-spacing: .12em; color: var(--mut); margin-right: 4px; }
+  .aviso { background: #fff6e8; border-left: 4px solid var(--b4); border-radius: 6px; padding: 6px 9px; font-size: 9.4pt; margin-top: 6px; }
+  .pre { color: var(--mut); }
+
+  /* Anexos */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips span { border: 1px solid var(--line); background: var(--soft); border-radius: 20px; padding: 4px 10px; font-size: 9.4pt; }
+  .regla { display: grid; grid-template-columns: 30px 1fr; padding: 7px 10px; border-bottom: 1px solid var(--line); break-inside: avoid; }
+  .regla:last-child { border-bottom: 0; }
+  .regla .i { font-family: var(--tit); font-weight: 700; color: var(--azul); }
+  .regla b { display: block; font-weight: 600; }
+  .regla span { color: var(--mut); font-size: 9.4pt; }
+  .hz { display: grid; grid-template-columns: 52px 1fr; padding: 6px 10px; border-bottom: 1px solid var(--line); break-inside: avoid; }
+  .hz:last-child { border-bottom: 0; }
+  .hz .i { font-family: var(--tit); font-weight: 700; font-size: 9pt; color: var(--azul); padding-top: 1px; }
+  .chk .h { display: flex; justify-content: space-between; padding: 6px 10px; background: var(--soft); font-weight: 700; font-size: 9pt; }
+  .chk .c { display: grid; grid-template-columns: 20px 1fr; gap: 4px; padding: 6px 10px; border-top: 1px solid var(--line); font-size: 9.8pt; break-inside: avoid; }
+  .chk .c i { width: 13px; height: 13px; border: 1.5px solid #9aa0aa; border-radius: 3px; display: inline-block; margin-top: 2px; }
+  .chk .c em { display: block; font-style: normal; color: var(--azul); font-weight: 600; font-size: 8.6pt; }
+  .foot { text-align: center; color: var(--mut); font-size: 8pt; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="top"><img src="img/nexo.png" alt="Nexo Studios"><span>Escaleta de contenido<br>Programa piloto 2</span></div>
+<div class="hero">
+  <img src="img/pgs-logo.png" alt="Pequeños Grandes Sabios">
+  <div><div class="k">Streaming kids · en vivo</div><h1>Pequeños Grandes Sabios</h1></div>
+</div>
+<p class="sub">Mesa de dos nenas y dos nenes de 10 a 12 años y un conductor que no es profesor: pregunta, escucha y repregunta. La frase del programa es "¿Por qué?".</p>
+<div class="ficha">
+  <div><span class="lbl">Fecha</span><b>A confirmar</b></div>
+  <div><span class="lbl">Al aire</span><b>A confirmar · 60 min</b></div>
+  <div><span class="lbl">Lugar</span><b>Nexo Studios · San Martín</b></div>
+  <div><span class="lbl">Salida</span><b>YouTube en vivo con delay</b></div>
+  <div><span class="lbl">Conduce</span><b>Julián Barreiro</b></div>
+  <div><span class="lbl">En cámara</span><b>Julián + 2 nenas y 2 nenes</b></div>
+</div>
+<div class="nuevo"><b>Qué cambia respecto del piloto 1</b>
+  <ul>
+    <li>Conduce Julián Barreiro.</li>
+    <li>La mesa es pareja: dos nenas y dos nenes. En los juegos de equipos, cada bando lleva una nena y un nene.</li>
+    <li>Todos los disparadores, frases, mensajes y misiones son nuevos: nada se repite del primer piloto.</li>
+  </ul>
+</div>
+
+<h2 class="break">El programa de un vistazo</h2>
+<div class="list">
+  <div class="row"><span class="tag" style="background:var(--b1)">B1</span><span class="n">¡Llegaron los sabios!</span><span class="m">00:00</span></div>
+  <div class="row"><span class="tag" style="background:var(--b2)">B2</span><span class="n">La gran pregunta</span><span class="m">05:00</span></div>
+  <div class="row"><span class="tag" style="background:var(--b3)">B3</span><span class="n">¿Mito o verdad?</span><span class="m">15:00</span></div>
+  <div class="row"><span class="tag" style="background:var(--b4)">B4</span><span class="n">El buzón de los sabios</span><span class="m">25:00</span></div>
+  <div class="row"><span class="tag" style="background:var(--b5)">B5</span><span class="n">Misión imposible</span><span class="m">35:00</span></div>
+  <div class="row"><span class="tag" style="background:var(--b6)">B6</span><span class="n">Lo que los grandes no saben</span><span class="m">45:00</span></div>
+  <div class="row"><span class="tag" style="background:var(--b7)">B7</span><span class="n">Sabios del día</span><span class="m">55:00</span></div>
+</div>
+<p class="sub" style="margin-top:8px">Los minutos cuentan desde que sale al aire. Cada bloque trae disparadores: no hace falta usarlos todos. Si uno engancha, se sigue con "¿Por qué?".</p>
+
+<h2 class="sp">En la mesa</h2>
+<div class="list">
+  <div class="cast"><span class="r">COND</span><div><div class="n">Julián Barreiro</div><div class="d">Pregunta, escucha y repregunta. Habla poco: los que hablan son los chicos.</div></div></div>
+  <div class="cast"><span class="r">SABIA</span><div><div class="n">[Apodo] · [edad]</div><div class="d">Nena 1</div></div></div>
+  <div class="cast"><span class="r">SABIA</span><div><div class="n">[Apodo] · [edad]</div><div class="d">Nena 2</div></div></div>
+  <div class="cast"><span class="r">SABIO</span><div><div class="n">[Apodo] · [edad]</div><div class="d">Nene 1</div></div></div>
+  <div class="cast"><span class="r">SABIO</span><div><div class="n">[Apodo] · [edad]</div><div class="d">Nene 2</div></div></div>
+</div>
+<p class="sub" style="margin-top:6px">Al aire, solo apodo y edad: sin apellido, escuela ni barrio.</p>
+
+<!-- PRE -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--pre)"><span class="tag">PRE</span><span class="ti">Antes de salir</span><div class="hr">−10:00</div></div>
+<div class="sec" style="--c:var(--pre)">
+  <p style="margin:2px 0 6px">Los chicos se sientan y prueban el micro diciendo su apodo. Julián es nuevo para ellos: se presenta, aprende los cuatro apodos y juega fuera de aire para bajar los nervios.</p>
+  <div class="q">"¿Quién está más nervioso, del 1 al 10?"</div>
+  <div class="q">"Decime tu apodo y yo te digo si me lo acuerdo al final."</div>
+  <div class="tec"><b>TÉCNICA</b>Placa de espera con cuenta regresiva.</div>
+</div>
+
+<!-- B1 -->
+<div class="bh" style="--c:var(--b1);margin-top:12px"><span class="tag">B1</span><span class="ti">¡Llegaron los sabios!</span><div class="hr">00:00 – 05:00<em>5 min</em></div><div class="ob">Que la audiencia los conozca y que ellos se suelten.</div></div>
+<div class="sec" style="--c:var(--b1)">
+  <span class="lbl">Cómo se juega</span>
+  <ul><li>Cada uno se presenta con su apodo y su súper poder.</li><li>Muestra el objeto que trajo de casa y lo explica en 20 segundos.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b1)">
+  <span class="lbl">Disparadores</span>
+  <div class="q">"Si hoy fueras un animal, ¿cuál serías?"</div>
+  <div class="q">"¿Qué es lo último que aprendiste que te voló la cabeza?"</div>
+  <div class="q">"Mostranos tu objeto: ¿quién te lo dio o de dónde salió?"</div>
+  <div class="q">"Del 1 al 10, ¿cuánta energía traés hoy?"</div>
+  <span class="lbl">Si se traba</span>
+  <ul><li>Que otro chico adivine para qué sirve el objeto.</li></ul>
+  <div class="tec"><b>TÉCNICA</b>Intro PGS · zócalos con apodo y edad, sin apellido · primeros planos con Insta360.</div>
+</div>
+
+<!-- B2 -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--b2)"><span class="tag">B2</span><span class="ti">La gran pregunta</span><div class="hr">05:00 – 15:00<em>10 min</em></div><div class="ob">Un debate de su mundo, con dos bandos.</div></div>
+<div class="sec" style="--c:var(--b2)">
+  <span class="lbl">Cómo se juega</span>
+  <ul><li>Julián lanza la pregunta y dos respuestas posibles.</li><li>Dos bandos de una nena y un nene: cada bando defiende una, aunque no piense así.</li><li>Al final cada uno puede cambiarse de bando y explicar por qué.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b2)">
+  <span class="lbl">Disparadores · elegir una</span>
+  <div class="q">"¿Es mejor ser el hermano más grande o el más chico?"</div>
+  <div class="q">"¿Los chicos deberían poder votar?"</div>
+  <div class="q">"¿Es mejor vivir en la ciudad o en el campo?"</div>
+  <div class="q">"¿Hay que hacer siempre lo que dicen los grandes?"</div>
+  <div class="q">"¿Qué es más importante: ser inteligente o ser buena persona?"</div>
+</div>
+<div class="sec" style="--c:var(--b2)">
+  <span class="lbl">Repreguntas</span>
+  <ul><li>"¿Por qué?"</li><li>"¿Me das un ejemplo de algo que te pasó?"</li><li>"¿Qué le dirías a alguien del otro bando?"</li><li>"¿Alguien se quiere cambiar de bando?"</li></ul>
+  <div class="tec"><b>TÉCNICA</b>Placa con la pregunta y los dos bandos · contador 2 vs 2 · sin música.</div>
+</div>
+
+<!-- B3 -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--b3)"><span class="tag">B3</span><span class="ti">¿Mito o verdad?</span><div class="hr">15:00 – 25:00<em>10 min</em></div><div class="ob">Votar rápido, discutir y descubrir la respuesta.</div></div>
+<div class="sec" style="--c:var(--b3)">
+  <span class="lbl">Cómo se juega</span>
+  <ul><li>Se lee una frase. Los cuatro levantan a la vez el cartel VERDE (verdad) o ROJO (mito).</li><li>Uno de cada bando explica su voto. Después se revela la respuesta.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b3)">
+  <span class="lbl">Disparadores · usar 3</span>
+  <div class="q"><b>"Los murciélagos son ciegos."</b><span>Mito: ven, y además se orientan con el eco.</span></div>
+  <div class="q"><b>"La jirafa tiene la misma cantidad de huesos en el cuello que una persona."</b><span>Verdad: siete, igual que nosotros. Solo que mucho más largos.</span></div>
+  <div class="q"><b>"Comer zanahoria te hace ver en la oscuridad."</b><span>Mito: es buena para la vista, pero no da visión nocturna.</span></div>
+  <div class="q"><b>"Los peces de colores se olvidan de todo a los 3 segundos."</b><span>Mito: pueden recordar cosas durante meses.</span></div>
+  <div class="q"><b>"Los videojuegos te hacen más inteligente."</b><span>Para opinar: no hay una sola respuesta.</span></div>
+  <div class="tec"><b>TÉCNICA</b>Placa por frase y resultado · SFX de votación · plano general al levantar carteles.</div>
+</div>
+
+<!-- B4 -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--b4)"><span class="tag">B4</span><span class="ti">El buzón de los sabios</span><div class="hr">25:00 – 35:00<em>10 min</em></div><div class="ob">Chicos que miran el stream piden un consejo y la mesa responde.</div></div>
+<div class="sec" style="--c:var(--b4)">
+  <span class="lbl">Cómo se juega</span>
+  <ul><li>Se leen 3 mensajes o audios de WhatsApp, solo con el primer nombre.</li><li>Los cuatro se ponen de acuerdo y dan UN solo consejo.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b4)">
+  <span class="lbl">Mensajes de reserva · si no llegan reales</span>
+  <div class="q">"Me peleé con mi mejor amigo y no sé cómo pedirle perdón."</div>
+  <div class="q">"Mi hermano chico me copia todo y me molesta."</div>
+  <div class="q">"El año que viene me cambio de escuela y me da miedo no tener amigos."</div>
+  <span class="lbl">Repreguntas</span>
+  <ul><li>"¿A alguno le pasó algo parecido?"</li><li>"Si fueras su amigo, ¿qué le dirías?"</li><li>"Ahora, el consejo en una sola frase."</li></ul>
+  <div class="tec"><b>TÉCNICA</b>Placa "El buzón" con el WhatsApp · audios desde el Rodecaster · bloque para clips.</div>
+</div>
+
+<!-- B5 -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--b5)"><span class="tag">B5</span><span class="ti">Misión imposible</span><div class="hr">35:00 – 45:00<em>10 min</em></div><div class="ob">Bloque de juego: no hablan, hacen.</div></div>
+<div class="sec" style="--c:var(--b5)">
+  <div class="aviso">Hacerlo sobre el escritorio: los micros son de mesa y si se alejan no se los escucha.</div>
+  <span class="lbl" style="display:block;margin-top:8px">Cómo se juega</span>
+  <ul><li>Se lee la misión y arranca el timer de 5 minutos.</li><li>Trabajan en dos equipos mixtos, en pizarras o con materiales, y después muestran el resultado a cámara.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b5)">
+  <span class="lbl">Misiones · elegir una</span>
+  <div class="q">"Diseñen la mascota del programa: nombre, súper poder y dibujo."</div>
+  <div class="q">"Inventen un deporte que se pueda jugar sentados."</div>
+  <div class="q">"Armen el menú de un restaurante para extraterrestres."</div>
+  <div class="q">"Escriban 3 reglas para que los grandes usen menos el celular."</div>
+  <div class="tec"><b>TÉCNICA</b>Placa con la misión · timer en pantalla · música de juego, baja cuando hablan.</div>
+</div>
+
+<!-- B6 -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--b6)"><span class="tag">B6</span><span class="ti">Lo que los grandes no saben</span><div class="hr">45:00 – 55:00<em>10 min · momento clave</em></div><div class="ob">El momento más sincero del programa. Julián no interrumpe: escucha.</div></div>
+<div class="sec" style="--c:var(--b6)">
+  <span class="lbl">Cómo se juega</span>
+  <ul><li>Cada chico completa una frase, sin apuro.</li><li>Cualquiera puede decir "paso" y no pasa nada.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b6)">
+  <span class="lbl">Disparadores</span>
+  <div class="q">"Ojalá los grandes supieran que…"</div>
+  <div class="q">"Lo que más me gusta de ser chico es…"</div>
+  <div class="q">"Si fuera adulto por un día, cambiaría…"</div>
+  <div class="q">"Algo que los chicos entendemos mejor que los grandes es…"</div>
+  <span class="lbl">De Julián</span>
+  <ul><li>Solo dice "Gracias" o "¿Querés contar un poco más?".</li><li>Si algo es delicado, lo recibe con calma y producción lo sigue fuera de aire.</li></ul>
+  <div class="tec"><b>TÉCNICA</b>Primer plano fijo con Insta360 · pantalla limpia, sin zócalos · música muy baja o nada.</div>
+</div>
+
+<!-- B7 -->
+<div class="break"></div>
+<div class="bh" style="--c:var(--b7)"><span class="tag">B7</span><span class="ti">Sabios del día</span><div class="hr">55:00 – 60:00<em>5 min</em></div><div class="ob">Cerrar arriba y dejar ganas del próximo programa.</div></div>
+<div class="sec" style="--c:var(--b7)">
+  <span class="lbl">Cómo se juega</span>
+  <ul><li>Cada uno le pone nota al programa del 1 al 10.</li><li>Se anuncia la encuesta de Instagram para elegir el próximo tema.</li><li>Saludo propio del programa.</li></ul>
+</div>
+<div class="sec" style="--c:var(--b7)">
+  <span class="lbl">Disparadores</span>
+  <div class="q">"¿Qué te llevás de hoy en una palabra?"</div>
+  <div class="q">"¿De qué te gustaría hablar la próxima?"</div>
+  <div class="q">"¿Quién fue el más sabio de hoy y por qué?"</div>
+  <div class="tec"><b>TÉCNICA</b>Ranking en pantalla · encuesta @pequenosgrandessabios · outro PGS + NEXO.</div>
+</div>
+<div class="bh" style="--c:var(--pre);margin-top:12px"><span class="tag">POST</span><span class="ti">Fuera de aire</span><div class="hr">60:00</div></div>
+<div class="sec"><p class="pre" style="margin:2px 0">Devolución con los chicos: qué les gustó y qué cambiarían. Se entregan a sus adultos. Publicar la encuesta y marcar los minutos para clips.</p></div>
+
+<!-- ANEXOS -->
+<h2 class="break">Comodines de Julián</h2>
+<p class="sub">Para cualquier bloque, cuando la charla se queda.</p>
+<div class="chips"><span>"¿Por qué?"</span><span>"¿Me das un ejemplo?"</span><span>"¿Quién piensa distinto?"</span><span>"Contalo como una película"</span><span>"Del 1 al 10…"</span><span>"¿Qué harías si fueras director del cole?"</span><span>"¿Qué le dirías a tu yo de 8 años?"</span></div>
+
+<h2 class="sp">Reglas de oro</h2>
+<div class="list">
+  <div class="regla"><span class="i">01</span><div><b>Máximo 30 segundos hablando</b><span>Julián pregunta y deja hablar.</span></div></div>
+  <div class="regla"><span class="i">02</span><div><b>No adultificar</b><span>Nada de "cuando sean grandes". Mejor "ahora que ustedes…".</span></div></div>
+  <div class="regla"><span class="i">03</span><div><b>Carteles y pizarras</b><span>Escribir y mostrar es más dinámico que hablar.</span></div></div>
+  <div class="regla"><span class="i">04</span><div><b>Derecho a pasar</b><span>Ningún chico está obligado a responder.</span></div></div>
+  <div class="regla"><span class="i">05</span><div><b>Turnos parejos</b><span>Que las nenas y los nenes hablen lo mismo. Si uno acapara, Julián le da la palabra a otro.</span></div></div>
+</div>
+
+<h2 class="break">Protocolo de menores</h2>
+<div class="list">
+  <div class="regla"><span class="i">✓</span><div><b>Autorización por emisión</b><span>Firmada por padre, madre o tutor antes de cada programa.</span></div></div>
+  <div class="regla"><span class="i">✓</span><div><b>Un adulto por chico</b><span>Presente en el estudio durante todo el vivo.</span></div></div>
+  <div class="regla"><span class="i">✓</span><div><b>Chat con delay</b><span>Moderación activa en YouTube.</span></div></div>
+  <div class="regla"><span class="i">✓</span><div><b>Datos que no salen al aire</b><span>Sin apellidos, escuela ni barrio. Tampoco en los mensajes del buzón.</span></div></div>
+</div>
+
+<h2 class="sp">Horario del día</h2>
+<p class="sub">Contado desde la hora de salida al aire (a confirmar).</p>
+<div class="list">
+  <div class="hz"><span class="i">−2:00</span><span>Técnica en estudio.</span></div>
+  <div class="hz"><span class="i">−1:15</span><span>Llega Julián. Repaso de esta escaleta.</span></div>
+  <div class="hz"><span class="i">−0:45</span><span>Llegan los chicos con sus adultos. Firmas.</span></div>
+  <div class="hz"><span class="i">−0:30</span><span>Prueba de sonido y cámara con la mesa.</span></div>
+  <div class="hz"><span class="i">−0:10</span><span>Stand by.</span></div>
+  <div class="hz"><span class="i">0:00</span><span>Al aire.</span></div>
+  <div class="hz"><span class="i">1:00</span><span>Fuera de aire y devolución.</span></div>
+</div>
+
+<h2 class="break">Antes de salir</h2>
+<div class="list chk">
+  <div class="h"><span>Checklist</span><span>0 / 9</span></div>
+  <div class="c"><i></i><span>Autorizaciones firmadas de los 4 chicos<em>Producción</em></span></div>
+  <div class="c"><i></i><span>Apodo y edad de cada chico para los zócalos<em>Producción</em></span></div>
+  <div class="c"><i></i><span>Elegida la gran pregunta (B2) y las 3 frases de mito o verdad (B3)<em>Julián</em></span></div>
+  <div class="c"><i></i><span>Bandos armados: una nena y un nene en cada uno<em>Julián</em></span></div>
+  <div class="c"><i></i><span>Mensajes del buzón listos, o los de reserva impresos<em>Producción</em></span></div>
+  <div class="c"><i></i><span>Misión elegida y materiales en la mesa<em>Producción</em></span></div>
+  <div class="c"><i></i><span>4 carteles verdes, 4 rojos y 4 pizarras con fibrones<em>Producción</em></span></div>
+  <div class="c"><i></i><span>Encuesta de Instagram armada<em>Julián</em></span></div>
+  <div class="c"><i></i><span>Chat con delay y moderador asignado<em>Técnica</em></span></div>
+</div>
+
+<div class="foot">Pequeños Grandes Sabios · Streaming Kids · by NEXO Studios<br>Piloto 2 · conduce Julián Barreiro</div>
+</body>
+</html>

@@ -5,6 +5,7 @@ Resumen de referencia armado a partir de los PDFs y piezas gráficas entregadas 
 > **Estado (oct. 2026): todo está en etapa de pilotos.** Ningún programa de la grilla salió todavía al aire de forma regular.
 > - Tercer Tiempo: piloto grabado, dom 4/10, 20–22 h.
 > - Pequeños Grandes Sabios: piloto en YouTube con delay, jue 1/10, 17–18 h.
+> - Pequeños Grandes Sabios, piloto 2: conduce Julián Barreiro, mesa de 2 nenas y 2 nenes, fecha a confirmar (`pilotos/pgs/`).
 > - El Motivo: sale los **miércoles** por Somos Como Somos (horario a confirmar). Piloto grabado el mar 6/10, 19–20 h (el piloto y el programa duran **1 hora**), sale por Somos Como Somos. Paula conectada en vivo desde Bogotá como co-conductora: no hay invitado desde Bogotá, ella hace parte de las preguntas (5 bloques: apertura, El motivo, caja de herramientas, El motivo de la calle y cierre; sin bloque Bogotá ni preguntas de la gente). Invitado: Fede Aguirre. La caja de herramientas es una página online: pública con la caja de cada invitado, y con modos `#control` y `#salida` para la transmisión (`caja-de-herramientas/`). El cierre suma "¿Qué le dirías a tu yo del pasado y a tu yo del futuro?" después de "¿Cuál es tu motivo?".
 > - Exitosa Yo y Sex and the Baires: pilotos esta semana (datos pendientes).
 > - Las escaletas de piloto van en `pilotos/`, en formato para celular.
