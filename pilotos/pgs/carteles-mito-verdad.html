@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pequeños Grandes Sabios · Carteles Mito o Verdad</title>
+<link href="fonts/local.css" rel="stylesheet">
+<style>
+  /* Carteles para imprenta: A4 vertical (210×297 mm) + 3 mm de sangrado por lado = 216×303 mm.
+     Todo lo importante queda a más de 12 mm del corte. */
+  @page { size: 216mm 303mm; margin: 0; }
+  :root {
+    --verde: #1f9d4a; --verde-osc: #137336; --rojo: #e2352f; --rojo-osc: #a81e1a;
+    --azul: #1f6fe0; --azul-osc: #123f8f; --amarillo: #ffc928; --blanco: #ffffff;
+    --tit: "Orbitron", "Arial Black", sans-serif; --sg: "Space Grotesk", "Arial", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; }
+  .hoja { width: 216mm; height: 303mm; position: relative; overflow: hidden; break-after: page; color: var(--blanco); font-family: var(--sg); }
+  .hoja:last-child { break-after: auto; }
+  .verdad { background: radial-gradient(120% 80% at 50% 30%, #2bb85b 0%, var(--verde) 45%, var(--verde-osc) 100%); }
+  .mito { background: radial-gradient(120% 80% at 50% 30%, #f04a40 0%, var(--rojo) 45%, var(--rojo-osc) 100%); }
+  .dorso { background: radial-gradient(120% 80% at 50% 35%, #2f80ee 0%, var(--azul) 45%, var(--azul-osc) 100%); }
+
+  /* Confeti de fondo, como en la identidad del programa */
+  .confeti { position: absolute; inset: 0; }
+  .confeti i { position: absolute; display: block; opacity: .22; }
+  .confeti .c { width: 9mm; height: 9mm; border-radius: 50%; background: #fff; }
+  .confeti .s { width: 0; height: 0; border-left: 6mm solid transparent; border-right: 6mm solid transparent; border-bottom: 10mm solid #fff; }
+  .confeti .r { width: 14mm; height: 4mm; border-radius: 2mm; background: #fff; }
+  .confeti .a { width: 7mm; height: 7mm; border-radius: 50%; border: 2mm solid var(--amarillo); opacity: .55; }
+
+  /* Contenido (zona segura: 15 mm del corte) */
+  .zona { position: absolute; left: 15mm; right: 15mm; top: 15mm; bottom: 15mm; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+  .icono { width: 112mm; height: 112mm; border-radius: 50%; background: #fff; display: grid; place-items: center; margin-top: 14mm; box-shadow: 0 3mm 0 rgba(0,0,0,.18); }
+  .icono svg { width: 70mm; height: 70mm; }
+  .palabra { font-family: var(--tit); font-weight: 800; line-height: 1; letter-spacing: .02em; text-shadow: 0 2.2mm 0 rgba(0,0,0,.22); }
+  .verdad .palabra { font-size: 100pt; }
+  .mito .palabra { font-size: 132pt; }
+  .bajada { font-family: var(--sg); font-weight: 700; font-size: 22pt; letter-spacing: .04em; text-transform: uppercase; opacity: .92; margin-top: 4mm; }
+  .pie { display: flex; align-items: center; gap: 5mm; background: rgba(255,255,255,.95); color: var(--azul-osc); border-radius: 30mm; padding: 3mm 9mm 3mm 3mm; }
+  .pie img { width: 26mm; height: auto; }
+  .pie span { font-family: var(--sg); font-weight: 700; font-size: 15pt; text-align: left; line-height: 1.1; }
+
+  /* Dorso */
+  .dorso .zona { justify-content: center; gap: 12mm; }
+  .dorso .logo { width: 130mm; height: auto; filter: drop-shadow(0 3mm 0 rgba(0,0,0,.18)); }
+  .dorso .frase { font-family: var(--tit); font-weight: 800; font-size: 60pt; line-height: 1; text-shadow: 0 2mm 0 rgba(0,0,0,.22); }
+  .dorso .sub { font-family: var(--sg); font-weight: 700; font-size: 18pt; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+</style>
+</head>
+<body>
+
+<!-- 1 · VERDAD (frente verde) -->
+<section class="hoja verdad">
+  <div class="confeti">
+    <i class="c" style="left:14mm;top:22mm"></i><i class="s" style="left:180mm;top:30mm;transform:rotate(18deg)"></i>
+    <i class="r" style="left:22mm;top:140mm;transform:rotate(-30deg)"></i><i class="a" style="left:186mm;top:150mm"></i>
+    <i class="c" style="left:176mm;top:238mm"></i><i class="s" style="left:20mm;top:250mm;transform:rotate(-14deg)"></i>
+    <i class="r" style="left:150mm;top:98mm;transform:rotate(40deg)"></i><i class="a" style="left:40mm;top:70mm"></i>
+  </div>
+  <div class="zona">
+    <div class="icono" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M22 52 L42 72 L80 30" fill="none" stroke="#1f9d4a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div>
+      <div class="palabra">VERDAD</div>
+      <div class="bajada">¡Es cierto!</div>
+    </div>
+    <div class="pie"><img src="img/pgs-logo-grande.png" alt=""><span>Pequeños<br>Grandes Sabios</span></div>
+  </div>
+</section>
+
+<!-- 2 · MITO (frente rojo) -->
+<section class="hoja mito">
+  <div class="confeti">
+    <i class="s" style="left:16mm;top:24mm;transform:rotate(-12deg)"></i><i class="c" style="left:182mm;top:26mm"></i>
+    <i class="a" style="left:18mm;top:146mm"></i><i class="r" style="left:172mm;top:150mm;transform:rotate(28deg)"></i>
+    <i class="r" style="left:24mm;top:244mm;transform:rotate(-24deg)"></i><i class="s" style="left:178mm;top:252mm;transform:rotate(20deg)"></i>
+    <i class="c" style="left:44mm;top:84mm"></i><i class="a" style="left:160mm;top:96mm"></i>
+  </div>
+  <div class="zona">
+    <div class="icono" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M28 28 L72 72 M72 28 L28 72" fill="none" stroke="#e2352f" stroke-width="13" stroke-linecap="round"/></svg>
+    </div>
+    <div>
+      <div class="palabra">MITO</div>
+      <div class="bajada">¡Es mentira!</div>
+    </div>
+    <div class="pie"><img src="img/pgs-logo-grande.png" alt=""><span>Pequeños<br>Grandes Sabios</span></div>
+  </div>
+</section>
+
+<!-- 3 · Dorso (para pegar atrás de cada cartel) -->
+<section class="hoja dorso">
+  <div class="confeti">
+    <i class="c" style="left:16mm;top:20mm"></i><i class="s" style="left:180mm;top:26mm;transform:rotate(16deg)"></i>
+    <i class="a" style="left:22mm;top:150mm"></i><i class="r" style="left:170mm;top:140mm;transform:rotate(-30deg)"></i>
+    <i class="s" style="left:20mm;top:252mm;transform:rotate(-18deg)"></i><i class="c" style="left:178mm;top:246mm"></i>
+  </div>
+  <div class="zona">
+    <img class="logo" src="img/pgs-logo-grande.png" alt="Pequeños Grandes Sabios">
+    <div class="frase">¿POR QUÉ?</div>
+    <div class="sub">Preguntas pequeñas. Grandes conversaciones.</div>
+  </div>
+</section>
+
+</body>
+</html>
