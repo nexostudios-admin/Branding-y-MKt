@@ -5,316 +5,287 @@
 <title>Café con Pips · Propuesta Nexo Studios</title>
 <link href="fonts/local.css" rel="stylesheet">
 <style>
-  /* Formato de las propuestas de Nexo: páginas verticales 9:16 (1080×1920), fondo oscuro, Sora + Barlow Condensed + Inter. */
+  /* Formato de las propuestas de Nexo: páginas verticales 9:16 (1080×1920), Sora + Barlow Condensed + Inter.
+     Seis páginas que alternan fondo oscuro y claro. */
   @page { size: 1080px 1920px; margin: 0; }
   :root {
-    --fondo: #05070b; --tarjeta: #0d1118; --linea: #1d2430; --texto: #e9edf3; --mut: #8d97a8;
     --azul: #3d7bff; --rojo: #ff3b3b; --oro: #e7b24a;
     --sora: "Sora", "Inter", sans-serif; --cond: "Barlow Condensed", "Arial Narrow", sans-serif; --inter: "Inter", system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--fondo); color: var(--texto); font-family: var(--inter); }
-  .pag { width: 1080px; height: 1920px; position: relative; overflow: hidden; break-after: page; padding: 140px 92px 150px;
-         background: radial-gradient(900px 700px at 0% 0%, rgba(61,123,255,.16), transparent 60%), radial-gradient(800px 600px at 100% 100%, rgba(255,59,59,.10), transparent 60%), var(--fondo); }
+  html, body { margin: 0; font-family: var(--inter); }
+  .pag { width: 1080px; height: 1920px; position: relative; overflow: hidden; break-after: page; padding: 150px 84px 140px; }
   .pag:last-child { break-after: auto; }
-  .marca { position: absolute; left: 92px; top: 56px; width: 120px; }
-  .num { position: absolute; right: 92px; top: 66px; font-family: var(--cond); font-weight: 700; font-size: 22px; letter-spacing: .14em; color: var(--mut); }
-  .pie { position: absolute; left: 92px; right: 92px; bottom: 60px; display: flex; justify-content: space-between; border-top: 1px solid var(--linea); padding-top: 18px;
-         font-family: var(--cond); font-weight: 700; font-size: 18px; letter-spacing: .16em; text-transform: uppercase; color: #5d6676; }
-  .kick { font-family: var(--cond); font-weight: 700; font-size: 24px; letter-spacing: .2em; text-transform: uppercase; color: var(--azul); display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+  .oscura { --bg: #05070b; --card: #0e131b; --linea: #222a37; --tx: #eef1f6; --tx2: #c3cad6; --mut: #8b95a6; --acento: #4a86ff; color: var(--tx);
+            background: radial-gradient(900px 700px at 0% 0%, rgba(61,123,255,.16), transparent 60%), radial-gradient(800px 600px at 100% 100%, rgba(255,59,59,.10), transparent 60%), var(--bg); }
+  .clara { --bg: #f3f5f9; --card: #ffffff; --linea: #dfe4ec; --tx: #0b0f17; --tx2: #2f3846; --mut: #6b7484; --acento: #1d5fe0; color: var(--tx);
+           background: radial-gradient(900px 600px at 100% 0%, rgba(61,123,255,.10), transparent 60%), var(--bg); }
+  .marca { position: absolute; left: 84px; top: 58px; width: 130px; }
+  .clara .marca { background: #05070b; padding: 10px 14px; border-radius: 10px; width: 158px; top: 48px; }
+  .num { position: absolute; right: 84px; top: 70px; font-family: var(--cond); font-weight: 700; font-size: 24px; letter-spacing: .14em; color: var(--mut); }
+  .pie { position: absolute; left: 84px; right: 84px; bottom: 58px; display: flex; justify-content: space-between; border-top: 1px solid var(--linea); padding-top: 16px;
+         font-family: var(--cond); font-weight: 700; font-size: 20px; letter-spacing: .16em; text-transform: uppercase; color: var(--mut); }
+  .kick { font-family: var(--cond); font-weight: 700; font-size: 26px; letter-spacing: .2em; text-transform: uppercase; color: var(--acento); display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
   .kick::before { content: ""; width: 44px; height: 3px; background: var(--rojo); }
-  h1 { font-family: var(--sora); font-weight: 800; font-size: 104px; line-height: .98; letter-spacing: -.02em; margin: 0 0 40px; }
-  h2 { font-family: var(--sora); font-weight: 800; font-size: 76px; line-height: 1.02; letter-spacing: -.02em; margin: 0 0 28px; }
-  .bajada { font-family: var(--sora); font-weight: 700; font-size: 34px; color: var(--azul); margin: -10px 0 30px; }
-  p.lead { font-size: 33px; line-height: 1.5; color: #c9d0db; margin: 0 0 34px; }
-  .chip { display: inline-block; font-family: var(--cond); font-weight: 700; font-size: 22px; letter-spacing: .16em; text-transform: uppercase; color: #05070b; background: var(--azul); border-radius: 8px; padding: 6px 14px; margin-bottom: 18px; }
-  .chip.op { background: var(--oro); }
+  h1 { font-family: var(--sora); font-weight: 800; font-size: 108px; line-height: .98; letter-spacing: -.02em; margin: 0 0 34px; }
+  h2 { font-family: var(--sora); font-weight: 800; font-size: 70px; line-height: 1.02; letter-spacing: -.02em; margin: 0 0 24px; }
+  .lead { font-size: 34px; line-height: 1.48; color: var(--tx2); margin: 0 0 34px; }
 
+  /* Portada */
+  .logo-portada { width: 360px; margin: 60px 0 90px; }
+  .indice { border-top: 1px solid var(--linea); }
+  .indice > div { display: grid; grid-template-columns: 70px 1fr; gap: 10px; padding: 18px 0; border-bottom: 1px solid var(--linea); }
+  .indice .n { font-family: var(--sora); font-weight: 800; font-size: 32px; color: var(--rojo); }
+  .indice b { font-family: var(--sora); font-weight: 700; font-size: 32px; display: block; }
+  .indice span { font-size: 26px; color: var(--mut); }
+  .indice em { font-style: normal; color: var(--oro); font-size: 24px; margin-left: 10px; font-family: var(--cond); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+
+  /* Estudio */
+  .sectores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+  .sector { background: var(--card); border: 1px solid var(--linea); border-radius: 18px; padding: 22px 22px 24px; }
+  .sector b { font-family: var(--sora); font-weight: 700; font-size: 30px; display: block; margin-bottom: 6px; }
+  .sector span { font-size: 24px; line-height: 1.4; color: var(--tx2); }
+  .et { font-family: var(--cond); font-weight: 700; font-size: 24px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); margin: 6px 0 8px; }
   .lista { list-style: none; margin: 0; padding: 0; }
-  .lista li { position: relative; padding: 14px 0 14px 34px; font-size: 29px; line-height: 1.4; border-bottom: 1px solid var(--linea); }
-  .lista li::before { content: ""; position: absolute; left: 4px; top: 30px; width: 12px; height: 12px; border-radius: 50%; background: var(--rojo); }
-  .grupo { font-family: var(--cond); font-weight: 700; font-size: 22px; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); margin: 34px 0 6px; }
+  .lista li { position: relative; padding: 11px 0 11px 30px; font-size: 28px; line-height: 1.38; border-bottom: 1px solid var(--linea); color: var(--tx); }
+  .lista li::before { content: ""; position: absolute; left: 3px; top: 25px; width: 11px; height: 11px; border-radius: 50%; background: var(--rojo); }
+  .salidas { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  .salida { background: var(--card); border: 1px solid var(--linea); border-radius: 16px; padding: 18px 22px; }
+  .salida b { font-family: var(--sora); font-weight: 700; font-size: 30px; }
+  .salida b i { font-style: normal; color: var(--rojo); margin-right: 10px; }
+  .salida span { display: block; font-size: 24px; color: var(--tx2); margin-top: 4px; line-height: 1.35; }
 
-  .items { display: grid; gap: 0; }
-  .item { padding: 26px 0; border-bottom: 1px solid var(--linea); }
-  .item b { display: block; font-family: var(--sora); font-weight: 700; font-size: 34px; margin-bottom: 8px; }
-  .item span { font-size: 28px; line-height: 1.45; color: #aeb7c5; }
+  /* Módulos */
+  .mods { display: grid; grid-template-rows: 1fr 1fr; gap: 34px; height: 100%; }
+  .mod { background: var(--card); border: 1px solid var(--linea); border-radius: 26px; padding: 34px 38px 30px; display: flex; flex-direction: column; }
+  .chip { align-self: flex-start; font-family: var(--cond); font-weight: 700; font-size: 23px; letter-spacing: .16em; text-transform: uppercase; color: #fff; background: var(--azul); border-radius: 8px; padding: 5px 14px; margin-bottom: 14px; }
+  .chip.op { background: var(--oro); color: #1a1205; }
+  .mod h3 { font-family: var(--sora); font-weight: 800; font-size: 54px; line-height: 1.02; margin: 0; letter-spacing: -.01em; }
+  .mod .baj { font-family: var(--sora); font-weight: 600; font-size: 29px; color: var(--acento); margin: 8px 0 14px; }
+  .mod .nota { font-size: 24px; line-height: 1.42; color: var(--mut); border-left: 4px solid var(--oro); padding-left: 16px; margin: 16px 0 0; }
+  .precio { margin-top: auto; border-top: 1px solid var(--linea); padding-top: 16px; display: grid; gap: 8px; }
+  .precio .fila { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .precio .op { font-size: 27px; color: var(--tx2); }
+  .precio .op small { display: block; font-family: var(--cond); font-weight: 700; font-size: 21px; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); }
+  .precio .v { font-family: var(--sora); font-weight: 800; font-size: 46px; color: var(--acento); white-space: nowrap; }
 
-  .precio { position: absolute; left: 92px; right: 92px; bottom: 150px; border: 1px solid var(--linea); background: var(--tarjeta); border-radius: 18px; padding: 26px 34px; display: grid; gap: 14px; }
-  .precio .fila { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
-  .precio .et { font-family: var(--cond); font-weight: 700; font-size: 22px; letter-spacing: .16em; text-transform: uppercase; color: var(--mut); }
-  .precio .op { font-size: 26px; color: #c9d0db; }
-  .precio .v { font-family: var(--sora); font-weight: 800; font-size: 44px; color: var(--azul); white-space: nowrap; }
-  .precio .fila + .fila { border-top: 1px solid var(--linea); padding-top: 14px; }
-
-  .nota { font-size: 24px; line-height: 1.45; color: var(--mut); border-left: 4px solid var(--oro); padding: 4px 0 4px 18px; margin-top: 26px; }
-
-  .salidas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 10px; }
-  .salida { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 18px; padding: 26px; }
-  .salida .n { font-family: var(--sora); font-weight: 800; font-size: 52px; color: var(--rojo); line-height: 1; }
-  .salida b { display: block; font-family: var(--sora); font-weight: 700; font-size: 32px; margin: 12px 0 6px; }
-  .salida span { font-size: 25px; line-height: 1.4; color: #aeb7c5; }
-
+  /* Presupuesto */
   table { width: 100%; border-collapse: collapse; font-size: 26px; }
-  th { text-align: left; font-family: var(--cond); font-weight: 700; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); padding: 0 0 12px; border-bottom: 1px solid var(--linea); }
-  td { padding: 18px 0; border-bottom: 1px solid var(--linea); vertical-align: top; line-height: 1.35; }
-  td.v { text-align: right; font-family: var(--sora); font-weight: 700; white-space: nowrap; color: var(--texto); padding-left: 16px; }
-  td small { display: block; color: var(--mut); font-size: 21px; margin-top: 4px; }
-  td.m { color: #aeb7c5; font-size: 22px; padding-left: 14px; white-space: nowrap; }
-  .suma { margin-top: 30px; background: var(--tarjeta); border: 1px solid var(--linea); border-left: 6px solid var(--azul); border-radius: 14px; padding: 24px 28px; }
-  .suma b { font-family: var(--sora); font-weight: 700; font-size: 30px; display: block; }
-  .suma span { font-size: 25px; color: #aeb7c5; line-height: 1.45; display: block; margin-top: 6px; }
-  .suma .v { font-family: var(--sora); font-weight: 800; font-size: 46px; color: var(--azul); margin-top: 10px; }
-
-  .portada { display: flex; flex-direction: column; justify-content: center; }
-  .portada .logo { width: 380px; margin-bottom: 120px; }
-  .contacto { display: grid; gap: 22px; margin-top: 20px; }
-  .contacto div { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 20px 26px; }
-  .contacto .et { font-family: var(--cond); font-weight: 700; font-size: 20px; letter-spacing: .16em; text-transform: uppercase; color: var(--mut); }
-  .contacto b { display: block; font-family: var(--sora); font-weight: 700; font-size: 32px; margin-top: 4px; }
+  th { text-align: left; font-family: var(--cond); font-weight: 700; font-size: 21px; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); padding: 0 0 10px; border-bottom: 2px solid var(--linea); }
+  td { padding: 13px 0; border-bottom: 1px solid var(--linea); vertical-align: top; line-height: 1.3; }
+  td small { display: block; color: var(--mut); font-size: 21px; margin-top: 2px; }
+  td.m { color: var(--mut); font-size: 22px; padding: 16px 0 0 12px; white-space: nowrap; }
+  td.v { text-align: right; font-family: var(--sora); font-weight: 700; white-space: nowrap; padding-left: 14px; }
+  .suma { margin: 22px 0 26px; background: #0b1220; color: #eef1f6; border-radius: 18px; padding: 22px 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .suma b { font-family: var(--sora); font-weight: 700; font-size: 28px; display: block; }
+  .suma span { font-size: 22px; color: #aab4c4; }
+  .suma .v { font-family: var(--sora); font-weight: 800; font-size: 50px; color: #5b95ff; white-space: nowrap; }
+  .cond { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px; font-size: 23px; line-height: 1.38; color: var(--tx2); margin-bottom: 24px; }
+  .cond b { color: var(--tx); }
+  .contacto { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .contacto div { background: var(--card); border: 1px solid var(--linea); border-radius: 14px; padding: 14px 20px; }
+  .contacto .et { margin: 0; font-size: 19px; }
+  .contacto b { display: block; font-family: var(--sora); font-weight: 700; font-size: 27px; margin-top: 2px; }
 </style>
 </head>
 <body>
 
-<!-- 1 · Portada -->
-<section class="pag portada">
-  <span class="num">01 / 12</span>
-  <img class="logo" src="img/nexo.png" alt="Nexo Studios">
+<!-- 1 · Portada y propuesta (oscura) -->
+<section class="pag oscura">
+  <span class="num">01 / 06</span>
+  <img class="logo-portada" src="img/nexo.png" alt="Nexo Studios">
   <div class="kick">Propuesta de producción · Streaming y podcast</div>
   <h1>Café con Pips, desde Nexo.</h1>
   <p class="lead">Estudio, técnica y equipo de producción en un mismo lugar. El programa sale en vivo, queda grabado y se corta para redes sin salir de la casa.</p>
+  <div class="indice">
+    <div><span class="n">01</span><div><b>Streaming del programa</b><span>El módulo fijo: estudio, técnica y vivo.</span></div></div>
+    <div><span class="n">02</span><div><b>Versión podcast<em>Opcional</em></b><span>El mismo episodio, en audio.</span></div></div>
+    <div><span class="n">03</span><div><b>Gráfica en vivo</b><span>Mosca, zócalos y placas del programa.</span></div></div>
+    <div><span class="n">04</span><div><b>Edición del episodio</b><span>El programa listo para publicar.</span></div></div>
+    <div><span class="n">05</span><div><b>Clips verticales</b><span>Los mejores momentos, en 9:16.</span></div></div>
+    <div><span class="n">06</span><div><b>Identidad visual<em>Opcional</em></b><span>Logo, paleta y manual del programa.</span></div></div>
+  </div>
   <div class="pie"><span>Café con Pips</span><span>Nexo Studios · San Martín</span></div>
 </section>
 
-<!-- 2 · La propuesta -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">02 / 12</span>
-  <div class="kick">La propuesta</div>
-  <h2>Un módulo fijo y el resto, a elección.</h2>
-  <p class="lead">El corazón es el streaming del programa. Alrededor, cinco módulos que se suman según la etapa y el presupuesto: la versión podcast, la gráfica en vivo, la edición, los clips y la identidad.</p>
-  <div class="items">
-    <div class="item"><b>01 · Streaming del programa</b><span>Dos horas de estudio con técnica, en vivo y grabado. Por episodio.</span></div>
-    <div class="item"><b>02 · Versión podcast <i style="font-style:normal;color:var(--oro)">(opcional)</i></b><span>El mismo episodio, editado en audio y listo para Spotify y YouTube Music.</span></div>
-    <div class="item"><b>03 · Gráfica en vivo</b><span>Mosca, zócalos, placas y oversize, operados durante el programa.</span></div>
-    <div class="item"><b>04 · Edición del episodio</b><span>Ajustes de montaje, gráficas y material de apoyo sobre el máster.</span></div>
-    <div class="item"><b>05 · Clips verticales</b><span>Los mejores momentos para Instagram, TikTok y Shorts.</span></div>
-    <div class="item"><b>06 · Identidad visual</b><span>Logo, paleta, tipografías y manual digital del programa.</span></div>
-  </div>
-  <div class="pie"><span>La propuesta</span><span>Café con Pips</span></div>
-</section>
-
-<!-- 3 · El estudio -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">03 / 12</span>
+<!-- 2 · El estudio (clara) -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">02 / 06</span>
   <div class="kick">El estudio</div>
   <h2>Tres sectores en un mismo piso.</h2>
-  <p class="lead">Un estudio acondicionado acústicamente en San Martín, con equipo técnico permanente.</p>
-  <div class="items">
-    <div class="item"><b>Conducción</b><span>Escritorio de listones para hasta seis personas al aire. El formato natural para un streaming de mesa.</span></div>
-    <div class="item"><b>Entrevistas</b><span>Dos sillones y mesa baja contra la cortina. Para un formato podcast más íntimo.</span></div>
-    <div class="item"><b>Live set</b><span>Sector para música en vivo, si el programa quiere sumar un momento musical.</span></div>
+  <div class="sectores">
+    <div class="sector"><b>Conducción</b><span>Escritorio para hasta seis personas al aire.</span></div>
+    <div class="sector"><b>Entrevistas</b><span>Sillones y mesa baja, para un podcast íntimo.</span></div>
+    <div class="sector"><b>Live set</b><span>Para sumar un momento de música en vivo.</span></div>
   </div>
-  <div class="grupo">Equipamiento</div>
+  <div class="et">Equipamiento</div>
   <ul class="lista">
-    <li>5 cámaras: 3 PTZ 4K OpterCam GA5500N + 2 Insta360 Link 2C Pro</li>
+    <li>5 cámaras: 3 PTZ 4K y 2 Insta360 Link 2C Pro</li>
     <li>6 micrófonos Shure MV7+, uno por persona</li>
-    <li>Rodecaster Pro II con audio multipista por canal y mesa Behringer X2442 de 24 canales</li>
-    <li>Switching con Elgato Stream Deck XL e in-ears Shure SE215 con talkback</li>
-    <li>Iluminación E-Image EL-1152 y Par LED RGB</li>
+    <li>Rodecaster Pro II: cada voz en su propio canal</li>
+    <li>Switching en vivo con Stream Deck XL</li>
+    <li>In-ear Shure SE215 y talkback para la conducción</li>
   </ul>
+  <div class="et" style="margin-top:30px">Una grabación, cuatro salidas</div>
+  <div class="salidas">
+    <div class="salida"><b><i>01</i>El vivo</b><span>Donde el programa arma comunidad.</span></div>
+    <div class="salida"><b><i>02</i>El episodio</b><span>Sigue sumando vistas semanas después.</span></div>
+    <div class="salida"><b><i>03</i>Los clips</b><span>Llevan el programa a gente nueva.</span></div>
+    <div class="salida"><b><i>04</i>El podcast</b><span>Para escuchar manejando o entrenando.</span></div>
+  </div>
   <div class="pie"><span>El estudio</span><span>Café con Pips</span></div>
 </section>
 
-<!-- 4 · Cómo rinde -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">04 / 12</span>
-  <div class="kick">Cómo rinde</div>
-  <h2>Una grabación, cuatro salidas.</h2>
-  <p class="lead">El programa no se graba una vez para un solo lugar. Con la misma sesión salen cuatro piezas, cada una para su audiencia.</p>
-  <div class="salidas">
-    <div class="salida"><div class="n">01</div><b>El vivo</b><span>Streaming con chat abierto, donde el programa arma comunidad.</span></div>
-    <div class="salida"><div class="n">02</div><b>El episodio</b><span>Queda publicado y sigue sumando vistas semanas después.</span></div>
-    <div class="salida"><div class="n">03</div><b>Los clips</b><span>Los verticales llevan el programa a gente que todavía no lo vio.</span></div>
-    <div class="salida"><div class="n">04</div><b>El podcast</b><span>La versión en audio, para escuchar manejando o entrenando.</span></div>
+<!-- 3 · Módulos 01 y 02 (oscura) -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">03 / 06</span>
+  <div class="mods">
+    <div class="mod">
+      <span class="chip">Módulo 01</span>
+      <h3>Streaming del programa</h3>
+      <div class="baj">El estudio, la técnica y el vivo.</div>
+      <ul class="lista">
+        <li>2 horas de estudio en el sector conducción</li>
+        <li>Realización multicámara con switching en vivo</li>
+        <li>Operador técnico y asistente toda la jornada</li>
+        <li>Grabación del programa completo en Full HD</li>
+      </ul>
+      <p class="nota">Con producción se suman un productor general y un productor de piso: siguen la rutina, manejan los tiempos y coordinan invitados.</p>
+      <div class="precio">
+        <div class="fila"><span class="op"><small>Por episodio · 2 h</small>Solo técnica</span><span class="v">$300.000</span></div>
+        <div class="fila"><span class="op">Técnica + producción</span><span class="v">$360.000</span></div>
+      </div>
+    </div>
+    <div class="mod">
+      <span class="chip op">Módulo 02 · Opcional</span>
+      <h3>Versión podcast</h3>
+      <div class="baj">El mismo episodio, en audio.</div>
+      <ul class="lista">
+        <li>Edición y limpieza de cada voz desde la grabación multipista</li>
+        <li>Nivelación, mezcla final y cortina de entrada y salida</li>
+        <li>Exportación para Spotify, Apple Podcasts y YouTube Music</li>
+      </ul>
+      <p class="nota">Si quieren episodios solo de podcast, se graban en el sector entrevistas con las mismas horas de estudio del módulo 01.</p>
+      <div class="precio">
+        <div class="fila"><span class="op"><small>Por episodio</small>Edición y mezcla de audio</span><span class="v">$90.000</span></div>
+      </div>
+    </div>
   </div>
-  <p class="nota">Producción ya piensa los clips mientras se graba: los momentos se marcan en el piso, no después.</p>
-  <div class="pie"><span>Cómo rinde</span><span>Café con Pips</span></div>
+  <div class="pie"><span>Módulos 01 y 02</span><span>Café con Pips</span></div>
 </section>
 
-<!-- 5 · Módulo 1 -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">05 / 12</span>
-  <span class="chip">Módulo 01</span>
-  <h2>Streaming del programa</h2>
-  <div class="bajada">El estudio, la técnica y el vivo.</div>
-  <p class="lead">Dos horas de estudio por episodio, con realización multicámara y operación técnica en el piso.</p>
-  <ul class="lista">
-    <li>2 horas de estudio en el sector conducción</li>
-    <li>Realización multicámara con 5 cámaras y switching en vivo</li>
-    <li>Un micrófono por persona y audio multipista por canal</li>
-    <li>Operador técnico y asistente durante toda la jornada</li>
-    <li>In-ear y talkback para la conducción</li>
-    <li>Grabación del programa completo en Full HD</li>
-  </ul>
-  <p class="nota">Con producción se suma el equipo de producción de Nexo: un productor general y un productor de piso. Siguen la rutina, manejan los tiempos al aire, coordinan invitados y deciden en el momento si algo no funciona.</p>
-  <div class="precio">
-    <div class="fila"><span><span class="et">Por episodio · 2 h</span><br><span class="op">Solo técnica</span></span><span class="v">$300.000</span></div>
-    <div class="fila"><span class="op">Técnica + equipo de producción</span><span class="v">$360.000</span></div>
+<!-- 4 · Módulos 03 y 04 (clara) -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">04 / 06</span>
+  <div class="mods">
+    <div class="mod">
+      <span class="chip">Módulo 03</span>
+      <h3>Gráfica en vivo</h3>
+      <div class="baj">Diseñada y operada por el mismo equipo.</div>
+      <ul class="lista">
+        <li>Mosca con el logo y zócalos para cada participante</li>
+        <li>Oversize para el tema de cada bloque</li>
+        <li>Placas «Ya comenzamos», «Ya volvemos» y «Gracias por ver»</li>
+        <li>Fondos y composiciones para varias cámaras en pantalla</li>
+      </ul>
+      <p class="nota">Se opera en vivo desde el Stream Deck. Cada pieza se entrega también en PNG para usar en redes.</p>
+      <div class="precio">
+        <div class="fila"><span class="op"><small>Pago único</small>Paquete gráfico completo</span><span class="v">$300.000</span></div>
+      </div>
+    </div>
+    <div class="mod">
+      <span class="chip">Módulo 04</span>
+      <h3>Edición del episodio</h3>
+      <div class="baj">El programa, listo para publicar.</div>
+      <ul class="lista">
+        <li>Revisión del montaje y corrección de cortes</li>
+        <li>Videos, imágenes y material de apoyo</li>
+        <li>Placas, overlays y gráfica del programa</li>
+        <li>Ajuste de audio, miniatura y carga en la plataforma</li>
+      </ul>
+      <p class="nota">Las indicaciones las pasa el programa con timecodes, o las arma producción, que estuvo en el piso.</p>
+      <div class="precio">
+        <div class="fila"><span class="op"><small>Por episodio · 2 h de programa</small>Edición sobre máster Full HD</span><span class="v">$250.000</span></div>
+      </div>
+    </div>
   </div>
-  <div class="pie"><span>Módulo 01</span><span>Entregable: máster Full HD</span></div>
+  <div class="pie"><span>Módulos 03 y 04</span><span>Café con Pips</span></div>
 </section>
 
-<!-- 6 · Módulo 2 -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">06 / 12</span>
-  <span class="chip op">Módulo 02 · Opcional</span>
-  <h2>Versión podcast</h2>
-  <div class="bajada">El mismo episodio, en audio.</div>
-  <p class="lead">Cada voz se graba en su propio canal, así la versión en audio sale limpia sin regrabar nada.</p>
-  <ul class="lista">
-    <li>Edición y limpieza de cada voz desde la grabación multipista</li>
-    <li>Nivelación y mezcla final del episodio</li>
-    <li>Cortina de entrada y salida</li>
-    <li>Exportación lista para Spotify, Apple Podcasts y YouTube Music</li>
-  </ul>
-  <p class="nota">Si el programa quiere episodios solo de podcast, se graban en el sector entrevistas, con sillones y un clima más íntimo. Se cotiza con las mismas horas de estudio del módulo 01.</p>
-  <div class="precio">
-    <div class="fila"><span><span class="et">Por episodio</span><br><span class="op">Edición y mezcla de audio</span></span><span class="v">$90.000</span></div>
+<!-- 5 · Módulos 05 y 06 (oscura) -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">05 / 06</span>
+  <div class="mods">
+    <div class="mod">
+      <span class="chip">Módulo 05</span>
+      <h3>Clips verticales</h3>
+      <div class="baj">Los mejores momentos, en 9:16.</div>
+      <ul class="lista">
+        <li>Momentos marcados por producción en la grabación, o elegidos por el programa</li>
+        <li>Reencuadre vertical y subtítulos</li>
+        <li>Placas y elementos gráficos del programa</li>
+        <li>Para Instagram, TikTok y YouTube Shorts</li>
+      </ul>
+      <div class="precio">
+        <div class="fila"><span class="op"><small>Por programa · $15.000 por clip</small>Paquete de 15 clips</span><span class="v">$225.000</span></div>
+        <div class="fila"><span class="op">Paquete de 20 clips</span><span class="v">$300.000</span></div>
+      </div>
+    </div>
+    <div class="mod">
+      <span class="chip op">Módulo 06 · Opcional</span>
+      <h3>Identidad visual</h3>
+      <div class="baj">Para que el programa se reconozca.</div>
+      <ul class="lista">
+        <li>Diseño de logotipo</li>
+        <li>Paleta de colores y tipografías</li>
+        <li>Manual de marca para aplicaciones digitales</li>
+        <li>Lineamientos para merch y otras aplicaciones</li>
+      </ul>
+      <div class="precio">
+        <div class="fila"><span class="op"><small>Pago único</small>Identidad y manual digital</span><span class="v">$350.000</span></div>
+      </div>
+    </div>
   </div>
-  <div class="pie"><span>Módulo 02</span><span>Entregable: episodio en audio</span></div>
+  <div class="pie"><span>Módulos 05 y 06</span><span>Café con Pips</span></div>
 </section>
 
-<!-- 7 · Módulo 3 -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">07 / 12</span>
-  <span class="chip">Módulo 03</span>
-  <h2>Gráfica en vivo</h2>
-  <div class="bajada">Diseñada y operada por el mismo equipo.</div>
-  <p class="lead">El paquete gráfico se arma con la identidad del programa y se opera en vivo desde el Stream Deck, sin depender de nadie de afuera.</p>
-  <ul class="lista">
-    <li>Mosca con el logo del programa</li>
-    <li>Zócalos para cada conductor e invitado</li>
-    <li>Oversize para el tema de cada bloque</li>
-    <li>Placas «Ya comenzamos», «Ya volvemos» y «Gracias por ver»</li>
-    <li>Fondos y composiciones para varias cámaras en pantalla</li>
-    <li>Versión en PNG transparente de cada pieza, para usar también en redes</li>
-  </ul>
-  <p class="nota">Si el programa tiene un segmento fijo, se le puede armar su propia placa interactiva: una pantalla que producción completa en el momento, como hacemos en los programas de la casa.</p>
-  <div class="precio">
-    <div class="fila"><span><span class="et">Pago único</span><br><span class="op">Paquete gráfico completo</span></span><span class="v">$300.000</span></div>
-  </div>
-  <div class="pie"><span>Módulo 03</span><span>Entregable: paquete gráfico</span></div>
-</section>
-
-<!-- 8 · Módulo 4 -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">08 / 12</span>
-  <span class="chip">Módulo 04</span>
-  <h2>Edición del episodio</h2>
-  <div class="bajada">El programa, listo para publicar.</div>
-  <p class="lead">Sobre el máster grabado en el estudio: se corrige lo que hay que corregir y se suma lo que hace falta.</p>
-  <ul class="lista">
-    <li>Revisión del montaje y corrección de cortes</li>
-    <li>Eliminación de segmentos</li>
-    <li>Incorporación de videos, imágenes y material de apoyo</li>
-    <li>Placas, overlays y gráfica del programa</li>
-    <li>Ajuste de audio y ritmo general</li>
-    <li>Exportación, miniatura y carga en la plataforma</li>
-  </ul>
-  <p class="nota">Las indicaciones de edición las puede pasar el programa con timecodes, o las arma la producción de Nexo, que estuvo en el piso durante la grabación.</p>
-  <div class="precio">
-    <div class="fila"><span><span class="et">Por episodio · 2 h de programa</span><br><span class="op">Edición sobre máster Full HD</span></span><span class="v">$250.000</span></div>
-  </div>
-  <div class="pie"><span>Módulo 04</span><span>Entregable: episodio editado Full HD</span></div>
-</section>
-
-<!-- 9 · Módulo 5 -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">09 / 12</span>
-  <span class="chip">Módulo 05</span>
-  <h2>Clips verticales</h2>
-  <div class="bajada">Los mejores momentos, en 9:16.</div>
-  <p class="lead">Cada clip se edita por separado, con el ritmo y el formato que piden Instagram, TikTok y YouTube Shorts. Se trabaja en paquetes de 15 o 20 clips por programa.</p>
-  <ul class="lista">
-    <li>Selección de los momentos: los marca producción durante la grabación, o los elige el programa</li>
-    <li>Reencuadre a formato vertical</li>
-    <li>Subtítulos</li>
-    <li>Placas y elementos gráficos del programa</li>
-    <li>Ajuste de imagen y audio para redes</li>
-  </ul>
-  <div class="precio">
-    <div class="fila"><span><span class="et">Por programa · $15.000 por clip</span><br><span class="op">Paquete de 15 clips</span></span><span class="v">$225.000</span></div>
-    <div class="fila"><span class="op">Paquete de 20 clips</span><span class="v">$300.000</span></div>
-  </div>
-  <div class="pie"><span>Módulo 05</span><span>Entregable: clips 9:16</span></div>
-</section>
-
-<!-- 10 · Módulo 6 -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">10 / 12</span>
-  <span class="chip op">Módulo 06 · Opcional</span>
-  <h2>Identidad visual</h2>
-  <div class="bajada">Para que el programa se reconozca.</div>
-  <p class="lead">La imagen de Café con Pips, pensada desde el primer día para la pantalla, las redes y el merch.</p>
-  <ul class="lista">
-    <li>Diseño de logotipo</li>
-    <li>Paleta de colores y tipografías</li>
-    <li>Manual de marca para aplicaciones digitales</li>
-    <li>Lineamientos para merch y otras aplicaciones</li>
-  </ul>
-  <p class="nota">Si el formato todavía no está cerrado, Nexo también ofrece producción creativa: concepto, guion y rutina de cada emisión, y plan de redes. Se cotiza por proyecto.</p>
-  <div class="precio">
-    <div class="fila"><span><span class="et">Pago único</span><br><span class="op">Identidad y manual digital</span></span><span class="v">$350.000</span></div>
-  </div>
-  <div class="pie"><span>Módulo 06</span><span>Entregable: manual de marca</span></div>
-</section>
-
-<!-- 11 · Presupuesto -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">11 / 12</span>
+<!-- 6 · Presupuesto, condiciones y contacto (clara) -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">06 / 06</span>
   <div class="kick">Presupuesto</div>
   <h2>Todo, de un vistazo.</h2>
   <table>
     <thead><tr><th>Módulo</th><th>Modalidad</th><th style="text-align:right">Valor</th></tr></thead>
     <tbody>
-      <tr><td>01 · Streaming del programa<small>2 h, solo técnica</small></td><td class="m">Por episodio</td><td class="v">$300.000</td></tr>
-      <tr><td>01 · Streaming del programa<small>2 h, técnica + productor general y de piso</small></td><td class="m">Por episodio</td><td class="v">$360.000</td></tr>
+      <tr><td>01 · Streaming 2 h<small>Solo técnica / técnica + producción</small></td><td class="m">Por episodio</td><td class="v">$300.000<br>$360.000</td></tr>
       <tr><td>02 · Versión podcast<small>Opcional</small></td><td class="m">Por episodio</td><td class="v">$90.000</td></tr>
       <tr><td>03 · Gráfica en vivo</td><td class="m">Pago único</td><td class="v">$300.000</td></tr>
-      <tr><td>04 · Edición del episodio<small>2 h de programa, sobre máster Full HD</small></td><td class="m">Por episodio</td><td class="v">$250.000</td></tr>
-      <tr><td>05 · Clips verticales<small>$15.000 por clip · paquete de 15 / 20</small></td><td class="m">Por programa</td><td class="v">$225.000<br>$300.000</td></tr>
+      <tr><td>04 · Edición del episodio<small>2 h de programa, Full HD</small></td><td class="m">Por episodio</td><td class="v">$250.000</td></tr>
+      <tr><td>05 · Clips verticales<small>Paquete de 15 / 20 clips</small></td><td class="m">Por programa</td><td class="v">$225.000<br>$300.000</td></tr>
       <tr><td>06 · Identidad visual<small>Opcional</small></td><td class="m">Pago único</td><td class="v">$350.000</td></tr>
       <tr><td>Hora extra de estudio<small>Técnica / con producción</small></td><td class="m">Por hora</td><td class="v">$150.000<br>$180.000</td></tr>
     </tbody>
   </table>
   <div class="suma">
-    <b>Un episodio completo</b>
-    <span>Streaming con producción + edición del episodio + 15 clips verticales.</span>
+    <div><b>Un episodio completo</b><span>Streaming con producción + edición + 15 clips</span></div>
     <div class="v">$835.000</div>
   </div>
-  <div class="pie"><span>Presupuesto</span><span>Valores en pesos argentinos</span></div>
-</section>
-
-<!-- 12 · Condiciones y contacto -->
-<section class="pag">
-  <img class="marca" src="img/nexo.png" alt=""><span class="num">12 / 12</span>
-  <div class="kick">Condiciones</div>
-  <h2>Letra chica, en grande.</h2>
-  <ul class="lista">
-    <li><b>Jornada mínima:</b> dos horas de estudio.</li>
-    <li><b>Reserva:</b> seña del 50 % para tomar la fecha. El saldo, contra entrega del material.</li>
-    <li><b>Cancelación:</b> con menos de 48 horas de aviso, la seña no se devuelve.</li>
-    <li><b>Horario:</b> la hora empieza a la hora agendada. Noches, feriados y fines de semana se cotizan aparte.</li>
-    <li><b>Validez:</b> quince días corridos desde el envío de esta propuesta.</li>
-    <li><b>Temporada:</b> para un ciclo de varios episodios se arma un acuerdo con precio por temporada.</li>
-  </ul>
+  <div class="et">Condiciones</div>
+  <div class="cond">
+    <div><b>Jornada mínima:</b> dos horas de estudio.</div>
+    <div><b>Reserva:</b> seña del 50 %; saldo contra entrega.</div>
+    <div><b>Cancelación:</b> con menos de 48 h, la seña no se devuelve.</div>
+    <div><b>Fuera de agenda:</b> noches, feriados y fines de semana, aparte.</div>
+    <div><b>Validez:</b> quince días desde el envío.</div>
+    <div><b>Temporada:</b> varios episodios, precio por temporada.</div>
+  </div>
   <div class="contacto">
     <div><span class="et">Dirección General</span><b>Federico Aguirre</b></div>
     <div><span class="et">WhatsApp</span><b>+54 9 11 8107-2749</b></div>
     <div><span class="et">Estudio</span><b>Hipólito Yrigoyen 4716, San Martín</b></div>
-    <div><span class="et">Web e Instagram</span><b>nexostudios.com.ar · @nexo.studios.ar</b></div>
+    <div><span class="et">Instagram</span><b>@nexo.studios.ar</b></div>
   </div>
-  <div class="pie"><span>Nexo Studios</span><span>Historias que conectan</span></div>
+  <div class="pie"><span>Valores en pesos argentinos</span><span>Nexo Studios · Historias que conectan</span></div>
 </section>
 
 </body>
