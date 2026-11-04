@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Masher · Catálogo de productos</title>
+<style>
+@font-face { font-family: "Masher Cond"; src: url(fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Masher Cond"; src: url(fonts/DejaVuSansCondensed.ttf); font-weight: 400; }
+@font-face { font-family: "Masher Text"; src: url(fonts/DejaVuSans.ttf); font-weight: 400; }
+@font-face { font-family: "Masher Text"; src: url(fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+
+:root {
+  --azul: #17256B;      /* Azul Masher */
+  --negro: #08090B;     /* Negro base */
+  --blanco: #FFFFFF;
+  --celeste: #9AA8FF;   /* acento de rótulos del manual */
+  --gris-osc: #15171D;
+  --tinta: #1A1C22;
+  --gris: #5E6370;
+  --linea: #E2E4EA;
+  --fondo-suave: #F4F5F8;
+}
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "Masher Text", sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: none; } .hoja { margin: 0 !important; box-shadow: none !important; } }
+
+.hoja { width: 210mm; height: 297mm; position: relative; overflow: hidden; background: var(--blanco);
+        margin: 10mm auto; box-shadow: 0 2px 16px rgba(0,0,0,.25); page-break-after: always; break-after: page; }
+.cond { font-family: "Masher Cond", sans-serif; font-weight: 700; letter-spacing: .01em; }
+.rotulo { font-family: "Masher Cond", sans-serif; font-weight: 700; font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Líneas horizontales: eco del símbolo */
+.rayas { position: absolute; background: repeating-linear-gradient(to bottom, currentColor 0 2.2mm, transparent 2.2mm 3.6mm); }
+
+/* ---------- Tapa ---------- */
+.tapa { background: var(--negro); color: var(--blanco); padding: 22mm 18mm; }
+.tapa .barra { position: absolute; left: 18mm; top: 22mm; width: 14mm; height: 1.6mm; background: var(--celeste); }
+.tapa .cab { margin-left: 18mm; margin-top: -1.2mm; color: #C9CCD6; }
+.tapa .logo { position: absolute; left: 18mm; top: 52mm; width: 120mm; }
+.tapa .rayas { color: var(--azul); right: 0; top: 40mm; width: 52mm; height: 70mm;
+               clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%); }
+.tapa .eyebrow { position: absolute; left: 18mm; top: 124mm; color: var(--celeste); }
+.tapa h1 { position: absolute; left: 18mm; top: 133mm; font-size: 46pt; line-height: 1.02; }
+.tapa .bajada { position: absolute; left: 18mm; top: 197mm; width: 140mm; font-size: 12.5pt; line-height: 1.45; color: #B9BDC8; }
+.tapa .cifras { position: absolute; left: 18mm; right: 18mm; top: 222mm; display: flex; gap: 0; border-top: .3mm solid #2A2D36; }
+.tapa .cifras div { flex: 1; padding-top: 6mm; }
+.tapa .cifras b { display: block; font-family: "Masher Cond"; font-size: 28pt; color: var(--blanco); }
+.tapa .cifras span { font-size: 9pt; color: #9095A3; }
+.tapa .pie { position: absolute; left: 18mm; right: 18mm; bottom: 16mm; display: flex; justify-content: space-between; font-size: 9pt; color: #9095A3; }
+.tapa .pie b { color: var(--celeste); font-family: "Masher Cond"; }
+
+/* ---------- Cabecera y pie de páginas interiores ---------- */
+.cabecera { position: absolute; left: 15mm; right: 15mm; top: 9mm; height: 15mm; display: flex; align-items: center; justify-content: space-between; border-bottom: .35mm solid var(--azul); }
+.cabecera img { width: 50mm; margin-bottom: 1.5mm; }
+.cabecera .rotulo { color: var(--azul); }
+.pie-int { position: absolute; left: 0; right: 0; bottom: 0; height: 13mm; background: var(--negro); color: #A9ADB8; display: flex; align-items: center; justify-content: space-between; padding: 0 15mm; font-size: 7.5pt; }
+.pie-int .num { font-family: "Masher Cond"; font-weight: 700; color: var(--celeste); font-size: 9pt; letter-spacing: .06em; }
+.pie-int .aviso { flex: 1; text-align: center; padding: 0 8mm; }
+.cuerpo { position: absolute; left: 15mm; right: 15mm; top: 29mm; bottom: 18mm; }
+
+/* ---------- Índice ---------- */
+.indice h2 { font-size: 28pt; line-height: 1.05; color: var(--negro); margin-top: 3mm; }
+.indice .intro { font-size: 10pt; color: var(--gris); margin: 3mm 0 6mm; width: 150mm; line-height: 1.5; }
+.toc { list-style: none; border-top: .35mm solid var(--negro); }
+.toc li { display: flex; align-items: baseline; gap: 4mm; padding: 2.5mm 0; border-bottom: .25mm solid var(--linea); }
+.toc .n { font-family: "Masher Cond"; font-weight: 700; color: var(--celeste); width: 9mm; font-size: 10pt; }
+.toc .t { font-family: "Masher Cond"; font-weight: 700; font-size: 13pt; color: var(--negro); }
+.toc .c { color: var(--gris); font-size: 8.5pt; flex: 1; }
+.toc .p { font-family: "Masher Cond"; font-weight: 700; color: var(--azul); font-size: 12pt; }
+.marcas { margin-top: 6mm; background: var(--fondo-suave); padding: 5mm 6mm; }
+.marcas .rotulo { color: var(--azul); margin-bottom: 2.5mm; }
+.marcas p { font-size: 8pt; line-height: 1.7; color: var(--tinta); }
+
+/* ---------- Bloque de categoría ---------- */
+.cat-cab { position: relative; background: var(--azul); color: var(--blanco); padding: 5.5mm 7mm 5mm; margin-bottom: 1.5mm; overflow: hidden; }
+.cat-cab .rotulo { color: var(--celeste); }
+.cat-cab h2 { font-size: 25pt; line-height: 1.05; margin-top: 1.5mm; }
+.cat-cab .cuenta { font-size: 8.5pt; color: #C8CDF0; margin-top: 1.5mm; }
+.cat-cab .rayas { color: rgba(255,255,255,.09); right: -2mm; top: 0; bottom: 0; width: 62mm; }
+.cat-cont { display: flex; justify-content: space-between; align-items: baseline; border-bottom: .35mm solid var(--azul); padding: 1mm 0 2mm; margin-bottom: 1mm; }
+.cat-cont b { font-family: "Masher Cond"; font-size: 12pt; color: var(--azul); }
+.cat-cont span { font-size: 7.5pt; color: var(--gris); }
+
+/* ---------- Producto ---------- */
+.grilla { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; }
+.item { display: flex; flex-direction: column; padding: 2.6mm 0 2.6mm; border-bottom: .25mm solid var(--linea); break-inside: avoid; }
+.item .info { flex: 1; min-width: 0; }
+.item h3 { font-family: "Masher Cond"; font-weight: 700; font-size: 10.2pt; line-height: 1.22; color: var(--negro); }
+.item .marca { display: inline-block; font-family: "Masher Cond"; font-weight: 700; font-size: 6.8pt; letter-spacing: .07em; text-transform: uppercase;
+               color: var(--azul); border: .25mm solid var(--azul); padding: .25mm 1.4mm .15mm; margin: 1.1mm 0 .9mm; }
+.item .incluye { font-size: 7.1pt; color: var(--tinta); line-height: 1.4; margin-bottom: .6mm; }
+.item .incluye b { color: var(--azul); }
+.item p.desc { font-size: 7.3pt; line-height: 1.4; color: var(--gris); }
+.item .precio { margin-top: 1.4mm; text-align: left; font-family: "Masher Cond"; font-weight: 700; font-size: 14pt; color: var(--azul); white-space: nowrap; padding-top: .2mm; }
+.item .precio small { font-size: 9pt; vertical-align: .32em; margin-right: .4mm; }
+
+/* ---------- Contratapa ---------- */
+.contra { background: var(--negro); color: var(--blanco); }
+.contra .rayas { color: var(--azul); left: 0; right: 0; top: 0; height: 96mm; }
+.contra .caja { position: absolute; left: 18mm; right: 18mm; top: 118mm; }
+.contra .caja .rotulo { color: var(--celeste); }
+.contra h2 { font-size: 36pt; line-height: 1.04; margin: 4mm 0 6mm; }
+.contra .caja p { font-size: 11pt; line-height: 1.55; color: #B9BDC8; width: 150mm; }
+.contra .datos { position: absolute; left: 18mm; right: 18mm; top: 208mm; background: var(--gris-osc); padding: 7mm 8mm; display: flex; justify-content: space-between; align-items: center; }
+.contra .datos b { font-family: "Masher Cond"; font-size: 17pt; }
+.contra .datos span { display: block; font-size: 8.5pt; color: #9095A3; margin-top: 1mm; }
+.contra .logo { position: absolute; left: 18mm; bottom: 22mm; width: 82mm; }
+.contra .legal { position: absolute; right: 18mm; bottom: 22mm; width: 70mm; text-align: right; font-size: 7.5pt; line-height: 1.5; color: #8A8F9C; }
+</style>
+</head>
+<body>
+<div id="libro"></div>
+
+<template id="t-tapa">
+  <section class="hoja tapa">
+    <div class="barra"></div>
+    <div class="cab rotulo">Masher / Catálogo</div>
+    <img class="logo" src="img/masher-logo-blanco.png" alt="Masher máquinas - herramientas">
+    <div class="rayas"></div>
+    <div class="eyebrow rotulo">Catálogo de productos · Noviembre 2026</div>
+    <h1 class="cond">MÁQUINAS Y<br>HERRAMIENTAS<br>PARA EL TRABAJO.</h1>
+    <p class="bajada">Eléctricas, de mano, soldadura, medición, seguridad y todo lo que hace falta en el taller y en la obra.</p>
+    <div class="cifras">
+      <div><b data-k="productos"></b><span>productos</span></div>
+      <div><b data-k="categorias"></b><span>categorías</span></div>
+      <div><b data-k="marcas"></b><span>marcas</span></div>
+    </div>
+    <div class="pie"><span>Ferretería industrial</span><b>@masherrferreteria</b></div>
+  </section>
+</template>
+
+<template id="t-hoja">
+  <section class="hoja">
+    <header class="cabecera"><img src="img/masher-logo-azul.png" alt="Masher"><span class="rotulo"></span></header>
+    <div class="cuerpo"></div>
+    <footer class="pie-int"><span>@masherrferreteria</span><span class="aviso">Precios en pesos, sujetos a cambio sin previo aviso. Consultar disponibilidad.</span><span class="num"></span></footer>
+  </section>
+</template>
+
+<template id="t-contra">
+  <section class="hoja contra">
+    <div class="rayas"></div>
+    <div class="caja">
+      <div class="rotulo">Masher · Ferretería industrial</div>
+      <h2 class="cond">¿NO ENCONTRÁS<br>LO QUE BUSCÁS?</h2>
+      <p>Escribinos y te ayudamos a elegir la herramienta adecuada para tu trabajo. Consultá precios, stock y formas de pago antes de comprar.</p>
+    </div>
+    <div class="datos">
+      <div><b>@masherrferreteria</b><span>Instagram · consultas y novedades</span></div>
+      <div class="rotulo" style="color:var(--celeste)">Máquinas · Herramientas</div>
+    </div>
+    <img class="logo" src="img/masher-logo-blanco.png" alt="Masher">
+    <p class="legal">Catálogo vigente a noviembre de 2026. Precios en pesos, sujetos a cambio sin previo aviso. Imágenes y especificaciones a confirmar con el vendedor. Las marcas mencionadas pertenecen a sus respectivos dueños.</p>
+  </section>
+</template>
+
+<script src="productos.js"></script>
+<script>
+Promise.all(['700 10pt "Masher Cond"','400 10pt "Masher Cond"','400 10pt "Masher Text"','700 10pt "Masher Text"'].map(f => document.fonts.load(f))).then(() => {
+  const P = window.PRODUCTOS;
+  const libro = document.getElementById('libro');
+  const tpl = id => document.getElementById(id).content.firstElementChild.cloneNode(true);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const precio = n => '<small>$</small>' + n.toLocaleString('es-AR');
+  const dos = n => String(n).padStart(2, '0');
+
+  const cats = [];
+  for (const p of P) {
+    let c = cats[cats.length - 1];
+    if (!c || c.nombre !== p.categoria) cats.push(c = { nombre: p.categoria, items: [] });
+    c.items.push(p);
+  }
+  const marcas = [...new Set(P.map(p => p.marca.replace(/\s*\(.*\)$/, '')))].sort((a, b) => a.localeCompare(b, 'es'));
+
+  // Tapa
+  const tapa = tpl('t-tapa');
+  tapa.querySelector('[data-k=productos]').textContent = P.length;
+  tapa.querySelector('[data-k=categorias]').textContent = cats.length;
+  tapa.querySelector('[data-k=marcas]').textContent = marcas.length;
+  libro.appendChild(tapa);
+
+  const hojas = [];
+  const nuevaHoja = titulo => {
+    const h = tpl('t-hoja');
+    h.querySelector('.cabecera .rotulo').textContent = titulo;
+    libro.appendChild(h); hojas.push(h);
+    return h.querySelector('.cuerpo');
+  };
+  const desborda = cuerpo => cuerpo.scrollHeight > cuerpo.clientHeight + 1;
+
+  // Índice
+  const ind = nuevaHoja('Índice');
+  ind.classList.add('indice');
+  ind.innerHTML = `<div class="rotulo" style="color:var(--azul)">Contenido</div>
+    <h2 class="cond">TODO PARA EL TALLER<br>Y LA OBRA.</h2>
+    <p class="intro">${P.length} productos organizados en ${cats.length} categorías. Cada ficha indica marca, código y precio. Ante cualquier duda, consultanos antes de comprar.</p>
+    <ol class="toc">${cats.map((c, i) => `<li><span class="n">${dos(i + 1)}</span><span class="t">${esc(c.nombre)}</span><span class="c">${c.items.length} productos</span><span class="p" data-cat="${i}"></span></li>`).join('')}</ol>
+    <div class="marcas"><div class="rotulo">Marcas en este catálogo</div><p>${marcas.map(esc).join('  ·  ')}</p></div>`;
+
+  // Categorías
+  cats.forEach((c, i) => {
+    let cuerpo = nuevaHoja(c.nombre);
+    c.pagina = hojas.length + 1; // +1 por la tapa
+    cuerpo.insertAdjacentHTML('beforeend', `<div class="cat-cab"><div class="rayas"></div><div class="rotulo">Categoría ${dos(i + 1)}</div><h2 class="cond">${esc(c.nombre.toUpperCase())}</h2><div class="cuenta">${c.items.length} productos</div></div><div class="grilla"></div>`);
+    let grilla = cuerpo.lastElementChild;
+    for (const p of c.items) {
+      const el = document.createElement('article');
+      el.className = 'item';
+      el.innerHTML = `<div class="info"><h3>${esc(p.producto)}</h3><span class="marca">${esc(p.marca)}</span>`
+        + (p.incluye ? `<div class="incluye"><b>Incluye:</b> ${esc(p.incluye.replace(/^Incluye\s*/i, ''))}</div>` : '')
+        + (p.descripcion ? `<p class="desc">${esc(p.descripcion)}</p>` : '')
+        + `</div><div class="precio">${precio(p.precio)}</div>`;
+      grilla.appendChild(el);
+      if (desborda(cuerpo)) {
+        el.remove();
+        cuerpo = nuevaHoja(c.nombre);
+        cuerpo.insertAdjacentHTML('beforeend', `<div class="cat-cont"><b>${esc(c.nombre)}</b><span>Categoría ${dos(i + 1)} · continuación</span></div><div class="grilla"></div>`);
+        grilla = cuerpo.lastElementChild;
+        grilla.appendChild(el);
+      }
+    }
+  });
+
+  libro.appendChild(tpl('t-contra'));
+  const total = hojas.length + 2;
+  hojas.forEach((h, i) => h.querySelector('.pie-int .num').textContent = `${dos(i + 2)} / ${dos(total)}`);
+  document.querySelectorAll('[data-cat]').forEach(e => e.textContent = 'pág. ' + dos(cats[+e.dataset.cat].pagina));
+  document.body.dataset.listo = '1';
+});
+</script>
+</body>
+</html>
