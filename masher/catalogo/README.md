@@ -2,9 +2,9 @@
 
 Rediseño del `CATÁLOGO TN` (planilla exportada a PDF) con el manual de marca de Masher: azul `#17256B`, negro `#08090B`, blanco, DejaVu Sans Condensed Bold para titulares y DejaVu Sans para textos.
 
-- **PDF final:** `Masher_Catalogo_2026.pdf` (A4, 44 páginas: tapa, índice, 13 categorías y contratapa).
+- **PDF final:** `Masher_Catalogo_2026.pdf` (formato vertical 9:16 (540 × 960 pt, como el manual), 98 páginas a una columna para leer en el celular: tapa, índice, marcas, 13 categorías y contratapa).
 - 436 productos, 55 marcas. Cada ficha: nombre, marca, qué incluye (si aplica), descripción corta y precio.
-- El logo interior va a 50 mm de ancho (mínimo de impresión del manual); en la tapa y contratapa se usa la versión blanca sobre negro.
+- En la tapa y contratapa se usa el logo blanco sobre negro; en el interior, el original azul sobre blanco.
 
 ## Cómo regenerarlo
 

@@ -10,7 +10,7 @@ const path = require('path');
   if (process.argv[4]) {
     await p.emulateMedia({ media: 'print' });
     const hojas = await p.$$('.hoja');
-    for (const i of [0, 1, 2, 3, hojas.length - 1]) await hojas[i].screenshot({ path: `${process.argv[4]}-${i + 1}.png` });
+    for (const i of [0, 1, 2, 3, 4, hojas.length - 1]) await hojas[i].screenshot({ path: `${process.argv[4]}-${i + 1}.png` });
     console.log('hojas', hojas.length);
   }
   await b.close();
