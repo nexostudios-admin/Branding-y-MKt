@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Masher · Catálogo de productos</title>
+<title>Masherr · Catálogo de productos</title>
 <style>
 /* Formato vertical 9:16 (540 × 960 pt), igual que el manual de marca. 1 px CSS = 0,75 pt → hoja de 720 × 1280 px. */
 @font-face { font-family: "Masher Cond"; src: url(fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
@@ -98,15 +98,20 @@ body { font-family: "Masher Text", sans-serif; color: var(--tinta); -webkit-prin
 
 /* ---------- Contratapa ---------- */
 .contra { background: var(--negro); color: var(--blanco); }
-.contra .rayas { color: var(--azul); left: 0; right: 0; top: 0; height: 300px; }
-.contra .caja { position: absolute; left: var(--m); right: var(--m); top: 380px; }
+.contra .rayas { color: var(--azul); left: 0; right: 0; top: 0; height: 260px; }
+.contra .caja { position: absolute; left: var(--m); right: var(--m); top: 330px; }
 .contra .caja .rotulo { color: var(--celeste); }
 .contra h2 { font-size: 66px; line-height: 1.04; margin: 16px 0 24px; }
 .contra .caja p { font-size: 24px; line-height: 1.5; color: #B9BDC8; }
-.contra .datos { position: absolute; left: var(--m); right: var(--m); top: 760px; background: var(--gris-osc); padding: 28px 30px; }
+.contra .datos { position: absolute; left: var(--m); right: var(--m); top: 700px; background: var(--gris-osc); padding: 28px 30px; }
 .contra .datos b { font-family: "Masher Cond"; font-size: 38px; }
 .contra .datos span { display: block; font-size: 19px; color: #9095A3; margin-top: 6px; }
-.contra .logo { position: absolute; left: var(--m); top: 960px; width: 340px; }
+.contra .datos .ig { display: block; margin-top: 22px; color: var(--celeste); font-size: 32px; }
+.tapa .secciones { position: absolute; left: var(--m); right: var(--m); top: 940px; list-style: none; border-top: 1px solid #2A2D36; }
+.tapa .secciones li { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #2A2D36; font-family: "Masher Cond"; font-weight: 700; font-size: 25px; }
+.tapa .secciones li span { color: #9095A3; font-family: "Masher Text"; font-weight: 400; font-size: 18px; }
+.tapa .secciones li b { color: var(--celeste); font-size: 21px; white-space: nowrap; margin-left: 12px; }
+.contra .logo { position: absolute; left: var(--m); top: 1010px; width: 300px; }
 .contra .legal { position: absolute; left: var(--m); right: var(--m); bottom: 44px; font-size: 16px; line-height: 1.5; color: #8A8F9C; }
 </style>
 </head>
@@ -116,8 +121,8 @@ body { font-family: "Masher Text", sans-serif; color: var(--tinta); -webkit-prin
 <template id="t-tapa">
   <section class="hoja tapa">
     <div class="barra"></div>
-    <div class="cab rotulo">Masher / Catálogo</div>
-    <img class="logo" src="img/masher-logo-blanco.png" alt="Masher máquinas - herramientas">
+    <div class="cab rotulo">Masherr / Catálogo</div>
+    <img class="logo" src="img/masher-logo-blanco.png" alt="Masherr máquinas - herramientas">
     <div class="rayas"></div>
     <div class="eyebrow rotulo">Catálogo · Noviembre 2026</div>
     <h1 class="cond">MÁQUINAS Y<br>HERRAMIENTAS<br>PARA EL<br>TRABAJO.</h1>
@@ -133,7 +138,7 @@ body { font-family: "Masher Text", sans-serif; color: var(--tinta); -webkit-prin
 
 <template id="t-hoja">
   <section class="hoja">
-    <header class="cabecera"><img src="img/masher-logo-azul.png" alt="Masher"><span class="rotulo"></span></header>
+    <header class="cabecera"><img src="img/masher-logo-azul.png" alt="Masherr"><span class="rotulo"></span></header>
     <div class="cuerpo"></div>
     <footer class="pie-int"><span>@masherrferreteria</span><span class="num"></span></footer>
   </section>
@@ -143,12 +148,12 @@ body { font-family: "Masher Text", sans-serif; color: var(--tinta); -webkit-prin
   <section class="hoja contra">
     <div class="rayas"></div>
     <div class="caja">
-      <div class="rotulo">Masher · Ferretería industrial</div>
+      <div class="rotulo">Masherr · Ferretería industrial desde 1973</div>
       <h2 class="cond">¿NO ENCONTRÁS<br>LO QUE BUSCÁS?</h2>
       <p>Escribinos y te ayudamos a elegir la herramienta adecuada. Consultá precios, stock y formas de pago antes de comprar.</p>
     </div>
-    <div class="datos"><b>@masherrferreteria</b><span>Instagram · consultas y novedades</span></div>
-    <img class="logo" src="img/masher-logo-blanco.png" alt="Masher">
+    <div class="datos"><b>011 4752-5210</b><span>Calle 38 (ex H. Yrigoyen) 4335 · Villa Lynch, San Martín</span><b class="ig">@masherrferreteria</b><span>Instagram · consultas y novedades</span></div>
+    <img class="logo" src="img/masher-logo-blanco.png" alt="Masherr">
     <p class="legal">Catálogo vigente a noviembre de 2026. Precios en pesos, sujetos a cambio sin previo aviso. Especificaciones a confirmar con el vendedor. Las marcas mencionadas pertenecen a sus respectivos dueños.</p>
   </section>
 </template>
@@ -173,18 +178,40 @@ Promise.all(['700 10px "Masher Cond"','400 10px "Masher Cond"','400 10px "Masher
     do { prev = t; t = t.replace(/[\s,;:\-–(]+$/, '').replace(sueltas, ''); } while (t !== prev);
     return t + '.';
   };
+  // ?g=N genera solo un tomo (ver TOMOS); sin parámetro, el catálogo completo.
+  const TOMOS = [
+    { titulo: 'HERRAMIENTAS<br>ELÉCTRICAS.', cats: ['Herramientas eléctricas'] },
+    { titulo: 'DISCOS, BROCAS<br>Y ACCESORIOS.', cats: ['Discos, brocas y accesorios'] },
+    { titulo: 'SOLDADURA<br>Y NEUMÁTICA.', cats: ['Soldadura', 'Compresores y neumática'] },
+    { titulo: 'HERRAMIENTAS<br>DE MANO Y<br>MEDICIÓN.', cats: ['Herramientas de mano', 'Medición y nivelación', 'Almacenamiento y transporte'] },
+    { titulo: 'TALLER, OBRA<br>Y JARDÍN.', cats: ['Taller y equipamiento', 'Construcción', 'Agua, limpieza y jardín'] },
+    { titulo: 'FERRETERÍA,<br>QUÍMICOS Y<br>SEGURIDAD.', cats: ['Fijaciones y ferretería', 'Adhesivos, lubricantes y pintura', 'Seguridad e indumentaria'] },
+  ];
+  const g = new URLSearchParams(location.search).get('g');
+  const tomo = g ? TOMOS[+g - 1] : null;
+  window.TOMOS = TOMOS;
   const cats = [];
   for (const p of P) {
     let c = cats[cats.length - 1];
     if (!c || c.nombre !== p.categoria) cats.push(c = { nombre: p.categoria, items: [] });
     c.items.push(p);
   }
+  cats.forEach((c, i) => c.num = i + 1);
+  if (tomo) cats.splice(0, cats.length, ...tomo.cats.map(n => cats.find(c => c.nombre === n)));
   const marcas = [...new Set(P.map(p => p.marca.replace(/\s*\(.*\)$/, '')))].sort((a, b) => a.localeCompare(b, 'es'));
 
   const tapa = tpl('t-tapa');
-  tapa.querySelector('[data-k=productos]').textContent = P.length;
-  tapa.querySelector('[data-k=categorias]').textContent = cats.length;
-  tapa.querySelector('[data-k=marcas]').textContent = marcas.length;
+  if (tomo) {
+    tapa.querySelector('.eyebrow').textContent = `Catálogo · Tomo ${g} de ${TOMOS.length} · Noviembre 2026`;
+    tapa.querySelector('h1').innerHTML = tomo.titulo;
+    tapa.querySelector('.bajada').remove();
+    tapa.querySelector('.cifras').outerHTML = `<ol class="secciones">${cats.map((c, i) => `<li><div>${esc(c.nombre)} <span>· ${c.items.length} productos</span></div><b data-cat="${i}"></b></li>`).join('')}</ol>`;
+  }
+  else {
+    tapa.querySelector('[data-k=productos]').textContent = P.length;
+    tapa.querySelector('[data-k=categorias]').textContent = cats.length;
+    tapa.querySelector('[data-k=marcas]').textContent = marcas.length;
+  }
   libro.appendChild(tapa);
 
   const hojas = [];
@@ -196,6 +223,7 @@ Promise.all(['700 10px "Masher Cond"','400 10px "Masher Cond"','400 10px "Masher
   };
   const desborda = cuerpo => cuerpo.scrollHeight > cuerpo.clientHeight + 1;
 
+  if (!tomo) {
   // Índice
   const ind = nuevaHoja('Índice');
   ind.classList.add('indice');
@@ -211,12 +239,13 @@ Promise.all(['700 10px "Masher Cond"','400 10px "Masher Cond"','400 10px "Masher
     <h2 class="cond">${marcas.length} MARCAS EN UN SOLO LUGAR.</h2>
     <p class="intro">Trabajamos con fabricantes reconocidos en herramientas, insumos y equipamiento.</p>
     <div class="lista-marcas">${marcas.map(m => `<span>${esc(m)}</span>`).join('')}</div>`;
+  }
 
   // Categorías
   cats.forEach((c, i) => {
     let cuerpo = nuevaHoja(c.nombre);
     c.pagina = hojas.length + 1;
-    cuerpo.insertAdjacentHTML('beforeend', `<div class="cat-cab"><div class="rayas"></div><div class="rotulo">Categoría ${dos(i + 1)}</div><h2 class="cond">${esc(c.nombre.toUpperCase())}</h2><div class="cuenta">${c.items.length} productos</div></div>`);
+    cuerpo.insertAdjacentHTML('beforeend', `<div class="cat-cab"><div class="rayas"></div><div class="rotulo">Categoría ${dos(c.num)}</div><h2 class="cond">${esc(c.nombre.toUpperCase())}</h2><div class="cuenta">${c.items.length} productos</div></div>`);
     for (const p of c.items) {
       const el = document.createElement('article');
       el.className = 'item';
@@ -228,7 +257,7 @@ Promise.all(['700 10px "Masher Cond"','400 10px "Masher Cond"','400 10px "Masher
       if (desborda(cuerpo)) {
         el.remove();
         cuerpo = nuevaHoja(c.nombre);
-        cuerpo.insertAdjacentHTML('beforeend', `<div class="cat-cont"><b>${esc(c.nombre)}</b><span>Cat. ${dos(i + 1)} · continuación</span></div>`);
+        cuerpo.insertAdjacentHTML('beforeend', `<div class="cat-cont"><b>${esc(c.nombre)}</b><span>Cat. ${dos(c.num)} · continuación</span></div>`);
         cuerpo.appendChild(el);
       }
     }

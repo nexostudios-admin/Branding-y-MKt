@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Masherr · Presentación</title>
+<style>
+/* Formato vertical 9:16 (540 × 960 pt), igual que el manual de marca. Hoja de 720 × 1280 px. */
+@font-face { font-family: "Masher Cond"; src: url(../catalogo/fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Masher Text"; src: url(../catalogo/fonts/DejaVuSans.ttf); font-weight: 400; }
+@font-face { font-family: "Masher Text"; src: url(../catalogo/fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+:root { --azul: #17256B; --negro: #08090B; --blanco: #FFFFFF; --celeste: #9AA8FF; --gris-osc: #15171D;
+        --tinta: #1A1C22; --gris: #555A66; --linea: #DDE0E7; --suave: #B9BDC8; --m: 48px; }
+@page { size: 540pt 960pt; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "Masher Text", sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: none; } .hoja { margin: 0 !important; box-shadow: none !important; } }
+.hoja { width: 720px; height: 1280px; position: relative; overflow: hidden; background: var(--blanco); margin: 20px auto;
+        box-shadow: 0 2px 16px rgba(0,0,0,.25); break-after: page; padding: 0 var(--m); }
+.oscura { background: var(--negro); color: var(--blanco); }
+.azul { background: var(--azul); color: var(--blanco); }
+.cond, h1, h2, h3 { font-family: "Masher Cond", sans-serif; font-weight: 700; }
+.rotulo { font-family: "Masher Cond", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.oscura .rotulo, .azul .rotulo { color: var(--celeste); }
+.rayas { position: absolute; background: repeating-linear-gradient(to bottom, currentColor 0 9px, transparent 9px 15px); }
+
+/* cabecera común */
+.cab { position: absolute; left: var(--m); right: var(--m); top: 56px; display: flex; align-items: center; gap: 20px; }
+.cab i { width: 56px; height: 7px; background: var(--celeste); }
+.cab span { font-family: "Masher Cond"; font-weight: 700; font-size: 19px; letter-spacing: .08em; text-transform: uppercase; color: #C9CCD6; }
+.hoja:not(.oscura):not(.azul) .cab span { color: var(--gris); }
+.hoja:not(.oscura):not(.azul) .cab i { background: var(--azul); }
+.num { position: absolute; right: var(--m); bottom: 44px; font-family: "Masher Cond"; font-weight: 700; font-size: 21px; letter-spacing: .06em; color: var(--celeste); }
+.hoja:not(.oscura):not(.azul) .num { color: var(--azul); }
+.ig { position: absolute; left: var(--m); bottom: 44px; font-size: 18px; color: #9095A3; }
+.hoja:not(.oscura):not(.azul) .ig { color: var(--gris); }
+
+.contenido { position: absolute; left: var(--m); right: var(--m); top: 150px; }
+h2 { font-size: 66px; line-height: 1.03; margin: 14px 0 26px; }
+.lead { font-size: 25px; line-height: 1.5; color: var(--gris); }
+.oscura .lead, .azul .lead { color: var(--suave); }
+
+/* 1 · tapa */
+.tapa .logo { position: absolute; left: var(--m); top: 150px; width: 480px; }
+.tapa .rayas { color: var(--azul); right: 0; top: 330px; width: 260px; height: 230px; clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%); }
+.tapa .eyebrow { position: absolute; left: var(--m); top: 600px; }
+.tapa h1 { position: absolute; left: var(--m); top: 640px; font-size: 80px; line-height: 1.0; }
+.tapa .bajada { position: absolute; left: var(--m); right: var(--m); top: 980px; font-size: 25px; line-height: 1.45; color: var(--suave); }
+
+/* 2 · historia */
+.grande { font-family: "Masher Cond"; font-weight: 700; font-size: 300px; line-height: .85; color: var(--azul); letter-spacing: -.02em; }
+.grande small { font-size: 64px; letter-spacing: 0; color: var(--negro); display: block; margin-top: 10px; }
+.linea-tiempo { margin-top: 40px; border-top: 2px solid var(--negro); }
+.linea-tiempo div { display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--linea); }
+.linea-tiempo b { font-family: "Masher Cond"; font-size: 30px; color: var(--azul); width: 110px; flex: none; }
+.linea-tiempo span { font-size: 21px; line-height: 1.45; color: var(--tinta); }
+
+/* 3 · qué ofrecemos */
+.lineas { margin-top: 34px; border-top: 1px solid #2E3A86; }
+.lineas div { display: flex; align-items: baseline; gap: 18px; padding: 19px 0; border-bottom: 1px solid #2E3A86; }
+.lineas i { font-style: normal; font-family: "Masher Cond"; font-weight: 700; font-size: 21px; color: var(--celeste); width: 34px; }
+.lineas b { font-family: "Masher Cond"; font-size: 30px; flex: 1; line-height: 1.15; }
+.lineas b span { display: block; font-family: "Masher Text"; font-weight: 400; font-size: 18px; color: #C8CDF0; margin-top: 5px; }
+.azul .rayas { color: rgba(255,255,255,.07); right: 0; top: 0; width: 220px; height: 330px; }
+
+/* 4 · cifras */
+.cifras { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 40px; border-top: 2px solid var(--negro); }
+.cifras div { padding: 30px 0 30px; border-bottom: 1px solid var(--linea); }
+.cifras div:nth-child(odd) { padding-right: 20px; border-right: 1px solid var(--linea); }
+.cifras div:nth-child(even) { padding-left: 28px; }
+.cifras b { display: block; font-family: "Masher Cond"; font-size: 86px; line-height: 1; color: var(--azul); }
+.cifras span { display: block; font-size: 21px; line-height: 1.35; margin-top: 10px; color: var(--tinta); }
+
+/* 5 · marcas */
+.marcas { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; margin-top: 30px; }
+.marcas span { font-family: "Masher Cond"; font-weight: 700; font-size: 30px; padding: 14px 0; border-bottom: 1px solid #262A35; }
+.nota { font-size: 20px; color: #9095A3; margin-top: 26px; line-height: 1.45; }
+
+/* 6 · clientes y por qué */
+.lista { margin-top: 30px; }
+.lista div { padding: 22px 0 22px 26px; border-left: 6px solid var(--azul); margin-bottom: 18px; background: #F4F5F8; padding-right: 22px; }
+.lista b { display: block; font-family: "Masher Cond"; font-size: 30px; color: var(--negro); }
+.lista span { display: block; font-size: 20px; line-height: 1.45; color: var(--gris); margin-top: 6px; }
+
+/* 7 · contacto */
+.contacto .rayas { color: var(--azul); left: 0; right: 0; top: 0; height: 230px; }
+.contacto .contenido { top: 300px; }
+.dato { background: var(--gris-osc); padding: 26px 30px; margin-bottom: 14px; }
+.dato .rotulo { font-size: 16px; }
+.dato b { display: block; font-family: "Masher Cond"; font-size: 36px; margin-top: 6px; line-height: 1.15; }
+.dato span { display: block; font-size: 19px; color: #9095A3; margin-top: 6px; }
+.contacto .logo { position: absolute; left: var(--m); bottom: 110px; width: 300px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Tapa -->
+<section class="hoja oscura tapa">
+  <div class="cab"><i></i><span>Masherr / Presentación</span></div>
+  <img class="logo" src="../catalogo/img/masher-logo-blanco.png" alt="Masherr máquinas - herramientas">
+  <div class="rayas"></div>
+  <div class="eyebrow rotulo">Ferretería industrial · Desde 1973</div>
+  <h1>53 AÑOS<br>EQUIPANDO<br>A QUIENES<br>TRABAJAN.</h1>
+  <p class="bajada">Máquinas, herramientas e insumos industriales en Villa Lynch, San Martín, provincia de Buenos Aires.</p>
+  <div class="ig">@masherrferreteria</div><div class="num">01 / 07</div>
+</section>
+
+<!-- 2 · Historia -->
+<section class="hoja">
+  <div class="cab"><i></i><span>Quiénes somos</span></div>
+  <div class="contenido">
+    <div class="grande">53<small>AÑOS EN EL MERCADO.</small></div>
+    <p class="lead" style="margin-top:34px">Masherr es una ferretería industrial de San Martín. Desde 1973 abastecemos a industrias, talleres, profesionales y particulares con las herramientas y los insumos que necesitan para trabajar.</p>
+    <div class="linea-tiempo">
+      <div><b>1973</b><span>Abrimos en San Martín, uno de los polos industriales del Gran Buenos Aires.</span></div>
+      <div><b>Hoy</b><span>Más de 430 productos de 55 marcas, de la herramienta de mano al equipo de soldadura.</span></div>
+    </div>
+  </div>
+  <div class="ig">@masherrferreteria</div><div class="num">02 / 07</div>
+</section>
+
+<!-- 3 · Qué ofrecemos -->
+<section class="hoja azul">
+  <div class="rayas"></div>
+  <div class="cab"><i></i><span>Qué ofrecemos</span></div>
+  <div class="contenido">
+    <div class="rotulo">Seis líneas de producto</div>
+    <h2>TODO PARA EL TALLER Y LA OBRA.</h2>
+    <div class="lineas">
+      <div><i>01</i><b>Herramientas eléctricas<span>Taladros, amoladoras, sierras, rotomartillos e inalámbricas</span></b></div>
+      <div><i>02</i><b>Discos, brocas y accesorios<span>Corte, desbaste, diamantados, SDS Plus y puntas</span></b></div>
+      <div><i>03</i><b>Soldadura y neumática<span>Soldadoras inverter, electrodos, alambre MIG y compresores</span></b></div>
+      <div><i>04</i><b>Herramientas de mano y medición<span>Llaves, pinzas, destornilladores, niveles y medidores láser</span></b></div>
+      <div><i>05</i><b>Taller, obra y jardín<span>Morsas, criques, hormigoneras, bombas e hidrolavadoras</span></b></div>
+      <div><i>06</i><b>Ferretería, químicos y seguridad<span>Fijaciones, cables, adhesivos, aerosoles y protección personal</span></b></div>
+    </div>
+  </div>
+  <div class="ig">@masherrferreteria</div><div class="num">03 / 07</div>
+</section>
+
+<!-- 4 · En números -->
+<section class="hoja">
+  <div class="cab"><i></i><span>En números</span></div>
+  <div class="contenido">
+    <div class="rotulo">Masherr hoy</div>
+    <h2>TRAYECTORIA Y VARIEDAD.</h2>
+    <div class="cifras">
+      <div><b>53</b><span>años en el mercado</span></div>
+      <div><b>1973</b><span>año de fundación</span></div>
+      <div><b>436</b><span>productos en catálogo</span></div>
+      <div><b>55</b><span>marcas</span></div>
+      <div><b>13</b><span>categorías de producto</span></div>
+      <div><b>1</b><span>local en Villa Lynch, San Martín</span></div>
+    </div>
+  </div>
+  <div class="ig">@masherrferreteria</div><div class="num">04 / 07</div>
+</section>
+
+<!-- 5 · Marcas -->
+<section class="hoja oscura">
+  <div class="cab"><i></i><span>Marcas</span></div>
+  <div class="contenido">
+    <div class="rotulo">Trabajamos con</div>
+    <h2>MARCAS QUE RESPONDEN.</h2>
+    <div class="marcas">
+      <span>Bosch</span><span>DeWalt</span><span>Stanley</span><span>Black+Decker</span>
+      <span>Milwaukee</span><span>Karcher</span><span>Bahco</span><span>Dremel</span>
+      <span>Tyrolit</span><span>Esab</span><span>Emtop</span><span>Bremen</span>
+      <span>Nebraska</span><span>Isard</span><span>WD-40</span><span>Pegaso</span>
+    </div>
+    <p class="nota">Y 39 marcas más en nuestro catálogo. Las marcas mencionadas pertenecen a sus respectivos dueños.</p>
+  </div>
+  <div class="ig">@masherrferreteria</div><div class="num">05 / 07</div>
+</section>
+
+<!-- 6 · Por qué Masherr -->
+<section class="hoja">
+  <div class="cab"><i></i><span>Por qué Masherr</span></div>
+  <div class="contenido">
+    <div class="rotulo">Lo que nos diferencia</div>
+    <h2>EXPERIENCIA EN EL MOSTRADOR.</h2>
+    <div class="lista">
+      <div><b>Trayectoria</b><span>Más de cinco décadas acompañando a la industria y a los oficios de la zona.</span></div>
+      <div><b>Asesoramiento</b><span>Te ayudamos a elegir la herramienta o el insumo correcto para cada trabajo.</span></div>
+      <div><b>Variedad</b><span>Desde una grampa hasta una soldadora: todo en un mismo lugar.</span></div>
+      <div><b>Cerca de la industria</b><span>En Villa Lynch, San Martín, en medio de talleres y fábricas.</span></div>
+    </div>
+  </div>
+  <div class="ig">@masherrferreteria</div><div class="num">06 / 07</div>
+</section>
+
+<!-- 7 · Contacto -->
+<section class="hoja oscura contacto">
+  <div class="rayas"></div>
+  <div class="contenido">
+    <div class="rotulo">Contacto</div>
+    <h2>VENÍ A VERNOS.</h2>
+    <div class="dato"><div class="rotulo">Dirección</div><b>Calle 38 (ex Hipólito Yrigoyen) 4335</b><span>Villa Lynch, San Martín, Buenos Aires</span></div>
+    <div class="dato"><div class="rotulo">Teléfono</div><b>011 4752-5210</b></div>
+    <div class="dato"><div class="rotulo">Redes</div><b>@masherrferreteria</b><span>Instagram · Facebook: masherrferreteria30</span></div>
+  </div>
+  <img class="logo" src="../catalogo/img/masher-logo-blanco.png" alt="Masherr">
+  <div class="num">07 / 07</div>
+</section>
+
+</body>
+</html>
