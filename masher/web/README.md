@@ -50,7 +50,7 @@ Cualquier hosting estático sirve la carpeta `sitio/` tal cual (Netlify, Cloudfl
 
 - Precios y stock son una copia: no se actualizan solos. Definir quién y cómo se actualiza (ver arriba).
 - El carrito vive en el navegador de cada cliente; los pedidos quedan registrados solo en WhatsApp.
-- TikTok y LinkedIn: faltan los perfiles; no hay publicaciones cargadas todavía.
+- LinkedIn: la cuenta se va a crear; cuando exista, cargar la URL en `config.json` (aparece sola). No hay publicaciones cargadas todavía.
 - Fotos reales del local y del equipo; horarios; políticas de cambios y envíos.
 - 2 productos tienen imagen con nombre de generador de IA (ver `catalogo/REPORTE_VALIDACION.md`).
 - No se midió rendimiento (LCP, INP, CLS) en condiciones reales: hacerlo con el sitio publicado.

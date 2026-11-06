@@ -11,8 +11,8 @@ window.MASHERR = {
    "url": "https://www.instagram.com/masherrferreteria/"
   },
   "tiktok": {
-   "usuario": "",
-   "url": ""
+   "usuario": "@masherrferreteria",
+   "url": "https://www.tiktok.com/@masherrferreteria"
   },
   "linkedin": {
    "usuario": "",

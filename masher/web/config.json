@@ -10,10 +10,22 @@
   "horarios": "",
   "fecha_precios": "06/11/2026",
   "redes": {
-    "instagram": { "usuario": "@masherrferreteria", "url": "https://www.instagram.com/masherrferreteria/" },
-    "tiktok": { "usuario": "", "url": "" },
-    "linkedin": { "usuario": "", "url": "" },
-    "facebook": { "usuario": "masherrferreteria30", "url": "https://www.facebook.com/masherrferreteria30/" }
+    "instagram": {
+      "usuario": "@masherrferreteria",
+      "url": "https://www.instagram.com/masherrferreteria/"
+    },
+    "tiktok": {
+      "usuario": "@masherrferreteria",
+      "url": "https://www.tiktok.com/@masherrferreteria"
+    },
+    "linkedin": {
+      "usuario": "",
+      "url": ""
+    },
+    "facebook": {
+      "usuario": "masherrferreteria30",
+      "url": "https://www.facebook.com/masherrferreteria30/"
+    }
   },
   "publicaciones": [],
   "_ayuda_publicaciones": "Pegar enlaces de publicaciones para mostrarlas en la web. Ejemplos: {\"red\": \"instagram\", \"url\": \"https://www.instagram.com/p/XXXX/\", \"titulo\": \"Cómo elegir un taladro\"}, {\"red\": \"tiktok\", \"url\": \"https://www.tiktok.com/@usuario/video/1234567890\"}, {\"red\": \"linkedin\", \"url\": \"https://www.linkedin.com/feed/update/urn:li:activity:1234567890/\"}"
