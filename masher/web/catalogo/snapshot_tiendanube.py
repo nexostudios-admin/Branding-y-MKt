@@ -48,7 +48,12 @@ def ficha(url):
     m = re.search(r'data-variants="([^"]*)"', page)
     variantes = json.loads(html.unescape(m.group(1))) if m else []
     desc = descripcion(page)
-    imgs = sorted(set(re.findall(r'(//dcdn-us\.mitiendanube\.com/stores/[^"\s]+/products/[^"\s]+?-1024-1024\.webp)', page)))
+    # Solo la galería de la ficha (no las imágenes de productos relacionados), en orden.
+    imgs = []
+    for tag in re.findall(r'<img[^>]*js-product-slide-img[^>]*>', page):
+        m_src = re.search(r'\ssrc="(//[^"]+?)-\d+-\d+\.webp"', tag)
+        if m_src and m_src.group(1) + "-1024-1024.webp" not in imgs:
+            imgs.append(m_src.group(1) + "-1024-1024.webp")
     pid = variantes[0]["product_id"] if variantes else None
     offer = prod.get("offers") or {}
     return {

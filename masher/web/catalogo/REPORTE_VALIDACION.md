@@ -26,7 +26,7 @@ Monedas: {'ARS': 244}
 | SKU repetido | 0 | Corregir antes de importar. |
 | Nombre repetido | 2 | Revisar si son duplicados o variantes de un mismo producto. |
 | Sin imagen | 0 | Pedir foto oficial o propia. |
-| Imagen con nombre de generador de IA | 18 | Reemplazar por foto real del producto (el brief no admite imágenes sintéticas). |
+| Imagen con nombre de generador de IA | 2 | Reemplazar por foto real del producto (el brief no admite imágenes sintéticas). |
 | Sin precio o precio 0 | 0 | Desactivar compra hasta tener precio. |
 | Sin stock / no disponible | 0 | Mostrar “Sin stock” y bloquear compra. |
 | Stock sin controlar (null) | 3 | Definir si se controla stock; si no, riesgo de sobreventa. |
@@ -57,22 +57,8 @@ Monedas: {'ARS': 244}
 - pistola de pintar hvlp con compresor esgn50001 4 emtop: 2 fichas
 
 ### Imágenes con nombre de generador de IA
-- Adhesivo de contacto x 1/2lt. Fortex
-- Adhesivo de contacto x 1lt. Fortex
-- Adhesivo de contacto x 4lt. Fortex
-- Broca Diamantada Ø 10mm - para mandril - uso en seco - BDAS-10 Aliafor
-- Broca Diamantada Ø 12mm - para mandril - uso en seco - BDAS-12 Aliafor
-- Broca Diamantada Ø 14mm - para mandril - uso en seco - BDAS-14 Aliafor
-- Broca Diamantada Ø 16mm - para mandril - uso en seco - BDAS-16 Aliafor
-- Broca Diamantada Ø 18mm - para mandril - uso en seco - BDAS-18 Aliafor
-- Broca Diamantada Ø 6mm - para mandril - uso en seco - BDAS-6 Aliafor
-- Cola Sintetica para pisos P-60 x 1kg. Fortex
 - Cola Sintética Vinílica A-20 Fortex – 1/4 kg, 1/2 kg, 1 kg y 6 kg
-- Copa diamantada Ø 25mm - para amoladora - uso en seco - CDA-25 Aliafor
-- Copa diamantada Ø 30mm - para amoladora - uso en seco - CDA-30 Aliafor
-- Copa diamantada Ø 35mm - para amoladora - uso en seco - CDA-35 Aliafor
-- Copa diamantada Ø 40mm - para amoladora - uso en seco - CDA-40 Aliafor
-- … y 3 más
+- Pack de Puntas Phillips para Atornillar Venturo (Aliafor) – PH1, PH2 y PH3 x 50 mm – 10 Unidades
 
 ### Sin stock o no disponibles
 

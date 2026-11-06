@@ -1,0 +1,20 @@
+{
+  "nombre": "Masherr",
+  "dominio": "",
+  "whatsapp": "5491131826166",
+  "whatsapp_visible": "+54 9 11 3182-6166",
+  "telefono": "011 4752-5210",
+  "direccion": "Calle 38 (ex Hipólito Yrigoyen) 4335",
+  "localidad": "Villa Lynch, San Martín, Buenos Aires",
+  "mapa": "https://www.google.com/maps/search/?api=1&query=Calle+38+4335+Villa+Lynch+San+Martin+Buenos+Aires",
+  "horarios": "",
+  "fecha_precios": "06/11/2026",
+  "redes": {
+    "instagram": { "usuario": "@masherrferreteria", "url": "https://www.instagram.com/masherrferreteria/" },
+    "tiktok": { "usuario": "", "url": "" },
+    "linkedin": { "usuario": "", "url": "" },
+    "facebook": { "usuario": "masherrferreteria30", "url": "https://www.facebook.com/masherrferreteria30/" }
+  },
+  "publicaciones": [],
+  "_ayuda_publicaciones": "Pegar enlaces de publicaciones para mostrarlas en la web. Ejemplos: {\"red\": \"instagram\", \"url\": \"https://www.instagram.com/p/XXXX/\", \"titulo\": \"Cómo elegir un taladro\"}, {\"red\": \"tiktok\", \"url\": \"https://www.tiktok.com/@usuario/video/1234567890\"}, {\"red\": \"linkedin\", \"url\": \"https://www.linkedin.com/feed/update/urn:li:activity:1234567890/\"}"
+}

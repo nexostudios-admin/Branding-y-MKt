@@ -1,5 +1,7 @@
 # Masherr web + ecommerce · Diagnóstico técnico y elección del motor
 
+> **Actualización 06/11/2026:** el cliente eligió una web propia con cierre de compra por WhatsApp (ver `README.md`). Tiendanube queda como fuente de catálogo y precios mientras se define otra.
+
 Fecha: 6 de noviembre de 2026. Estado: **diagnóstico, sin integración**. Nada de lo que hay en esta carpeta cobra ni modifica la tienda.
 
 ## 1. Qué hay hoy
@@ -9,7 +11,7 @@ Fecha: 6 de noviembre de 2026. Estado: **diagnóstico, sin integración**. Nada 
 | Motor | Tiendanube, tienda `masherrferreteria.mitiendanube.com` | Lectura pública del sitio |
 | Tema actual | **Brasilia** (plantilla de Tiendanube) | Rutas de assets `themes/brasilia/` |
 | Catálogo publicado | 244 productos, 249 variantes, todo en ARS, 0 errores de lectura | Copia pública de solo lectura (`catalogo/REPORTE_VALIDACION.md`) |
-| Calidad de datos | Ningún producto publica SKU; la marca solo figura en el nombre; 18 productos tienen imágenes con nombre de generador de IA; 2 nombres duplicados; 3 con stock sin controlar | Mismo reporte |
+| Calidad de datos | Ningún producto publica SKU; la marca solo figura en el nombre; 2 productos tienen imágenes con nombre de generador de IA; 2 nombres duplicados; 3 con stock sin controlar | Mismo reporte |
 | Catálogo PDF del cliente | 436 productos | `../catalogo/productos.json` |
 | Familias | Herramientas (eléctricas, inalámbricas, manuales, insumos, medición, cajas, escaleras, equipos de pintar), Máquinas (aparejos y zorras, compresores, construcción, soldadoras, torno), Jardín, Agua y limpieza, Adhesivos y selladores, Espumas, Bolsos, Calefactor, Discos de corte, Mechas y brocas, Cinceles, Puntas y adaptadores, Muebles para el hogar | Sitemap |
 | Pagos visibles en la ficha | Pago Nube y Mercado Pago (con cuotas calculadas por la plataforma) | Datos de variantes en la ficha |
