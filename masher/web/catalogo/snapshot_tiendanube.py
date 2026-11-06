@@ -27,6 +27,18 @@ def texto(fragmento):
     t = html.unescape(re.sub(r"<[^>]+>", " ", t))
     return re.sub(r"[ \t]+", " ", re.sub(r"\n\s*\n+", "\n", t)).strip()
 
+def descripcion(page):
+    """Contenido del div.user-content dentro del bloque de descripción, respetando divs anidados."""
+    i = page.find('data-store="product-description-')
+    j = page.find('class="user-content', i) if i >= 0 else -1
+    if j < 0: return None
+    k = page.find('>', j) + 1
+    nivel, pos = 1, k
+    for m in re.finditer(r'<(/?)div\b', page[k:]):
+        nivel += -1 if m.group(1) else 1
+        if nivel == 0: return page[k:k + m.start()]
+    return None
+
 def ficha(url):
     page = get(url)
     datos = jsonld(page)
@@ -35,7 +47,7 @@ def ficha(url):
     crumbs = [i["name"] for i in web.get("breadcrumb", {}).get("itemListElement", [])][1:-1]
     m = re.search(r'data-variants="([^"]*)"', page)
     variantes = json.loads(html.unescape(m.group(1))) if m else []
-    desc = re.search(r'<div[^>]+class="[^"]*product-description[^"]*"[^>]*>(.*?)</div>\s*</div>', page, re.S)
+    desc = descripcion(page)
     imgs = sorted(set(re.findall(r'(//dcdn-us\.mitiendanube\.com/stores/[^"\s]+/products/[^"\s]+?-1024-1024\.webp)', page)))
     pid = variantes[0]["product_id"] if variantes else None
     offer = prod.get("offers") or {}
@@ -46,7 +58,7 @@ def ficha(url):
         "nombre": html.unescape(prod.get("name") or "") or None,
         "marca": (prod.get("brand") or {}).get("name") if isinstance(prod.get("brand"), dict) else None,
         "categorias": crumbs or None,
-        "descripcion": texto(desc.group(1)) if desc else None,
+        "descripcion": texto(desc) if desc else None,
         "moneda": offer.get("priceCurrency"),
         "peso_kg": float(prod["weight"]["value"]) if prod.get("weight") else None,
         "imagenes": ["https:" + i for i in imgs],
@@ -67,7 +79,7 @@ def ficha(url):
 
 def main(salida):
     sm = get(BASE + "/sitemap.xml")
-    urls = sorted(set(u for u in re.findall(r"<loc>(.*?)</loc>", sm) if "/productos/" in u))
+    urls = sorted(set(u for u in re.findall(r"<loc>(.*?)</loc>", sm) if re.search(r"/productos/[^/]+/$", u)))
     categorias = sorted(set(u for u in re.findall(r"<loc>(.*?)</loc>", sm) if "/productos/" not in u))
     productos, errores = [], []
     for i, u in enumerate(urls, 1):
