@@ -141,12 +141,14 @@ def ic(i):
 REDES = [('instagram', 'Instagram'), ('tiktok', 'TikTok'), ('linkedin', 'LinkedIn'), ('facebook', 'Facebook')]
 redes_activas = [(k, n, CFG['redes'][k]) for k, n in REDES if CFG['redes'].get(k, {}).get('url')]
 
-def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), indexar=True):
+def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), indexar=True, imagen=None, tipo='website'):
     prof = ruta.count('/')
     r = '../' * prof
     canon = (CFG['dominio'].rstrip('/') + '/' + ruta.replace('index.html', '')) if CFG['dominio'] else ''
     nav = [('', 'Inicio'), ('tienda/', 'Tienda'), ('empresas/', 'Empresas'), ('nosotros/', 'Nosotros')]
     navhtml = lambda: ''.join(f'<a href="{r}{h}"{" aria-current=\"page\"" if actual == h else ""}>{t}</a>' for h, t in nav)
+    base_abs = (CFG['dominio'].rstrip('/') + '/') if CFG['dominio'] else r
+    og_img = base_abs + (imagen or 'assets/img/compartir.jpg')
     ld = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>' if jsonld else ''
     redes_pie = ''.join(f'<a href="{e(x["url"])}" target="_blank" rel="noopener" aria-label="{n}">{ic(k)}</a>' for k, n, x in redes_activas)
     doc = f"""<!doctype html>
@@ -158,11 +160,20 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 <meta name="description" content="{e(desc)}">
 {'' if indexar else '<meta name="robots" content="noindex">'}
 {f'<link rel="canonical" href="{e(canon)}">' if canon else ''}
+<meta property="og:site_name" content="Masherr">
+<meta property="og:type" content="{tipo}">
 <meta property="og:title" content="{e(titulo)}">
+{f'<meta property="og:url" content="{e(canon)}">' if canon else ''}
+<meta property="og:image" content="{e(og_img)}">
+<meta property="og:image:alt" content="Masherr máquinas - herramientas">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{e(og_img)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:locale" content="es_AR">
 <meta name="theme-color" content="#08090B">
 <link rel="icon" href="{r}assets/img/favicon.png">
+<link rel="apple-touch-icon" href="{r}assets/img/apple-touch-icon.png">
+<link rel="manifest" href="{r}manifest.webmanifest">
 <link rel="preload" href="{r}assets/fonts/DejaVuSansCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{r}assets/css/estilos.css">
 {ld}
@@ -230,6 +241,18 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
     destino = SITIO / ruta
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(re.sub(r'\n\s*\n', '\n', doc))
+
+def og_producto(base):
+    """JPG 1200x630 con la foto centrada sobre blanco, para previsualizar en WhatsApp y redes (no aceptan bien webp)."""
+    destino = SITIO / (base + '-og.jpg')
+    if not destino.exists():
+        from PIL import Image
+        foto = Image.open(SITIO / (base + '-1024-1024.webp')).convert('RGB')
+        foto.thumbnail((560, 560))
+        lienzo = Image.new('RGB', (1200, 630), (255, 255, 255))
+        lienzo.paste(foto, ((1200 - foto.width) // 2, (630 - foto.height) // 2))
+        lienzo.save(destino, quality=85, optimize=True)
+    return base + '-og.jpg'
 
 def tarjeta(p, r):
     v = p['variantes'][0]
@@ -427,7 +450,8 @@ for p in productos:
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Tienda', 'item': (CFG['dominio'].rstrip('/') + '/tienda/') if CFG['dominio'] else 'tienda/'},
             {'@type': 'ListItem', 'position': 2, 'name': p['catNombre']}, {'@type': 'ListItem', 'position': 3, 'name': p['nombre']}]}]}
-    pagina(f'producto/{p["slug"]}/index.html', f'{p["nombre"]} · Masherr', resumen(p['_desc']) or p['nombre'], ficha, actual='tienda/', jsonld=ld, scripts=['producto.js'])
+    pagina(f'producto/{p["slug"]}/index.html', f'{p["nombre"]} · Masherr', resumen(p['_desc']) or p['nombre'], ficha, actual='tienda/', jsonld=ld, scripts=['producto.js'],
+           imagen=og_producto(imgs[0]) if imgs else None, tipo='product')
 
 # ---------------------------------------------------------------- Carrito
 carrito = f"""
@@ -507,4 +531,6 @@ if CFG['dominio']:
     urls = ['', 'tienda/', 'empresas/', 'nosotros/'] + [f'producto/{p["slug"]}/' for p in productos]
     (SITIO / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{d}/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     (SITIO / 'robots.txt').write_text(f'User-agent: *\nDisallow: /carrito/\nSitemap: {d}/sitemap.xml\n')
+(SITIO / 'manifest.webmanifest').write_text(json.dumps({'name': 'Masherr Ferretería Industrial', 'short_name': 'Masherr', 'start_url': './', 'display': 'browser',
+    'background_color': '#FFFFFF', 'theme_color': '#08090B', 'icons': [{'src': 'assets/img/icono-192.png', 'sizes': '192x192', 'type': 'image/png'}, {'src': 'assets/img/icono-512.png', 'sizes': '512x512', 'type': 'image/png'}]}, ensure_ascii=False))
 print(f'{len(productos)} productos · {len(cats_usadas)} categorías · {sum(1 for p in productos if p["marca"])} con marca detectada')
