@@ -28,5 +28,6 @@
     }
   },
   "publicaciones": [],
-  "_ayuda_publicaciones": "Pegar enlaces de publicaciones para mostrarlas en la web. Ejemplos: {\"red\": \"instagram\", \"url\": \"https://www.instagram.com/p/XXXX/\", \"titulo\": \"Cómo elegir un taladro\"}, {\"red\": \"tiktok\", \"url\": \"https://www.tiktok.com/@usuario/video/1234567890\"}, {\"red\": \"linkedin\", \"url\": \"https://www.linkedin.com/feed/update/urn:li:activity:1234567890/\"}"
+  "_ayuda_publicaciones": "Pegar enlaces de publicaciones para mostrarlas en la web. Ejemplos: {\"red\": \"instagram\", \"url\": \"https://www.instagram.com/p/XXXX/\", \"titulo\": \"Cómo elegir un taladro\"}, {\"red\": \"tiktok\", \"url\": \"https://www.tiktok.com/@usuario/video/1234567890\"}, {\"red\": \"linkedin\", \"url\": \"https://www.linkedin.com/feed/update/urn:li:activity:1234567890/\"}",
+  "planilla_id": "11pKeHeZsR6B5yXFSu57CMl7k86AoEnjTMPRkruYPo28"
 }

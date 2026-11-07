@@ -81,7 +81,7 @@
       <div class="cuerpo">
         ${p.marca ? `<span class="marca">${esc(p.marca)}</span>` : ''}
         <h3><a href="${ROOT}producto/${p.slug}/">${esc(p.nombre)}</a></h3>
-        <span class="precio">${variasVar ? '<span style="font-size:.6em">desde </span>' : ''}${fmt(p.precio)}</span>
+        <span class="precio">${p.precio ? (variasVar ? '<span style="font-size:.6em">desde </span>' : '') + fmt(p.precio) : 'Consultar'}</span>
         <span class="estado ${sinStock ? 'stock-no' : 'stock-ok'}">${sinStock ? 'Sin stock' : 'Disponible'}</span>
         ${boton}
       </div>

@@ -9,7 +9,7 @@
   const variante = () => P.variantes.find(v => String(v.id) === (sel ? sel.value : String(P.variantes[0].id))) || P.variantes[0];
   function pintar() {
     const v = variante();
-    $('#precio').textContent = fmt(v.precio);
+    $('#precio').textContent = v.precio ? fmt(v.precio) : 'Consultar precio';
     $('#sku').textContent = v.sku ? 'SKU: ' + v.sku : '';
     const st = $('#stock');
     st.className = v.disponible ? 'stock-ok' : 'stock-no';

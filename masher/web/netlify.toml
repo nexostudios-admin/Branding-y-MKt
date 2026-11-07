@@ -1,7 +1,12 @@
-# Netlify: en "Base directory" poner masher/web. El sitio ya está construido en sitio/ (no requiere comando de build).
+# Netlify: "Base directory" = masher/web. En cada publicación se vuelve a construir la web leyendo la planilla de Google.
+# Si la planilla no se puede leer, se publica con los últimos datos (no se rompe la web).
 [build]
   publish = "sitio"
-  command = ""
+  command = "python3 construir.py"
+  functions = "netlify/functions"
+
+[build.environment]
+  PYTHON_VERSION = "3.13"
 
 [[headers]]
   for = "/*"

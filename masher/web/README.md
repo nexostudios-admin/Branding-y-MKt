@@ -15,7 +15,16 @@ Sitio estático, sin servidor ni base de datos. La tienda arma el carrito en el 
 
 Las redes se configuran en `config.json`: perfiles (Instagram, TikTok, LinkedIn, Facebook) y publicaciones a mostrar. Las publicaciones se cargan desde cada red solo cuando la persona toca “Ver publicación” (no se cargan scripts de terceros de entrada).
 
-## Actualizar productos y precios
+## Actualizar productos y precios (planilla de Google)
+
+La fuente de verdad es la planilla **Masherr - Productos de la web** (Google Sheets, compartida con redesmasherr@gmail.com; id en `config.json` → `planilla_id`). Instrucciones para el equipo: documento **Masherr - Cómo usar la planilla de productos**. Fotos nuevas: carpeta **Masherr - Fotos de productos**.
+
+- Netlify ejecuta `python3 construir.py` en cada publicación: lee la planilla (exportación CSV) y regenera la web. Si no la puede leer, publica con los datos anteriores.
+- La función programada `netlify/functions/actualizar.mjs` dispara una publicación cada hora (necesita la variable `BUILD_HOOK_URL` en Netlify).
+- Requisitos: la planilla y la carpeta de fotos compartidas como “Cualquier persona con el enlace: Lector”.
+- Probar con un CSV local: `PLANILLA_CSV=archivo.csv python3 construir.py`.
+
+## Copia desde Tiendanube (histórico)
 
 Hoy el catálogo sale de la tienda Tiendanube publicada (copia del 06/11/2026: 244 productos):
 

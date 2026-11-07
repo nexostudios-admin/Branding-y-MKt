@@ -108,6 +108,17 @@ for p in SNAP['productos']:
         'disponible': any(v['disponible'] for v in vs), 'variantes': vs,
         '_desc': p['descripcion'] or '', '_peso': p['peso_kg'], '_url_tn': p['url'],
     })
+# Fuente de verdad: la planilla de Google (si está configurada). Si no se puede leer, se usa la última copia.
+import sys
+sys.path.insert(0, str(AQUI / 'planilla'))
+from planilla import desde_planilla
+FUENTE = os.environ.get('PLANILLA_CSV') or (f"https://docs.google.com/spreadsheets/d/{CFG['planilla_id']}/export?format=csv" if CFG.get('planilla_id') else '')
+if FUENTE:
+    try:
+        productos = desde_planilla(FUENTE, productos, CATEGORIAS, lambda n: categoria({'categorias': None, 'nombre': n}), marca, SITIO)
+        print(f'Planilla leída: {len(productos)} productos publicados')
+    except Exception as ex:
+        print(f'  ! No se pudo leer la planilla ({ex}). Se publica con los datos anteriores.', file=sys.stderr)
 cats_usadas = [c for c in CATEGORIAS if any(p['cat'] == c[0] for p in productos)]
 
 # ---------------------------------------------------------------- Plantillas
@@ -141,6 +152,9 @@ def ic(i):
 REDES = [('instagram', 'Instagram'), ('tiktok', 'TikTok'), ('linkedin', 'LinkedIn'), ('facebook', 'Facebook')]
 redes_activas = [(k, n, CFG['redes'][k]) for k, n in REDES if CFG['redes'].get(k, {}).get('url')]
 
+import datetime
+GENERADO = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+
 def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), indexar=True, imagen=None, tipo='website'):
     prof = ruta.count('/')
     r = '../' * prof
@@ -171,6 +185,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:locale" content="es_AR">
 <meta name="theme-color" content="#08090B">
+<meta name="generado" content="{GENERADO}">
 <link rel="icon" href="{r}assets/img/favicon.png">
 <link rel="apple-touch-icon" href="{r}assets/img/apple-touch-icon.png">
 <link rel="manifest" href="{r}manifest.webmanifest">
@@ -266,7 +281,7 @@ def tarjeta(p, r):
     return f"""<article class="tarjeta"><div class="foto">{img}</div><div class="cuerpo">
       {f'<span class="marca">{e(p["marca"])}</span>' if p['marca'] else ''}
       <h3><a href="{r}producto/{p['slug']}/">{e(p['nombre'])}</a></h3>
-      <span class="precio">{'<span style="font-size:.6em">desde </span>' if len(p['variantes']) > 1 else ''}{precio(p['precio'])}</span>
+      <span class="precio">{'<span style="font-size:.6em">desde </span>' if len(p['variantes']) > 1 and p['precio'] else ''}{precio(p['precio']) if p['precio'] else 'Consultar'}</span>
       <span class="estado {'stock-ok' if p['disponible'] else 'stock-no'}">{'Disponible' if p['disponible'] else 'Sin stock'}</span>
       {boton}</div></article>"""
 
@@ -403,7 +418,7 @@ for p in productos:
     selector = ''
     if len(p['variantes']) > 1:
         selector = '<div class="campo"><label for="variante">Opción</label><select id="variante">' + ''.join(
-            f'<option value="{v["id"]}" {"disabled" if not v["disponible"] else ""}>{e(v["nombre"])} · {precio(v["precio"])}{" · sin stock" if not v["disponible"] else ""}</option>' for v in p['variantes']) + '</select></div>'
+            f'<option value="{v["id"]}" {"disabled" if not v["disponible"] else ""}>{e(v["nombre"])} · {precio(v["precio"]) if v["precio"] else "consultar"}{" · sin stock" if not v["disponible"] else ""}</option>' for v in p['variantes']) + '</select></div>'
     stock_txt = ('Sin stock' if not v0['disponible'] else ('Disponible' if v0['stock'] is None else f'Disponible · {v0["stock"]} en stock' if v0['stock'] <= 5 else 'Disponible'))
     relacionados = [x for x in productos if x['cat'] == p['cat'] and x['slug'] != p['slug'] and x['disponible']]
     relacionados = sorted(relacionados, key=lambda x: (x['sub'] != p['sub'], x['marca'] != p['marca']))[:4]
@@ -421,7 +436,7 @@ for p in productos:
       {f'<p class="rotulo">{e(p["marca"])}</p>' if p['marca'] else f'<p class="rotulo">{e(p["catNombre"])}</p>'}
       <h1>{e(p['nombre'])}</h1>
       <div class="ficha-meta">{f'<span>Marca: {e(p["marca"])}</span>' if p['marca'] else ''}<span>Categoría: {e(p['sub'] or p['catNombre'])}</span><span id="sku">{f'SKU: {e(v0["sku"])}' if v0['sku'] else ''}</span></div>
-      <p class="ficha-precio" id="precio">{precio(v0['precio'])}</p>
+      <p class="ficha-precio" id="precio">{precio(v0['precio']) if v0['precio'] else 'Consultar precio'}</p>
       <p class="nota-precio">Precio publicado al {e(CFG['fecha_precios'])}. Te lo confirmamos por WhatsApp antes de cobrar.</p>
       <div class="compra">
         {selector}
@@ -441,7 +456,7 @@ for p in productos:
 <dialog class="lightbox" id="lightbox" aria-label="Foto ampliada"><img id="lb-img" alt="{e(p['nombre'])}"><button class="icono-boton cerrar" type="button" data-cerrar-lb aria-label="Cerrar">{ic('cerrar')}</button>
   {f'<button class="icono-boton nav-lb ant" type="button" data-lb="-1" aria-label="Foto anterior">{ic("anterior")}</button><button class="icono-boton nav-lb sig" type="button" data-lb="1" aria-label="Foto siguiente">{ic("siguiente")}</button>' if len(imgs) > 1 else ''}</dialog>
 <script>window.PRODUCTO = {datos_js};</script>"""
-    oferta = {'@type': 'Offer', 'price': str(v0['precio']), 'priceCurrency': 'ARS',
+    oferta = {'@type': 'Offer', 'price': str(v0['precio'] or ''), 'priceCurrency': 'ARS',
               'availability': 'https://schema.org/' + ('InStock' if p['disponible'] else 'OutOfStock')}
     if CFG['dominio']: oferta['url'] = CFG['dominio'].rstrip('/') + f'/producto/{p["slug"]}/'
     ld = {'@context': 'https://schema.org', '@graph': [
