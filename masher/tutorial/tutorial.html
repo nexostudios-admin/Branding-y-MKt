@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Masherr · Cómo cargar productos en la web</title>
+<style>
+/* Formato vertical 9:16 (540 × 960 pt), igual que el manual de marca. Hoja de 720 × 1280 px. */
+@font-face { font-family: "Cond"; src: url(../catalogo/fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans.ttf); font-weight: 400; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+:root { --azul: #17256B; --negro: #08090B; --celeste: #9AA8FF; --gris: #EEF0F4; --tinta: #1A1C22; --texto2: #50566A; --linea: #D9DCE4; --verde: #146C43; --m: 48px; }
+@page { size: 540pt 960pt; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "Texto", sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: none; } .hoja { margin: 0 !important; box-shadow: none !important; } }
+.hoja { width: 720px; height: 1280px; position: relative; overflow: hidden; background: #fff; margin: 20px auto; box-shadow: 0 2px 16px rgba(0,0,0,.25); break-after: page; padding: 0 var(--m); }
+.oscura { background: var(--negro); color: #fff; }
+.rayas { position: absolute; background: repeating-linear-gradient(to bottom, currentColor 0 9px, transparent 9px 15px); }
+h1, h2, h3, .cond { font-family: "Cond", sans-serif; font-weight: 700; }
+.rotulo { font-family: "Cond"; font-size: 19px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.oscura .rotulo { color: var(--celeste); }
+
+.cab { position: absolute; left: var(--m); right: var(--m); top: 34px; height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--azul); }
+.cab img { width: 240px; margin-bottom: 6px; }
+.cab span { font-family: "Cond"; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.pie { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: var(--negro); color: #A9ADB8; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--m); font-size: 17px; }
+.pie b { font-family: "Cond"; color: var(--celeste); font-size: 20px; letter-spacing: .06em; }
+.cuerpo { position: absolute; left: var(--m); right: var(--m); top: 140px; bottom: 80px; }
+.paso-n { font-family: "Cond"; font-size: 19px; letter-spacing: .08em; color: var(--azul); text-transform: uppercase; }
+h2 { font-size: 50px; line-height: 1.04; margin: 6px 0 16px; color: var(--negro); }
+.lead { font-size: 22px; line-height: 1.45; color: var(--texto2); margin-bottom: 22px; }
+
+ol.pasos { list-style: none; counter-reset: p; margin-top: 8px; }
+ol.pasos li { counter-increment: p; position: relative; padding: 0 0 16px 62px; font-size: 21px; line-height: 1.42; }
+ol.pasos li::before { content: counter(p); position: absolute; left: 0; top: -4px; width: 44px; height: 44px; border-radius: 50%; background: var(--azul); color: #fff; font-family: "Cond"; font-size: 23px; display: grid; place-items: center; }
+b.k { font-family: "Cond"; font-weight: 700; color: var(--azul); }
+code { font-family: "Texto"; font-weight: 700; background: var(--gris); padding: 1px 7px; border-radius: 4px; }
+
+.tabla { width: 100%; border-collapse: collapse; font-size: 17px; margin: 6px 0 18px; }
+.tabla th { background: var(--azul); color: #fff; font-family: "Cond"; font-weight: 700; text-align: left; padding: 9px 10px; font-size: 16px; }
+.tabla td { border-bottom: 1px solid var(--linea); padding: 9px 10px; vertical-align: top; }
+.tabla td.cambio { background: #FFF4C2; font-weight: 700; }
+.tabla td.nuevo { background: #E3F4E9; }
+.cols td:first-child { font-family: "Cond"; font-size: 19px; color: var(--azul); white-space: nowrap; width: 190px; }
+
+.nota { display: flex; gap: 14px; background: var(--gris); border-left: 6px solid var(--azul); padding: 16px 18px; font-size: 19px; line-height: 1.45; margin-top: 8px; }
+.nota b { font-family: "Cond"; }
+.ok { border-left-color: var(--verde); }
+.ojo { border-left-color: #B42318; background: #FDECEA; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px; }
+.chips span { border: 2px solid var(--azul); color: var(--azul); border-radius: 999px; padding: 6px 13px; font-family: "Cond"; font-size: 17px; }
+
+/* Tapa y contratapa */
+.tapa .barra { position: absolute; left: var(--m); top: 64px; width: 56px; height: 7px; background: var(--celeste); }
+.tapa .sup { position: absolute; left: 124px; top: 57px; font-family: "Cond"; font-size: 19px; letter-spacing: .08em; color: #C9CCD6; }
+.tapa .logo { position: absolute; left: var(--m); top: 150px; width: 480px; }
+.tapa .rayas { color: var(--azul); right: 0; top: 330px; width: 260px; height: 230px; clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%); }
+.tapa .eyebrow { position: absolute; left: var(--m); top: 600px; }
+.tapa h1 { position: absolute; left: var(--m); top: 640px; font-size: 76px; line-height: 1.0; }
+.tapa .bajada { position: absolute; left: var(--m); right: var(--m); top: 980px; font-size: 24px; line-height: 1.45; color: #B9BDC8; }
+.tapa .pie-t { position: absolute; left: var(--m); right: var(--m); bottom: 44px; display: flex; justify-content: space-between; font-size: 19px; color: #9095A3; }
+.tapa .pie-t b { font-family: "Cond"; color: var(--celeste); }
+.indice { list-style: none; margin-top: 10px; border-top: 2px solid var(--negro); }
+.indice li { display: flex; gap: 18px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid var(--linea); font-family: "Cond"; font-size: 27px; }
+.indice li i { font-style: normal; color: var(--celeste); font-size: 21px; width: 34px; }
+.indice li span { margin-left: auto; font-family: "Texto"; font-size: 17px; color: var(--texto2); }
+.link { display: block; margin-top: 18px; background: var(--negro); color: #fff; padding: 18px 20px; font-size: 16px; word-break: break-all; line-height: 1.4; }
+.link b { display: block; font-family: "Cond"; color: var(--celeste); font-size: 17px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Tapa -->
+<section class="hoja oscura tapa">
+  <div class="barra"></div><div class="sup">MASHERR / GUÍA DEL EQUIPO</div>
+  <img class="logo" src="../catalogo/img/masher-logo-blanco.png" alt="Masherr máquinas - herramientas">
+  <div class="rayas"></div>
+  <div class="eyebrow rotulo">Tutorial · Web masherr.netlify.app</div>
+  <h1>CÓMO CARGAR<br>PRODUCTOS<br>EN LA WEB.</h1>
+  <p class="bajada">Precios, stock, productos nuevos y fotos, desde la planilla de Google y desde el celular.</p>
+  <div class="pie-t"><span>Ferretería industrial</span><b>@masherrferreteria</b></div>
+</section>
+
+<!-- 2 · Antes de empezar -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Antes de empezar</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">Cómo funciona</div>
+    <h2>LA PLANILLA MANDA.</h2>
+    <p class="lead">Todo lo que se ve en la tienda de la web sale de una planilla de Google. Cambiás la planilla y la web se actualiza sola.</p>
+    <ol class="pasos">
+      <li>Instalá la app <b class="k">Hojas de cálculo de Google</b> (Google Sheets) en el celular.</li>
+      <li>Entrá con la cuenta <b class="k">redesmasherr@gmail.com</b>.</li>
+      <li>Abrí la planilla <b class="k">Masherr - Productos de la web</b>. Guardala en favoritos con la estrella para encontrarla rápido.</li>
+    </ol>
+    <ul class="indice">
+      <li><i>01</i>Cambiar precio o stock <span>pág. 4</span></li>
+      <li><i>02</i>Ocultar un producto <span>pág. 5</span></li>
+      <li><i>03</i>Agregar un producto nuevo <span>pág. 6</span></li>
+      <li><i>04</i>Productos con opciones <span>pág. 7</span></li>
+      <li><i>05</i>Cargar fotos <span>pág. 8</span></li>
+      <li><i>06</i>Cuándo se ve en la web <span>pág. 9</span></li>
+    </ul>
+    <div class="link"><b>Link de la planilla</b>docs.google.com/spreadsheets/d/11pKeHeZsR6B5yXFSu57CMl7k86AoEnjTMPRkruYPo28</div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>02 / 09</b></div>
+</section>
+
+<!-- 3 · Columnas -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Las columnas</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">Qué va en cada columna</div>
+    <h2>UNA FILA, UN PRODUCTO.</h2>
+    <table class="tabla cols">
+      <tr><td>Producto</td><td>Nombre como se ve en la web. Incluí medida, potencia y código del fabricante.</td></tr>
+      <tr><td>Precio</td><td>Solo números, sin $ ni puntos. Ej.: <code>16000</code>. Vacío = “Consultar”.</td></tr>
+      <tr><td>Stock</td><td>Unidades disponibles. <code>0</code> = sin stock. Vacío = sin límite.</td></tr>
+      <tr><td>Publicado</td><td><code>SI</code> se ve en la web · <code>NO</code> queda oculto.</td></tr>
+      <tr><td>Marca</td><td>Ej.: Bosch, DeWalt, Emtop. Sirve para el filtro por marca.</td></tr>
+      <tr><td>Categoría</td><td>Una de la lista de la página 6, escrita igual.</td></tr>
+      <tr><td>Opción</td><td>Solo si el producto tiene tamaños o medidas (página 7).</td></tr>
+      <tr><td>Código</td><td>SKU interno. Opcional: permite buscar por código.</td></tr>
+      <tr><td>Descripción nueva</td><td>Texto de la ficha. Vacío = queda el texto que ya tenía.</td></tr>
+      <tr><td>Fotos nuevas</td><td>Links de fotos de Drive (página 8). Vacío = quedan las fotos que ya tenía.</td></tr>
+    </table>
+    <div class="nota ojo"><span><b>No cambies los títulos de la fila 1</b> ni borres columnas: la web los usa para leer la planilla.</span></div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>03 / 09</b></div>
+</section>
+
+<!-- 4 · Precio y stock -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>01 · Precio y stock</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">01 · Lo más común</div>
+    <h2>CAMBIAR PRECIO O STOCK.</h2>
+    <ol class="pasos">
+      <li>Tocá la lupa y buscá el producto por una palabra (ej.: <code>adhesivo</code>).</li>
+      <li>Tocá la celda de <b class="k">Precio</b> y escribí el precio nuevo, sin $ ni puntos.</li>
+      <li>Si se agotó, poné <code>0</code> en <b class="k">Stock</b>. En la web aparece “Sin stock” y no se puede agregar al carrito.</li>
+      <li>Listo. No hay que guardar: Google guarda solo.</li>
+    </ol>
+    <table class="tabla">
+      <tr><th>Producto</th><th>Precio</th><th>Stock</th><th>Publicado</th></tr>
+      <tr><td>Adhesivo de contacto x 1lt. Fortex</td><td class="cambio">16500</td><td>5</td><td>SI</td></tr>
+      <tr><td>Disco Flap Ø 115 mm - Grano 40</td><td>3000</td><td class="cambio">0</td><td>SI</td></tr>
+    </table>
+    <div class="nota ok"><span><b>En amarillo, lo que cambia.</b> El adhesivo pasa a $16.500 y el disco queda “Sin stock”.</span></div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>04 / 09</b></div>
+</section>
+
+<!-- 5 · Ocultar -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>02 · Ocultar</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">02 · Sin borrar nada</div>
+    <h2>OCULTAR UN PRODUCTO.</h2>
+    <p class="lead">Para sacar un producto de la web sin perderlo (por ejemplo, si se discontinuó), no borres la fila: ocultala.</p>
+    <ol class="pasos">
+      <li>Buscá el producto.</li>
+      <li>En <b class="k">Publicado</b> cambiá <code>SI</code> por <code>NO</code>.</li>
+      <li>Para volver a mostrarlo, poné otra vez <code>SI</code>.</li>
+    </ol>
+    <table class="tabla">
+      <tr><th>Producto</th><th>Precio</th><th>Stock</th><th>Publicado</th></tr>
+      <tr><td>Hacha de acero W014053 Workpro</td><td>94000</td><td>5</td><td class="cambio">NO</td></tr>
+    </table>
+    <div class="nota"><span><b>¿Sin stock u oculto?</b> Con <code>Stock 0</code> el producto se sigue viendo como “Sin stock”. Con <code>Publicado NO</code> desaparece de la web.</span></div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>05 / 09</b></div>
+</section>
+
+<!-- 6 · Nuevo -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>03 · Producto nuevo</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">03 · Sumar al catálogo</div>
+    <h2>AGREGAR UN PRODUCTO.</h2>
+    <ol class="pasos">
+      <li>Bajá hasta la última fila y escribí en la primera fila vacía.</li>
+      <li>Completá <b class="k">Producto, Precio, Stock, Publicado</b> (<code>SI</code>), <b class="k">Marca</b> y <b class="k">Categoría</b>.</li>
+      <li>En <b class="k">Descripción nueva</b> escribí para qué sirve y sus datos técnicos.</li>
+      <li>Agregá la foto (página 8).</li>
+    </ol>
+    <table class="tabla">
+      <tr><th>Producto</th><th>Precio</th><th>Stock</th><th>Publ.</th><th>Marca</th><th>Categoría</th></tr>
+      <tr><td class="nuevo">Producto de ejemplo 13mm</td><td class="nuevo">99000</td><td class="nuevo">4</td><td class="nuevo">SI</td><td class="nuevo">Bosch</td><td class="nuevo">Herramientas eléctricas</td></tr>
+    </table>
+    <div class="paso-n" style="margin-top:6px">Categorías (escribilas igual)</div>
+    <div class="chips"><span>Herramientas eléctricas</span><span>Inalámbricas a batería</span><span>Herramientas manuales</span><span>Medición y nivelación</span><span>Discos, brocas y puntas</span><span>Soldadura y compresores</span><span>Agua, limpieza y jardín</span><span>Adhesivos y selladores</span><span>Cajas y almacenamiento</span><span>Otros productos</span></div>
+    <div class="nota"><span>Si la categoría está mal escrita, el producto aparece igual en <b>Otros productos</b>.</span></div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>06 / 09</b></div>
+</section>
+
+<!-- 7 · Opciones -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>04 · Opciones</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">04 · Tamaños y medidas</div>
+    <h2>PRODUCTOS CON OPCIONES.</h2>
+    <p class="lead">Cuando un mismo producto viene en varios tamaños, el cliente elige la opción en la ficha. Cada opción tiene su precio y su stock.</p>
+    <ol class="pasos">
+      <li>Una fila por opción.</li>
+      <li>El texto de <b class="k">Producto</b> tiene que ser <b>exactamente igual</b> en todas las filas.</li>
+      <li>En <b class="k">Opción</b> escribí el tamaño o la medida.</li>
+    </ol>
+    <table class="tabla">
+      <tr><th>Producto</th><th>Precio</th><th>Stock</th><th>Opción</th></tr>
+      <tr><td>Cola Sintética Vinílica A-20 Fortex</td><td>3500</td><td>5</td><td class="cambio">1/4 Kg.</td></tr>
+      <tr><td>Cola Sintética Vinílica A-20 Fortex</td><td>5300</td><td>5</td><td class="cambio">1/2 Kg.</td></tr>
+      <tr><td>Cola Sintética Vinílica A-20 Fortex</td><td>9500</td><td>5</td><td class="cambio">1 Kg.</td></tr>
+    </table>
+    <div class="nota"><span>En la tienda se ve como <b>un solo producto</b> “desde $3.500”, con un selector de tamaño.</span></div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>07 / 09</b></div>
+</section>
+
+<!-- 8 · Fotos -->
+<section class="hoja">
+  <div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>05 · Fotos</span></div>
+  <div class="cuerpo">
+    <div class="paso-n">05 · Desde Google Drive</div>
+    <h2>CARGAR FOTOS.</h2>
+    <ol class="pasos">
+      <li>Sacá la foto con buena luz y fondo liso, con el producto completo.</li>
+      <li>Abrí <b class="k">Google Drive</b> con redesmasherr@gmail.com y entrá a la carpeta <b class="k">Masherr - Fotos de productos</b>.</li>
+      <li>Tocá <b class="k">+</b> → <b class="k">Subir</b> y elegí la foto.</li>
+      <li>En la foto subida tocá los <b class="k">tres puntos ⋮</b> → <b class="k">Compartir</b> → <b class="k">Copiar vínculo</b>.</li>
+      <li>Volvé a la planilla y pegá el vínculo en <b class="k">Fotos nuevas</b>, en la fila del producto.</li>
+    </ol>
+    <div class="nota"><span><b>Varias fotos:</b> pegá los vínculos en la misma celda, separados por un espacio. La primera es la principal.</span></div>
+    <div class="nota ojo" style="margin-top:12px"><span><b>Usá fotos reales</b> del producto o las oficiales de la marca. No uses imágenes generadas ni fotos de otras tiendas.</span></div>
+  </div>
+  <div class="pie"><span>Masherr · Guía para cargar productos</span><b>08 / 09</b></div>
+</section>
+
+<!-- 9 · Cuándo se ve -->
+<section class="hoja oscura">
+  <div class="rayas" style="color:var(--azul);left:0;right:0;top:0;height:200px"></div>
+  <div class="cuerpo" style="top:250px">
+    <div class="paso-n" style="color:var(--celeste)">06 · Publicación</div>
+    <h2 style="color:#fff">¿CUÁNDO SE VE EN LA WEB?</h2>
+    <p class="lead" style="color:#B9BDC8">La web lee la planilla automáticamente. Los cambios aparecen en la próxima actualización: hasta 1 hora.</p>
+    <table class="tabla" style="color:#fff">
+      <tr><th>Si no se ve el cambio</th><th>Revisá</th></tr>
+      <tr><td style="border-color:#2A2E3A">Pasó más de 1 hora</td><td style="border-color:#2A2E3A">Recargá la página. Si sigue igual, avisá a quien administra la web.</td></tr>
+      <tr><td style="border-color:#2A2E3A">El precio sale “Consultar”</td><td style="border-color:#2A2E3A">El precio tiene letras o está vacío.</td></tr>
+      <tr><td style="border-color:#2A2E3A">El producto no aparece</td><td style="border-color:#2A2E3A">Publicado tiene que decir <code style="color:var(--negro)">SI</code>.</td></tr>
+      <tr><td style="border-color:#2A2E3A">La foto no aparece</td><td style="border-color:#2A2E3A">La foto tiene que estar en la carpeta de Drive y el vínculo completo.</td></tr>
+    </table>
+  </div>
+  <img src="../catalogo/img/masher-logo-blanco.png" alt="Masherr" style="position:absolute;left:var(--m);bottom:56px;width:280px">
+  <div style="position:absolute;right:var(--m);bottom:62px;font-family:Cond;color:var(--celeste);font-size:20px;letter-spacing:.06em">09 / 09</div>
+</section>
+
+</body>
+</html>
