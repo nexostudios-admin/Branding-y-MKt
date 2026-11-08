@@ -21,7 +21,7 @@ La fuente de verdad es la planilla **Masherr - Productos de la web** (Google She
 
 - Netlify ejecuta `python3 construir.py` en cada publicación: lee la planilla (exportación CSV) y regenera la web. Si no la puede leer, publica con los datos anteriores.
 - La función programada `netlify/functions/actualizar.mjs` dispara una publicación cada hora (necesita la variable `BUILD_HOOK_URL` en Netlify).
-- Requisitos: la planilla y la carpeta de fotos compartidas como “Cualquier persona con el enlace: Lector”.
+- Requisitos: la planilla y la carpeta de fotos compartidas como “Cualquier persona con el enlace: Lector” (planilla: hecho el 08/11/2026).
 - Probar con un CSV local: `PLANILLA_CSV=archivo.csv python3 construir.py`.
 
 ## Copia desde Tiendanube (histórico)
