@@ -13,7 +13,7 @@ const path = require('path');
   if (process.argv[2]) {
     await p.emulateMedia({ media: 'print' });
     const hs = await p.$$('.hoja');
-    for (const i of [0, 1, 2, 3, 6, 18, 19]) await hs[i].screenshot({ path: `${process.argv[2]}-${i + 1}.png` });
+    for (const i of [2, 3, 16, 14]) await hs[i].screenshot({ path: `${process.argv[2]}-${i + 1}.png` });
   }
   await b.close();
 })();
