@@ -324,7 +324,7 @@ inicio = f"""
   <div class="rayas" aria-hidden="true"></div>
   <div class="contenedor">
     <p class="rotulo">Ferretería industrial · San Martín</p>
-    <h1 id="t-hero">Herramientas y máquinas para trabajar bien.</h1>
+    <h1 id="t-hero">Herramientas &amp; máquinas para trabajar bien.</h1>
     <p class="bajada">Una ferretería con historia, con asesoramiento técnico para industria, mantenimiento, talleres, profesionales y obra.</p>
     <form action="tienda/" role="search"><div class="buscador"><label class="sr" for="q-hero">Buscar productos</label>
       <input id="q-hero" name="q" type="search" placeholder="¿Qué necesitás? Ej.: amoladora, disco 115, nivel" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form>
