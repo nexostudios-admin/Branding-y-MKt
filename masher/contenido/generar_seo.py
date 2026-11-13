@@ -27,15 +27,15 @@ PAGINAS = [
 <li>Zona de atención y mapa en “Nosotros”, y mapa del sitio con 258 páginas.</li></ol>'''),
 
  ('Paso 1 · La ficha', 'CREAR O RECLAMAR LA FICHA.', '''<ol class="pasos"><li>Entrá a <b>business.google.com</b> con <b>redesmasherr@gmail.com</b>.</li>
-<li>Buscá “Masherr”. Si la ficha <b>ya existe</b> (la creó un cliente o Google), tocá <b>Reclamar este negocio</b>. Si <b>no existe</b>, tocá <b>Agregar negocio</b>.</li>
+<li>La ficha real ya existe: <b>Ferretería Industrial Masherr</b>, Calle 38 4335. Abrila en Google Maps: si ves <b>Editar perfil</b>, ya la administran; si ves <b>Reclamar este negocio</b>, reclamala.</li>
 <li>Tipo de negocio: <b>local físico</b> que recibe clientes. Marcá también que hacés envíos si los hacen.</li>
 <li>Completá los datos de la página siguiente <b>exactamente igual</b> en todos lados.</li>
 <li><b>Verificación:</b> Google elige el método (video del local y del cartel, llamada, SMS o mail). El video suele pedir: cartel con el nombre, la calle, el interior y algo que pruebe que es tuyo (abrir la caja o la persiana).</li></ol>
-<div class="nota"><span><b>Importante:</b> hasta que la ficha esté verificada, los cambios no se publican. Si aparece una ficha duplicada (por ejemplo con el número 4349), se pide unificar desde la misma ficha con <b>Sugerir un cambio → Cerrado o eliminado → Duplicado</b>.</span></div>'''),
+<div class="nota"><span><b>Importante:</b> hasta que la ficha esté verificada, los cambios no se publican. Existe otra ficha, <b>“Masherr Alfa”, Hipólito Yrigoyen 4349</b>. Si es el mismo negocio, se marca como duplicada desde esa ficha: <b>Sugerir un cambio → Cerrado o eliminado → Duplicado</b>. Si es otro negocio, no se toca.</span></div>'''),
 
  ('Paso 2 · Datos', 'LOS MISMOS DATOS EN TODOS LADOS.', '''<p class="lead">Google confía más en un negocio cuando el nombre, la dirección y el teléfono coinciden en la ficha, la web y las redes.</p>
-<table class="tabla cols"><tr><td>Nombre</td><td>El del cartel del local, sin agregar palabras (ej.: <b>Masherr Ferretería Industrial</b>). Agregar “San Martín” o “herramientas” al nombre está prohibido por Google.</td></tr>
-<tr><td>Dirección</td><td>Calle 38 (ex Hipólito Yrigoyen) 4335, Villa Lynch, Buenos Aires. <mark>Confirmar el número:</mark> algunas guías dicen 4349.</td></tr>
+<table class="tabla cols"><tr><td>Nombre</td><td><b>Ferretería Industrial Masherr</b> (como figura hoy en la ficha). No agregar palabras como “San Martín” o “herramientas”: Google lo prohíbe.</td></tr>
+<tr><td>Dirección</td><td>Calle 38 4335, Villa Lynch, B1650GSA, Buenos Aires (confirmada en la ficha real).</td></tr>
 <tr><td>Teléfono</td><td>011 4752-5210 (principal) · WhatsApp +54 9 11 3182-6166 (adicional)</td></tr>
 <tr><td>Sitio web</td><td>https://masherrferreteria.com.ar</td></tr>
 <tr><td>Horario</td><td><mark>A confirmar.</mark> Cargar el real y los feriados. Un horario mal cargado genera reseñas negativas.</td></tr>
@@ -110,8 +110,8 @@ PAGINAS = [
 <tr><td>Cada mes</td><td>Revisar en la ficha: llamadas, “cómo llegar” y clics a la web. En Search Console: búsquedas y clics.</td></tr>
 <tr><td>Cada cambio</td><td>Horario, feriados o teléfono: actualizar ficha, web y redes el mismo día.</td></tr></table>
 <div class="rotulo" style="margin-top:14px">Qué falta confirmar</div>
-<ol class="pasos"><li>Número exacto de la dirección (4335 o 4349).</li><li>Horario de atención y si hacen envíos.</li>
-<li>Si la ficha de Google ya existe y quién la administra.</li><li>Código de verificación de Search Console.</li></ol>
+<ol class="pasos"><li>Si la ficha “Masherr Alfa” (4349) es el mismo negocio o es otro.</li><li>Horario de atención y si hacen envíos.</li>
+<li>Quién administra la ficha real (Ferretería Industrial Masherr).</li><li>Código de verificación de Search Console.</li></ol>
 <p class="ayuda">Los resultados del SEO local se ven en semanas o meses, no en días: depende de las reseñas, de la competencia de la zona y de la constancia.</p>'''),
 ]
 

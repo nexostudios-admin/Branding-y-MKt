@@ -244,7 +244,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
         </ul>
       </div>
     </div>
-    <div class="pie-legal"><span>© Masherr Ferretería Industrial</span><span>Precios en pesos argentinos, publicados al {e(CFG['fecha_precios'])}. Se confirman por WhatsApp antes de cobrar.</span></div>
+    <div class="pie-legal"><span>© Ferretería Industrial Masherr</span><span>Precios en pesos argentinos, publicados al {e(CFG['fecha_precios'])}. Se confirman por WhatsApp antes de cobrar.</span></div>
   </div>
 </footer>
 <a class="wa-flotante" href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">{ic('whatsapp')}</a>
@@ -377,11 +377,11 @@ inicio = f"""
 </section>"""
 DOM = CFG['dominio'].rstrip('/') if CFG['dominio'] else ''
 NEGOCIO = {'@context': 'https://schema.org', '@type': 'HardwareStore', '@id': (DOM + '/#negocio') if DOM else None,
-           'name': 'Masherr Ferretería Industrial', 'url': (DOM + '/') if DOM else None,
+           'name': CFG.get('nombre_ficha', 'Masherr Ferretería Industrial'), 'url': (DOM + '/') if DOM else None,
            'logo': (DOM + '/assets/img/icono-512.png') if DOM else None, 'image': (DOM + '/assets/img/compartir.jpg') if DOM else None,
            'description': 'Ferretería industrial en Villa Lynch, San Martín. Herramientas eléctricas y manuales, máquinas, soldadura, discos, brocas e insumos para industria, talleres, mantenimiento y obra.',
            'telephone': '+54 11 4752-5210',
-           'address': {'@type': 'PostalAddress', 'streetAddress': CFG['direccion'], 'addressLocality': 'Villa Lynch', 'addressRegion': 'Buenos Aires', 'addressCountry': 'AR'},
+           'address': {'@type': 'PostalAddress', 'streetAddress': CFG['direccion'], 'addressLocality': 'Villa Lynch', 'postalCode': CFG.get('codigo_postal'), 'addressRegion': 'Buenos Aires', 'addressCountry': 'AR'},
            'areaServed': [{'@type': 'City', 'name': z} for z in CFG.get('zona', [])],
            'hasMap': CFG['mapa'],
            'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'telephone': '+' + CFG['whatsapp'], 'availableLanguage': 'es'},
@@ -553,7 +553,7 @@ nosotros += f"""
   <div><p class="rotulo">Zona</p><h2 class="titulo-seccion" id="t-zona">Ferretería industrial en San Martín y alrededores.</h2>
     <p class="bajada">Estamos en Villa Lynch, partido de General San Martín. Atendemos a industrias, talleres, profesionales y vecinos de {', '.join(CFG.get('zona', [])[:-1])} y {CFG.get('zona', [''])[-1]}.</p>
     <p class="bajada">Retirá en el local o consultanos por WhatsApp por envíos.</p></div>
-  <div class="mapa" id="mapa"><button class="boton secundario" type="button" onclick="this.parentNode.innerHTML='&lt;iframe title=&quot;Mapa de Masherr&quot; src=&quot;https://www.google.com/maps?q=Calle+38+4335,+Villa+Lynch,+Buenos+Aires&amp;output=embed&quot; loading=&quot;lazy&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot;&gt;&lt;/iframe&gt;'">{ic('ubicacion')}Ver mapa</button>
+  <div class="mapa" id="mapa"><button class="boton secundario" type="button" onclick="this.parentNode.innerHTML='&lt;iframe title=&quot;Mapa de Masherr&quot; src=&quot;https://www.google.com/maps?q=Ferreteria+Industrial+Masherr,+Calle+38+4335,+Villa+Lynch&amp;output=embed&quot; loading=&quot;lazy&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot;&gt;&lt;/iframe&gt;'">{ic('ubicacion')}Ver mapa</button>
     <p class="aviso-terceros">El mapa se carga desde Google Maps al tocar el botón.</p></div>
 </div></section>"""
 pagina('nosotros/index.html', 'Nosotros · Masherr Ferretería Industrial en Villa Lynch', 'Masherr, ferretería industrial de Villa Lynch, San Martín. Asesoramiento técnico, local en Calle 38 4335 y pedidos por WhatsApp.', nosotros, actual='nosotros/', jsonld=NEGOCIO)

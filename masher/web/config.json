@@ -6,7 +6,7 @@
   "telefono": "011 4752-5210",
   "direccion": "Calle 38 (ex Hipólito Yrigoyen) 4335",
   "localidad": "Villa Lynch, San Martín, Buenos Aires",
-  "mapa": "https://www.google.com/maps/search/?api=1&query=Calle+38+4335+Villa+Lynch+San+Martin+Buenos+Aires",
+  "mapa": "https://maps.app.goo.gl/DFGesHfBCZgQHgJY6",
   "horarios": "",
   "fecha_precios": "06/11/2026",
   "redes": {
@@ -44,5 +44,7 @@
     "Villa Devoto"
   ],
   "google_site_verification": "",
-  "horarios_schema": []
+  "horarios_schema": [],
+  "nombre_ficha": "Ferretería Industrial Masherr",
+  "codigo_postal": "B1650GSA"
 }
