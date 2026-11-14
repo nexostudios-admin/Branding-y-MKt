@@ -137,3 +137,25 @@
 
   window.M = { CFG, ROOT, fmt, esc, img, icono, cargarCatalogo, carrito, resolver, wa, toast, tarjeta };
 })();
+
+/* Medición de contactos (Google Analytics 4 / Google Ads). Solo envía si gtag está configurado en config.json. */
+(function () {
+  const CONV = (window.MASHERR && window.MASHERR.ads_conversion) || {};
+  function evento(nombre, extra) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', nombre, extra || {});
+    if (CONV[nombre]) window.gtag('event', 'conversion', { send_to: CONV[nombre] });
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a'); if (!a) return;
+    const h = a.getAttribute('href') || '';
+    if (h.startsWith('tel:')) evento('click_llamar');
+    else if (h.includes('wa.me')) evento('click_whatsapp');
+    else if (a.dataset.evento === 'como_llegar' || h.includes('maps.app.goo.gl')) evento('click_como_llegar');
+  });
+  document.addEventListener('submit', e => {
+    if (e.target.id === 'form-pedido') evento('pedido_whatsapp');
+    if (e.target.id === 'form-empresas') evento('cotizacion_empresa');
+  }, true);
+  document.addEventListener('click', e => { if (e.target.closest('[data-agregar], #agregar')) evento('add_to_cart'); });
+})();

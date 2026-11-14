@@ -23,5 +23,6 @@ window.MASHERR = {
    "url": "https://www.facebook.com/masherrferreteria30/"
   }
  },
- "publicaciones": []
+ "publicaciones": [],
+ "ads_conversion": {}
 };

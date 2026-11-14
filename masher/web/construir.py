@@ -155,6 +155,11 @@ redes_activas = [(k, n, CFG['redes'][k]) for k, n in REDES if CFG['redes'].get(k
 import datetime
 GENERADO = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
 
+IDS = [i for i in (CFG.get('ga4_id'), CFG.get('google_ads_id')) if i]
+MEDICION = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={IDS[0]}"></script>'
+            '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());'
+            + ''.join(f'gtag("config","{i}");' for i in IDS) + '</script>') if IDS else ''
+
 def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), indexar=True, imagen=None, tipo='website'):
     prof = ruta.count('/')
     r = '../' * prof
@@ -241,6 +246,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
           <li><a href="{r}carrito/">Mi carrito</a></li>
           <li><a href="{r}empresas/">Pedidos para empresas</a></li>
           <li><a href="{r}nosotros/#como-comprar">Cómo comprar</a></li>
+          <li><a href="{r}ferreteria-san-martin/">Ferretería en San Martín</a></li>
         </ul>
       </div>
     </div>
@@ -249,7 +255,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 </footer>
 <a class="wa-flotante" href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">{ic('whatsapp')}</a>
 <script src="{r}assets/js/config.js"></script>
-<script src="{r}assets/js/app.js"></script>
+{MEDICION}<script src="{r}assets/js/app.js"></script>
 {''.join(f'<script src="{r}assets/js/{s}"></script>' for s in scripts)}
 </body>
 </html>
@@ -302,7 +308,7 @@ def bloque_redes(r):
 </section>"""
 
 # ---------------------------------------------------------------- Limpiar y copiar
-for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'data']:  # img/ se conserva como caché
+for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'data']:  # img/ se conserva como caché
     shutil.rmtree(SITIO / sub, ignore_errors=True)
 (SITIO / 'data').mkdir(parents=True)
 
@@ -310,6 +316,7 @@ publico = [{k: v for k, v in p.items() if not k.startswith('_')} for p in produc
 json.dump({'actualizado': CFG['fecha_precios'], 'categorias': [{'slug': c[0], 'nombre': c[1]} for c in cats_usadas], 'productos': publico},
           open(SITIO / 'data' / 'productos.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 cfg_pub = {k: CFG[k] for k in ['whatsapp', 'whatsapp_visible', 'telefono', 'direccion', 'localidad', 'fecha_precios', 'redes', 'publicaciones']}
+cfg_pub['ads_conversion'] = CFG.get('google_ads_conversion', {})
 (SITIO / 'assets' / 'js' / 'config.js').write_text('window.MASHERR = ' + json.dumps(cfg_pub, ensure_ascii=False, indent=1) + ';\n')
 
 # ---------------------------------------------------------------- Inicio
@@ -587,13 +594,52 @@ for slug, nombre, bajada in cats_usadas:
             {'@type': 'ListItem', 'position': 3, 'name': nombre}]}]}
     pagina(f'categoria/{slug}/index.html', f'{nombre} en San Martín · Masherr', f'{bajada}. {len(lista)} productos en Masherr, ferretería industrial de Villa Lynch, San Martín. Comprá online o en el local.', cuerpo, actual='tienda/', jsonld=ld)
 
+# ---------------------------------------------------------------- Ferretería en San Martín (búsqueda local)
+PREGUNTAS = [
+ ('¿Dónde queda Masherr?', f"En {CFG['direccion']}, Villa Lynch, partido de General San Martín, provincia de Buenos Aires."),
+ ('¿Qué horario tiene la ferretería?', CFG['horarios'] + '. Domingos y feriados, cerrado.'),
+ ('¿Puedo comprar sin ir al local?', 'Sí. Armá el pedido en la tienda de la web y envialo por WhatsApp. Te confirmamos precio, stock, retiro o envío y forma de pago.'),
+ ('¿Venden a empresas y talleres?', 'Sí. Cotizamos pedidos para industrias, talleres, mantenimiento y obra desde la sección Empresas o por WhatsApp.'),
+ ('¿Qué marcas trabajan?', 'Bosch, DeWalt, Stanley, Milwaukee, Black+Decker, Karcher, Bahco, Emtop, Nebraska, Isard, Pegaso y más de 40 marcas.'),
+]
+r = '../'
+cats_txt = ''.join(f'<li><a class="tile-cat" href="{r}categoria/{c[0]}/"><b>{e(c[1])}</b><span>{conteo[c[0]]} productos {ic("flecha")}</span></a></li>' for c in cats_usadas)
+local = f"""
+<section class="hero oscuro" aria-labelledby="t-fsm">
+  <div class="rayas" aria-hidden="true"></div>
+  <div class="contenedor"><p class="rotulo">Villa Lynch · General San Martín</p>
+    <h1 id="t-fsm">Ferretería en San Martín.</h1>
+    <p class="bajada">Ferretería industrial con local en Villa Lynch y tienda online. Herramientas eléctricas y de mano, soldadoras, compresores, discos, brocas, medición y artículos de ferretería, con asesoramiento técnico.</p>
+    <p style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px"><a class="boton claro" href="{e(CFG['mapa'])}" target="_blank" rel="noopener" data-evento="como_llegar">{ic('ubicacion')}Cómo llegar</a>
+      <a class="boton wa" href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener">{ic('whatsapp')}WhatsApp</a>
+      <a class="boton borde-claro" href="tel:+541147525210">{ic('telefono')}Llamar</a></p></div>
+</section>
+<section class="seccion"><div class="contenedor dos-col">
+  <div><p class="rotulo">El local</p><h2 class="titulo-seccion">{e(CFG['direccion'])}, Villa Lynch.</h2>
+    <p class="bajada">{e(CFG['horarios'])}. Teléfono {e(CFG['telefono'])} · WhatsApp {e(CFG['whatsapp_visible'])}.</p>
+    <p class="bajada">Atendemos a vecinos, profesionales, talleres e industrias de {', '.join(CFG.get('zona', [])[:-1])} y {CFG.get('zona', [''])[-1]}.</p></div>
+  <div class="mapa"><button class="boton secundario" type="button" onclick="this.parentNode.innerHTML='&lt;iframe title=&quot;Mapa de Masherr&quot; src=&quot;https://www.google.com/maps?q=Ferreteria+Industrial+Masherr,+Calle+38+4335,+Villa+Lynch&amp;output=embed&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;'">{ic('ubicacion')}Ver mapa</button></div>
+</div></section>
+<section class="seccion suave" aria-labelledby="t-fsm-cat"><div class="contenedor">
+  <p class="rotulo">Qué vas a encontrar</p><h2 class="titulo-seccion" id="t-fsm-cat">Todo para el taller, la obra y la casa.</h2>
+  <ul class="grilla-cat">{cats_txt}</ul></div></section>
+<section class="seccion" aria-labelledby="t-fsm-faq"><div class="contenedor" style="max-width:860px">
+  <p class="rotulo">Preguntas frecuentes</p><h2 class="titulo-seccion" id="t-fsm-faq">Lo que más nos preguntan.</h2>
+  {''.join(f'<details class="faq"><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in PREGUNTAS)}
+</div></section>"""
+ld = {'@context': 'https://schema.org', '@graph': [NEGOCIO, {'@type': 'FAQPage', 'mainEntity': [
+      {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in PREGUNTAS]}]}
+pagina('ferreteria-san-martin/index.html', 'Ferretería en San Martín · Masherr, Villa Lynch',
+       'Ferretería industrial en San Martín: local en Calle 38 4335, Villa Lynch. Herramientas, máquinas e insumos. Horario, cómo llegar, WhatsApp y tienda online.',
+       local, jsonld=ld)
+
 # ---------------------------------------------------------------- 404, sitemap
 pagina('404.html', 'Página no encontrada · Masherr', 'No encontramos esta página.', f"""<section class="seccion"><div class="contenedor"><h1>No encontramos esta página.</h1>
 <p class="bajada">Puede que el producto ya no esté publicado. Buscalo en la tienda o consultanos.</p>
 <p><a class="boton" href="/tienda/">Ir a la tienda</a></p></div></section>""", indexar=False)
 if CFG['dominio']:
     d = CFG['dominio'].rstrip('/')
-    urls = ['', 'tienda/', 'empresas/', 'nosotros/'] + [f'categoria/{c[0]}/' for c in cats_usadas] + [f'producto/{p["slug"]}/' for p in productos]
+    urls = ['', 'ferreteria-san-martin/', 'tienda/', 'empresas/', 'nosotros/'] + [f'categoria/{c[0]}/' for c in cats_usadas] + [f'producto/{p["slug"]}/' for p in productos]
     (SITIO / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{d}/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     (SITIO / 'robots.txt').write_text(f'User-agent: *\nDisallow: /carrito/\nSitemap: {d}/sitemap.xml\n')
 (SITIO / 'manifest.webmanifest').write_text(json.dumps({'name': 'Masherr Ferretería Industrial', 'short_name': 'Masherr', 'start_url': './', 'display': 'browser',
