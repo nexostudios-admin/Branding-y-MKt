@@ -158,7 +158,7 @@ GENERADO = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M
 IDS = [i for i in (CFG.get('ga4_id'), CFG.get('google_ads_id')) if i]
 MEDICION = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={IDS[0]}"></script>'
             '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());'
-            + ''.join(f'gtag("config","{i}");' for i in IDS) + '</script>') if IDS else ''
+            + ''.join(f'gtag("config","{i}");' for i in IDS if not i.startswith('GTM-')) + '</script>') if IDS else ''
 
 def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), indexar=True, imagen=None, tipo='website'):
     prof = ruta.count('/')
