@@ -1,7 +1,7 @@
 """Cartel A5 con QR para pedir reseñas en Google. Uso: python3 generar_qr.py [link]"""
 import sys, qrcode
 from PIL import Image, ImageDraw, ImageFont
-LINK = sys.argv[1] if len(sys.argv) > 1 else 'https://maps.app.goo.gl/Qj7w6C5trkfbKCCGA'
+LINK = sys.argv[1] if len(sys.argv) > 1 else 'https://g.page/r/CSTh9aafPrTYEBE/review'
 U = '/root/.claude/uploads/01849ead-b7ff-5b3e-9867-28cbc3720288/'
 F = '/home/user/Branding-y-MKt/masher/catalogo/fonts/'
 W, H = 1748, 2480  # A5 a 300 dpi
@@ -27,7 +27,7 @@ qs = 900; q = q.resize((qs, qs), Image.NEAREST)
 qx, qy = (W - qs) // 2, 1150
 d.rounded_rectangle([qx - 40, qy - 40, qx + qs + 40, qy + qs + 40], radius=24, fill=BL)
 im.paste(q, (qx, qy))
-pasos = ['1  Tocá “Opiniones”', '2  Tocá “Escribir una opinión”', '3  Elegí las estrellas y contanos cómo te fue']
+pasos = ['1  Escaneá el código', '2  Elegí las estrellas', '3  Contanos cómo te fue y tocá “Publicar”']
 for i, p in enumerate(pasos):
     d.text((M, 2160 + i * 66), p, font=cond(48), fill=BL)
 d.text((M, H - 90), 'Ferretería Industrial Masherr · Calle 38 4335, Villa Lynch', font=txt(34), fill=(140, 146, 160))
