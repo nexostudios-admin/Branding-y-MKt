@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Propuesta Social Media — El Natural Vital Grass × Nexo</title>
+<style>
+  @page { size: A4 portrait; margin: 16mm 16mm 16mm 16mm; }
+  :root {
+    --green: #1f4d2b; --green2: #3c7a3f; --leaf: #6fa34a;
+    --cream: #f6f1e3; --sand: #e9dcc0; --ink: #1d2a20; --muted: #5d6b60; --line: #d8cfb8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; color: var(--ink); }
+  body { font-family: Inter, sans-serif; font-size: 9.9pt; line-height: 1.42; }
+  h1, h2, h3 { font-family: "Bitstream Charter", Caladea, serif; color: var(--green); margin: 0; }
+  h2 { font-size: 17pt; margin: 0 0 4pt; }
+  h3 { font-size: 12pt; margin: 10pt 0 4pt; }
+  p { margin: 0 0 6pt; }
+  ul { margin: 0 0 6pt; padding-left: 14pt; }
+  li { margin-bottom: 2.5pt; }
+  li::marker { color: var(--leaf); }
+  strong { color: var(--green); }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+
+  .cover { background: var(--cream); border-radius: 10pt; padding: 16pt 20pt 14pt; margin-bottom: 11pt; position: relative; overflow: hidden; }
+  .cover .kicker { font-size: 8.5pt; letter-spacing: .14em; text-transform: uppercase; color: var(--green2); font-weight: 600; }
+  .cover h1 { font-size: 25pt; line-height: 1.08; margin: 6pt 0 8pt; }
+  .cover .sub { font-size: 11pt; color: var(--muted); max-width: 70%; }
+  .cover .meta { margin-top: 12pt; font-size: 8.5pt; color: var(--muted); }
+  .cover svg { position: absolute; right: 18pt; bottom: 0; }
+
+  .section { margin-bottom: 9pt; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--green2); margin-bottom: 2pt; }
+  .meta-row { display: flex; gap: 6pt; flex-wrap: wrap; margin: 4pt 0 7pt; }
+  .pill { font-size: 8.3pt; background: var(--cream); border: 1px solid var(--line); border-radius: 20pt; padding: 1.5pt 8pt; color: var(--ink); }
+  .pill b { color: var(--green); }
+
+  table { width: 100%; border-collapse: collapse; margin: 4pt 0 8pt; font-size: 9.4pt; }
+  th { text-align: left; background: var(--green); color: #fff; font-weight: 600; padding: 4pt 7pt; }
+  td { padding: 3pt 7pt; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #fbf8f0; }
+  th:first-child { border-top-left-radius: 5pt; } th:last-child { border-top-right-radius: 5pt; }
+
+  .service { border: 1px solid var(--line); border-left: 4pt solid var(--leaf); border-radius: 6pt; padding: 10pt 12pt 6pt; margin-bottom: 11pt; break-inside: avoid; }
+  .service.opt { border-left-color: var(--sand); border-style: dashed; border-left-style: solid; }
+  .service h2 { font-size: 15pt; }
+  .num { color: var(--leaf); margin-right: 4pt; }
+
+  .goals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7pt; margin: 6pt 0 6pt; }
+  .goal { background: var(--cream); border-radius: 6pt; padding: 7pt 8pt; font-size: 8.8pt; line-height: 1.35; }
+  .goal b { display: block; font-family: "Bitstream Charter", serif; color: var(--green); font-size: 11pt; margin-bottom: 2pt; }
+  .note { font-size: 9pt; color: var(--muted); }
+
+  .pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5pt; margin: 4pt 0 8pt; }
+  .pillar { background: var(--cream); border-top: 3pt solid var(--green2); border-radius: 4pt; padding: 6pt; font-size: 8.4pt; line-height: 1.35; }
+  .pillar b { display: block; color: var(--green); font-size: 9.3pt; margin-bottom: 1pt; }
+
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7pt; margin: 6pt 0 4pt; }
+  .phase { border: 1px solid var(--line); border-radius: 6pt; padding: 8pt 10pt; font-size: 9pt; }
+  .phase.main { background: #e8f0e1; border: 1.5pt solid var(--green2); }
+  .phase b { display: block; font-family: "Bitstream Charter", serif; color: var(--green); font-size: 10.5pt; margin-bottom: 3pt; }
+  .phase ul { margin: 0; padding-left: 12pt; }
+  .gates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7pt; font-size: 8.3pt; color: var(--muted); margin-bottom: 6pt; }
+  .gates span { text-align: right; padding-right: 2pt; }
+  .gates span::before { content: "◆ "; color: var(--leaf); }
+  .webopt { border: 1px dashed var(--muted); border-radius: 6pt; padding: 6pt 10pt; font-size: 9pt; margin: 0 0 10pt 16.6%; width: 72%; }
+
+  .checks { list-style: none; padding: 0; }
+  .checks li::before { content: "☐  "; color: var(--green2); }
+  .closing { background: var(--green); color: #fff; border-radius: 8pt; padding: 9pt 14pt; margin-top: 6pt; }
+  .closing h3 { color: #fff; margin-top: 0; }
+  .closing p { margin: 0; color: #e7efe2; }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1 -->
+<div class="page">
+  <div class="cover">
+    <div class="kicker">Propuesta de social media · Nexo</div>
+    <h1>El Natural<br>Vital Grass</h1>
+    <div class="sub">Branding, estrategia, contenido y gestión de redes para la clorofila orgánica de Chapadmalal.</div>
+    <div class="meta">Noviembre 2026 · Equipo: Benja Ortega y Mica Liporacci</div>
+    <svg width="100" height="92" viewBox="0 0 120 110" aria-hidden="true">
+      <g stroke="#3c7a3f" stroke-width="3" stroke-linecap="round" fill="none">
+        <path d="M60 110 C58 80 50 50 30 18"/><path d="M60 110 C60 75 62 45 60 6"/><path d="M60 110 C63 80 72 52 92 22"/>
+        <path d="M60 110 C55 85 40 65 16 48"/><path d="M60 110 C66 86 82 66 106 52"/><path d="M60 110 C57 82 52 60 44 30"/><path d="M60 110 C64 82 70 60 78 30"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="section">
+    <span class="tag">Resumen</span>
+    <h2>Una marca reconocible que venda suscripciones</h2>
+    <p>Proponemos acompañar a El Natural Vital Grass con un servicio integral en cuatro módulos (branding, estrategia, contenido semanal y gestión de redes) más un quinto opcional de web y ecommerce. El objetivo: convertir una cuenta con contenido auténtico pero visualmente disperso en una marca reconocible que venda suscripciones de clorofila orgánica.</p>
+  </div>
+
+  <div class="section">
+    <span class="tag">Diagnóstico</span>
+    <h2>@elnaturalvitalgrass hoy</h2>
+    <p>50 publicaciones y 1.495 seguidores (noviembre 2026). La cuenta tiene lo más difícil de conseguir: personas reales, cultivo propio y un ritual. Le falta un sistema visual y un camino claro hacia la compra.</p>
+    <table>
+      <tr><th style="width:44%">Fortalezas</th><th>Oportunidades de mejora</th></tr>
+      <tr><td>Fundador a cámara, con energía y credibilidad</td><td>Cada pieza usa otra tipografía y otro estilo; el feed no se lee como una sola marca</td></tr>
+      <tr><td>Testimonios espontáneos (“¿A qué sabe la clorofila pura?”)</td><td>Mezcla de imágenes con IA, parodias y fotos reales sin criterio común</td></tr>
+      <tr><td>Origen concreto: cultivo orgánico en la costa atlántica</td><td>Bio con errata (“Clorfila Pura Organica”) y nombre visible “EL NATURAL” incompleto</td></tr>
+      <tr><td>Ilustración de playa + wheatgrass con identidad propia</td><td>La suscripción mensual no aparece en la bio ni en destacadas</td></tr>
+      <tr><td>Presencia en ferias y encuentros</td><td>Link a WhatsApp genérico, sin catálogo ni forma de medir consultas</td></tr>
+      <tr><td>Destacadas ya armadas (semilla, soberanía, testimonios)</td><td>Afirmaciones de salud sin fuente (“60 veces más vitamina C”), con riesgo regulatorio</td></tr>
+    </table>
+  </div>
+  <div class="section">
+    <span class="tag">Objetivos</span>
+    <h2>Qué buscamos lograr</h2>
+    <div class="goals">
+      <div class="goal"><b>Marca reconocible</b>Que cada pieza se identifique como El Natural Vital Grass sin ver el usuario.</div>
+      <div class="goal"><b>Comunidad activa</b>Seguidores calificados de Mar del Plata, Chapadmalal y CABA; más guardados, compartidos y respuestas.</div>
+      <div class="goal"><b>Ventas medibles</b>Tráfico a la suscripción mensual y a los extractores, con consultas registradas.</div>
+      <div class="goal"><b>Comunicación responsable</b>Hablar de bienestar y ritual diario sin promesas médicas que expongan a la marca.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PÁGINA 2 -->
+<div class="page">
+
+  <div class="service">
+    <span class="tag">Servicio 1</span>
+    <h2><span class="num">01</span>Branding corporativo y manual de marca</h2>
+    <div class="meta-row"><span class="pill"><b>Benja Ortega</b></span><span class="pill">3 a 4 semanas</span><span class="pill">Pago único</span></div>
+    <p>Ordenamos la identidad a partir de lo que ya funciona (la ilustración de playa y pasto, los verdes, el tono cercano) en vez de empezar de cero.</p>
+    <ul>
+      <li>Workshop de marca con los fundadores: propósito, público, personalidad y tono de voz.</li>
+      <li>Nombre de uso (“El Natural Vital Grass”) y claim (“Volver a la tierra es volver a vos”).</li>
+      <li>Logo principal, versiones secundarias e isotipo para perfil, etiquetas y botellas.</li>
+      <li>Paleta, tipografías y estilo de ilustración y fotografía.</li>
+      <li>Aplicaciones: etiqueta de botella, cartel de feria, remera, tarjeta y sticker con QR.</li>
+      <li><strong>Manual de marca</strong> en PDF con reglas de uso, ejemplos y guía de tono.</li>
+      <li>Kit de plantillas editables (Canva) para posts, carruseles, historias y portadas de reels.</li>
+    </ul>
+  </div>
+
+  <div class="service">
+    <span class="tag">Servicio 2</span>
+    <h2><span class="num">02</span>Estrategia de redes</h2>
+    <div class="meta-row"><span class="pill"><b>Mica Liporacci</b></span><span class="pill">2 a 3 semanas</span><span class="pill">Pago único + revisión trimestral</span></div>
+    <p>Definimos qué decir, a quién, en qué formato y cómo eso se convierte en ventas.</p>
+    <ul>
+      <li>Auditoría de la cuenta e Insights; benchmark de 5 a 8 cuentas de bienestar y productos orgánicos.</li>
+      <li>Perfiles de cliente: quien busca energía diaria, quien hace ayuno, la comunidad local.</li>
+      <li>Optimización del perfil: nombre, bio, link con menú (suscripción, WhatsApp, catálogo) y destacadas.</li>
+      <li>Embudo de venta: reel → historia → WhatsApp → suscripción.</li>
+      <li>Guía de comunicación responsable, metas y KPIs mensuales; evaluación de TikTok y pauta.</li>
+    </ul>
+    <div class="pillars">
+      <div class="pillar"><b>Ritual</b>Cómo y cuándo tomarlo</div>
+      <div class="pillar"><b>Origen</b>Semilla, cultivo, extracción</div>
+      <div class="pillar"><b>Comunidad</b>Testimonios, ferias, encuentros</div>
+      <div class="pillar"><b>Saber</b>Beneficios con fuente</div>
+      <div class="pillar"><b>Oferta</b>Suscripción, extractor, puntos de venta</div>
+    </div>
+  </div>
+</div>
+
+<!-- PÁGINA 3 -->
+<div class="page">
+  <div class="service">
+    <span class="tag">Servicio 3</span>
+    <h2><span class="num">03</span>Creación de contenido semanal</h2>
+    <div class="meta-row"><span class="pill"><b>Benja Ortega</b></span><span class="pill">Abono mensual</span></div>
+    <p>Producimos las piezas con la nueva identidad y priorizamos lo que ya funciona: el fundador a cámara, los testimonios y el cultivo.</p>
+    <table>
+      <tr><th style="width:22%">Formato</th><th style="width:16%">Por semana</th><th>Contenido tipo</th></tr>
+      <tr><td><strong>Reels</strong></td><td>2</td><td>Ritual del shot, testimonios, cultivo y extracción</td></tr>
+      <tr><td><strong>Carrusel o post</strong></td><td>1</td><td>Recetas, beneficios con fuente, preguntas frecuentes</td></tr>
+      <tr><td><strong>Historias</strong></td><td>5 a 7</td><td>Detrás de escena, encuestas, ferias, recordatorio de suscripción</td></tr>
+    </table>
+    <ul>
+      <li>Jornada mensual de rodaje en el cultivo (fotos y video para todo el mes).</li>
+      <li>Edición de video con subtítulos, música y portada con la gráfica de la marca.</li>
+      <li>Copywriting de cada pieza con llamada a la acción.</li>
+      <li>Edición del material que graben los fundadores en el día a día.</li>
+    </ul>
+    <p class="note">La cantidad de piezas se ajusta en un plan básico o ampliado según presupuesto.</p>
+  </div>
+
+  <div class="service">
+    <span class="tag">Servicio 4</span>
+    <h2><span class="num">04</span>Manejo de redes sociales</h2>
+    <div class="meta-row"><span class="pill"><b>Mica Liporacci</b></span><span class="pill">Abono mensual</span></div>
+    <p>Nos ocupamos del día a día de la cuenta para que los fundadores se concentren en cultivar y vender.</p>
+    <ul>
+      <li>Calendario mensual de publicaciones, aprobado por el cliente antes de cada mes.</li>
+      <li>Programación y publicación en Instagram (y Facebook, si se suma).</li>
+      <li>Respuesta a comentarios y mensajes en horario acordado, con derivación de ventas al WhatsApp.</li>
+      <li>Gestión de colaboraciones con perfiles afines.</li>
+      <li>Cobertura de ferias y eventos en historias.</li>
+      <li>Reporte mensual: alcance, interacción, seguidores, consultas y aprendizajes.</li>
+    </ul>
+    <p class="note">La pauta paga, si se activa, se presupuesta aparte; la inversión en Meta la paga el cliente directamente.</p>
+  </div>
+
+</div>
+
+<!-- PÁGINA 4 -->
+<div class="page">
+  <div class="service opt">
+    <span class="tag">Servicio 5 · Opcional</span>
+    <h2><span class="num">05</span>Web institucional y/o ecommerce</h2>
+    <div class="meta-row"><span class="pill"><b>Benja Ortega</b></span><span class="pill">4 a 6 semanas</span><span class="pill">Pago único + mantenimiento opcional</span></div>
+    <p>Armamos el sitio en Liberty, la plataforma elegida por el equipo, con la nueva identidad aplicada y pensado para celular, que es de donde llega el tráfico de Instagram.</p>
+    <ul><li><strong>Web institucional:</strong> inicio, historia y cultivo, beneficios, puntos de venta y ferias, contacto y WhatsApp.</li><li><strong>Ecommerce:</strong> lo anterior + catálogo (shots, suscripción, extractores), medios de pago y envíos o retiro.</li></ul>
+    <p class="note">Incluye carga de productos, Instagram Shopping y píxel de Meta. A confirmar: cobro recurrente en Liberty, dominio y hosting.</p>
+  </div>
+
+  <div class="section">
+    <span class="tag">Cronograma</span>
+    <h2>En el mes 2 la cuenta sale con la nueva marca</h2>
+    <div class="roadmap">
+      <div class="phase"><b>Fase 1 · Semanas 1 a 4</b><ul><li>Workshop y auditoría</li><li>Estrategia y pilares</li><li>Identidad y manual</li><li>Plantillas listas</li></ul></div>
+      <div class="phase main"><b>Fase 2 · Mes 2</b><ul><li>Perfil y bio renovados</li><li>Primer calendario aprobado</li><li>Arranca el contenido semanal</li><li>Arranca la gestión diaria</li></ul></div>
+      <div class="phase"><b>Fase 3 · Mes 3 en adelante</b><ul><li>Reporte mensual</li><li>Ajuste de pilares y metas</li><li>Evaluar pauta y TikTok</li><li>Revisión trimestral</li></ul></div>
+    </div>
+    <div class="gates"><span>Manual y estrategia aprobados</span><span>Primer reporte mensual</span></div>
+    <div class="webopt"><strong>Opcional: web / ecommerce</strong> · Liberty, 4 a 6 semanas, desde la semana 3.</div>
+  </div>
+
+  <div class="section">
+    <span class="tag">Equipo e inversión</span>
+    <h2>Quién hace qué</h2>
+    <table>
+      <tr><th>Servicio</th><th style="width:24%">Responsable</th><th style="width:30%">Modalidad</th><th style="width:16%">Inversión</th></tr>
+      <tr><td>1. Branding y manual de marca</td><td>Benja Ortega</td><td>Pago único</td><td>$ ____</td></tr>
+      <tr><td>2. Estrategia de redes</td><td>Mica Liporacci</td><td>Pago único + revisión trimestral</td><td>$ ____</td></tr>
+      <tr><td>3. Contenido semanal</td><td>Benja Ortega</td><td>Abono mensual</td><td>$ ____ /mes</td></tr>
+      <tr><td>4. Manejo de redes</td><td>Mica Liporacci</td><td>Abono mensual</td><td>$ ____ /mes</td></tr>
+      <tr><td>5. Web / ecommerce (opcional)</td><td>Benja Ortega</td><td>Pago único + mantenimiento</td><td>$ ____</td></tr>
+      <tr><td><strong>Paquete módulos 1 a 4</strong></td><td>Nexo</td><td>Contrato mínimo sugerido: 3 meses</td><td><strong>$ ____</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <span class="tag">Próximos pasos</span>
+    <ul class="checks">
+      <li>Elegir módulos y plan de contenido (básico o ampliado).</li>
+      <li>Dar acceso a la cuenta de Instagram e Insights.</li>
+      <li>Agendar el workshop de marca y la primera jornada de rodaje.</li>
+      <li>Confirmar alcance de la web en Liberty (si se suma).</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>
