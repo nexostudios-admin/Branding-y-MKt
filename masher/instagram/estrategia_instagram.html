@@ -1,0 +1,158 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Masherr · Instagram</title><style>@font-face { font-family: "Cond"; src: url(../catalogo/fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans.ttf); font-weight: 400; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+:root { --azul: #17256B; --negro: #08090B; --celeste: #9AA8FF; --gris: #EEF0F4; --tinta: #1A1C22; --texto2: #50566A; --linea: #D9DCE4; --verde: #146C43; --m: 48px; }
+@page { size: 540pt 960pt; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "Texto", sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: none; } .hoja { margin: 0 !important; box-shadow: none !important; } }
+.hoja { width: 720px; height: 1280px; position: relative; overflow: hidden; background: #fff; margin: 20px auto; box-shadow: 0 2px 16px rgba(0,0,0,.25); break-after: page; padding: 0 var(--m); }
+.oscura { background: var(--negro); color: #fff; }
+.rayas { position: absolute; background: repeating-linear-gradient(to bottom, currentColor 0 9px, transparent 9px 15px); }
+h1, h2 { font-family: "Cond"; font-weight: 700; }
+.rotulo { font-family: "Cond"; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.oscura .rotulo { color: var(--celeste); }
+.cab { position: absolute; left: var(--m); right: var(--m); top: 34px; height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--azul); }
+.cab img { width: 240px; margin-bottom: 6px; }
+.cab span { font-family: "Cond"; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.pie { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: var(--negro); color: #A9ADB8; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--m); font-size: 17px; }
+.pie b { font-family: "Cond"; color: var(--celeste); font-size: 20px; letter-spacing: .06em; }
+.cuerpo { position: absolute; left: var(--m); right: var(--m); top: 136px; bottom: 76px; }
+h2 { font-size: 48px; line-height: 1.04; margin: 6px 0 14px; color: var(--negro); }
+h2.idea { font-size: 42px; margin-top: 10px; }
+.lead { font-size: 21px; line-height: 1.45; color: var(--texto2); margin-bottom: 16px; }
+.ayuda { font-size: 16px; color: var(--texto2); margin-top: 12px; }
+
+/* tapa */
+.barra { position: absolute; left: var(--m); top: 64px; width: 56px; height: 7px; background: var(--celeste); }
+.sup { position: absolute; left: 124px; top: 57px; font-family: "Cond"; font-size: 19px; letter-spacing: .08em; color: #C9CCD6; }
+.oscura .logo { position: absolute; left: var(--m); top: 150px; width: 480px; }
+.oscura .rayas { color: var(--azul); right: 0; top: 330px; width: 260px; height: 230px; clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%); }
+.eyebrow { position: absolute; left: var(--m); top: 600px; }
+.oscura h1 { position: absolute; left: var(--m); top: 640px; font-size: 76px; line-height: 1.0; }
+.bajada { position: absolute; left: var(--m); right: var(--m); top: 980px; font-size: 24px; line-height: 1.45; color: #B9BDC8; }
+.pie-t { position: absolute; left: var(--m); right: var(--m); bottom: 44px; display: flex; justify-content: space-between; font-size: 19px; color: #9095A3; }
+.pie-t b { font-family: "Cond"; color: var(--celeste); }
+
+/* tablas y bloques */
+.tabla { width: 100%; border-collapse: collapse; font-size: 17px; margin: 8px 0 14px; }
+.tabla th { background: var(--azul); color: #fff; font-family: "Cond"; font-weight: 700; text-align: left; padding: 9px 10px; font-size: 16px; }
+.tabla td { border-bottom: 1px solid var(--linea); padding: 9px 10px; vertical-align: top; line-height: 1.38; }
+.tabla td.pr { font-family: "Cond"; font-size: 20px; color: var(--azul); white-space: nowrap; text-align: right; }
+.estructura td:first-child { font-family: "Cond"; font-size: 20px; color: var(--azul); white-space: nowrap; width: 110px; }
+.cal td { font-size: 14.5px; }
+.cal td b { font-family: "Cond"; color: var(--azul); }
+.cal td.s { font-family: "Cond"; font-size: 16px; color: var(--negro); white-space: nowrap; }
+.ctas { display: grid; gap: 10px; margin: 8px 0 16px; }
+.ctas div { display: flex; gap: 16px; align-items: baseline; border: 2px solid var(--azul); padding: 12px 16px; }
+.ctas b { font-family: "Cond"; color: var(--azul); font-size: 20px; width: 112px; flex: none; }
+.ctas span { font-size: 17px; line-height: 1.4; }
+.nota { background: var(--gris); border-left: 6px solid var(--azul); padding: 14px 16px; font-size: 17px; line-height: 1.45; }
+.nota b { font-family: "Cond"; }
+ol.pasos { list-style: none; counter-reset: p; margin: 4px 0 8px; }
+ol.pasos li { counter-increment: p; position: relative; padding: 0 0 11px 50px; font-size: 18px; line-height: 1.4; }
+ol.pasos li::before { content: counter(p); position: absolute; left: 0; top: -3px; width: 36px; height: 36px; border-radius: 50%; background: var(--azul); color: #fff; font-family: "Cond"; font-size: 19px; display: grid; place-items: center; }
+ol.pasos li b { font-family: "Cond"; color: var(--azul); }
+
+/* índice */
+.indice { list-style: none; border-top: 2px solid var(--negro); }
+.indice li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linea); }
+.indice i { font-style: normal; font-family: "Cond"; color: var(--celeste); font-size: 19px; width: 30px; }
+.indice .t { font-family: "Cond"; font-size: 20px; flex: 1; line-height: 1.2; }
+.indice .c { font-size: 13px; color: var(--texto2); width: 120px; text-align: right; }
+.obj { font-family: "Cond"; font-size: 13px; letter-spacing: .06em; padding: 4px 8px; width: 70px; text-align: center; color: #fff; }
+.web { background: var(--azul); } .local { background: var(--negro); } .ambos { background: var(--verde); }
+
+/* página de idea */
+.meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chip { font-family: "Cond"; font-size: 14px; letter-spacing: .06em; padding: 4px 10px; color: #fff; }
+.chip.gris { background: var(--gris); color: var(--negro); }
+.gancho { background: var(--negro); color: #fff; padding: 16px 18px; font-size: 19px; line-height: 1.42; margin-bottom: 14px; }
+.gancho b { display: block; font-family: "Cond"; color: var(--celeste); font-size: 15px; letter-spacing: .08em; margin-bottom: 4px; }
+.cta { border: 3px solid var(--azul); padding: 14px 16px; font-size: 19px; line-height: 1.4; font-family: "Cond"; color: var(--negro); margin-bottom: 14px; }
+.cta b { display: block; color: var(--azul); font-size: 15px; letter-spacing: .08em; margin-bottom: 4px; }
+.cta span { display: block; font-family: "Texto"; font-size: 15px; color: var(--azul); margin-top: 6px; word-break: break-all; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 15.5px; line-height: 1.42; color: var(--texto2); }
+.dos b { display: block; font-family: "Cond"; color: var(--negro); font-size: 17px; margin-bottom: 4px; }
+
+.cols td:first-child { font-family: "Cond"; font-size: 17px; color: var(--azul); white-space: nowrap; width: 110px; }
+.estructura td:first-child { width: 150px; }
+.grilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 6px 0 12px; }
+.grilla .mini { width: 100%; display: block; }
+.grilla.st .mini { width: 100%; }
+.copy { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--linea); }
+.copy .mini { width: 150px; }
+.copy b { font-family: "Cond"; color: var(--azul); font-size: 18px; }
+.copy p { font-size: 15.5px; line-height: 1.5; margin-top: 4px; }
+.oscura h1 { font-size: 72px; }
+</style></head><body><section class="hoja oscura"><div class="barra"></div><div class="sup">MASHERR / INSTAGRAM</div>
+<img class="logo" src="../catalogo/img/masher-logo-blanco.png" alt="Masherr"><div class="rayas"></div>
+<div class="eyebrow rotulo">Estrategia de contenido · placas y stories</div>
+<h1>EL MOSTRADOR,<br>ABIERTO EN<br>INSTAGRAM.</h1>
+<p class="bajada">Contenido humano, minimalista y pensado para vender: placas listas, textos y calendario.</p>
+<div class="pie-t"><span>@masherrferreteria</span><b>masherrferreteria.com.ar</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>La idea</span></div>
+<div class="cuerpo"><div class="rotulo">La idea</div><h2>VENDER CON CARA Y CRITERIO.</h2><p class="lead">Instagram de Masherr no es un catálogo: es el mostrador abierto. Cada publicación muestra un producto real, una persona real (Guido) o un cliente real, y termina con un paso para comprar.</p>
+<table class="tabla estructura"><tr><th>Principio</th><th>Cómo se ve</th></tr>
+<tr><td>Humanizado</td><td>Guido habla en primera persona, la familia, el local, las reseñas de clientes.</td></tr>
+<tr><td>Minimalista</td><td>Fondo blanco, gris claro o negro; una sola idea por placa; mucho aire.</td></tr>
+<tr><td>Orientado a venta</td><td>Precio visible, producto grande y siempre un llamado: web, WhatsApp o local.</td></tr>
+<tr><td>Coherente</td><td>Mismos colores, tipografía, logo y pie en todas las piezas.</td></tr></table></div>
+<div class="pie"><span>Masherr · Instagram</span><b>02 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Pilares</span></div>
+<div class="cuerpo"><div class="rotulo">Pilares</div><h2>CINCO TIPOS DE CONTENIDO.</h2><table class="tabla"><tr><th>Pilar</th><th>Para qué</th><th>% del mes</th></tr>
+<tr><td><b>Producto con precio</b></td><td>Vender: producto de la semana, combos, ingresos.</td><td>35 %</td></tr>
+<tr><td><b>Asesoramiento</b></td><td>Mostrar criterio: comparativas, consejos de ferretero, mitos.</td><td>25 %</td></tr>
+<tr><td><b>Personas</b></td><td>Generar confianza: Guido, la familia, el local, detrás de escena.</td><td>15 %</td></tr>
+<tr><td><b>Prueba social</b></td><td>Reseñas reales de Google y clientes contentos (con permiso).</td><td>15 %</td></tr>
+<tr><td><b>Cómo comprar / empresas</b></td><td>Explicar la web, el pedido por WhatsApp y las cotizaciones.</td><td>10 %</td></tr></table>
+<div class="nota"><span>Los <b>reels</b> del plan de 15 videos y del guion de rodaje alimentan los mismos pilares: una placa y un reel del mismo tema se refuerzan entre sí.</span></div></div>
+<div class="pie"><span>Masherr · Instagram</span><b>03 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Diseño</span></div>
+<div class="cuerpo"><div class="rotulo">Diseño</div><h2>REGLAS DE DISEÑO.</h2><table class="tabla cols"><tr><td>Formatos</td><td>Post 1080 × 1350 (4:5, ocupa más pantalla) · Story 1080 × 1920.</td></tr>
+<tr><td>Colores</td><td>Azul #17256B, negro #08090B, blanco y gris #EEF0F4. Celeste #9AAEFF solo sobre fondo oscuro.</td></tr>
+<tr><td>Tipografía</td><td>DejaVu Sans Condensed Bold para títulos, DejaVu Sans para textos.</td></tr>
+<tr><td>Producto</td><td>Sobre gris claro, grande, sin sombras ni efectos. Precio en azul, grande.</td></tr>
+<tr><td>Rótulo</td><td>Línea + palabra en mayúsculas arriba: PRODUCTO DE LA SEMANA, CONSEJO, COMBO.</td></tr>
+<tr><td>Pie</td><td>Logo + llamado a la acción, siempre en el mismo lugar.</td></tr>
+<tr><td>Fotos</td><td>Reales: Guido, el local, productos en el mostrador. Sin imágenes generadas.</td></tr>
+<tr><td>Grilla</td><td>Alternar claro / oscuro / azul para que el perfil se vea ordenado.</td></tr></table>
+<div class="nota"><span>Evitar: fondos con degradados, muchas tipografías, textos largos en la placa, estrellas de “oferta” y colores fuera de la paleta.</span></div></div>
+<div class="pie"><span>Masherr · Instagram</span><b>04 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Grilla</span></div>
+<div class="cuerpo"><div class="rotulo">Grilla</div><h2>LAS 9 PLACAS DEL PRIMER MES.</h2><div class="grilla"><img class="mini" src="png/Masherr_post_01_guido.png" alt=""><img class="mini" src="png/Masherr_post_02_amoladora.png" alt=""><img class="mini" src="png/Masherr_post_03_comparativa.png" alt=""><img class="mini" src="png/Masherr_post_04_resena.png" alt=""><img class="mini" src="png/Masherr_post_05_combo.png" alt=""><img class="mini" src="png/Masherr_post_06_consejo.png" alt=""><img class="mini" src="png/Masherr_post_07_soldadora.png" alt=""><img class="mini" src="png/Masherr_post_08_como_comprar.png" alt=""><img class="mini" src="png/Masherr_post_09_empresas.png" alt=""></div><p class="ayuda">Así se ve el perfil: claro, oscuro y azul alternados. La placa 01 lleva una foto real de Guido en el mostrador (el espacio está marcado).</p></div>
+<div class="pie"><span>Masherr · Instagram</span><b>05 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Textos</span></div>
+<div class="cuerpo"><div class="rotulo">Textos</div><h2>TEXTOS PARA PUBLICAR.</h2><div class="copy"><img class="mini" src="png/Masherr_post_01_guido.png" alt=""><div><b>Presentación de Guido</b><p>Soy Guido, de Masherr. Desde el mostrador de la ferretería de mi familia, en Villa Lynch, te ayudo a elegir la herramienta justa para tu trabajo. Contame qué tenés que hacer y lo resolvemos. 📍 Calle 38 4335 · 💬 WhatsApp en la bio</p></div></div><div class="copy"><img class="mini" src="png/Masherr_post_02_amoladora.png" alt=""><div><b>Producto de la semana</b><p>Amoladora angular 115 mm Vanden, 650 W: liviana y precisa para cortes y terminaciones en hierro, chapa y cerámica. $46.000. Comprala en la web (link en la bio) o pasá a verla por el local.</p></div></div><div class="copy"><img class="mini" src="png/Masherr_post_03_comparativa.png" alt=""><div><b>Comparativa</b><p>¿115 o 180? La de 115 es para cortes finos y terminaciones; la de 180, para cortes profundos y desbaste pesado. ¿Cuál necesitás? Contanos qué vas a cortar y te recomendamos. Guardá este post 🔖</p></div></div></div>
+<div class="pie"><span>Masherr · Instagram</span><b>06 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Textos</span></div>
+<div class="cuerpo"><div class="rotulo">Textos</div><h2>TEXTOS (CONTINUACIÓN).</h2><div class="copy"><img class="mini" src="png/Masherr_post_04_resena.png" alt=""><div><b>Reseña real</b><p>Lo que más nos importa: que te vayas con lo que necesitás. Gracias Lorena por tu reseña ⭐ Somos 4,7 en Google con 131 opiniones. ¿Ya nos dejaste la tuya?</p></div></div><div class="copy"><img class="mini" src="png/Masherr_post_05_combo.png" alt=""><div><b>Combo</b><p>Tu primera caja de herramientas, completa: bolso rígido Emtop + 3 pinzas + set de 43 piezas con crique, puntas y tubos. $115.000 todo junto. Pedilo en la web y lo cerramos por WhatsApp.</p></div></div><div class="copy"><img class="mini" src="png/Masherr_post_06_consejo.png" alt=""><div><b>Consejo de ferretero</b><p>Consejo de ferretero #01: no uses el mismo destornillador para todo. La punta justa evita pelar el tornillo (y renegar después). Juegos de 6 piezas desde $21.000. Mandale este post a quien usa un cuchillo de destornillador 😅</p></div></div></div>
+<div class="pie"><span>Masherr · Instagram</span><b>07 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Textos</span></div>
+<div class="cuerpo"><div class="rotulo">Textos</div><h2>TEXTOS (CONTINUACIÓN).</h2><div class="copy"><img class="mini" src="png/Masherr_post_07_soldadora.png" alt=""><div><b>Producto</b><p>Soldadora inverter Pegaso SI 140: compacta, portátil y simple para empezar a soldar con electrodo. $182.000. Vení a verla al local y te explicamos cómo usarla. Siempre con máscara 👀</p></div></div><div class="copy"><img class="mini" src="png/Masherr_post_08_como_comprar.png" alt=""><div><b>Cómo comprar</b><p>Comprar en Masherr es así: 1) entrá a masherrferreteria.com.ar 2) agregá lo que necesitás al carrito 3) envialo por WhatsApp. Te confirmamos precio, stock y retiro. Link en la bio.</p></div></div><div class="copy"><img class="mini" src="png/Masherr_post_09_empresas.png" alt=""><div><b>Empresas</b><p>¿Tu taller no puede frenar? Mandanos la lista de lo que necesitás y te cotizamos: herramientas, insumos y equipos para industrias, talleres y obra. WhatsApp 11 3182-6166.</p></div></div></div>
+<div class="pie"><span>Masherr · Instagram</span><b>08 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Stories</span></div>
+<div class="cuerpo"><div class="rotulo">Stories</div><h2>STORIES TODOS LOS DÍAS.</h2><div class="grilla st"><img class="mini" src="png/Masherr_story_s1_producto.png" alt=""><img class="mini" src="png/Masherr_story_s2_encuesta.png" alt=""><img class="mini" src="png/Masherr_story_s3_resenas.png" alt=""></div>
+<ol class="pasos"><li><b>Producto con sticker de enlace</b> a la ficha en la web (reemplazar el recuadro punteado por el sticker).</li>
+<li><b>Encuesta o pregunta</b> para generar conversación; responder al día siguiente con un video de Guido.</li>
+<li><b>Reseñas</b> con sticker de enlace a g.page/r/CSTh9aafPrTYEBE/review.</li>
+<li>Destacadas: <b>Productos · Cómo comprar · Reseñas · Empresas · El local</b>.</li></ol></div>
+<div class="pie"><span>Masherr · Instagram</span><b>09 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Calendario</span></div>
+<div class="cuerpo"><div class="rotulo">Calendario</div><h2>RITMO SEMANAL.</h2><table class="tabla"><tr><th>Día</th><th>Feed</th><th>Stories</th></tr>
+<tr><td><b>Lunes</b></td><td>Producto de la semana (placa)</td><td>Producto + enlace</td></tr>
+<tr><td><b>Martes</b></td><td>—</td><td>Encuesta / pregunta</td></tr>
+<tr><td><b>Miércoles</b></td><td>Reel (asesoramiento o humor)</td><td>Respuesta de Guido</td></tr>
+<tr><td><b>Jueves</b></td><td>—</td><td>Detrás de escena del local</td></tr>
+<tr><td><b>Viernes</b></td><td>Placa: consejo, reseña o combo</td><td>Reseñas + enlace</td></tr>
+<tr><td><b>Sábado</b></td><td>—</td><td>“Abrimos hasta las 12:30”</td></tr></table>
+<p class="lead" style="margin-top:12px">Total: 2 placas + 1 reel por semana en el feed y stories todos los días hábiles. Es un ritmo sostenible para un comercio.</p></div>
+<div class="pie"><span>Masherr · Instagram</span><b>10 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Venta</span></div>
+<div class="cuerpo"><div class="rotulo">Venta</div><h2>DE LA PUBLICACIÓN A LA VENTA.</h2><ol class="pasos"><li><b>Link en la bio:</b> masherrferreteria.com.ar (la tienda y el carrito).</li>
+<li><b>Botón de WhatsApp</b> en el perfil (perfil de empresa → Botones de acción).</li>
+<li><b>Precio siempre visible</b> en placas de producto: evita “¿precio?” en comentarios.</li>
+<li><b>Responder comentarios y mensajes</b> en el día, como Guido, con el link del producto.</li>
+<li><b>Etiquetas de producto</b> de Instagram Shopping: opcional más adelante.</li></ol>
+<table class="tabla" style="margin-top:8px"><tr><th>Qué medir cada mes</th><th>Dónde</th></tr>
+<tr><td>Guardados, compartidos y alcance de cada placa</td><td>Estadísticas de Instagram</td></tr>
+<tr><td>Clics en el link y en WhatsApp</td><td>Instagram + Google Analytics (origen: instagram)</td></tr>
+<tr><td>Pedidos que llegan desde el carrito</td><td>WhatsApp</td></tr></table></div>
+<div class="pie"><span>Masherr · Instagram</span><b>11 / 12</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Producción</span></div>
+<div class="cuerpo"><div class="rotulo">Producción</div><h2>CÓMO SEGUIR CREANDO PLACAS.</h2><ol class="pasos"><li><b>Fotos de Guido:</b> una sesión de 30 minutos en el local, con luz de día. 15 fotos alcanzan para 2 meses (mostrador, góndolas, con herramienta en mano, con clientes con permiso).</li>
+<li><b>Producto nuevo:</b> me pasás el nombre y el precio (o lo cargás en la planilla) y genero la placa con el mismo diseño.</li>
+<li><b>Reseñas:</b> elegir las mejores de Google; usar solo el nombre de pila.</li>
+<li><b>Precios:</b> confirmar en la planilla el día que se publica.</li></ol>
+<div class="nota"><span>Las placas se generan automáticamente a partir de los datos de la web, así que cambiar un precio o sumar un producto lleva minutos y siempre respeta el branding.</span></div></div>
+<div class="pie"><span>Masherr · Instagram</span><b>12 / 12</b></div></section></body></html>
