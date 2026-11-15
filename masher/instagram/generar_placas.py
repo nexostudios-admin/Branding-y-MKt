@@ -97,6 +97,10 @@ PLACAS = [
 <img class="logo-st" src="{LOGO_BL}" alt="Masherr"></section>'''),
 ]
 
+import sys; sys.path.insert(0, str(AQUI))
+from historias import historias, CSS_HIST
+PLACAS += historias(LOGO_AZ, LOGO_BL)
+
 CSS = f'''
 @font-face{{font-family:C;src:url({F}DejaVuSansCondensed-Bold.ttf);font-weight:700}}
 @font-face{{font-family:T;src:url({F}DejaVuSans.ttf)}}
@@ -158,6 +162,7 @@ blockquote{{font-family:C;font-size:86px;line-height:1.12;margin-top:70px}}
 .story.oscuro,.story.azul{{padding-top:460px}}
 .story .sticker{{margin-top:50px}}
 '''
+CSS += CSS_HIST
 html = f'<!doctype html><html lang="es"><head><meta charset="utf-8"><style>{CSS}</style></head><body>' + ''.join(
     h.replace('<section class="', f'<section data-n="{n}" data-t="{t}" class="', 1) for t, n, h in PLACAS) + '</body></html>'
 (AQUI / 'placas.html').write_text(html)
