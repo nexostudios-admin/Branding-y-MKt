@@ -1,6 +1,6 @@
 """Placas de Instagram con el branding de Masherr (posts 1080x1350 y stories 1080x1920).
 Uso: python3 generar_placas.py && node exportar_placas.js
-Estilo: minimalista, humanizado (voz de Guido, reseñas reales), con precio y llamado a la venta.
+Estilo: minimalista, humanizado (voz de Guido, reseñas reales), sin precios (se consultan en la web o por WhatsApp), con llamado a la venta.
 """
 from pathlib import Path
 
@@ -23,7 +23,7 @@ def producto(n, rot, nombre, marca, p, img, bajada, sello=''):
 <div class="rotulo">{rot}</div>
 <div class="foto"><img src="{foto(img)}" alt="">{f'<span class="sello">{sello}</span>' if sello else ''}</div>
 <div class="info"><div><span class="marca">{marca}</span><h2>{nombre}</h2><p>{bajada}</p></div>
-<div class="precio"><small>$</small>{precio(p)[1:]}</div></div>
+<div class="cta">Consultá precio<br>y stock →</div></div>
 {pie()}</section>''')
 
 PLACAS = [
@@ -40,8 +40,8 @@ PLACAS = [
  # 3 · Comparativa
  ('post', '03_comparativa', f'''<section class="post claro">
 <div class="rotulo">¿CUÁL TE CONVIENE?</div><h1 class="t-osc">115 o 180.</h1>
-<div class="vs"><div><img src="{foto('amoladora-angular-115mm-650w-11565-vanden-z9jit-0')}" alt=""><b>115 mm</b><span>Cortes finos, chapa, terminaciones. Liviana.</span><em>desde {precio(46000)}</em></div>
-<div><img src="{foto('amoladora-angular-180mm-2000w-nemea180200-nebraska-15559-0')}" alt=""><b>180 mm</b><span>Cortes profundos y desbaste pesado.</span><em>desde {precio(195000)}</em></div></div>
+<div class="vs"><div><img src="{foto('amoladora-angular-115mm-650w-11565-vanden-z9jit-0')}" alt=""><b>115 mm</b><span>Cortes finos, chapa, terminaciones. Liviana.</span><em>Para el día a día</em></div>
+<div><img src="{foto('amoladora-angular-180mm-2000w-nemea180200-nebraska-15559-0')}" alt=""><b>180 mm</b><span>Cortes profundos y desbaste pesado.</span><em>Para trabajo pesado</em></div></div>
 {pie(cta='¿Dudas? Te asesoramos por WhatsApp')}</section>'''),
  # 4 · Reseña real
  ('post', '04_resena', f'''<section class="post oscuro">
@@ -58,7 +58,7 @@ PLACAS = [
 <div class="rayas"></div><div class="rotulo az">CONSEJO DE FERRETERO</div>
 <div class="numero">01</div>
 <h1>No uses el mismo destornillador para todo.</h1>
-<p class="bajada">La punta justa evita pelar el tornillo. Juegos de 6 piezas desde {precio(21000)}.</p>
+<p class="bajada">La punta justa evita pelar el tornillo. Tenemos juegos para cada tipo de tornillo.</p>
 {pie(True, 'Guardá este post')}</section>'''),
  # 7 · Producto soldadura
  producto('07_soldadora', 'SOLDADURA', 'Soldadora inverter SI 140', 'PEGASO', 182000,
@@ -81,7 +81,7 @@ PLACAS = [
 <div class="foto grande"><img src="{foto('kit-taladro-percutor-atornillador-y-amoladora-brushless-emtop-emteckl202564-317mg-0')}" alt=""></div>
 <span class="marca">EMTOP · 20 V BRUSHLESS</span><h2>Kit taladro percutor + amoladora</h2>
 <p>2 baterías de 4 Ah, cargador, 10 discos y 47 accesorios.</p>
-<div class="precio"><small>$</small>390.000</div>
+<div class="cta grande">Precio y stock en la web →</div>
 <div class="sticker">ACÁ VA EL STICKER DE ENLACE ↗</div>
 <img class="logo-st" src="{LOGO_AZ}" alt="Masherr"></section>'''),
  ('story', 's2_encuesta', f'''<section class="story oscuro">
@@ -126,6 +126,8 @@ h2{{font-family:C;font-size:58px;line-height:1.08;margin-top:10px}}
 .marca{{font-family:C;font-size:28px;letter-spacing:.1em;color:var(--az);border:3px solid var(--az);padding:6px 14px;display:inline-block}}
 .precio{{font-family:C;font-size:92px;color:var(--az);white-space:nowrap;line-height:1}}
 .precio small{{font-size:52px;vertical-align:.5em;margin-right:4px}}
+.cta{{font-family:C;font-size:36px;line-height:1.2;color:#fff;background:var(--az);padding:22px 28px;border-radius:10px;white-space:nowrap;text-align:left}}
+.cta.grande{{display:inline-block;font-size:44px;margin-top:40px;padding:28px 36px}}
 .pie{{position:absolute;left:80px;right:80px;bottom:64px;display:flex;justify-content:space-between;align-items:center;border-top:3px solid var(--az);padding-top:30px}}
 .pie.osc{{border-color:var(--ce)}}
 .pie img{{height:64px}} .pie span{{font-family:C;font-size:30px;color:var(--az)}} .pie.osc span{{color:var(--ce)}}
