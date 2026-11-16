@@ -341,3 +341,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .com-beneficios b { font-family: var(--titulos); font-size: 20px; display: block; margin-bottom: 4px; }
 .com-beneficios span { color: #BFC4D3; font-size: 13px; line-height: 1.4; display: block; }
 @media (min-width: 768px) { .com-beneficios { gap: 12px; } .com-beneficios li { padding: 18px; } .com-beneficios b { font-size: 24px; } .com-beneficios span { font-size: 15px; } }
+
+/* ---------- Sin precios publicados ---------- */
+[hidden] { display: none !important; }
+.tarjeta .precio.consultar { font-size: 15px; letter-spacing: .04em; color: var(--azul); }
+.ficha-precio.consultar { font-size: 26px; color: var(--azul); }

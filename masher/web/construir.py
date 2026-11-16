@@ -119,6 +119,15 @@ if FUENTE:
         print(f'Planilla leída: {len(productos)} productos publicados')
     except Exception as ex:
         print(f'  ! No se pudo leer la planilla ({ex}). Se publica con los datos anteriores.', file=sys.stderr)
+# Precios ocultos: la web no publica valores y la disponibilidad depende solo del stock (se cotiza por WhatsApp).
+MP = CFG.get('mostrar_precios', True)
+if not MP:
+    for p in productos:
+        for v in p['variantes']:
+            v['disponible'] = v['stock'] is None or v['stock'] > 0
+            v['precio'] = None
+        p['precio'] = None
+        p['disponible'] = any(v['disponible'] for v in p['variantes'])
 cats_usadas = [c for c in CATEGORIAS if any(p['cat'] == c[0] for p in productos)]
 
 # ---------------------------------------------------------------- Plantillas
@@ -253,7 +262,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
         </ul>
       </div>
     </div>
-    <div class="pie-legal"><span>© Ferretería Industrial Masherr</span><span>Precios en pesos argentinos, publicados al {e(CFG['fecha_precios'])}. Se confirman por WhatsApp antes de cobrar.</span></div>
+    <div class="pie-legal"><span>© Ferretería Industrial Masherr</span><span>{f"Precios en pesos argentinos, publicados al {e(CFG['fecha_precios'])}. Se confirman por WhatsApp antes de cobrar." if MP else 'Consultá precios y stock por WhatsApp: te cotizamos al momento.'}</span></div>
   </div>
 </footer>
 <a class="wa-flotante" href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">{ic('whatsapp')}</a>
@@ -291,7 +300,7 @@ def tarjeta(p, r):
     return f"""<article class="tarjeta"><div class="foto">{img}</div><div class="cuerpo">
       {f'<span class="marca">{e(p["marca"])}</span>' if p['marca'] else ''}
       <h3><a href="{r}producto/{p['slug']}/">{e(p['nombre'])}</a></h3>
-      <span class="precio">{'<span style="font-size:.6em">desde </span>' if len(p['variantes']) > 1 and p['precio'] else ''}{precio(p['precio']) if p['precio'] else 'Consultar'}</span>
+      <span class="precio{'' if p['precio'] else ' consultar'}">{'<span style="font-size:.6em">desde </span>' if len(p['variantes']) > 1 and p['precio'] else ''}{precio(p['precio']) if p['precio'] else 'Consultá precio'}</span>
       <span class="estado {'stock-ok' if p['disponible'] else 'stock-no'}">{'Disponible' if p['disponible'] else 'Sin stock'}</span>
       {boton}</div></article>"""
 
@@ -342,6 +351,7 @@ publico = [{k: v for k, v in p.items() if not k.startswith('_')} for p in produc
 json.dump({'actualizado': CFG['fecha_precios'], 'categorias': [{'slug': c[0], 'nombre': c[1]} for c in cats_usadas], 'productos': publico},
           open(SITIO / 'data' / 'productos.json', 'w'), ensure_ascii=False, separators=(',', ':'))
 cfg_pub = {k: CFG[k] for k in ['whatsapp', 'whatsapp_visible', 'telefono', 'direccion', 'localidad', 'fecha_precios', 'redes', 'publicaciones']}
+cfg_pub['mostrar_precios'] = MP
 cfg_pub['ads_conversion'] = CFG.get('google_ads_conversion', {})
 (SITIO / 'assets' / 'js' / 'config.js').write_text('window.MASHERR = ' + json.dumps(cfg_pub, ensure_ascii=False, indent=1) + ';\n')
 
@@ -439,12 +449,12 @@ tienda = f"""
       <div class="barra-resultados">
         <span class="cuenta" id="cuenta" aria-live="polite">Cargando…</span>
         <button class="boton secundario boton-filtros" type="button" data-abrir-filtros>{ic('filtro')}Filtrar</button>
-        <label class="select-orden">Ordenar <select id="orden"><option value="relevancia">Relevancia</option><option value="precio-asc">Menor precio</option><option value="precio-desc">Mayor precio</option><option value="nombre">Nombre A-Z</option></select></label>
+        <label class="select-orden">Ordenar <select id="orden"><option value="relevancia">Relevancia</option>{'<option value="precio-asc">Menor precio</option><option value="precio-desc">Mayor precio</option>' if MP else ''}<option value="nombre">Nombre A-Z</option></select></label>
       </div>
       <div id="activos" class="activos"></div>
       <div id="resultados"><ul class="grilla-prod" aria-hidden="true">{'<li><div class="esqueleto" style="aspect-ratio:.62"></div></li>' * 8}</ul></div>
       <ul id="paginacion" class="paginacion"></ul>
-      <noscript><h2>Todos los productos</h2><ul>{''.join(f'<li><a href="../producto/{p["slug"]}/">{e(p["nombre"])}</a> · {precio(p["precio"])}</li>' for p in productos)}</ul></noscript>
+      <noscript><h2>Todos los productos</h2><ul>{''.join(f'<li><a href="../producto/{p["slug"]}/">{e(p["nombre"])}</a>{" · " + precio(p["precio"]) if p["precio"] else ""}</li>' for p in productos)}</ul></noscript>
     </section>
   </div>
 </div>
@@ -465,11 +475,11 @@ for p in productos:
     selector = ''
     if len(p['variantes']) > 1:
         selector = '<div class="campo"><label for="variante">Opción</label><select id="variante">' + ''.join(
-            f'<option value="{v["id"]}" {"disabled" if not v["disponible"] else ""}>{e(v["nombre"])} · {precio(v["precio"]) if v["precio"] else "consultar"}{" · sin stock" if not v["disponible"] else ""}</option>' for v in p['variantes']) + '</select></div>'
+            f'<option value="{v["id"]}" {"disabled" if not v["disponible"] else ""}>{e(v["nombre"])} · {precio(v["precio"]) if v["precio"] else "consultá precio"}{" · sin stock" if not v["disponible"] else ""}</option>' for v in p['variantes']) + '</select></div>'
     stock_txt = ('Sin stock' if not v0['disponible'] else ('Disponible' if v0['stock'] is None else f'Disponible · {v0["stock"]} en stock' if v0['stock'] <= 5 else 'Disponible'))
     relacionados = [x for x in productos if x['cat'] == p['cat'] and x['slug'] != p['slug'] and x['disponible']]
     relacionados = sorted(relacionados, key=lambda x: (x['sub'] != p['sub'], x['marca'] != p['marca']))[:4]
-    consulta = f'Hola Masherr, quiero consultar por: {p["nombre"]} ({precio(p["precio"])}). '
+    consulta = f'Hola Masherr, quiero consultar por: {p["nombre"]}{f" ({precio(p['precio'])})" if p["precio"] else ""}. '
     datos_js = json.dumps({'nombre': p['nombre'], 'variantes': p['variantes'], 'imgs': imgs}, ensure_ascii=False)
     ficha = f"""
 <div class="contenedor">
@@ -483,8 +493,8 @@ for p in productos:
       {f'<p class="rotulo">{e(p["marca"])}</p>' if p['marca'] else f'<p class="rotulo">{e(p["catNombre"])}</p>'}
       <h1>{e(p['nombre'])}</h1>
       <div class="ficha-meta">{f'<span>Marca: {e(p["marca"])}</span>' if p['marca'] else ''}<span>Categoría: {e(p['sub'] or p['catNombre'])}</span><span id="sku">{f'SKU: {e(v0["sku"])}' if v0['sku'] else ''}</span></div>
-      <p class="ficha-precio" id="precio">{precio(v0['precio']) if v0['precio'] else 'Consultar precio'}</p>
-      <p class="nota-precio">Precio publicado al {e(CFG['fecha_precios'])}. Te lo confirmamos por WhatsApp antes de cobrar.</p>
+      <p class="ficha-precio{'' if v0['precio'] else ' consultar'}" id="precio">{precio(v0['precio']) if v0['precio'] else 'Consultá precio por WhatsApp'}</p>
+      <p class="nota-precio">{f"Precio publicado al {e(CFG['fecha_precios'])}. Te lo confirmamos por WhatsApp antes de cobrar." if MP else 'Agregalo al carrito o escribinos: te pasamos el precio actualizado por WhatsApp.'}</p>
       <div class="compra">
         {selector}
         <p id="stock" class="{'stock-ok' if v0['disponible'] else 'stock-no'}" style="margin:0;font-weight:700">{stock_txt}</p>
@@ -512,6 +522,7 @@ for p in productos:
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Tienda', 'item': (CFG['dominio'].rstrip('/') + '/tienda/') if CFG['dominio'] else 'tienda/'},
             {'@type': 'ListItem', 'position': 2, 'name': p['catNombre']}, {'@type': 'ListItem', 'position': 3, 'name': p['nombre']}]}]}
+    if not MP: ld['@graph'] = ld['@graph'][1:]  # sin precio, Google no acepta la ficha de producto: solo migas de pan
     pagina(f'producto/{p["slug"]}/index.html', f'{p["nombre"]} · Masherr', (resumen(p['_desc'], 120) or p['nombre']) + ' En Masherr, Villa Lynch, San Martín.', ficha, actual='tienda/', jsonld=ld, scripts=['producto.js'],
            imagen=og_producto(imgs[0]) if imgs else None, tipo='product')
 

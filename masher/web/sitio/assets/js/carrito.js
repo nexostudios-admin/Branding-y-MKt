@@ -3,6 +3,7 @@
   'use strict';
   const { carrito, cargarCatalogo, resolver, fmt, esc, icono, wa, img, CFG, ROOT } = window.M;
   const app = document.getElementById('carrito-app');
+  const MP = CFG.mostrar_precios !== false;  // false: la web no muestra precios, se cotiza por WhatsApp
   let CAT, datos = { nombre: '', entrega: 'retiro', direccion: '', localidad: '', cp: '', pago: '', factura: '', comentarios: '' };
   try { datos = { ...datos, ...JSON.parse(sessionStorage.getItem('masherr_datos') || '{}') }; } catch (e) {}
 
@@ -31,13 +32,13 @@
             <div>
               <h2><a href="${ROOT}producto/${p.slug}/">${esc(p.nombre)}</a></h2>
               ${v.nombre ? `<div class="ayuda">Opción: ${esc(v.nombre)}</div>` : ''}
-              <div class="ayuda">${fmt(v.precio)} c/u${!v.disponible ? ' · <span class="stock-no">Sin stock</span>' : v.stock != null && l.c > v.stock ? ` · <span class="stock-no">Hay ${v.stock} en stock</span>` : ''}</div>
+              <div class="ayuda">${MP ? fmt(v.precio) + ' c/u' : ''}${!v.disponible ? ' · <span class="stock-no">Sin stock</span>' : v.stock != null && l.c > v.stock ? ` · <span class="stock-no">Hay ${v.stock} en stock</span>` : ''}</div>
               <div class="controles">
                 <div class="cantidad"><button type="button" data-mod="${v.id}" data-d="-1" aria-label="Restar uno de ${esc(p.nombre)}">${icono('menos')}</button>
                   <label class="sr" for="c-${v.id}">Cantidad de ${esc(p.nombre)}</label><input id="c-${v.id}" type="number" inputmode="numeric" min="1" max="${max}" value="${l.c}" data-cant="${v.id}">
                   <button type="button" data-mod="${v.id}" data-d="1" aria-label="Sumar uno de ${esc(p.nombre)}">${icono('mas')}</button></div>
                 <button class="quitar" type="button" data-quitar="${v.id}">${icono('papelera')}Quitar</button>
-                <span class="subtotal">${v.disponible ? fmt(v.precio * l.c) : '—'}</span>
+                ${MP ? `<span class="subtotal">${v.disponible ? fmt(v.precio * l.c) : '—'}</span>` : ''}
               </div>
             </div></li>`;
         }).join('')}</ul>
@@ -45,8 +46,10 @@
       </section>
       <aside class="resumen" aria-labelledby="t-res">
         <h2 id="t-res">Tu pedido</h2>
-        <div class="total"><span>Total estimado</span><span>${fmt(total)}</span></div>
-        <p class="ayuda" style="margin:0">Precios publicados al ${esc(CFG.fecha_precios)}. Envío no incluido. Confirmamos precio, stock y forma de pago por WhatsApp antes de cobrar.</p>
+        ${MP ? `<div class="total"><span>Total estimado</span><span>${fmt(total)}</span></div>
+        <p class="ayuda" style="margin:0">Precios publicados al ${esc(CFG.fecha_precios)}. Envío no incluido. Confirmamos precio, stock y forma de pago por WhatsApp antes de cobrar.</p>`
+        : `<div class="total"><span>Productos</span><span>${validas.reduce((a, l) => a + l.c, 0)}</span></div>
+        <p class="ayuda" style="margin:0">Envianos el pedido y te respondemos por WhatsApp con el precio actualizado, el stock y la forma de pago.</p>`}
         <form id="form-pedido" class="form-grid" novalidate>
           <div class="campo"><label for="f-nombre">Nombre y apellido *</label><input id="f-nombre" name="nombre" autocomplete="name" required value="${esc(datos.nombre)}"><span class="error" id="e-nombre" hidden>Completá tu nombre.</span></div>
           <fieldset class="radio-grupo"><legend class="campo" style="font-weight:700;font-size:14px;margin-bottom:6px">Entrega</legend>
@@ -75,13 +78,14 @@
     const total = ls.reduce((a, l) => a + l.r.v.precio * l.c, 0);
     const d = Object.fromEntries(new FormData(f));
     const r = [`Hola Masherr, quiero hacer este pedido:`, ''];
-    ls.forEach(l => r.push(`• ${l.c} × ${l.r.p.nombre}${l.r.v.nombre ? ' (' + l.r.v.nombre + ')' : ''}${l.r.v.sku ? ' [SKU ' + l.r.v.sku + ']' : ''} — ${fmt(l.r.v.precio)} c/u = ${fmt(l.r.v.precio * l.c)}`));
-    r.push('', `Total estimado: ${fmt(total)} (precios web al ${CFG.fecha_precios}, envío no incluido)`, '', `Nombre: ${d.nombre}`);
+    ls.forEach(l => r.push(`• ${l.c} × ${l.r.p.nombre}${l.r.v.nombre ? ' (' + l.r.v.nombre + ')' : ''}${l.r.v.sku ? ' [SKU ' + l.r.v.sku + ']' : ''}${MP ? ` — ${fmt(l.r.v.precio)} c/u = ${fmt(l.r.v.precio * l.c)}` : ''}`));
+    if (MP) r.push('', `Total estimado: ${fmt(total)} (precios web al ${CFG.fecha_precios}, envío no incluido)`);
+    r.push('', `Nombre: ${d.nombre}`);
     r.push(d.entrega === 'envio' ? `Entrega: envío a ${d.direccion}${d.localidad ? ', ' + d.localidad : ''}${d.cp ? ' (CP ' + d.cp + ')' : ''}` : 'Entrega: retiro en el local');
     if (d.pago) r.push(`Pago preferido: ${d.pago}`);
     if (d.factura) r.push(`Factura: ${d.factura}`);
     if (d.comentarios) r.push(`Comentarios: ${d.comentarios}`);
-    r.push('', '¿Me confirman stock, precio final y cómo seguimos?');
+    r.push('', MP ? '¿Me confirman stock, precio final y cómo seguimos?' : '¿Me pasan el precio, confirman stock y cómo seguimos?');
     return r.join('\n');
   }
 
@@ -121,6 +125,6 @@
     e.target.setAttribute('aria-invalid', 'false'); const id = e.target.getAttribute('aria-describedby'); if (id) document.getElementById(id).hidden = true; } });
 
   cargarCatalogo().then(c => { CAT = c; pintar(); }).catch(() => {
-    app.innerHTML = `<div class="vacio" role="alert"><h2>No pudimos cargar los precios</h2><p>Revisá tu conexión y volvé a intentar.</p><button class="boton" type="button" onclick="location.reload()">Reintentar</button></div>`;
+    app.innerHTML = `<div class="vacio" role="alert"><h2>No pudimos cargar el catálogo</h2><p>Revisá tu conexión y volvé a intentar.</p><button class="boton" type="button" onclick="location.reload()">Reintentar</button></div>`;
   });
 })();
