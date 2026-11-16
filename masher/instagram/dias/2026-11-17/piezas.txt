@@ -1,0 +1,12 @@
+historia_1_0800_abrimos|story
+historia_2_1200_mediodia|story
+historia_3_1400_volvimos|story
+historia_4_1700_cerramos|story
+historia_5_promo_carrusel|story
+carrusel_01|post
+carrusel_02|post
+carrusel_03|post
+carrusel_04|post
+carrusel_05|post
+carrusel_06|post
+post_web_nueva|post

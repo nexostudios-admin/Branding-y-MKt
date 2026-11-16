@@ -1,0 +1,66 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
+@font-face{font-family:C;src:url(../../../catalogo/fonts/DejaVuSansCondensed-Bold.ttf);font-weight:700}
+@font-face{font-family:T;src:url(../../../catalogo/fonts/DejaVuSans.ttf)}
+@font-face{font-family:T;src:url(../../../catalogo/fonts/DejaVuSans-Bold.ttf);font-weight:700}
+:root{--az:#17256B;--ne:#08090B;--ce:#9AAEFF;--gr:#EEF0F4;--tx:#50566A;--li:#DDE0E7}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#555}
+body{font-family:T,sans-serif;-webkit-font-smoothing:antialiased}
+section{position:relative;overflow:hidden}
+.story{width:1080px;height:1920px;padding:0 96px}
+.post{width:1080px;height:1350px;padding:0 84px}
+.claro{background:#fff;color:var(--ne)} .oscuro{background:var(--ne);color:#fff} .azul{background:var(--az);color:#fff} .gris{background:var(--gr);color:var(--ne)}
+/* franjas del símbolo */
+.rayas{position:absolute;background:repeating-linear-gradient(to bottom,currentColor 0 16px,transparent 16px 28px)}
+.oscuro .rayas{color:var(--az)} .azul .rayas{color:rgba(255,255,255,.09)} .claro .rayas,.gris .rayas{color:var(--gr)}
+.gris .rayas{color:#E1E4EC}
+/* barra superior de historia */
+.top{position:absolute;left:96px;right:96px;top:150px;display:flex;justify-content:space-between;align-items:center}
+.top img{height:72px}
+.top .dia{font-family:C;font-size:30px;letter-spacing:.18em;color:var(--ce);text-align:right;line-height:1.3}
+.claro .top .dia,.gris .top .dia{color:var(--az)}
+.rot{font-family:C;font-size:32px;letter-spacing:.16em;color:var(--ce);display:flex;align-items:center;gap:20px}
+.rot::before{content:"";width:64px;height:8px;background:currentColor}
+.claro .rot,.gris .rot{color:var(--az)}
+.hora{font-family:C;font-size:330px;line-height:.86;letter-spacing:-.02em}
+.hora small{font-size:120px;letter-spacing:0;margin-left:10px;color:var(--ce)}
+.claro .hora small{color:var(--az)}
+h1{font-family:C;font-size:116px;line-height:1.0}
+.txt{font-size:44px;line-height:1.42;color:#D5D9E4} .claro .txt,.gris .txt{color:var(--tx)}
+.bloque{position:absolute;left:96px;right:96px}
+.linea{height:3px;background:var(--ce)} .claro .linea,.gris .linea{background:var(--az)}
+.datos{display:flex;justify-content:space-between;gap:30px}
+.datos div{flex:1} .datos b{display:block;font-family:C;font-size:28px;letter-spacing:.14em;color:var(--ce);margin-bottom:10px}
+.claro .datos b{color:var(--az)}
+.datos span{font-family:C;font-size:44px;line-height:1.15}
+.boton{display:inline-flex;align-items:center;gap:22px;font-family:C;font-size:44px;padding:30px 44px;border-radius:999px}
+.boton.wa{background:#128C3E;color:#fff} .boton.bl{background:#fff;color:var(--az)} .boton.az{background:var(--az);color:#fff}
+.boton svg{width:52px;height:52px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.zona-sticker{position:absolute;left:96px;right:96px;height:170px;border:3px dashed currentColor;opacity:.35;display:grid;place-items:center;font-family:C;font-size:28px;letter-spacing:.12em}
+.sol{position:absolute;border-radius:50%}
+/* post / carrusel */
+.cab{position:absolute;left:84px;right:84px;top:70px;display:flex;justify-content:space-between;align-items:center}
+.cab img{height:56px} .cab span{font-family:C;font-size:26px;letter-spacing:.14em;color:var(--az)}
+.oscuro .cab span,.azul .cab span{color:var(--ce)}
+.pag{position:absolute;right:84px;bottom:64px;font-family:C;font-size:26px;letter-spacing:.14em;color:var(--az)}
+.oscuro .pag,.azul .pag{color:var(--ce)}
+.flecha{position:absolute;left:84px;bottom:58px;display:flex;align-items:center;gap:16px;font-family:C;font-size:28px;letter-spacing:.1em;color:var(--az)}
+.oscuro .flecha,.azul .flecha{color:var(--ce)}
+.flecha i{display:block;width:80px;height:4px;background:currentColor;position:relative}
+.flecha i::after{content:"";position:absolute;right:-2px;top:-9px;border:11px solid transparent;border-left:16px solid currentColor;border-right:0}
+.num{font-family:C;font-size:200px;line-height:.8;color:var(--ce)}
+.claro .num,.gris .num{color:var(--az)}
+.tarjeta{position:absolute;left:84px;right:84px;top:560px;height:470px;background:#fff;border-radius:22px;display:grid;place-items:center}
+.tarjeta img{max-height:84%;max-width:80%;mix-blend-mode:multiply}
+.tag{display:inline-block;font-family:C;font-size:26px;letter-spacing:.12em;padding:10px 18px;border:3px solid var(--az);color:var(--az)}
+.oscuro .tag,.azul .tag{border-color:var(--ce);color:var(--ce)}
+.tel{position:absolute;width:520px;height:1060px;border-radius:70px;background:#000;padding:22px;box-shadow:0 40px 80px rgba(0,0,0,.35)}
+.tel img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50px}
+.tel::before{content:"";position:absolute;left:50%;top:40px;transform:translateX(-50%);width:130px;height:34px;border-radius:20px;background:#000;z-index:2}
+</style></head><body><section class="post gris"><div class="cab"><img src="../../../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>GUÍA DE DISCOS</span></div>
+<div style="position:absolute;left:84px;right:84px;top:170px;display:flex;align-items:flex-end;gap:34px"><div class="num">03</div>
+<div style="padding-bottom:14px"><span class="tag">TERMINACIÓN</span><h1 style="font-size:70px;margin-top:16px">Dejar la terminación lisa</h1></div></div>
+<div class="tarjeta" style="top:450px;height:520px"><img src="../../../web/sitio/img/productos/disco-flap-115-mm-grano-80-y115ap80-10pegaso-1klz1-0-1024-1024.webp" alt=""></div>
+<div style="position:absolute;left:84px;right:84px;top:1010px"><div style="font-family:C;font-size:46px;color:var(--az)">Disco flap grano 80 o 120</div>
+<p class="txt" style="font-size:34px;margin-top:12px">Después del desbaste: emparejá y dejá la superficie lista para pintar.</p></div>
+<div class="flecha">DESLIZÁ<i></i></div><div class="pag">04 / 06</div></section></body></html>
