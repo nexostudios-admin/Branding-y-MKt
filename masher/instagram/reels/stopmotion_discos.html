@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Reel · ¿Qué disco uso? (stop motion)</title>
+<!-- Masherr · Reel stop motion, 1080x1920, 12 cuadros por segundo. window.cuadro(n) dibuja el cuadro n. -->
+<style>
+@font-face{font-family:C;src:url(../../catalogo/fonts/DejaVuSansCondensed-Bold.ttf);font-weight:700}
+@font-face{font-family:T;src:url(../../catalogo/fonts/DejaVuSans.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#333}
+section{position:relative;width:1080px;height:1920px;overflow:hidden;background:#17256B;font-family:T,sans-serif}
+/* plancha de corte (mesa de trabajo) */
+.plancha{position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.16) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.16) 2px,transparent 2px),
+    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:300px 300px,300px 300px,60px 60px,60px 60px;background-position:-30px -30px}
+.regla{position:absolute;left:0;right:0;top:0;height:46px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 2px,transparent 2px 30px);opacity:.5;-webkit-mask:linear-gradient(#000 40%,transparent 41%)}
+.regla.b{top:auto;bottom:0;transform:scaleY(-1)}
+.obj{position:absolute;left:0;top:0;will-change:transform;opacity:0}
+.foto{filter:drop-shadow(14px 18px 0 rgba(4,6,20,.45)) drop-shadow(0 30px 30px rgba(4,6,20,.35))}
+.ficha{width:96px;height:110px;background:#fff;color:#08090B;font-family:C;font-weight:700;font-size:82px;display:grid;place-items:center;border-radius:6px;box-shadow:8px 10px 0 rgba(4,6,20,.45)}
+.ficha.ce{background:#9AAEFF}
+.etiqueta{background:#08090B;color:#fff;font-family:C;font-weight:700;font-size:38px;letter-spacing:.06em;padding:16px 26px;white-space:nowrap;box-shadow:8px 10px 0 rgba(4,6,20,.4)}
+.etiqueta small{display:block;font-family:T;font-weight:400;font-size:26px;letter-spacing:.02em;color:#9AAEFF;margin-top:4px}
+.tarjeta{background:#fff;padding:34px 46px;box-shadow:12px 14px 0 rgba(4,6,20,.45)}
+.tarjeta img{height:96px;display:block}
+.wa{display:inline-flex;align-items:center;gap:16px;background:#128C3E;color:#fff;font-family:C;font-weight:700;font-size:44px;padding:26px 40px;border-radius:999px;white-space:nowrap;box-shadow:10px 12px 0 rgba(4,6,20,.45)}
+.wa svg{width:52px;height:52px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#luz{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 45%,rgba(0,0,0,.45));pointer-events:none}
+#parpadeo{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none}
+#grano{position:absolute;inset:0;width:100%;height:100%;opacity:.13;mix-blend-mode:overlay;pointer-events:none}
+</style></head>
+<body>
+<section id="reel">
+  <div class="plancha"></div><div class="regla"></div><div class="regla b"></div>
+  <div id="escena"></div>
+  <div id="luz"></div><div id="parpadeo"></div>
+  <svg id="grano"><filter id="ruido"><feTurbulence id="tur" type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="1"/></filter><rect width="100%" height="100%" filter="url(#ruido)"/></svg>
+</section>
+<script>
+const R = '../v2/recortes/', A = 'assets/';
+const esc = document.getElementById('escena');
+const objs = [];
+// pista: lista de claves [cuadro, x, y, rot, escala]; antes de la primera clave el objeto no está.
+function obj(html, pista, opc = {}) {
+  const d = document.createElement('div');
+  d.className = 'obj ' + (opc.cls || '');
+  d.innerHTML = html;
+  if (opc.w) d.style.width = opc.w + 'px';
+  esc.appendChild(d);
+  objs.push({ d, pista, temblor: opc.temblor ?? 1, z: opc.z || 0 });
+  d.style.zIndex = opc.z || 0;
+}
+const img = (src, w) => `<img src="${src}" style="width:${w}px;display:block">`;
+const suave = t => 1 - Math.pow(1 - t, 2.2);
+function pos(p, f) {
+  if (f < p[0][0]) return null;
+  for (let k = p.length - 1; k >= 0; k--) {
+    if (f >= p[k][0]) {
+      const a = p[k], b = p[k + 1];
+      if (!b) return a.slice(1);
+      const t = suave((f - a[0]) / (b[0] - a[0]));
+      return a.slice(1).map((v, i) => v + (b[i + 1] - v) * t);
+    }
+  }
+}
+// azar repetible por cuadro (el "temblor" típico del stop motion)
+function azar(n) { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); }
+
+/* ---------- 1 · título con fichas: ¿QUÉ DISCO USO? ---------- */
+const T1 = '¿QUÉ', T2 = 'DISCO', T3 = 'USO?';
+let f0 = 3;
+[[T1, 230], [T2, 360], [T3, 490]].forEach(([pal, y], fila) => {
+  [...pal].forEach((ch, i) => {
+    const x = 160 + i * 112 + fila * 30, rot = (azar(i * 7 + fila * 31) - .5) * 14;
+    const ini = f0++;
+    obj(`<div class="ficha ${fila === 2 ? 'ce' : ''}">${ch}</div>`,
+      [[ini, x, y - 60, rot - 8, 1.25], [ini + 1, x, y, rot, 1], [104, x, y, rot, 1], [107, x + (azar(i) - .5) * 200, y - 900, rot + 40, 1]], { z: 5 });
+  });
+});
+
+/* ---------- 2 · la amoladora entra desde la izquierda ---------- */
+obj(img(R + 'amoladora-angular-115mm-650w-11565-vanden-z9jit-0.png', 640),
+  [[18, -500, 820, -18, 1], [22, 180, 800, -9, 1], [26, 470, 790, -3, 1], [29, 560, 790, -1, 1], [30, 545, 792, -2, 1], [100, 545, 792, -2, 1], [104, -700, 760, -25, 1]],
+  { cls: 'foto', z: 2 });
+obj(`<div class="etiqueta">AMOLADORA 115 mm</div>`,
+  [[31, 680, 1010, 3, 1.15], [32, 680, 1000, 2, 1], [100, 680, 1000, 2, 1], [103, 1500, 1000, 20, 1]], { z: 6 });
+
+/* ---------- 3 · los discos entran rodando, uno por uno ---------- */
+const DISCOS = [
+  { src: R + 'pack-x-5-discos-de-corte-de-acero-115-x-10-x-2223-a-60-t-bfbosch-s5sei-0.png', w: 330, x: 300, y: 1230, et: 'CORTAR', sub: 'disco de corte fino', ini: 36 },
+  { src: A + 'flap40.png', w: 300, x: 790, y: 1230, et: 'DESBASTAR', sub: 'flap grano 40', ini: 48 },
+  { src: A + 'flap80.png', w: 300, x: 300, y: 1610, et: 'TERMINAR', sub: 'flap grano 80', ini: 60 },
+  { src: R + 'copa-diamantada-35mm-para-amoladora-uso-en-seco-cda-35aliafor-1aqnl-0.png', w: 330, x: 790, y: 1600, et: 'PERFORAR', sub: 'copa diamantada', ini: 72, copa: true },
+];
+DISCOS.forEach((d, k) => {
+  const desde = k % 2 ? 1500 : -420, s = k % 2 ? -1 : 1;
+  const giro = d.copa ? 0 : 1;
+  obj(img(d.src, d.w), [
+    [d.ini, desde, d.y - 40, -s * 720 * giro + (d.copa ? -30 : 0), 1],
+    [d.ini + 3, d.x - s * 260, d.y - 10, -s * 260 * giro + (d.copa ? -15 : 0), 1],
+    [d.ini + 5, d.x - s * 40, d.y, -s * 40 * giro, 1],
+    [d.ini + 6, d.x + s * 12, d.y, s * 8 * giro + (d.copa ? 6 : 0), 1],
+    [d.ini + 7, d.x, d.y, d.copa ? 4 : 0, 1],
+    [100 + k, d.x, d.y, d.copa ? 4 : 0, 1],
+    [103 + k, d.x + (k % 2 ? 900 : -900), d.y + 120, s * 200, 1]], { cls: 'foto', z: 3 });
+  obj(`<div class="etiqueta">${d.et}<small>${d.sub}</small></div>`, [
+    [d.ini + 8, d.x, d.y + d.w / 2 + 10, (azar(k + 3) - .5) * 8, 1.2],
+    [d.ini + 9, d.x, d.y + d.w / 2 + 20, (azar(k + 3) - .5) * 6, 1],
+    [100 + k, d.x, d.y + d.w / 2 + 20, (azar(k + 3) - .5) * 6, 1],
+    [103 + k, d.x, d.y + 1100, 40, 1]], { z: 6 });
+});
+
+/* ---------- 4 · cierre: logo + te asesoramos + WhatsApp ---------- */
+obj(`<div class="tarjeta"><img src="../../catalogo/img/masher-logo-azul.png" alt="Masherr"></div>`,
+  [[108, 540, -200, -20, 1], [110, 540, 570, 4, 1], [111, 540, 530, -3, 1], [112, 540, 542, -2, 1]], { z: 8 });
+const FR = 'TE ASESORAMOS';
+[...FR].forEach((ch, i) => {
+  if (ch === ' ') return;
+  const fila = i < 3 ? 0 : 1, col = fila ? i - 3 : i;
+  const x = fila ? 126 + col * 92 : 484 + col * 112, y = fila ? 930 : 790;
+  const rot = (azar(i * 3 + 9) - .5) * 12, ini = 113 + Math.floor(i * .8);
+  obj(`<div class="ficha ${fila ? 'ce' : ''}" style="width:84px;height:100px;font-size:70px">${ch}</div>`,
+    [[ini, x, y - 50, rot + 10, 1.25], [ini + 1, x, y, rot, 1]], { z: 8 });
+});
+obj(`<p style="font-family:T;font-size:42px;line-height:1.4;color:#fff;text-align:center;width:820px">Contanos qué vas a hacer<br>y te decimos qué disco usar.</p>`,
+  [[126, 540, 1110, 0, 1]], { z: 8, temblor: .4 });
+obj(`<div class="wa"><svg viewBox="0 0 24 24"><path d="M3.5 20.5l1.4-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 8.6c.2 2.9 2.6 5.4 5.6 6l1.3-1.4-2-1.1-1 .7c-.9-.4-2-1.5-2.4-2.4l.7-1-1-2z"/></svg>11 3182-6166</div>`,
+  [[129, 1400, 1300, 12, 1], [131, 600, 1290, -4, 1], [132, 530, 1295, 2, 1], [133, 540, 1290, 0, 1]], { z: 8 });
+obj(`<div class="etiqueta" style="font-size:30px;letter-spacing:.16em">CALLE 38 4335 · VILLA LYNCH</div>`,
+  [[134, 540, 1440, -2, 1.15], [135, 540, 1450, -1.5, 1]], { z: 8 });
+
+/* ---------- dibujo de cada cuadro ---------- */
+window.cuadro = function (f) {
+  objs.forEach((o, k) => {
+    const p = pos(o.pista, f);
+    if (!p) { o.d.style.opacity = 0; return; }
+    const [x, y, r, s] = p;
+    const j = o.temblor;
+    const jx = (azar(f * 31 + k) - .5) * 3 * j, jy = (azar(f * 17 + k * 3) - .5) * 3 * j, jr = (azar(f * 7 + k * 11) - .5) * .9 * j;
+    o.d.style.opacity = 1;
+    o.d.style.transform = `translate(${x + jx}px,${y + jy}px) translate(-50%,-50%) rotate(${r + jr}deg) scale(${s})`;
+  });
+  document.getElementById('parpadeo').style.opacity = (azar(f * 5 + 1) * .06).toFixed(3);
+  document.getElementById('tur').setAttribute('seed', f + 1);
+  document.querySelector('.plancha').style.transform = `translate(${(azar(f * 3) - .5) * 2}px,${(azar(f * 9) - .5) * 2}px)`;
+};
+window.cuadro(0);
+</script>
+</body></html>
