@@ -1,0 +1,68 @@
+/* Nexo Social Media · estilo premium vertical para celular (9:16) */
+@page { size: 90mm 160mm; margin: 0; }
+:root {
+  --bg:#050505; --card:#111111; --edge:#262626; --ink:#f5f5f5; --muted:#a6a6a6;
+  --red:#e3121b; --red2:#ff4040; --silver:#d9d9d9; --sand:#3a3a3a;
+  --tit:"Space Grotesk","Inter",sans-serif; --mono:"Orbitron","Inter",sans-serif;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; background:var(--bg); color:var(--ink); }
+body { font-family:Inter, sans-serif; font-size:12pt; line-height:1.4; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.slide { width:90mm; height:160mm; padding:10mm 7mm 12mm; position:relative; overflow:hidden; break-after:page; display:flex; flex-direction:column;
+  background: radial-gradient(110% 55% at 100% 0%, rgba(227,18,27,.14), transparent 60%), var(--bg); }
+.slide:last-child { break-after:auto; }
+/* corte diagonal rojo, como la X del logo */
+.slide::after { content:""; position:absolute; right:-6mm; top:-2mm; width:0.8mm; height:34mm; transform:rotate(38deg); transform-origin:top;
+  background:linear-gradient(180deg, transparent, var(--red2) 40%, var(--red) 70%, transparent); opacity:.9; }
+.slide::before { content:""; position:absolute; left:7mm; top:0; width:14mm; height:1.1mm; background:var(--red); }
+.foot { position:absolute; left:7mm; right:7mm; bottom:4mm; display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:6.5pt; color:var(--muted); letter-spacing:.14em; }
+.foot img { height:5mm; }
+h1, h2 { font-family:var(--tit); font-weight:700; color:var(--ink); margin:0; letter-spacing:-.01em; }
+h2 { font-size:22pt; line-height:1.06; margin:3pt 0 10pt; }
+p { margin:0 0 8pt; }
+ul { margin:0 0 6pt; padding-left:14pt; }
+li { margin-bottom:5pt; }
+li::marker { color:var(--red); }
+strong { color:var(--red2); font-weight:600; }
+.tag, .sub { font-family:var(--mono); font-size:7.5pt; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--red2); }
+.sub { margin:6pt 0 5pt; color:var(--silver); }
+.pills { display:flex; flex-wrap:wrap; gap:4pt; margin:0 0 10pt; }
+.pill { font-size:9pt; background:rgba(255,255,255,.05); border:1px solid #3a3a3a; border-radius:20pt; padding:2pt 8pt; color:var(--ink); }
+.pill b { color:var(--red2); font-weight:700; }
+.card { background:linear-gradient(180deg,#151515,#0d0d0d); border:1px solid var(--edge); border-radius:8pt; padding:7pt 10pt; margin-bottom:6pt; }
+.card b { display:block; font-family:var(--tit); font-weight:700; color:var(--ink); font-size:13.5pt; margin-bottom:1pt; }
+.card.line { border-left:3pt solid var(--red); }
+.card.opt { border-left:3pt solid var(--sand); border-style:dashed; border-left-style:solid; }
+.card.hl { background:linear-gradient(135deg,#5a0a0e,#1f0405); border:1px solid var(--red); }
+.card .row b, .card .num + b { display:inline; }
+.who, .note { font-size:9.8pt; color:var(--muted); }
+.who { display:block; }
+.num { font-family:var(--mono); font-weight:800; color:var(--red2); font-size:10pt; margin-right:3pt; }
+.row { display:flex; justify-content:space-between; gap:6pt; align-items:baseline; }
+.price { font-family:var(--tit); font-weight:700; color:var(--red2); white-space:nowrap; font-size:13pt; }
+.card.hl .price, .card.hl .who { color:#fff; }
+.chips { display:flex; flex-wrap:wrap; gap:4pt; margin:2pt 0 8pt; }
+.chips span { font-family:var(--mono); font-size:7pt; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--red); color:var(--ink); border-radius:3pt; padding:2.5pt 6pt; }
+.checks { list-style:none; padding:0; }
+.checks li { padding-left:17pt; position:relative; }
+.checks li::before { content:""; position:absolute; left:0; top:3pt; width:9pt; height:9pt; border:1.2pt solid var(--red2); border-radius:2pt; }
+.compact .card { padding:5pt 9pt; margin-bottom:4.5pt; }
+.compact .card b { font-size:12.5pt; margin-bottom:0; }
+.compact h2 { margin-bottom:8pt; }
+
+/* Portada */
+.cover { background: radial-gradient(90% 50% at 80% 10%, rgba(227,18,27,.30), transparent 60%), radial-gradient(70% 35% at 0% 100%, rgba(255,255,255,.06), transparent 60%), var(--bg); }
+.cover .logo { width:62mm; margin:4mm 0 12mm -2mm; }
+.cover h1 { font-size:36pt; line-height:.98; margin:8pt 0 12pt; }
+.cover .claim { font-family:var(--tit); font-size:13pt; color:var(--red2); margin-bottom:12pt; }
+.cover .note { margin-top:auto; font-family:var(--mono); font-size:7pt; letter-spacing:.14em; text-transform:uppercase; }
+.cover .rule { width:100%; height:1px; background:linear-gradient(90deg,var(--red),transparent); margin:0 0 10pt; }
+
+/* Cierre */
+.dark { background: radial-gradient(100% 55% at 50% 0%, rgba(227,18,27,.38), transparent 65%), linear-gradient(180deg,#1a0304,#050505); }
+.dark h2 { color:#fff; }
+.dark .card.line { background:rgba(255,255,255,.04); }
+/* el logo es negro cromado: le damos una luz detrás para que se lea sobre negro */
+.cover .logo { position:relative; z-index:1; filter: drop-shadow(0 0 1.2mm rgba(255,255,255,.35)) drop-shadow(0 0 5mm rgba(255,255,255,.18)); }
+.cover::before { left:0; top:0; width:100%; height:62mm; background: radial-gradient(60% 55% at 40% 45%, rgba(190,190,190,.32), rgba(227,18,27,.10) 55%, transparent 75%); }
+.foot img { filter: brightness(2.6) contrast(1.1) drop-shadow(0 0 .6mm rgba(255,255,255,.3)); }
