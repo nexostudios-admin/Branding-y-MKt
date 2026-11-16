@@ -309,45 +309,46 @@ def p_comprar():
 {tarjetas}
 </section>'''
 
-# ====================================================================== SEMANA
-SEMANA = []
-def dia(carpeta, nombre, fecha, sab=False):
-    return {'carpeta': carpeta, 'nombre': nombre, 'fecha': fecha, 'sab': sab, 'piezas': []}
+if __name__ == '__main__':
+    # ====================================================================== SEMANA
+    SEMANA = []
+    def dia(carpeta, nombre, fecha, sab=False):
+        return {'carpeta': carpeta, 'nombre': nombre, 'fecha': fecha, 'sab': sab, 'piezas': []}
 
-d = dia('2026-11-17', 'MARTES', '17.11'); D = d['nombre'], d['fecha']
-d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
-               ('historia', '3 - 13.05 Compartir carrusel', h_compartir(*D, ['¿Qué disco', 'va con cada', 'trabajo?'], 'corte', -10, 640, 1000, 'Nuevo carrusel')),
-               ('historia', '4 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '5 - 17.00 Cerramos', h_cierre(*D)),
-               ('posteo', 'Martes 17 - 19.00 - Web nueva', p_web())] + [('carrusel', f'Guia de discos/{k:02d}', s) for k, s in enumerate(carrusel_discos(), 1)]
-SEMANA.append(d)
-d = dia('2026-11-18', 'MIÉRCOLES', '18.11'); D = d['nombre'], d['fecha']
-d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
-               ('historia', '3 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '4 - 17.00 Cerramos', h_cierre(*D)),
-               ('historia', '5 - 19.05 Compartir posteo', h_compartir(*D, ['Producto', 'de la', 'semana.'], 'kit', -4, 760, 990)),
-               ('posteo', 'Miercoles 18 - 19.00 - Producto de la semana', p_kit())]
-SEMANA.append(d)
-d = dia('2026-11-19', 'JUEVES', '19.11'); D = d['nombre'], d['fecha']
-d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
-               ('historia', '3 - 13.05 Compartir carrusel', h_compartir(*D, ['Medí una vez.', 'Cortá una', 'sola vez.'], 'cinta', -10, 600, 980, 'Nuevo carrusel')),
-               ('historia', '4 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '5 - 17.00 Cerramos', h_cierre(*D))] + \
-              [('carrusel', f'Como medir bien/{k:02d}', s) for k, s in enumerate(carrusel_medicion(), 1)]
-SEMANA.append(d)
-d = dia('2026-11-20', 'VIERNES', '20.11'); D = d['nombre'], d['fecha']
-d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
-               ('historia', '3 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '4 - 17.00 Cerramos', h_cierre(*D)),
-               ('historia', '5 - 19.05 Compartir posteo', h_resenas_compartir(*D)), ('posteo', 'Viernes 20 - 19.00 - Resena', p_resena())]
-SEMANA.append(d)
-d = dia('2026-11-21', 'SÁBADO', '21.11', True); D = d['nombre'], d['fecha']
-d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D, sab=True)), ('historia', '2 - 12.30 Cerramos', h_cierre(*D, sab=True)),
-               ('posteo', 'Sabado 21 - 10.00 - Como comprar', p_comprar())]
-SEMANA.append(d)
+    d = dia('2026-11-17', 'MARTES', '17.11'); D = d['nombre'], d['fecha']
+    d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
+                   ('historia', '3 - 13.05 Compartir carrusel', h_compartir(*D, ['¿Qué disco', 'va con cada', 'trabajo?'], 'corte', -10, 640, 1000, 'Nuevo carrusel')),
+                   ('historia', '4 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '5 - 17.00 Cerramos', h_cierre(*D)),
+                   ('posteo', 'Martes 17 - 19.00 - Web nueva', p_web())] + [('carrusel', f'Guia de discos/{k:02d}', s) for k, s in enumerate(carrusel_discos(), 1)]
+    SEMANA.append(d)
+    d = dia('2026-11-18', 'MIÉRCOLES', '18.11'); D = d['nombre'], d['fecha']
+    d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
+                   ('historia', '3 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '4 - 17.00 Cerramos', h_cierre(*D)),
+                   ('historia', '5 - 19.05 Compartir posteo', h_compartir(*D, ['Producto', 'de la', 'semana.'], 'kit', -4, 760, 990)),
+                   ('posteo', 'Miercoles 18 - 19.00 - Producto de la semana', p_kit())]
+    SEMANA.append(d)
+    d = dia('2026-11-19', 'JUEVES', '19.11'); D = d['nombre'], d['fecha']
+    d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
+                   ('historia', '3 - 13.05 Compartir carrusel', h_compartir(*D, ['Medí una vez.', 'Cortá una', 'sola vez.'], 'cinta', -10, 600, 980, 'Nuevo carrusel')),
+                   ('historia', '4 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '5 - 17.00 Cerramos', h_cierre(*D))] + \
+                  [('carrusel', f'Como medir bien/{k:02d}', s) for k, s in enumerate(carrusel_medicion(), 1)]
+    SEMANA.append(d)
+    d = dia('2026-11-20', 'VIERNES', '20.11'); D = d['nombre'], d['fecha']
+    d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D)), ('historia', '2 - 12.00 Mediodia', h_mediodia(*D)),
+                   ('historia', '3 - 14.00 Volvimos', h_volvimos(*D)), ('historia', '4 - 17.00 Cerramos', h_cierre(*D)),
+                   ('historia', '5 - 19.05 Compartir posteo', h_resenas_compartir(*D)), ('posteo', 'Viernes 20 - 19.00 - Resena', p_resena())]
+    SEMANA.append(d)
+    d = dia('2026-11-21', 'SÁBADO', '21.11', True); D = d['nombre'], d['fecha']
+    d['piezas'] = [('historia', '1 - 08.00 Abrimos', h_abrimos(*D, sab=True)), ('historia', '2 - 12.30 Cerramos', h_cierre(*D, sab=True)),
+                   ('posteo', 'Sabado 21 - 10.00 - Como comprar', p_comprar())]
+    SEMANA.append(d)
 
-manifiesto = []
-for d in SEMANA:
-    base = AQUI / d['carpeta']; base.mkdir(exist_ok=True)
-    for tipo, nombre, html in d['piezas']:
-        archivo = f"{tipo}__{nombre.replace('/', '__').replace(' ', '_')}.html"
-        (base / archivo).write_text(f'<!doctype html><html lang="es"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{html}</body></html>')
-        manifiesto.append({'dia': d['carpeta'], 'diaNombre': f"{d['nombre'].title()} {d['fecha'][:2]}", 'tipo': tipo, 'nombre': nombre, 'html': f"{d['carpeta']}/{archivo}"})
-(AQUI / 'manifiesto.json').write_text(json.dumps(manifiesto, ensure_ascii=False, indent=1))
-print(len(manifiesto), 'piezas')
+    manifiesto = []
+    for d in SEMANA:
+        base = AQUI / d['carpeta']; base.mkdir(exist_ok=True)
+        for tipo, nombre, html in d['piezas']:
+            archivo = f"{tipo}__{nombre.replace('/', '__').replace(' ', '_')}.html"
+            (base / archivo).write_text(f'<!doctype html><html lang="es"><head><meta charset="utf-8"><style>{CSS}</style></head><body>{html}</body></html>')
+            manifiesto.append({'dia': d['carpeta'], 'diaNombre': f"{d['nombre'].title()} {d['fecha'][:2]}", 'tipo': tipo, 'nombre': nombre, 'html': f"{d['carpeta']}/{archivo}"})
+    (AQUI / 'manifiesto.json').write_text(json.dumps(manifiesto, ensure_ascii=False, indent=1))
+    print(len(manifiesto), 'piezas')
