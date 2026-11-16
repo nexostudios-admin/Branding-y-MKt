@@ -1,0 +1,6 @@
+historia_1_0800_abrimos|story
+historia_2_1200_mediodia|story
+historia_3_1400_volvimos|story
+historia_4_cierre|story
+post_resena|post
+historia_5_promo_post|story

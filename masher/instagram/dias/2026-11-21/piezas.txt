@@ -1,0 +1,3 @@
+historia_1_0800_abrimos|story
+historia_4_cierre|story
+post_como_comprar|post
