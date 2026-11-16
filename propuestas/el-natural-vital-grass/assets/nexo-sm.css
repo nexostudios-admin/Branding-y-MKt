@@ -1,15 +1,15 @@
-/* Nexo Social Media · estilo premium vertical para celular (9:16) */
+/* Nexo Social Media · estilo premium (paleta del cliente: negro, verde y blanco) vertical para celular (9:16) */
 @page { size: 90mm 160mm; margin: 0; }
 :root {
   --bg:#050505; --card:#111111; --edge:#262626; --ink:#f5f5f5; --muted:#a6a6a6;
-  --red:#e3121b; --red2:#ff4040; --silver:#d9d9d9; --sand:#3a3a3a;
+  --red:#2e9e48; --red2:#6fd36b; --silver:#d9d9d9; --sand:#3a3a3a;
   --tit:"Space Grotesk","Inter",sans-serif; --mono:"Orbitron","Inter",sans-serif;
 }
 * { box-sizing:border-box; }
 html, body { margin:0; background:var(--bg); color:var(--ink); }
 body { font-family:Inter, sans-serif; font-size:12pt; line-height:1.4; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 .slide { width:90mm; height:160mm; padding:10mm 7mm 12mm; position:relative; overflow:hidden; break-after:page; display:flex; flex-direction:column;
-  background: radial-gradient(110% 55% at 100% 0%, rgba(227,18,27,.14), transparent 60%), var(--bg); }
+  background: radial-gradient(110% 55% at 100% 0%, rgba(46,158,72,.14), transparent 60%), var(--bg); }
 .slide:last-child { break-after:auto; }
 /* corte diagonal rojo, como la X del logo */
 .slide::after { content:""; position:absolute; right:-6mm; top:-2mm; width:0.8mm; height:34mm; transform:rotate(38deg); transform-origin:top;
@@ -33,7 +33,7 @@ strong { color:var(--red2); font-weight:600; }
 .card b { display:block; font-family:var(--tit); font-weight:700; color:var(--ink); font-size:13.5pt; margin-bottom:1pt; }
 .card.line { border-left:3pt solid var(--red); }
 .card.opt { border-left:3pt solid var(--sand); border-style:dashed; border-left-style:solid; }
-.card.hl { background:linear-gradient(135deg,#5a0a0e,#1f0405); border:1px solid var(--red); }
+.card.hl { background:linear-gradient(135deg,#14532d,#06200f); border:1px solid var(--red); }
 .card .row b, .card .num + b { display:inline; }
 .who, .note { font-size:9.8pt; color:var(--muted); }
 .who { display:block; }
@@ -51,7 +51,7 @@ strong { color:var(--red2); font-weight:600; }
 .compact h2 { margin-bottom:8pt; }
 
 /* Portada */
-.cover { background: radial-gradient(90% 50% at 80% 10%, rgba(227,18,27,.30), transparent 60%), radial-gradient(70% 35% at 0% 100%, rgba(255,255,255,.06), transparent 60%), var(--bg); }
+.cover { background: radial-gradient(90% 50% at 80% 10%, rgba(46,158,72,.30), transparent 60%), radial-gradient(70% 35% at 0% 100%, rgba(255,255,255,.06), transparent 60%), var(--bg); }
 .cover .logo { width:62mm; margin:4mm 0 12mm -2mm; }
 .cover h1 { font-size:36pt; line-height:.98; margin:8pt 0 12pt; }
 .cover .claim { font-family:var(--tit); font-size:13pt; color:var(--red2); margin-bottom:12pt; }
@@ -59,10 +59,10 @@ strong { color:var(--red2); font-weight:600; }
 .cover .rule { width:100%; height:1px; background:linear-gradient(90deg,var(--red),transparent); margin:0 0 10pt; }
 
 /* Cierre */
-.dark { background: radial-gradient(100% 55% at 50% 0%, rgba(227,18,27,.38), transparent 65%), linear-gradient(180deg,#1a0304,#050505); }
+.dark { background: radial-gradient(100% 55% at 50% 0%, rgba(46,158,72,.38), transparent 65%), linear-gradient(180deg,#04170b,#050505); }
 .dark h2 { color:#fff; }
 .dark .card.line { background:rgba(255,255,255,.04); }
 /* el logo es negro cromado: le damos una luz detrás para que se lea sobre negro */
 .cover .logo { position:relative; z-index:1; filter: drop-shadow(0 0 1.2mm rgba(255,255,255,.35)) drop-shadow(0 0 5mm rgba(255,255,255,.18)); }
-.cover::before { left:0; top:0; width:100%; height:62mm; background: radial-gradient(60% 55% at 40% 45%, rgba(190,190,190,.32), rgba(227,18,27,.10) 55%, transparent 75%); }
+.cover::before { left:0; top:0; width:100%; height:62mm; background: radial-gradient(60% 55% at 40% 45%, rgba(190,190,190,.32), rgba(46,158,72,.10) 55%, transparent 75%); }
 .foot img { filter: brightness(2.6) contrast(1.1) drop-shadow(0 0 .6mm rgba(255,255,255,.3)); }
