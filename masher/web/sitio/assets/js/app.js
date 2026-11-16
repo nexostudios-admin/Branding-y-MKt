@@ -150,6 +150,7 @@
     const a = e.target.closest('a'); if (!a) return;
     const h = a.getAttribute('href') || '';
     if (h.startsWith('tel:')) evento('click_llamar');
+    else if (h.includes('chat.whatsapp.com')) evento('unirse_comunidad');
     else if (h.includes('wa.me')) evento('click_whatsapp');
     else if (a.dataset.evento === 'como_llegar' || h.includes('maps.app.goo.gl')) evento('click_como_llegar');
   });

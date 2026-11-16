@@ -143,6 +143,7 @@ SPRITE = """<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></symbol>
 <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></symbol>
 <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.4 4.5 5 4.8"/></symbol>
+<symbol id="i-grupo" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A5 5 0 0 1 21 19"/></symbol>
 <symbol id="i-empresa" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l5-3v15M10 21V4l9 4v13M14 10h2M14 14h2M7 12h1M7 16h1"/></symbol>
 </svg>"""
 
@@ -202,6 +203,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 <body>
 {SPRITE}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
+{f'<a class="barra-comunidad" href="{e(COM["url"])}" target="_blank" rel="noopener" data-evento="unirse_comunidad">{ic("whatsapp")}<span><b>Comunidad Masherr</b> · Descuentos, promos y rifas. <u>Sumate</u></span></a>' if COM.get('url') else ''}
 <header class="cabecera">
   <div class="contenedor">
     <div class="cab-fila">
@@ -236,6 +238,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
           <li><a href="{e(CFG['mapa'])}" target="_blank" rel="noopener">{e(CFG['direccion'])}<br>{e(CFG['localidad'])}</a></li>
           <li>Teléfono: <a href="tel:+541147525210">{e(CFG['telefono'])}</a></li>
           <li>WhatsApp: <a href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener">{e(CFG['whatsapp_visible'])}</a></li>
+          {f'<li><a href="{r}comunidad/">Comunidad Masherr</a> · descuentos, promos y rifas</li>' if COM.get('url') else ''}
           {f'<li>{e(CFG["horarios"])}</li>' if CFG['horarios'] else ''}
         </ul>
       </div>
@@ -292,6 +295,29 @@ def tarjeta(p, r):
       <span class="estado {'stock-ok' if p['disponible'] else 'stock-no'}">{'Disponible' if p['disponible'] else 'Sin stock'}</span>
       {boton}</div></article>"""
 
+COM = CFG.get('comunidad') or {}
+def btn_comunidad(clase='boton wa', texto='Unirme a la comunidad'):
+    return f'<a class="{clase}" href="{e(COM['url'])}" target="_blank" rel="noopener" data-evento="unirse_comunidad">{ic('whatsapp')}{texto}</a>'
+
+def bloque_comunidad(r, h='h2', id_t='t-com'):
+    if not COM.get('url'): return ''
+    return f"""<section class="seccion oscuro banda comunidad" aria-labelledby="{id_t}">
+  <div class="rayas" aria-hidden="true"></div>
+  <div class="contenedor dos-col">
+    <div><p class="rotulo">{ic('grupo')}Comunidad Masherr</p>
+      <{h} class="titulo-seccion" id="{id_t}">Sumate a la comunidad.</{h}>
+      <p class="bajada">Descuentos, promos, rifas y mucho más. Enterate primero desde nuestro grupo de WhatsApp.</p>
+      <p class="com-acciones">{btn_comunidad()}</p>
+      <p class="com-nota">Es gratis y podés salir cuando quieras.</p></div>
+    <ul class="com-beneficios">
+      <li><b>Descuentos</b><span>Beneficios exclusivos para los que están en el grupo.</span></li>
+      <li><b>Promos</b><span>Ofertas de la semana y novedades antes que nadie.</span></li>
+      <li><b>Rifas</b><span>Sorteos entre los miembros de la comunidad.</span></li>
+      <li><b>Y mucho más</b><span>Consejos, lanzamientos y avisos del local.</span></li>
+    </ul>
+  </div>
+</section>"""
+
 def bloque_redes(r):
     tarjetas = ''.join(f"""<li><a class="red" href="{e(x['url'])}" target="_blank" rel="noopener">{ic(k)}<span><b>{n}</b><span>{e(x['usuario'])}</span></span></a></li>"""
                        for k, n, x in redes_activas if k != 'facebook')
@@ -308,7 +334,7 @@ def bloque_redes(r):
 </section>"""
 
 # ---------------------------------------------------------------- Limpiar y copiar
-for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'data']:  # img/ se conserva como caché
+for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'comunidad', 'data']:  # img/ se conserva como caché
     shutil.rmtree(SITIO / sub, ignore_errors=True)
 (SITIO / 'data').mkdir(parents=True)
 
@@ -351,6 +377,7 @@ inicio = f"""
     <ul class="grilla-prod">{''.join(f'<li>{tarjeta(p, r)}</li>' for p in destacados)}</ul>
   </div>
 </section>
+{bloque_comunidad('')}
 <section class="seccion" aria-labelledby="t-como" id="como-comprar">
   <div class="contenedor">
     <p class="rotulo">Cómo comprar</p><h2 class="titulo-seccion" id="t-como">Armá el pedido online, lo cerramos por WhatsApp.</h2>
@@ -633,13 +660,27 @@ pagina('ferreteria-san-martin/index.html', 'Ferretería en San Martín · Masher
        'Ferretería industrial en San Martín: local en Calle 38 4335, Villa Lynch. Herramientas, máquinas e insumos. Horario, cómo llegar, WhatsApp y tienda online.',
        local, jsonld=ld)
 
+# ---------------------------------------------------------------- Comunidad
+if COM.get('url'):
+    pagina('comunidad/index.html', 'Comunidad Masherr · Descuentos, promos y rifas', 'Sumate gratis a la Comunidad Masherr en WhatsApp: descuentos, promos, rifas y novedades de la ferretería industrial de Villa Lynch, San Martín.',
+           bloque_comunidad('../', h='h1', id_t='t-com-p') + f"""
+<section class="seccion"><div class="contenedor" style="max-width:860px">
+  <p class="rotulo">Cómo funciona</p><h2 class="titulo-seccion">Entrás con un toque.</h2>
+  <ol class="pasos">
+    <li><b>Tocá el botón</b><p>Se abre WhatsApp con la invitación al grupo.</p></li>
+    <li><b>Unite</b><p>Tocá "Unirse al grupo". Es gratis.</p></li>
+    <li><b>Listo</b><p>Te llegan las promos, los descuentos y las rifas de Masherr.</p></li>
+  </ol>
+  <p style="margin-top:28px">{btn_comunidad()}</p>
+</div></section>""", actual='comunidad/')
+
 # ---------------------------------------------------------------- 404, sitemap
 pagina('404.html', 'Página no encontrada · Masherr', 'No encontramos esta página.', f"""<section class="seccion"><div class="contenedor"><h1>No encontramos esta página.</h1>
 <p class="bajada">Puede que el producto ya no esté publicado. Buscalo en la tienda o consultanos.</p>
 <p><a class="boton" href="/tienda/">Ir a la tienda</a></p></div></section>""", indexar=False)
 if CFG['dominio']:
     d = CFG['dominio'].rstrip('/')
-    urls = ['', 'ferreteria-san-martin/', 'tienda/', 'empresas/', 'nosotros/'] + [f'categoria/{c[0]}/' for c in cats_usadas] + [f'producto/{p["slug"]}/' for p in productos]
+    urls = ['', 'ferreteria-san-martin/', 'comunidad/', 'tienda/', 'empresas/', 'nosotros/'] + [f'categoria/{c[0]}/' for c in cats_usadas] + [f'producto/{p["slug"]}/' for p in productos]
     (SITIO / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{d}/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     (SITIO / 'robots.txt').write_text(f'User-agent: *\nDisallow: /carrito/\nSitemap: {d}/sitemap.xml\n')
 (SITIO / 'manifest.webmanifest').write_text(json.dumps({'name': 'Masherr Ferretería Industrial', 'short_name': 'Masherr', 'start_url': './', 'display': 'browser',

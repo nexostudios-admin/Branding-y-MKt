@@ -53,5 +53,10 @@
   "codigo_postal": "B1650GSA",
   "ga4_id": "GTM-5RQWJWVC",
   "google_ads_id": "",
-  "google_ads_conversion": {}
+  "google_ads_conversion": {},
+  "comunidad": {
+    "nombre": "Comunidad Masherr",
+    "url": "https://chat.whatsapp.com/LC8enWGUJvsDrNZvOybiWl",
+    "lema": "Descuentos | Promos | Rifas. Y mucho más."
+  }
 }
