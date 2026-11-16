@@ -3,63 +3,19 @@
 <head>
 <meta charset="utf-8">
 <title>Resumen Propuesta — El Natural Vital Grass × Nexo</title>
-<style>
-  @page { size: 90mm 160mm; margin: 0; }
-  :root { --green:#1f4d2b; --green2:#3c7a3f; --leaf:#6fa34a; --cream:#f6f1e3; --sand:#e9dcc0; --ink:#1d2a20; --muted:#55645a; --line:#d8cfb8; }
-  * { box-sizing: border-box; }
-  html, body { margin:0; background:#fff; color:var(--ink); }
-  body { font-family: Inter, sans-serif; font-size: 11.5pt; line-height: 1.36; }
-  .slide { width:90mm; height:160mm; padding:9mm 7mm 8mm; position:relative; overflow:hidden; break-after:page; display:flex; flex-direction:column; }
-  .slide:last-child { break-after:auto; }
-  .foot { position:absolute; left:7mm; right:7mm; bottom:4mm; display:flex; justify-content:space-between; font-size:7pt; color:var(--muted); letter-spacing:.04em; }
-  h1,h2 { font-family:"Bitstream Charter", Caladea, serif; color:var(--green); margin:0; }
-  h2 { font-size:19pt; line-height:1.12; margin:2pt 0 8pt; }
-  p { margin:0 0 7pt; }
-  ul { margin:0 0 6pt; padding-left:13pt; }
-  li { margin-bottom:4pt; }
-  li::marker { color:var(--leaf); }
-  strong { color:var(--green); }
-  .tag { font-size:8pt; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--green2); }
-  .sub { font-size:8.5pt; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--green2); margin:4pt 0 4pt; }
-  .card { background:var(--cream); border-radius:7pt; padding:6pt 9pt; margin-bottom:5pt; }
-  .card b { font-family:"Bitstream Charter", serif; color:var(--green); font-size:12.5pt; }
-  .card.line { background:none; border:1px solid var(--line); border-left:3.5pt solid var(--leaf); }
-  .card.opt { border-left-color:var(--sand); border-style:dashed; border-left-style:solid; }
-  .card.hl { background:#e3eedb; border:1.5pt solid var(--green2); }
-  .who { font-size:9.5pt; color:var(--muted); display:block; }
-  .note { font-size:9.5pt; color:var(--muted); }
-  .num { color:var(--leaf); font-family:"Bitstream Charter", serif; font-weight:700; }
-  .row { display:flex; justify-content:space-between; gap:6pt; align-items:baseline; }
-  .price { font-weight:600; color:var(--green); white-space:nowrap; }
-  .cover { background:var(--cream); }
-  .cover h1 { font-size:30pt; line-height:1.02; margin:12pt 0 10pt; }
-  .cover .claim { font-family:"Bitstream Charter", serif; font-size:13pt; color:var(--green2); margin-bottom:10pt; }
-  .cover .grass { position:absolute; right:-4mm; bottom:0; }
-  .dark { background:var(--green); color:#fff; }
-  .dark h2, .dark strong { color:#fff; }
-  .dark .tag, .dark .sub, .dark .foot { color:#bcd8a8; }
-  .dark .card.line { border-color:#4d7a55; border-left-color:#bcd8a8; }
-  .dark .card b, .dark .price { color:#fff; }
-  .dark .who { color:#bcd8a8; }
-  .checks { list-style:none; padding:0; }
-  .checks li { padding-left:15pt; position:relative; }
-  .checks li::before { content:"☐"; position:absolute; left:0; color:#bcd8a8; }
-</style>
+<link href="assets/fonts/local.css" rel="stylesheet">
+<link href="assets/nexo-premium.css" rel="stylesheet">
 </head>
 <body>
 
 <section class="slide cover">
-  <div class="tag">Resumen de propuesta · Nexo</div>
+  <img class="logo" src="assets/nexo.png" alt="Nexo Studios">
+  <div class="tag">Resumen de propuesta</div>
   <h1>El Natural<br>Vital Grass</h1>
+  <div class="rule"></div>
   <div class="claim">Volver a la tierra es volver a vos.</div>
   <p>Proponemos convertir una cuenta con contenido auténtico, pero visualmente disperso, en <strong>una marca reconocible que venda clorofila y kits para cultivarla en casa</strong>: en el balcón, el patio o la terraza.</p>
   <p class="note">Noviembre 2026 · Benja Ortega y Mica Liporacci</p>
-  <svg class="grass" width="150" height="138" viewBox="0 0 120 110" aria-hidden="true">
-    <g stroke="#3c7a3f" stroke-width="2.6" stroke-linecap="round" fill="none">
-      <path d="M60 110 C58 80 50 50 30 18"/><path d="M60 110 C60 75 62 45 60 6"/><path d="M60 110 C63 80 72 52 92 22"/>
-      <path d="M60 110 C55 85 40 65 16 48"/><path d="M60 110 C66 86 82 66 106 52"/><path d="M60 110 C57 82 52 60 44 30"/><path d="M60 110 C64 82 70 60 78 30"/>
-    </g>
-  </svg>
 </section>
 
 <section class="slide">
@@ -79,7 +35,7 @@
   </ul>
 </section>
 
-<section class="slide">
+<section class="slide compact">
   <div class="tag">La propuesta</div>
   <h2>Cuatro módulos + uno opcional</h2>
   <div class="card line"><span class="num">01</span> <b>Branding y manual</b><span class="who">Benja · identidad, logo, manual y plantillas</span></div>
@@ -113,7 +69,7 @@
 
 <script>
   const s = [...document.querySelectorAll('.slide')];
-  s.forEach((el, i) => { if (!i) return; const f = document.createElement('div'); f.className = 'foot'; f.innerHTML = '<span>NEXO × EL NATURAL VITAL GRASS</span><span>' + (i + 1) + ' / ' + s.length + '</span>'; el.appendChild(f); });
+  s.forEach((el, i) => { if (!i) return; const f = document.createElement('div'); f.className = 'foot'; f.innerHTML = '<img src="assets/nexo.png" alt="Nexo"><span>' + String(i + 1).padStart(2, '0') + ' / ' + String(s.length).padStart(2, '0') + '</span>'; el.appendChild(f); });
 </script>
 </body>
 </html>
