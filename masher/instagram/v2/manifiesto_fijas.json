@@ -1,0 +1,65 @@
+[
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "1 - Lunes a viernes 08.00 - Abrimos",
+  "html": "fijas/historia__1_-_Lunes_a_viernes_08.00_-_Abrimos.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "2 - Lunes a viernes 12.00 - Cerramos al mediodia",
+  "html": "fijas/historia__2_-_Lunes_a_viernes_12.00_-_Cerramos_al_mediodia.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "3 - Lunes a viernes 14.00 - Volvimos (14 a 17)",
+  "html": "fijas/historia__3_-_Lunes_a_viernes_14.00_-_Volvimos_14_a_17.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "4 - Lunes a viernes 17.00 - Cerramos",
+  "html": "fijas/historia__4_-_Lunes_a_viernes_17.00_-_Cerramos.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "5 - Sabados 08.00 - Abrimos",
+  "html": "fijas/historia__5_-_Sabados_08.00_-_Abrimos.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "6 - Sabados 12.30 - Cerramos",
+  "html": "fijas/historia__6_-_Sabados_12.30_-_Cerramos.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "7 - Domingos - Hoy descansamos",
+  "html": "fijas/historia__7_-_Domingos_-_Hoy_descansamos.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "8 - Comunidad A (todos los dias)",
+  "html": "fijas/historia__8_-_Comunidad_A_todos_los_dias.html"
+ },
+ {
+  "dia": "fijas",
+  "carpeta": "00 - Historias fijas",
+  "tipo": "historia",
+  "nombre": "9 - Comunidad B (todos los dias)",
+  "html": "fijas/historia__9_-_Comunidad_B_todos_los_dias.html"
+ }
+]
