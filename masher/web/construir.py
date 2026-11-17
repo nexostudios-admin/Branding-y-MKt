@@ -165,10 +165,15 @@ redes_activas = [(k, n, CFG['redes'][k]) for k, n in REDES if CFG['redes'].get(k
 import datetime
 GENERADO = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
 
-IDS = [i for i in (CFG.get('ga4_id'), CFG.get('google_ads_id')) if i]
-MEDICION = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={IDS[0]}"></script>'
-            '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());'
-            + ''.join(f'gtag("config","{i}");' for i in IDS if not i.startswith('GTM-')) + '</script>') if IDS else ''
+# Medición: Google Tag Manager (GTM-…) y/o etiqueta de Google directa (GA4 G-… y Google Ads AW-…).
+_ids = [CFG.get('gtm_id'), CFG.get('ga4_id'), CFG.get('google_ads_id')]
+GTM = next((i for i in _ids if i and i.startswith('GTM-')), '')
+TAGS = [i for i in _ids if i and (i.startswith('G-') or i.startswith('AW-'))]
+MED_HEAD = ('<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}</script>'
+            + (f"<script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);}})(window,document,'script','dataLayer','{GTM}');</script>" if GTM else '')
+            + (f'<script async src="https://www.googletagmanager.com/gtag/js?id={TAGS[0]}"></script><script>gtag("js",new Date());' + ''.join(f'gtag("config","{i}");' for i in TAGS) + '</script>' if TAGS else ''))
+MED_BODY = f'<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>' if GTM else ''
+MEDICION = ''
 
 def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), indexar=True, imagen=None, tipo='website'):
     prof = ruta.count('/')
@@ -207,9 +212,11 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 <link rel="manifest" href="{r}manifest.webmanifest">
 <link rel="preload" href="{r}assets/fonts/DejaVuSansCondensed-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{r}assets/css/estilos.css">
+{MED_HEAD}
 {ld}
 </head>
 <body>
+{MED_BODY}
 {SPRITE}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 {f'<a class="barra-comunidad" href="{e(COM["url"])}" target="_blank" rel="noopener" data-evento="unirse_comunidad">{ic("whatsapp")}<span><b>Comunidad Masherr</b> · Descuentos, promos y rifas. <u>Sumate</u></span></a>' if COM.get('url') else ''}
@@ -353,6 +360,7 @@ json.dump({'actualizado': CFG['fecha_precios'], 'categorias': [{'slug': c[0], 'n
 cfg_pub = {k: CFG[k] for k in ['whatsapp', 'whatsapp_visible', 'telefono', 'direccion', 'localidad', 'fecha_precios', 'redes', 'publicaciones']}
 cfg_pub['mostrar_precios'] = MP
 cfg_pub['ads_conversion'] = CFG.get('google_ads_conversion', {})
+cfg_pub['gtag'] = bool(TAGS)
 (SITIO / 'assets' / 'js' / 'config.js').write_text('window.MASHERR = ' + json.dumps(cfg_pub, ensure_ascii=False, indent=1) + ';\n')
 
 # ---------------------------------------------------------------- Inicio

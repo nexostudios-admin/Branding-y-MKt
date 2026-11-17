@@ -138,12 +138,14 @@
   window.M = { CFG, ROOT, fmt, esc, img, icono, cargarCatalogo, carrito, resolver, wa, toast, tarjeta };
 })();
 
-/* Medición de contactos (Google Analytics 4 / Google Ads). Solo envía si gtag está configurado en config.json. */
+/* Medición de contactos: eventos a Tag Manager (dataLayer) y, si hay IDs G-/AW- en config.json, a GA4 / Google Ads. */
 (function () {
   const CONV = (window.MASHERR && window.MASHERR.ads_conversion) || {};
   function evento(nombre, extra) {
-    if (typeof window.gtag !== 'function') return;
-    window.gtag('event', nombre, extra || {});
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: nombre }, extra || {}));  // para Tag Manager
+    if (!(window.MASHERR && window.MASHERR.gtag) || typeof window.gtag !== 'function') return;
+    window.gtag('event', nombre, extra || {});  // GA4 / Google Ads directos
     if (CONV[nombre]) window.gtag('event', 'conversion', { send_to: CONV[nombre] });
   }
   document.addEventListener('click', e => {

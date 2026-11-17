@@ -25,5 +25,6 @@ window.MASHERR = {
  },
  "publicaciones": [],
  "mostrar_precios": false,
- "ads_conversion": {}
+ "ads_conversion": {},
+ "gtag": false
 };
