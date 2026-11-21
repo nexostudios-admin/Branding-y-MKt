@@ -5,6 +5,7 @@
   const app = document.getElementById('carrito-app');
   const MP = CFG.mostrar_precios !== false;  // false: la web no muestra precios, se cotiza por WhatsApp
   let CAT, datos = { nombre: '', entrega: 'retiro', direccion: '', localidad: '', cp: '', pago: '', factura: '', comentarios: '' };
+  try { const pf = JSON.parse(localStorage.getItem('masherr_perfil_v1') || '{}'); datos = { ...datos, ...Object.fromEntries(Object.entries(pf).filter(([k, v]) => v && k in datos)) }; } catch (e) {}
   try { datos = { ...datos, ...JSON.parse(sessionStorage.getItem('masherr_datos') || '{}') }; } catch (e) {}
 
   function lineas() {
@@ -118,6 +119,13 @@
     marcar(dir, 'e-dir', envio && !dir.value.trim());
     if (!ok) return;
     window.open(wa(mensaje(f)), '_blank', 'noopener');
+    try {  // historial de pedidos para "Mi cuenta"
+      const h = JSON.parse(localStorage.getItem('masherr_pedidos_v1') || '[]');
+      h.unshift({ fecha: Date.now(), items: lineas().filter(l => l.r && l.r.v.disponible).map(l => ({ v: l.v, c: l.c, n: l.r.p.nombre + (l.r.v.nombre ? ' (' + l.r.v.nombre + ')' : '') })) });
+      localStorage.setItem('masherr_pedidos_v1', JSON.stringify(h.slice(0, 30)));
+      const pf = JSON.parse(localStorage.getItem('masherr_perfil_v1') || '{}');
+      if (!pf.nombre) localStorage.setItem('masherr_perfil_v1', JSON.stringify({ ...pf, nombre: datos.nombre, direccion: datos.direccion || pf.direccion, localidad: datos.localidad || pf.localidad, cp: datos.cp || pf.cp, pago: datos.pago || pf.pago, factura: datos.factura || pf.factura }));
+    } catch (e) {}
   });
   document.addEventListener('carrito', () => CAT && pintar());
   document.querySelector('.wa-flotante')?.remove();  // en el carrito el botón de WhatsApp es el del pedido

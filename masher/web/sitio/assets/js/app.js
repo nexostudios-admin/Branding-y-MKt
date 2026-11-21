@@ -76,17 +76,68 @@
       : variasVar
         ? `<a class="boton secundario agregar" href="${ROOT}producto/${p.slug}/">Elegir opción</a>`
         : `<button class="boton agregar" type="button" data-agregar="${v.id}" data-nombre="${esc(p.nombre)}">${icono('carrito')}Agregar</button>`;
+    const fav = favoritos.tiene(p.id);
     return `<article class="tarjeta">
-      <div class="foto">${p.imgs[0] ? `<img src="${img(p.imgs[0])}" alt="" width="480" height="480" loading="lazy" decoding="async">` : ''}</div>
+      <div class="foto">${p.imgs[0] ? `<img src="${img(p.imgs[0])}" alt="" width="480" height="480" loading="lazy" decoding="async">` : ''}
+        <button class="fav" type="button" data-fav="${p.id}" aria-pressed="${fav}" aria-label="Guardar ${esc(p.nombre)} en favoritos">${icono('corazon')}</button>
+        ${sinStock ? '<span class="sello">Sin stock</span>' : ''}</div>
       <div class="cuerpo">
         ${p.marca ? `<span class="marca">${esc(p.marca)}</span>` : ''}
         <h3><a href="${ROOT}producto/${p.slug}/">${esc(p.nombre)}</a></h3>
         <span class="precio${p.precio ? '' : ' consultar'}">${p.precio ? (variasVar ? '<span style="font-size:.6em">desde </span>' : '') + fmt(p.precio) : 'Consultá precio'}</span>
-        <span class="estado ${sinStock ? 'stock-no' : 'stock-ok'}">${sinStock ? 'Sin stock' : 'Disponible'}</span>
-        ${boton}
+        <div class="t-acciones">${boton}<a class="t-wa" href="${wa('Hola Masherr, quiero consultar por: ' + p.nombre + '.')}" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">${icono('whatsapp')}</a></div>
       </div>
     </article>`;
   }
+
+  // ---------- Favoritos (en este navegador; se sincronizan con la cuenta cuando esté activa) ----------
+  const CLAVE_F = 'masherr_favoritos_v1';
+  const favoritos = {
+    lista() { try { const v = JSON.parse(localStorage.getItem(CLAVE_F) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } },
+    tiene(id) { return favoritos.lista().includes(+id); },
+    alternar(id) {
+      id = +id; const l = favoritos.lista(); const i = l.indexOf(id);
+      if (i >= 0) l.splice(i, 1); else l.unshift(id);
+      try { localStorage.setItem(CLAVE_F, JSON.stringify(l)); } catch (e) {}
+      pintarFavoritos(); document.dispatchEvent(new CustomEvent('favoritos'));
+      return i < 0;
+    },
+  };
+  function pintarFavoritos() {
+    const l = favoritos.lista();
+    document.querySelectorAll('[data-fav]').forEach(b => b.setAttribute('aria-pressed', l.includes(+b.dataset.fav)));
+    document.querySelectorAll('[data-fav-burbuja]').forEach(b => { b.textContent = l.length; b.hidden = !l.length; });
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-fav]'); if (!b) return;
+    e.preventDefault();
+    const agregado = favoritos.alternar(b.dataset.fav);
+    toast(agregado ? `Guardado en favoritos <a href="${ROOT}cuenta/#favoritos">Ver favoritos</a>` : 'Quitado de favoritos');
+  });
+
+  // ---------- Banners rotativos ----------
+  function iniciarSlider() {
+    const s = document.querySelector('[data-slider]'); if (!s) return;
+    const slides = [...s.querySelectorAll('[data-slide]')], dots = [...s.querySelectorAll('[data-ir]')];
+    let k = 0, t;
+    const ir = n => { k = (n + slides.length) % slides.length; slides.forEach((x, i) => (x.hidden = i !== k)); dots.forEach((d, i) => d.setAttribute('aria-current', i === k)); };
+    const auto = () => { clearInterval(t); if (!matchMedia('(prefers-reduced-motion: reduce)').matches) t = setInterval(() => ir(k + 1), 6500); };
+    dots.forEach(d => d.addEventListener('click', () => { ir(+d.dataset.ir); auto(); }));
+    s.addEventListener('mouseenter', () => clearInterval(t)); s.addEventListener('mouseleave', auto);
+    auto();
+  }
+  // ---------- Flechas de los carruseles de productos ----------
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-riel]'); if (!b) return;
+    const r = b.closest('section').querySelector('.riel');
+    r.scrollBy({ left: +b.dataset.riel * r.clientWidth * .9, behavior: 'smooth' });
+  });
+  // ---------- Menú de categorías (teclado / táctil) ----------
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-mm]');
+    document.querySelectorAll('.megamenu.abierto').forEach(m => { if (!b || !m.contains(b)) { m.classList.remove('abierto'); m.querySelector('[data-mm]').setAttribute('aria-expanded', 'false'); } });
+    if (b) { const m = b.closest('.megamenu'); const a = m.classList.toggle('abierto'); b.setAttribute('aria-expanded', a); }
+  });
 
   // Delegación: botones "Agregar" en cualquier página
   document.addEventListener('click', e => {
@@ -132,10 +183,10 @@
     });
   }
 
-  document.addEventListener('DOMContentLoaded', () => { actualizarBurbuja(); iniciarRedes(); });
+  document.addEventListener('DOMContentLoaded', () => { actualizarBurbuja(); iniciarRedes(); pintarFavoritos(); iniciarSlider(); });
   window.addEventListener('storage', e => { if (e.key === CLAVE) { memoria = leer(); actualizarBurbuja(); document.dispatchEvent(new CustomEvent('carrito')); } });
 
-  window.M = { CFG, ROOT, fmt, esc, img, icono, cargarCatalogo, carrito, resolver, wa, toast, tarjeta };
+  window.M = { CFG, ROOT, fmt, esc, img, icono, cargarCatalogo, carrito, resolver, wa, toast, tarjeta, favoritos, pintarFavoritos };
 })();
 
 /* Medición de contactos: eventos a Tag Manager (dataLayer) y, si hay IDs G-/AW- en config.json, a GA4 / Google Ads. */

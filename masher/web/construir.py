@@ -128,6 +128,39 @@ if not MP:
             v['precio'] = None
         p['precio'] = None
         p['disponible'] = any(v['disponible'] for v in p['variantes'])
+
+# Fotos con marco Masherr (img/marca/…): se generan una sola vez por foto; si algo falla se usa la original.
+try:
+    from marco import generar as _marco
+except Exception:
+    _marco = None
+_nuevas = 0
+for p in productos:
+    fotos = []
+    for b in p['imgs']:
+        dst = 'img/marca/' + b.rsplit('/', 1)[-1]
+        if not (SITIO / (dst + '-480-0.webp')).exists():
+            try:
+                _marco(SITIO / (b + '-1024-1024.webp'), SITIO / dst, SITIO / 'assets/img/masher-logo-azul.webp'); _nuevas += 1
+            except Exception as ex:
+                print(f'  ! Sin marco para {b}: {ex}', file=sys.stderr); dst = b
+        fotos.append(dst)
+    p['imgs'] = fotos
+if _nuevas: print(f'Fotos con marco nuevas: {_nuevas}')
+
+# Orden de "Relevancia": rubros principales primero y, dentro de cada rubro, los productos más buscados.
+ORDEN_CAT = ['herramientas-electricas', 'inalambricas', 'maquinas', 'medicion', 'accesorios', 'agua-jardin', 'herramientas-manuales', 'almacenamiento', 'adhesivos', 'otros']
+CLAVES = {'herramientas-electricas': ['amoladora', 'taladro', 'rotomartillo', 'sierra', 'atornillador', 'lijadora'], 'inalambricas': ['taladro', 'amoladora', 'atornillador'],
+          'maquinas': ['soldadora', 'compresor', 'mascara'], 'medicion': ['cinta', 'nivel laser', 'medidor', 'nivel'], 'accesorios': ['disco', 'juego de mechas', 'mecha', 'broca', 'copa'],
+          'agua-jardin': ['hidrolavadora', 'aspiradora', 'bomba'], 'herramientas-manuales': ['juego', 'set', 'pinza', 'llave'], 'almacenamiento': ['caja', 'bolso', 'carro'],
+          'adhesivos': ['adhesivo', 'espuma'], 'otros': ['escalera']}
+MARCAS_TOP_ORDEN = ['DeWalt', 'Bosch', 'Milwaukee', 'Stanley', 'Karcher', 'Makita', 'Black+Decker', 'Bahco', 'Emtop', 'Nebraska', 'Pegaso']
+def _puntaje(p):
+    n = norm(p['nombre']); ks = CLAVES.get(p['cat'], [])
+    kw = next((i for i, k in enumerate(ks) if k in n), len(ks))
+    mk = MARCAS_TOP_ORDEN.index(p['marca']) if p['marca'] in MARCAS_TOP_ORDEN else len(MARCAS_TOP_ORDEN)
+    return (ORDEN_CAT.index(p['cat']) if p['cat'] in ORDEN_CAT else 99, not p['disponible'], not p['imgs'], kw, mk, n)
+productos.sort(key=_puntaje)
 cats_usadas = [c for c in CATEGORIAS if any(p['cat'] == c[0] for p in productos)]
 
 # ---------------------------------------------------------------- Plantillas
@@ -153,6 +186,12 @@ SPRITE = """<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></symbol>
 <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.4 4.5 5 4.8"/></symbol>
 <symbol id="i-grupo" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A5 5 0 0 1 21 19"/></symbol>
+<symbol id="i-usuario" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></symbol>
+<symbol id="i-corazon" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-9.2-9.4C1.7 7.4 3.9 4.5 7 4.5c2 0 3.4 1.2 5 3 1.6-1.8 3-3 5-3 3.1 0 5.3 2.9 4.2 6.1C19.5 15.4 12 20 12 20z"/></symbol>
+<symbol id="i-tienda" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V9M5 13v8h14v-8M10 21v-5h4v5"/></symbol>
+<symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+<symbol id="i-estrella" viewBox="0 0 24 24"><path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.3L12 17.4 6.5 20.4l1-6.3L3 9.7l6.2-.9z"/></symbol>
+<symbol id="i-pedido" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></symbol>
 <symbol id="i-empresa" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l5-3v15M10 21V4l9 4v13M14 10h2M14 14h2M7 12h1M7 16h1"/></symbol>
 </svg>"""
 
@@ -219,55 +258,62 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 {MED_BODY}
 {SPRITE}
 <a class="saltar" href="#contenido">Saltar al contenido</a>
-{f'<a class="barra-comunidad" href="{e(COM["url"])}" target="_blank" rel="noopener" data-evento="unirse_comunidad">{ic("whatsapp")}<span><b>Comunidad Masherr</b> · Descuentos, promos y rifas. <u>Sumate</u></span></a>' if COM.get('url') else ''}
+<div class="topbar"><div class="contenedor topbar-fila">
+  <a href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener">{ic('whatsapp')}Pedidos por WhatsApp <b>{e(CFG['whatsapp_visible'])}</b></a>
+  <span class="tb-2">{ic('tienda')}Retiro en el local · Villa Lynch, San Martín</span>
+  {f'<a class="tb-3" href="{r}comunidad/">{ic("grupo")}Comunidad Masherr: descuentos, promos y rifas <u>Sumate</u></a>' if COM.get('url') else ''}
+</div></div>
 <header class="cabecera">
-  <div class="contenedor">
-    <div class="cab-fila">
-      <a class="marca-logo" href="{r}" aria-label="Masherr, ir al inicio"><img src="{r}assets/img/masher-logo-azul.webp" alt="Masherr máquinas - herramientas" width="473" height="97"></a>
-      <nav class="cab-nav" aria-label="Principal">{navhtml()}</nav>
-      <form class="cab-buscar" action="{r}tienda/" role="search"><div class="buscador"><label class="sr" for="q-cab">Buscar productos</label>
-        <input id="q-cab" name="q" type="search" placeholder="Buscá por producto o marca" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form>
-      <div class="cab-acciones">
-        <a class="icono-boton" href="{r}carrito/" data-carrito-label aria-label="Carrito">{ic('carrito')}<span class="burbuja" data-burbuja hidden>0</span></a>
-        <button class="icono-boton solo-movil" type="button" data-menu aria-expanded="false" aria-controls="menu-movil">{ic('menu')}<span class="sr">Abrir menú</span></button>
-      </div>
+  <div class="contenedor cab-fila">
+    <button class="icono-boton solo-movil" type="button" data-menu aria-expanded="false" aria-controls="menu-movil">{ic('menu')}<span class="sr">Abrir menú</span></button>
+    <a class="marca-logo" href="{r}" aria-label="Masherr, ir al inicio"><img src="{r}assets/img/masher-logo-azul.webp" alt="Masherr máquinas - herramientas" width="473" height="97"></a>
+    <form class="cab-buscar" action="{r}tienda/" role="search"><div class="buscador"><label class="sr" for="q-cab">Buscar productos</label>
+      <input id="q-cab" name="q" type="search" placeholder="Buscá productos, marcas o categorías" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form>
+    <div class="cab-acciones">
+      <a class="cab-accion" href="{r}cuenta/">{ic('usuario')}<span class="solo-escritorio"><small>Hola</small>Mi cuenta</span></a>
+      <a class="cab-accion" href="{r}cuenta/#favoritos" aria-label="Favoritos">{ic('corazon')}<span class="burbuja" data-fav-burbuja hidden>0</span></a>
+      <a class="cab-accion" href="{r}carrito/" data-carrito-label aria-label="Carrito">{ic('carrito')}<span class="burbuja" data-burbuja hidden>0</span><span class="solo-escritorio"><small>Tu</small>Pedido</span></a>
     </div>
-    <form class="cab-buscar solo-movil" action="{r}tienda/" role="search"><div class="buscador"><label class="sr" for="q-movil">Buscar productos</label>
-      <input id="q-movil" name="q" type="search" placeholder="Buscá por producto o marca" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form>
-    <nav id="menu-movil" class="menu-movil solo-movil" aria-label="Menú">{navhtml()}<a href="#contacto">Contacto</a></nav>
   </div>
+  <div class="contenedor cab-buscar-movil"><form action="{r}tienda/" role="search"><div class="buscador"><label class="sr" for="q-movil">Buscar productos</label>
+    <input id="q-movil" name="q" type="search" placeholder="Buscá productos o marcas" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form></div>
+  <nav class="nav-cat" aria-label="Categorías"><div class="contenedor nav-fila">
+    <div class="megamenu"><button class="mm-boton" type="button" aria-expanded="false" data-mm>{ic('menu')}Categorías</button>
+      <div class="mm-panel"><ul>{''.join(f'<li><a href="{r}categoria/{c[0]}/"><b>{e(c[1])}</b><span>{e(c[2])}</span></a></li>' for c in cats_usadas)}</ul>
+      <a class="mm-todo" href="{r}tienda/">Ver toda la tienda {ic('flecha')}</a></div></div>
+    <div class="nav-links">{''.join(f'<a href="{r}categoria/{c[0]}/">{e(c[1])}</a>' for c in [x for x in cats_usadas if x[0] in ('herramientas-electricas', 'maquinas', 'medicion', 'accesorios')])}</div>
+    <div class="nav-der"><a href="{r}empresas/"{' aria-current="page"' if actual == 'empresas/' else ''}>{ic('empresa')}Empresas</a><a href="{r}nosotros/"{' aria-current="page"' if actual == 'nosotros/' else ''}>Nosotros</a></div>
+  </div></nav>
+  <nav id="menu-movil" class="menu-movil" aria-label="Menú"><div class="contenedor">
+    <p class="mm-titulo">Categorías</p>{''.join(f'<a href="{r}categoria/{c[0]}/">{e(c[1])}</a>' for c in cats_usadas)}
+    <p class="mm-titulo">Masherr</p><a href="{r}tienda/">Toda la tienda</a><a href="{r}cuenta/">Mi cuenta</a><a href="{r}empresas/">Empresas</a><a href="{r}nosotros/">Nosotros</a><a href="{r}comunidad/">Comunidad</a><a href="#contacto">Contacto</a>
+  </div></nav>
 </header>
 <main id="contenido">
 {cuerpo}
 </main>
 <footer class="pie" id="contacto">
+  <div class="pie-cta"><div class="contenedor pie-cta-fila">
+    <div><b>¿No encontrás lo que buscás?</b><span>Escribinos: lo conseguimos o te recomendamos una alternativa.</span></div>
+    <a class="boton wa" href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener">{ic('whatsapp')}Escribinos por WhatsApp</a>
+  </div></div>
   <div class="contenedor">
     <div class="pie-grid">
-      <div>
-        <a class="logo-bloque" href="{r}"><img src="{r}assets/img/masher-logo-azul.webp" alt="Masherr máquinas - herramientas" width="473" height="97" loading="lazy"></a>
-        <p>Ferretería industrial en San Martín. Herramientas, máquinas e insumos para industria, talleres, mantenimiento y obra.</p>
+      <div class="pie-marca">
+        <a class="logo-bloque" href="{r}"><img src="{r}assets/img/masher-logo-blanco.webp" alt="Masherr máquinas - herramientas" width="473" height="97" loading="lazy"></a>
+        <p>Ferretería industrial en Villa Lynch, San Martín. Herramientas, máquinas e insumos para industria, talleres, mantenimiento, obra y hogar.</p>
         <div class="redes-pie">{redes_pie}</div>
       </div>
-      <div>
-        <h2>Contacto</h2>
-        <ul>
-          <li><a href="{e(CFG['mapa'])}" target="_blank" rel="noopener">{e(CFG['direccion'])}<br>{e(CFG['localidad'])}</a></li>
-          <li>Teléfono: <a href="tel:+541147525210">{e(CFG['telefono'])}</a></li>
-          <li>WhatsApp: <a href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener">{e(CFG['whatsapp_visible'])}</a></li>
-          {f'<li><a href="{r}comunidad/">Comunidad Masherr</a> · descuentos, promos y rifas</li>' if COM.get('url') else ''}
-          {f'<li>{e(CFG["horarios"])}</li>' if CFG['horarios'] else ''}
-        </ul>
-      </div>
-      <div>
-        <h2>Comprar</h2>
-        <ul>
-          <li><a href="{r}tienda/">Tienda</a></li>
-          <li><a href="{r}carrito/">Mi carrito</a></li>
-          <li><a href="{r}empresas/">Pedidos para empresas</a></li>
-          <li><a href="{r}nosotros/#como-comprar">Cómo comprar</a></li>
-          <li><a href="{r}ferreteria-san-martin/">Ferretería en San Martín</a></li>
-        </ul>
-      </div>
+      <div><h2>Categorías</h2><ul>{''.join(f'<li><a href="{r}categoria/{c[0]}/">{e(c[1])}</a></li>' for c in cats_usadas[:7])}</ul></div>
+      <div><h2>Comprar</h2><ul>
+        <li><a href="{r}tienda/">Tienda</a></li><li><a href="{r}cuenta/">Mi cuenta</a></li><li><a href="{r}carrito/">Mi pedido</a></li>
+        <li><a href="{r}empresas/">Pedidos para empresas</a></li><li><a href="{r}nosotros/#como-comprar">Cómo comprar</a></li>
+        {f'<li><a href="{r}comunidad/">Comunidad Masherr</a></li>' if COM.get('url') else ''}<li><a href="{r}ferreteria-san-martin/">Ferretería en San Martín</a></li></ul></div>
+      <div><h2>Contacto</h2><ul class="pie-contacto">
+        <li>{ic('ubicacion')}<a href="{e(CFG['mapa'])}" target="_blank" rel="noopener">{e(CFG['direccion'])}<br>{e(CFG['localidad'])}</a></li>
+        <li>{ic('whatsapp')}<a href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener">{e(CFG['whatsapp_visible'])}</a></li>
+        <li>{ic('telefono')}<a href="tel:+541147525210">{e(CFG['telefono'])}</a></li>
+        {f'<li>{ic("info")}<span>{e(CFG["horarios"])}</span></li>' if CFG['horarios'] else ''}</ul></div>
     </div>
     <div class="pie-legal"><span>© Ferretería Industrial Masherr</span><span>{f"Precios en pesos argentinos, publicados al {e(CFG['fecha_precios'])}. Se confirman por WhatsApp antes de cobrar." if MP else 'Consultá precios y stock por WhatsApp: te cotizamos al momento.'}</span></div>
   </div>
@@ -304,12 +350,13 @@ def tarjeta(p, r):
         boton = f'<a class="boton secundario agregar" href="{r}producto/{p["slug"]}/">Elegir opción</a>'
     else:
         boton = f'<button class="boton agregar" type="button" data-agregar="{v["id"]}" data-nombre="{e(p["nombre"])}">{ic("carrito")}Agregar</button>'
-    return f"""<article class="tarjeta"><div class="foto">{img}</div><div class="cuerpo">
+    consulta = __import__('urllib.parse').parse.quote(f'Hola Masherr, quiero consultar por: {p["nombre"]}.')
+    return f"""<article class="tarjeta"><div class="foto">{img}<button class="fav" type="button" data-fav="{p['id']}" aria-pressed="false" aria-label="Guardar {e(p['nombre'])} en favoritos">{ic('corazon')}</button>
+      {'' if p['disponible'] else '<span class="sello">Sin stock</span>'}</div><div class="cuerpo">
       {f'<span class="marca">{e(p["marca"])}</span>' if p['marca'] else ''}
       <h3><a href="{r}producto/{p['slug']}/">{e(p['nombre'])}</a></h3>
       <span class="precio{'' if p['precio'] else ' consultar'}">{'<span style="font-size:.6em">desde </span>' if len(p['variantes']) > 1 and p['precio'] else ''}{precio(p['precio']) if p['precio'] else 'Consultá precio'}</span>
-      <span class="estado {'stock-ok' if p['disponible'] else 'stock-no'}">{'Disponible' if p['disponible'] else 'Sin stock'}</span>
-      {boton}</div></article>"""
+      <div class="t-acciones">{boton}<a class="t-wa" href="https://wa.me/{CFG['whatsapp']}?text={consulta}" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">{ic('whatsapp')}</a></div></div></article>"""
 
 COM = CFG.get('comunidad') or {}
 def btn_comunidad(clase='boton wa', texto='Unirme a la comunidad'):
@@ -350,7 +397,7 @@ def bloque_redes(r):
 </section>"""
 
 # ---------------------------------------------------------------- Limpiar y copiar
-for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'comunidad', 'data']:  # img/ se conserva como caché
+for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'comunidad', 'cuenta', 'data']:  # img/ se conserva como caché
     shutil.rmtree(SITIO / sub, ignore_errors=True)
 (SITIO / 'data').mkdir(parents=True)
 
@@ -370,63 +417,82 @@ destacados = []
 for c in cats_usadas:  # uno o dos por categoría, con stock y foto
     destacados += [p for p in productos if p['cat'] == c[0] and p['disponible'] and p['imgs']][:1]
 destacados = destacados[:8]
+def riel(slug, titulo, r=''):
+    cand = [p for p in productos if p['cat'] == slug and p['disponible'] and p['imgs']]
+    vistos, lista, resto = set(), [], []
+    for p in cand:
+        tipo = ' '.join(norm(p['nombre']).split()[:2])
+        (resto if tipo in vistos else lista).append(p); vistos.add(tipo)
+    lista = (lista + resto)[:12]
+    if len(lista) < 4: return ''
+    return f"""<section class="seccion-riel" aria-labelledby="t-{slug}"><div class="contenedor">
+  <div class="cabeza-riel"><h2 id="t-{slug}">{e(titulo)}</h2><a href="{r}categoria/{slug}/">Ver todo {ic('flecha')}</a>
+    <div class="riel-nav"><button type="button" data-riel="-1" aria-label="Anteriores">{ic('anterior')}</button><button type="button" data-riel="1" aria-label="Siguientes">{ic('siguiente')}</button></div></div>
+  <ul class="riel">{''.join(f'<li>{tarjeta(p, r)}</li>' for p in lista)}</ul></div></section>"""
+
+def foto_cat(slug):
+    p = next((p for p in productos if p['cat'] == slug and p['imgs']), None)
+    return f'<img src="{p["imgs"][0]}-480-0.webp" alt="" width="480" height="480" loading="lazy">' if p else ''
+
+from collections import Counter
+MARCAS_TOP = [m for m, n in Counter(p['marca'] for p in productos if p['marca']).most_common(14)]
+ESTRELLAS = ''.join(ic('estrella').replace('class="icono"', 'class="icono relleno"') for _ in range(5))
+SLIDES = [
+    ('oscuro', 'Ferretería industrial · San Martín', 'Herramientas &amp; máquinas para trabajar bien.', 'Asesoramiento técnico para industria, talleres, obra y hogar. Armá tu pedido y lo cerramos por WhatsApp.',
+     [('tienda/', 'Ver la tienda', 'boton claro'), (f"https://wa.me/{CFG['whatsapp']}", 'Pedir por WhatsApp', 'boton wa')], 'hero-kit.webp'),
+    ('azul', 'Comunidad Masherr', 'Descuentos. Promos. Rifas.', 'Sumate gratis a nuestro grupo de WhatsApp y enterate antes que nadie.',
+     [('comunidad/', 'Unirme a la comunidad', 'boton wa')], 'hero-amoladora.webp'),
+    ('oscuro', 'Empresas · talleres · obras', '¿Comprás para tu empresa? Te cotizamos.', 'Mandanos la lista con productos y cantidades y te respondemos con la cotización.',
+     [('empresas/', 'Pedir cotización', 'boton claro')], 'hero-soldadora.webp'),
+]
+def slide(k, d):
+    fondo, rot, tit, baj, btns, img = d
+    h = 'h1' if k == 0 else 'p'
+    return f"""<div class="slide {fondo}" data-slide="{k}" {'' if k == 0 else 'hidden'}><div class="rayas" aria-hidden="true"></div><div class="contenedor slide-fila">
+  <div class="slide-txt"><p class="rotulo">{rot}</p><{h} class="slide-titulo">{tit}</{h}><p class="bajada">{baj}</p>
+  <p class="slide-btns">{''.join(f'<a class="{c}" href="{u}"{" target=\"_blank\" rel=\"noopener\"" if u.startswith("http") else ""}>{t}</a>' for u, t, c in btns)}</p></div>
+  <img class="slide-img" src="assets/img/hero/{img}" alt="" width="900" height="760" {'fetchpriority="high"' if k == 0 else 'loading="lazy"'}></div></div>"""
+
 inicio = f"""
-<section class="hero oscuro" aria-labelledby="t-hero">
-  <div class="rayas" aria-hidden="true"></div>
-  <div class="contenedor">
-    <p class="rotulo">Ferretería industrial · San Martín</p>
-    <h1 id="t-hero">Herramientas &amp; máquinas para trabajar bien.</h1>
-    <p class="bajada">Una ferretería con historia, con asesoramiento técnico para industria, mantenimiento, talleres, profesionales y obra.</p>
-    <form action="tienda/" role="search"><div class="buscador"><label class="sr" for="q-hero">Buscar productos</label>
-      <input id="q-hero" name="q" type="search" placeholder="¿Qué necesitás? Ej.: amoladora, disco 115, nivel" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form>
-    <ul class="chips" aria-label="Categorías más buscadas">{''.join(f'<li><a href="categoria/{c[0]}/">{e(c[1])}</a></li>' for c in cats_usadas[:6])}</ul>
-  </div>
+<section class="hero-slider" aria-label="Destacados" data-slider>
+  {''.join(slide(k, d) for k, d in enumerate(SLIDES))}
+  <div class="slider-dots">{''.join(f'<button type="button" data-ir="{k}" aria-label="Ver destacado {k + 1}" {"aria-current=\"true\"" if k == 0 else ""}></button>' for k in range(len(SLIDES)))}</div>
 </section>
-<section class="seccion" aria-labelledby="t-cat">
-  <div class="contenedor">
-    <div class="cabeza-seccion"><div><p class="rotulo">Categorías</p><h2 class="titulo-seccion" id="t-cat">Elegí por tipo de trabajo.</h2></div>
-      <a class="boton secundario" href="tienda/">Ver toda la tienda {ic('flecha')}</a></div>
-    <ul class="grilla-cat">{''.join(f'<li><a class="tile-cat" href="categoria/{c[0]}/"><b>{e(c[1])}</b><span>{conteo[c[0]]} productos {ic("flecha")}</span></a></li>' for c in cats_usadas)}</ul>
-  </div>
-</section>
-<section class="seccion suave" aria-labelledby="t-dest">
-  <div class="contenedor">
-    <div class="cabeza-seccion"><div><p class="rotulo">Selección</p><h2 class="titulo-seccion" id="t-dest">Para equipar el taller.</h2></div></div>
-    <ul class="grilla-prod">{''.join(f'<li>{tarjeta(p, r)}</li>' for p in destacados)}</ul>
-  </div>
-</section>
-{bloque_comunidad('')}
-<section class="seccion" aria-labelledby="t-como" id="como-comprar">
-  <div class="contenedor">
-    <p class="rotulo">Cómo comprar</p><h2 class="titulo-seccion" id="t-como">Armá el pedido online, lo cerramos por WhatsApp.</h2>
-    <ol class="pasos">
-      <li><b>Elegí</b><p>Buscá en la tienda y agregá al carrito lo que necesitás, con la cantidad.</p></li>
-      <li><b>Envianos el pedido</b><p>Desde el carrito, el pedido llega armado a nuestro WhatsApp.</p></li>
-      <li><b>Confirmamos y cerramos</b><p>Te confirmamos precio, stock, entrega y forma de pago antes de cobrar.</p></li>
-    </ol>
-  </div>
-</section>
-<section class="seccion oscuro" aria-labelledby="t-hist">
-  <div class="contenedor dos-col">
-    <div><p class="rotulo">Masherr</p><h2 class="titulo-seccion" id="t-hist">Una ferretería con historia.</h2>
-      <p class="bajada">Somos una ferretería industrial de San Martín. Escuchamos qué tenés que resolver y te ayudamos a elegir la herramienta o el insumo correcto.</p>
-      <p><a class="boton borde-claro" href="nosotros/">Conocenos {ic('flecha')}</a></p></div>
-    <ul class="valores">
-      <li><b>Criterio técnico</b><span>Comparamos opciones según el material, la tarea y la intensidad de uso.</span></li>
-      <li><b>Atención cercana</b><span>Consultanos antes de comprar: te respondemos personas del equipo.</span></li>
-      <li><b>Para cada trabajo</b><span>Industria, mantenimiento, talleres, profesionales y obra.</span></li>
-    </ul>
-  </div>
-</section>
-{bloque_redes(r)}
-<section class="seccion azul banda" aria-labelledby="t-emp">
-  <div class="rayas" aria-hidden="true"></div>
-  <div class="contenedor">
-    <div><p class="rotulo">Empresas</p><h2 class="titulo-seccion" id="t-emp">¿Comprás para una empresa o una obra?</h2>
-      <p class="bajada">Contanos la tarea, los productos, las cantidades y el plazo. Te respondemos con una cotización.</p></div>
-    <a class="boton claro" href="empresas/">{ic('empresa')}Pedir cotización</a>
-  </div>
-</section>"""
+<section class="beneficios" aria-label="Beneficios"><div class="contenedor"><ul>
+  <li>{ic('escudo')}<div><b>Asesoramiento técnico</b><span>Te ayudamos a elegir lo justo</span></div></li>
+  <li>{ic('whatsapp')}<div><b>Pedidos por WhatsApp</b><span>Armá el carrito y envialo</span></div></li>
+  <li>{ic('tienda')}<div><b>Retiro en el local</b><span>Calle 38 4335, Villa Lynch</span></div></li>
+  <li>{ic('empresa')}<div><b>Cuentas para empresas</b><span>Cotizaciones y pedidos grandes</span></div></li>
+</ul></div></section>
+<section class="seccion" aria-labelledby="t-cat"><div class="contenedor">
+  <div class="cabeza-riel"><h2 id="t-cat">Comprá por categoría</h2><a href="tienda/">Ver toda la tienda {ic('flecha')}</a></div>
+  <ul class="grilla-cat2">{''.join(f'<li><a class="cat2" href="categoria/{c[0]}/"><span class="cat2-foto">{foto_cat(c[0])}</span><b>{e(c[1])}</b><span>{conteo[c[0]]} productos</span></a></li>' for c in cats_usadas)}</ul>
+</div></section>
+{riel('herramientas-electricas', 'Herramientas eléctricas')}
+{riel('maquinas', 'Soldadura y compresores')}
+<section class="seccion-duo"><div class="contenedor duo">
+  <a class="duo-banner oscuro" href="comunidad/"><div class="rayas" aria-hidden="true"></div><p class="rotulo">Comunidad Masherr</p><b>Descuentos, promos y rifas en WhatsApp.</b><span class="boton wa">{ic('whatsapp')}Sumarme gratis</span></a>
+  <a class="duo-banner azul" href="empresas/"><div class="rayas" aria-hidden="true"></div><p class="rotulo">Empresas</p><b>Cotizamos pedidos para industria, talleres y obras.</b><span class="boton claro">{ic('empresa')}Pedir cotización</span></a>
+</div></section>
+{riel('accesorios', 'Discos, brocas y puntas')}
+{riel('medicion', 'Medición y nivelación')}
+<section class="seccion marcas-sec" aria-labelledby="t-marcas"><div class="contenedor">
+  <div class="cabeza-riel"><h2 id="t-marcas">Marcas que trabajamos</h2><span class="nota">Más de 40 marcas</span></div>
+  <ul class="marcas">{''.join(f'<li><a href="tienda/?marca={__import__("urllib.parse").parse.quote(m)}">{e(m)}</a></li>' for m in MARCAS_TOP)}</ul>
+</div></section>
+{riel('agua-jardin', 'Agua, limpieza y jardín')}
+<section class="seccion resenas-sec oscuro" aria-labelledby="t-res"><div class="rayas" aria-hidden="true"></div><div class="contenedor resenas">
+  <div class="nota-google"><b class="num">4,7</b><span class="estrellas">{ESTRELLAS}</span><span>131 opiniones en Google</span></div>
+  <div><p class="rotulo">Lo que dicen de nosotros</p><h2 id="t-res" class="cita">“Se tomaron el tiempo para buscar la que yo necesitaba.”</h2><p class="bajada">— Lorena, reseña en Google</p>
+    <p class="slide-btns"><a class="boton claro" href="https://g.page/r/CSTh9aafPrTYEBE/review" target="_blank" rel="noopener">{ic('estrella')}Dejanos tu reseña</a><a class="boton borde-claro" href="nosotros/">Conocé Masherr</a></p></div>
+</div></section>
+<section class="seccion" aria-labelledby="t-como" id="como-comprar"><div class="contenedor">
+  <p class="rotulo">Cómo comprar</p><h2 class="titulo-seccion" id="t-como">Armá el pedido online, lo cerramos por WhatsApp.</h2>
+  <ol class="pasos">
+    <li><b>Elegí</b><p>Buscá en la tienda y agregá al pedido lo que necesitás, con la cantidad.</p></li>
+    <li><b>Envianos el pedido</b><p>Desde "Tu pedido", el detalle llega armado a nuestro WhatsApp.</p></li>
+    <li><b>Confirmamos y cerramos</b><p>Te pasamos precio, stock, entrega y forma de pago antes de cobrar.</p></li>
+  </ol></div></section>"""
 DOM = CFG['dominio'].rstrip('/') if CFG['dominio'] else ''
 NEGOCIO = {'@context': 'https://schema.org', '@type': 'HardwareStore', '@id': (DOM + '/#negocio') if DOM else None,
            'name': CFG.get('nombre_ficha', 'Masherr Ferretería Industrial'), 'url': (DOM + '/') if DOM else None,
@@ -499,7 +565,7 @@ for p in productos:
     </div>
     <div class="ficha-info">
       {f'<p class="rotulo">{e(p["marca"])}</p>' if p['marca'] else f'<p class="rotulo">{e(p["catNombre"])}</p>'}
-      <h1>{e(p['nombre'])}</h1>
+      <div class="ficha-titulo"><h1>{e(p['nombre'])}</h1><button class="fav fav-ficha" type="button" data-fav="{p['id']}" aria-pressed="false" aria-label="Guardar en favoritos">{ic('corazon')}</button></div>
       <div class="ficha-meta">{f'<span>Marca: {e(p["marca"])}</span>' if p['marca'] else ''}<span>Categoría: {e(p['sub'] or p['catNombre'])}</span><span id="sku">{f'SKU: {e(v0["sku"])}' if v0['sku'] else ''}</span></div>
       <p class="ficha-precio{'' if v0['precio'] else ' consultar'}" id="precio">{precio(v0['precio']) if v0['precio'] else 'Consultá precio por WhatsApp'}</p>
       <p class="nota-precio">{f"Precio publicado al {e(CFG['fecha_precios'])}. Te lo confirmamos por WhatsApp antes de cobrar." if MP else 'Agregalo al carrito o escribinos: te pasamos el precio actualizado por WhatsApp.'}</p>
@@ -692,6 +758,15 @@ if COM.get('url'):
   </ol>
   <p style="margin-top:28px">{btn_comunidad()}</p>
 </div></section>""", actual='comunidad/')
+
+# ---------------------------------------------------------------- Mi cuenta
+pagina('cuenta/index.html', 'Mi cuenta · Masherr', 'Tus datos, tus pedidos y tus productos favoritos en Masherr.', f"""
+<section class="cuenta-cab oscuro"><div class="rayas" aria-hidden="true"></div><div class="contenedor"><p class="rotulo">Mi cuenta</p><h1 id="cuenta-hola">Hola.</h1>
+  <p class="bajada">Guardá tus datos para pedir más rápido, revisá tus pedidos y tus favoritos.</p></div></section>
+<div class="contenedor cuenta" id="cuenta-app">
+  <nav class="cuenta-tabs" aria-label="Secciones de la cuenta"><a href="#datos" data-tab="datos">{ic('usuario')}Mis datos</a><a href="#pedidos" data-tab="pedidos">{ic('pedido')}Mis pedidos</a><a href="#favoritos" data-tab="favoritos">{ic('corazon')}Favoritos</a><a href="#empresa" data-tab="empresa">{ic('empresa')}Cuenta empresa</a></nav>
+  <div class="cuenta-panel" id="panel"></div>
+</div>""", scripts=['cuenta.js'], indexar=False)
 
 # ---------------------------------------------------------------- 404, sitemap
 pagina('404.html', 'Página no encontrada · Masherr', 'No encontramos esta página.', f"""<section class="seccion"><div class="contenedor"><h1>No encontramos esta página.</h1>
