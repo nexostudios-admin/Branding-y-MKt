@@ -95,11 +95,12 @@
   const favoritos = {
     lista() { try { const v = JSON.parse(localStorage.getItem(CLAVE_F) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } },
     tiene(id) { return favoritos.lista().includes(+id); },
+    reemplazar(l) { try { localStorage.setItem(CLAVE_F, JSON.stringify([...new Set(l.map(Number))])); } catch (e) {} pintarFavoritos(); },
     alternar(id) {
       id = +id; const l = favoritos.lista(); const i = l.indexOf(id);
       if (i >= 0) l.splice(i, 1); else l.unshift(id);
       try { localStorage.setItem(CLAVE_F, JSON.stringify(l)); } catch (e) {}
-      pintarFavoritos(); document.dispatchEvent(new CustomEvent('favoritos'));
+      pintarFavoritos(); document.dispatchEvent(new CustomEvent('favoritos', { detail: { id, agregado: i < 0 } }));
       return i < 0;
     },
   };

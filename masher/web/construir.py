@@ -270,7 +270,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
     <form class="cab-buscar" action="{r}tienda/" role="search"><div class="buscador"><label class="sr" for="q-cab">Buscar productos</label>
       <input id="q-cab" name="q" type="search" placeholder="Buscá productos, marcas o categorías" autocomplete="off"><button type="submit" aria-label="Buscar">{ic('buscar')}</button></div></form>
     <div class="cab-acciones">
-      <a class="cab-accion" href="{r}cuenta/">{ic('usuario')}<span class="solo-escritorio"><small>Hola</small>Mi cuenta</span></a>
+      <a class="cab-accion" href="{r}cuenta/">{ic('usuario')}<span class="solo-escritorio"><small data-hola>Ingresá</small>Mi cuenta</span></a>
       <a class="cab-accion" href="{r}cuenta/#favoritos" aria-label="Favoritos">{ic('corazon')}<span class="burbuja" data-fav-burbuja hidden>0</span></a>
       <a class="cab-accion" href="{r}carrito/" data-carrito-label aria-label="Carrito">{ic('carrito')}<span class="burbuja" data-burbuja hidden>0</span><span class="solo-escritorio"><small>Tu</small>Pedido</span></a>
     </div>
@@ -321,6 +321,7 @@ def pagina(ruta, titulo, desc, cuerpo, actual='', jsonld=None, scripts=(), index
 <a class="wa-flotante" href="https://wa.me/{CFG['whatsapp']}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">{ic('whatsapp')}</a>
 <script src="{r}assets/js/config.js"></script>
 {MEDICION}<script src="{r}assets/js/app.js"></script>
+<script src="{r}assets/js/auth.js"></script>
 {''.join(f'<script src="{r}assets/js/{s}"></script>' for s in scripts)}
 </body>
 </html>
@@ -408,6 +409,7 @@ cfg_pub = {k: CFG[k] for k in ['whatsapp', 'whatsapp_visible', 'telefono', 'dire
 cfg_pub['mostrar_precios'] = MP
 cfg_pub['ads_conversion'] = CFG.get('google_ads_conversion', {})
 cfg_pub['gtag'] = bool(TAGS)
+cfg_pub['supabase'] = CFG.get('supabase') or {}
 (SITIO / 'assets' / 'js' / 'config.js').write_text('window.MASHERR = ' + json.dumps(cfg_pub, ensure_ascii=False, indent=1) + ';\n')
 
 # ---------------------------------------------------------------- Inicio

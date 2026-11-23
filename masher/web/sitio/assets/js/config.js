@@ -26,5 +26,9 @@ window.MASHERR = {
  "publicaciones": [],
  "mostrar_precios": false,
  "ads_conversion": {},
- "gtag": false
+ "gtag": false,
+ "supabase": {
+  "url": "https://clfvtjizmuyhytehytxh.supabase.co",
+  "key": "sb_publishable_oBBW35FzOZwabAyGDgwAnA_69wEp6hx"
+ }
 };
