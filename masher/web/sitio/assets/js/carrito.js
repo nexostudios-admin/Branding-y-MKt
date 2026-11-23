@@ -123,7 +123,7 @@
       const h = JSON.parse(localStorage.getItem('masherr_pedidos_v1') || '[]');
       h.unshift({ fecha: Date.now(), items: lineas().filter(l => l.r && l.r.v.disponible).map(l => ({ v: l.v, c: l.c, n: l.r.p.nombre + (l.r.v.nombre ? ' (' + l.r.v.nombre + ')' : '') })) });
       localStorage.setItem('masherr_pedidos_v1', JSON.stringify(h.slice(0, 30)));
-      document.dispatchEvent(new CustomEvent('pedido-enviado', { detail: { items: h[0].items, entrega: datos.entrega === 'envio' ? `Envío: ${datos.direccion || ''} ${datos.localidad || ''}`.trim() : 'Retiro en el local', comentarios: datos.comentarios || null } }));
+      document.dispatchEvent(new CustomEvent('pedido-enviado', { detail: { items: h[0].items, entrega: datos.entrega === 'envio' ? `Envío: ${datos.direccion || ''} ${datos.localidad || ''}`.trim() : 'Retiro en el local', comentarios: datos.comentarios || null, nombre: datos.nombre || null, pago: datos.pago || null, factura: datos.factura || null, telefono: (JSON.parse(localStorage.getItem('masherr_perfil_v1') || '{}').telefono) || null } }));
       const pf = JSON.parse(localStorage.getItem('masherr_perfil_v1') || '{}');
       if (!pf.nombre) localStorage.setItem('masherr_perfil_v1', JSON.stringify({ ...pf, nombre: datos.nombre, direccion: datos.direccion || pf.direccion, localidad: datos.localidad || pf.localidad, cp: datos.cp || pf.cp, pago: datos.pago || pf.pago, factura: datos.factura || pf.factura }));
     } catch (e) {}

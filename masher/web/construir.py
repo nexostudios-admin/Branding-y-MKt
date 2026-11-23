@@ -398,7 +398,7 @@ def bloque_redes(r):
 </section>"""
 
 # ---------------------------------------------------------------- Limpiar y copiar
-for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'comunidad', 'cuenta', 'data']:  # img/ se conserva como caché
+for sub in ['tienda', 'producto', 'categoria', 'carrito', 'empresas', 'nosotros', 'ferreteria-san-martin', 'comunidad', 'cuenta', 'admin', 'data']:  # img/ se conserva como caché
     shutil.rmtree(SITIO / sub, ignore_errors=True)
 (SITIO / 'data').mkdir(parents=True)
 
@@ -770,6 +770,12 @@ pagina('cuenta/index.html', 'Mi cuenta · Masherr', 'Tus datos, tus pedidos y tu
   <div class="cuenta-panel" id="panel"></div>
 </div>""", scripts=['cuenta.js'], indexar=False)
 
+# ---------------------------------------------------------------- Panel de administración (acceso controlado por Supabase)
+pagina('admin/index.html', 'Panel · Masherr', 'Panel de administración de Masherr.', """
+<section class="cuenta-cab oscuro"><div class="rayas" aria-hidden="true"></div><div class="contenedor"><p class="rotulo">Administración</p><h1>Panel de ventas</h1>
+  <p class="bajada">Pedidos, ventas, clientes y cuentas empresa.</p></div></section>
+<div class="contenedor adm" id="admin-app"><p class="ayuda">Cargando…</p></div>""", scripts=['admin.js'], indexar=False)
+
 # ---------------------------------------------------------------- 404, sitemap
 pagina('404.html', 'Página no encontrada · Masherr', 'No encontramos esta página.', f"""<section class="seccion"><div class="contenedor"><h1>No encontramos esta página.</h1>
 <p class="bajada">Puede que el producto ya no esté publicado. Buscalo en la tienda o consultanos.</p>
@@ -778,7 +784,7 @@ if CFG['dominio']:
     d = CFG['dominio'].rstrip('/')
     urls = ['', 'ferreteria-san-martin/', 'comunidad/', 'tienda/', 'empresas/', 'nosotros/'] + [f'categoria/{c[0]}/' for c in cats_usadas] + [f'producto/{p["slug"]}/' for p in productos]
     (SITIO / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>{d}/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
-    (SITIO / 'robots.txt').write_text(f'User-agent: *\nDisallow: /carrito/\nSitemap: {d}/sitemap.xml\n')
+    (SITIO / 'robots.txt').write_text(f'User-agent: *\nDisallow: /carrito/\nDisallow: /cuenta/\nDisallow: /admin/\nSitemap: {d}/sitemap.xml\n')
 (SITIO / 'manifest.webmanifest').write_text(json.dumps({'name': 'Masherr Ferretería Industrial', 'short_name': 'Masherr', 'start_url': './', 'display': 'browser',
     'background_color': '#FFFFFF', 'theme_color': '#08090B', 'icons': [{'src': 'assets/img/icono-192.png', 'sizes': '192x192', 'type': 'image/png'}, {'src': 'assets/img/icono-512.png', 'sizes': '512x512', 'type': 'image/png'}]}, ensure_ascii=False))
 print(f'{len(productos)} productos · {len(cats_usadas)} categorías · {sum(1 for p in productos if p["marca"])} con marca detectada')

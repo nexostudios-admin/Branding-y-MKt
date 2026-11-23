@@ -40,9 +40,13 @@
       else await c.from('favoritos').delete().eq('usuario', u.id).eq('producto', e.detail.id);
     } catch (err) { /* sin conexión: queda guardado en este dispositivo */ }
   });
-  document.addEventListener('pedido-enviado', async e => {
-    if (!haySesion()) return;
-    try { const c = await cargar(); const u = await usuario(); if (u) await c.from('pedidos').insert({ items: e.detail.items, entrega: e.detail.entrega, comentarios: e.detail.comentarios }); } catch (err) {}
+  // Todo pedido enviado queda registrado (con o sin cuenta) para el panel de ventas.
+  document.addEventListener('pedido-enviado', e => {
+    const ses = sesionGuardada(); const tok = ses && ses.access_token; const uid = ses && ses.user && ses.user.id;
+    const enviar = conCuenta => fetch(S.url + '/rest/v1/pedidos', { method: 'POST', keepalive: true,
+      headers: Object.assign({ apikey: S.key, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, conCuenta ? { Authorization: 'Bearer ' + tok } : {}),
+      body: JSON.stringify(Object.assign({}, e.detail, { usuario: conCuenta ? uid : null })) });
+    enviar(!!(tok && uid)).then(r => { if (!r.ok && tok) return enviar(false); }).catch(() => {});
   });
 
   // Al iniciar sesión: une los favoritos del dispositivo con los de la cuenta

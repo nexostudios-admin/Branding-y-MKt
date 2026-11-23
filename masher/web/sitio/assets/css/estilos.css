@@ -590,3 +590,58 @@ body { background: #fff; }
 .estado-aprobada { background: #E8F5EC; border-color: var(--ok); }
 .estado-rechazada { background: #FDECEC; border-color: var(--error); }
 .cuenta-cab .boton.borde-claro { position: relative; margin-top: 14px; }
+/* ---------- Panel de administración ---------- */
+.adm { padding-top: 24px; padding-bottom: 64px; }
+.adm-barra { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.adm-tabs { display: flex; gap: 6px; overflow-x: auto; }
+.adm-tabs a { padding: 10px 16px; border-radius: 999px; color: var(--negro); text-decoration: none; font-family: var(--titulos); white-space: nowrap; background: var(--gris); }
+.adm-tabs a[aria-current] { background: var(--azul); color: #fff; }
+.adm-badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: #C8102E; color: #fff; font: 700 12px/1 var(--texto); margin-left: 4px; }
+.adm-sesion { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--texto-2); flex-wrap: wrap; }
+.adm-sesion .boton { min-height: 38px; padding: 6px 14px; font-size: 14px; }
+.adm-tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+@media (min-width: 900px) { .adm-tiles { grid-template-columns: repeat(4, 1fr); } }
+.adm-tile { border: 1px solid var(--linea); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 4px; background: #fff; }
+.adm-tile .l { font-size: 13px; color: var(--texto-2); }
+.adm-tile b { font-family: var(--titulos); font-size: 30px; line-height: 1.05; color: var(--negro); }
+.adm-tile .s { font-size: 12px; color: var(--texto-2); }
+.adm-grid2 { display: grid; gap: 16px; margin-bottom: 16px; }
+@media (min-width: 1000px) { .adm-grid2 { grid-template-columns: 1fr 1fr; } }
+.adm-card { border: 1px solid var(--linea); border-radius: 14px; padding: 18px; background: #fff; min-width: 0; }
+.adm-card h3 { font-size: 18px; margin: 0 0 14px; }
+.adm-card h3 small { font-family: var(--texto); font-weight: 400; font-size: 13px; color: var(--texto-2); margin-left: 6px; }
+.adm-graf { width: 100%; height: auto; display: block; }
+.adm-graf .grid { stroke: #E6E8EE; stroke-width: 1; }
+.adm-graf .eje { font: 11px var(--texto); fill: var(--texto-2); }
+.adm-graf .v { fill: var(--azul); }
+.adm-graf .cero { fill: transparent; }
+.adm-graf .barra:hover .v, .adm-graf .barra:focus .v { fill: var(--azul-2); }
+.adm-graf .barra:focus { outline: none; }
+.adm-hbar { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.adm-hbar li { display: grid; grid-template-columns: minmax(0, 1.4fr) 1fr auto; gap: 10px; align-items: center; font-size: 13px; }
+.adm-hbar .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.adm-hbar .b { height: 12px; background: var(--gris); border-radius: 6px; overflow: hidden; }
+.adm-hbar .b i { display: block; height: 100%; background: var(--azul); border-radius: 0 4px 4px 0; }
+.adm-hbar .v { font-weight: 700; font-variant-numeric: tabular-nums; }
+.adm-filtros { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 14px; }
+.adm-filtros label, .adm-pedido .acc label { display: grid; gap: 4px; font-size: 13px; font-weight: 700; }
+.adm-filtros .crece, .adm-pedido .acc .crece { flex: 1; min-width: 180px; }
+.adm-filtros input, .adm-filtros select, .adm-pedido input, .adm-pedido select { padding: 9px 10px; border: 1px solid #9AA0B0; border-radius: 8px; font-size: 15px; background: #fff; }
+.adm-pedido { border: 1px solid var(--linea); border-left: 5px solid var(--azul); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; background: #fff; }
+.adm-pedido.est-nuevo { border-left-color: #C98A00; }
+.adm-pedido.est-confirmado { border-left-color: var(--azul); }
+.adm-pedido.est-entregado { border-left-color: var(--ok); }
+.adm-pedido.est-cancelado { border-left-color: #A9AEBC; opacity: .75; }
+.adm-pedido header { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 14px; margin-bottom: 8px; }
+.adm-pedido header b { font-family: var(--titulos); font-size: 17px; }
+.chip-est { margin-left: auto; font: 700 12px var(--titulos); letter-spacing: .04em; padding: 4px 10px; border-radius: 999px; background: var(--gris); }
+.adm-pedido ul { margin: 0 0 6px; padding-left: 18px; font-size: 14px; }
+.adm-pedido .det { font-size: 13px; color: var(--texto-2); margin: 0 0 10px; }
+.adm-pedido .acc { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.adm-pedido .acc .boton { min-height: 40px; padding: 8px 16px; font-size: 15px; }
+.adm-pedido .acc input[type=number] { width: 140px; }
+.adm-tabla { overflow-x: auto; border: 1px solid var(--linea); border-radius: 12px; }
+.adm-tabla table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.adm-tabla th, .adm-tabla td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--linea); white-space: nowrap; }
+.adm-tabla th { background: var(--gris); font-family: var(--titulos); font-weight: 700; position: sticky; top: 0; }
+.adm-tabla .num { text-align: right; font-variant-numeric: tabular-nums; }
