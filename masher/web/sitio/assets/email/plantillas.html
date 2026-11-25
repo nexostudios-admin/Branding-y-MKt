@@ -1,0 +1,148 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Plantillas de mail Masherr</title>
+<style>body{margin:0;background:#EEF0F4;color:#08090B;font-family:"DejaVu Sans",Arial,sans-serif}header{background:#17256B;color:#fff;padding:20px 16px}h1{margin:0;font-size:20px}main{padding:16px;max-width:720px;margin:auto}section{background:#fff;border-radius:12px;padding:16px;margin-bottom:16px}h2{margin:0 0 6px;font-size:17px;color:#17256B}label{display:block;font-weight:bold;margin-top:10px;font-size:13px}textarea{width:100%;box-sizing:border-box;font:12px monospace;border:1px solid #ccd;border-radius:8px;padding:8px}button{margin-top:6px;background:#17256B;color:#fff;border:0;border-radius:999px;padding:10px 18px;font-weight:bold}</style></head>
+<body><header><h1>Plantillas de mail · Masherr</h1><p style="margin:6px 0 0;font-size:13px">Copiá cada asunto y cuerpo y pegalo en Supabase. Guardá cada una con “Save changes”.</p></header><main><section><h2>1. Confirm signup</h2>
+<p>En Supabase: <b>Authentication → Emails → Templates → Confirm signup</b></p>
+<label>Subject</label><textarea id="s1" rows="1" readonly>Confirmá tu cuenta de Masherr</textarea>
+<button onclick="cp('s1',this)">Copiar asunto</button>
+<label>Body (Source)</label><textarea id="b1" rows="6" readonly>&lt;!doctype html&gt;
+&lt;html lang=&quot;es&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Masherr&lt;/title&gt;&lt;/head&gt;
+&lt;body style=&quot;margin:0;padding:0;background:#EEF0F4;&quot;&gt;
+&lt;div style=&quot;display:none;max-height:0;overflow:hidden;opacity:0;&quot;&gt;Un paso más para activar tu cuenta.&lt;/div&gt;
+&lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;background:#EEF0F4;&quot;&gt;
+&lt;tr&gt;&lt;td align=&quot;center&quot; style=&quot;padding:24px 12px;&quot;&gt;
+  &lt;table role=&quot;presentation&quot; width=&quot;600&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;width:100%;max-width:600px;background:#FFFFFF;border-radius:14px;overflow:hidden;&quot;&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#08090B;&quot;&gt;&lt;a href=&quot;https://masherrferreteria.com.ar&quot;&gt;&lt;img src=&quot;https://masherrferreteria.com.ar/assets/img/email/cabecera.png&quot; width=&quot;600&quot; alt=&quot;Masherr · máquinas - herramientas&quot; style=&quot;display:block;width:100%;max-width:600px;height:auto;border:0;&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:40px 40px 8px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;p style=&quot;margin:0 0 12px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#17256B;font-weight:bold;&quot;&gt;&amp;#8212;&amp;nbsp;Bienvenido a Masherr&lt;/p&gt;
+      &lt;h1 style=&quot;margin:0 0 16px;font-size:30px;line-height:1.1;color:#08090B;font-weight:bold;&quot;&gt;¡Ya casi tenés tu cuenta!&lt;/h1&gt;
+      &lt;p style=&quot;margin:0 0 28px;font-size:16px;line-height:1.6;color:#50566A;&quot;&gt;Gracias por registrarte en Masherr. Confirmá tu email para guardar tus datos, ver tus pedidos y tus favoritos desde cualquier dispositivo.&lt;/p&gt;
+      &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td align=&quot;center&quot; bgcolor=&quot;#17256B&quot; style=&quot;border-radius:999px;&quot;&gt;
+        &lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;display:inline-block;padding:15px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;&quot;&gt;Confirmar mi cuenta&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+      &lt;p style=&quot;margin:24px 0 0;font-size:13px;line-height:1.6;color:#50566A;&quot;&gt;Si el botón no funciona, copiá y pegá este enlace en tu navegador:&lt;br&gt;&lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;color:#17256B;word-break:break-all;&quot;&gt;{{ .ConfirmationURL }}&lt;/a&gt;&lt;/p&gt;
+      &lt;p style=&quot;margin:20px 0 0;font-size:13px;line-height:1.6;color:#8A90A2;&quot;&gt;Si no creaste una cuenta en Masherr, ignorá este mensaje.&lt;/p&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:28px 40px 36px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;border-top:1px solid #D9DCE4;&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding-top:22px;font-size:14px;line-height:1.6;color:#50566A;&quot;&gt;
+        ¿Dudas? Escribinos por &lt;a href=&quot;https://wa.me/5491131826166&quot; style=&quot;color:#128C3E;font-weight:bold;text-decoration:none;&quot;&gt;WhatsApp 11 3182-6166&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#17256B;padding:20px 40px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#C9CDDA;&quot;&gt;
+      &lt;b style=&quot;color:#FFFFFF;&quot;&gt;Ferretería Industrial Masherr&lt;/b&gt;&lt;br&gt;
+      Calle 38 (ex Hipólito Yrigoyen) 4335 · Villa Lynch, San Martín&lt;br&gt;
+      &lt;a href=&quot;https://masherrferreteria.com.ar&quot; style=&quot;color:#9AAEFF;text-decoration:none;&quot;&gt;masherrferreteria.com.ar&lt;/a&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/body&gt;&lt;/html&gt;
+</textarea>
+<button onclick="cp('b1',this)">Copiar cuerpo</button></section><section><h2>2. Reset password</h2>
+<p>En Supabase: <b>Authentication → Emails → Templates → Reset password</b></p>
+<label>Subject</label><textarea id="s2" rows="1" readonly>Restablecé tu contraseña de Masherr</textarea>
+<button onclick="cp('s2',this)">Copiar asunto</button>
+<label>Body (Source)</label><textarea id="b2" rows="6" readonly>&lt;!doctype html&gt;
+&lt;html lang=&quot;es&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Masherr&lt;/title&gt;&lt;/head&gt;
+&lt;body style=&quot;margin:0;padding:0;background:#EEF0F4;&quot;&gt;
+&lt;div style=&quot;display:none;max-height:0;overflow:hidden;opacity:0;&quot;&gt;Pediste cambiar tu contraseña.&lt;/div&gt;
+&lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;background:#EEF0F4;&quot;&gt;
+&lt;tr&gt;&lt;td align=&quot;center&quot; style=&quot;padding:24px 12px;&quot;&gt;
+  &lt;table role=&quot;presentation&quot; width=&quot;600&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;width:100%;max-width:600px;background:#FFFFFF;border-radius:14px;overflow:hidden;&quot;&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#08090B;&quot;&gt;&lt;a href=&quot;https://masherrferreteria.com.ar&quot;&gt;&lt;img src=&quot;https://masherrferreteria.com.ar/assets/img/email/cabecera.png&quot; width=&quot;600&quot; alt=&quot;Masherr · máquinas - herramientas&quot; style=&quot;display:block;width:100%;max-width:600px;height:auto;border:0;&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:40px 40px 8px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;p style=&quot;margin:0 0 12px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#17256B;font-weight:bold;&quot;&gt;&amp;#8212;&amp;nbsp;Tu cuenta Masherr&lt;/p&gt;
+      &lt;h1 style=&quot;margin:0 0 16px;font-size:30px;line-height:1.1;color:#08090B;font-weight:bold;&quot;&gt;Restablecé tu contraseña&lt;/h1&gt;
+      &lt;p style=&quot;margin:0 0 28px;font-size:16px;line-height:1.6;color:#50566A;&quot;&gt;Recibimos un pedido para cambiar la contraseña de tu cuenta en Masherr. Tocá el botón para elegir una nueva.&lt;/p&gt;
+      &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td align=&quot;center&quot; bgcolor=&quot;#17256B&quot; style=&quot;border-radius:999px;&quot;&gt;
+        &lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;display:inline-block;padding:15px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;&quot;&gt;Elegir nueva contraseña&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+      &lt;p style=&quot;margin:24px 0 0;font-size:13px;line-height:1.6;color:#50566A;&quot;&gt;Si el botón no funciona, copiá y pegá este enlace en tu navegador:&lt;br&gt;&lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;color:#17256B;word-break:break-all;&quot;&gt;{{ .ConfirmationURL }}&lt;/a&gt;&lt;/p&gt;
+      &lt;p style=&quot;margin:20px 0 0;font-size:13px;line-height:1.6;color:#8A90A2;&quot;&gt;Si no pediste el cambio, ignorá este mensaje: tu contraseña sigue igual.&lt;/p&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:28px 40px 36px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;border-top:1px solid #D9DCE4;&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding-top:22px;font-size:14px;line-height:1.6;color:#50566A;&quot;&gt;
+        ¿Dudas? Escribinos por &lt;a href=&quot;https://wa.me/5491131826166&quot; style=&quot;color:#128C3E;font-weight:bold;text-decoration:none;&quot;&gt;WhatsApp 11 3182-6166&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#17256B;padding:20px 40px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#C9CDDA;&quot;&gt;
+      &lt;b style=&quot;color:#FFFFFF;&quot;&gt;Ferretería Industrial Masherr&lt;/b&gt;&lt;br&gt;
+      Calle 38 (ex Hipólito Yrigoyen) 4335 · Villa Lynch, San Martín&lt;br&gt;
+      &lt;a href=&quot;https://masherrferreteria.com.ar&quot; style=&quot;color:#9AAEFF;text-decoration:none;&quot;&gt;masherrferreteria.com.ar&lt;/a&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/body&gt;&lt;/html&gt;
+</textarea>
+<button onclick="cp('b2',this)">Copiar cuerpo</button></section><section><h2>3. Change email address</h2>
+<p>En Supabase: <b>Authentication → Emails → Templates → Change email address</b></p>
+<label>Subject</label><textarea id="s3" rows="1" readonly>Confirmá tu nuevo email en Masherr</textarea>
+<button onclick="cp('s3',this)">Copiar asunto</button>
+<label>Body (Source)</label><textarea id="b3" rows="6" readonly>&lt;!doctype html&gt;
+&lt;html lang=&quot;es&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Masherr&lt;/title&gt;&lt;/head&gt;
+&lt;body style=&quot;margin:0;padding:0;background:#EEF0F4;&quot;&gt;
+&lt;div style=&quot;display:none;max-height:0;overflow:hidden;opacity:0;&quot;&gt;Confirmá el cambio de email de tu cuenta.&lt;/div&gt;
+&lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;background:#EEF0F4;&quot;&gt;
+&lt;tr&gt;&lt;td align=&quot;center&quot; style=&quot;padding:24px 12px;&quot;&gt;
+  &lt;table role=&quot;presentation&quot; width=&quot;600&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;width:100%;max-width:600px;background:#FFFFFF;border-radius:14px;overflow:hidden;&quot;&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#08090B;&quot;&gt;&lt;a href=&quot;https://masherrferreteria.com.ar&quot;&gt;&lt;img src=&quot;https://masherrferreteria.com.ar/assets/img/email/cabecera.png&quot; width=&quot;600&quot; alt=&quot;Masherr · máquinas - herramientas&quot; style=&quot;display:block;width:100%;max-width:600px;height:auto;border:0;&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:40px 40px 8px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;p style=&quot;margin:0 0 12px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#17256B;font-weight:bold;&quot;&gt;&amp;#8212;&amp;nbsp;Tu cuenta Masherr&lt;/p&gt;
+      &lt;h1 style=&quot;margin:0 0 16px;font-size:30px;line-height:1.1;color:#08090B;font-weight:bold;&quot;&gt;Confirmá tu nuevo email&lt;/h1&gt;
+      &lt;p style=&quot;margin:0 0 28px;font-size:16px;line-height:1.6;color:#50566A;&quot;&gt;Pediste cambiar el email de tu cuenta en Masherr. Confirmá que este es tu nuevo correo.&lt;/p&gt;
+      &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td align=&quot;center&quot; bgcolor=&quot;#17256B&quot; style=&quot;border-radius:999px;&quot;&gt;
+        &lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;display:inline-block;padding:15px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;&quot;&gt;Confirmar nuevo email&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+      &lt;p style=&quot;margin:24px 0 0;font-size:13px;line-height:1.6;color:#50566A;&quot;&gt;Si el botón no funciona, copiá y pegá este enlace en tu navegador:&lt;br&gt;&lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;color:#17256B;word-break:break-all;&quot;&gt;{{ .ConfirmationURL }}&lt;/a&gt;&lt;/p&gt;
+      &lt;p style=&quot;margin:20px 0 0;font-size:13px;line-height:1.6;color:#8A90A2;&quot;&gt;Si no pediste el cambio, escribinos por WhatsApp.&lt;/p&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:28px 40px 36px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;border-top:1px solid #D9DCE4;&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding-top:22px;font-size:14px;line-height:1.6;color:#50566A;&quot;&gt;
+        ¿Dudas? Escribinos por &lt;a href=&quot;https://wa.me/5491131826166&quot; style=&quot;color:#128C3E;font-weight:bold;text-decoration:none;&quot;&gt;WhatsApp 11 3182-6166&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#17256B;padding:20px 40px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#C9CDDA;&quot;&gt;
+      &lt;b style=&quot;color:#FFFFFF;&quot;&gt;Ferretería Industrial Masherr&lt;/b&gt;&lt;br&gt;
+      Calle 38 (ex Hipólito Yrigoyen) 4335 · Villa Lynch, San Martín&lt;br&gt;
+      &lt;a href=&quot;https://masherrferreteria.com.ar&quot; style=&quot;color:#9AAEFF;text-decoration:none;&quot;&gt;masherrferreteria.com.ar&lt;/a&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/body&gt;&lt;/html&gt;
+</textarea>
+<button onclick="cp('b3',this)">Copiar cuerpo</button></section><section><h2>4. Magic link</h2>
+<p>En Supabase: <b>Authentication → Emails → Templates → Magic link</b></p>
+<label>Subject</label><textarea id="s4" rows="1" readonly>Tu enlace para ingresar a Masherr</textarea>
+<button onclick="cp('s4',this)">Copiar asunto</button>
+<label>Body (Source)</label><textarea id="b4" rows="6" readonly>&lt;!doctype html&gt;
+&lt;html lang=&quot;es&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Masherr&lt;/title&gt;&lt;/head&gt;
+&lt;body style=&quot;margin:0;padding:0;background:#EEF0F4;&quot;&gt;
+&lt;div style=&quot;display:none;max-height:0;overflow:hidden;opacity:0;&quot;&gt;Tu enlace de ingreso.&lt;/div&gt;
+&lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;background:#EEF0F4;&quot;&gt;
+&lt;tr&gt;&lt;td align=&quot;center&quot; style=&quot;padding:24px 12px;&quot;&gt;
+  &lt;table role=&quot;presentation&quot; width=&quot;600&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;width:100%;max-width:600px;background:#FFFFFF;border-radius:14px;overflow:hidden;&quot;&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#08090B;&quot;&gt;&lt;a href=&quot;https://masherrferreteria.com.ar&quot;&gt;&lt;img src=&quot;https://masherrferreteria.com.ar/assets/img/email/cabecera.png&quot; width=&quot;600&quot; alt=&quot;Masherr · máquinas - herramientas&quot; style=&quot;display:block;width:100%;max-width:600px;height:auto;border:0;&quot;&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:40px 40px 8px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;p style=&quot;margin:0 0 12px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#17256B;font-weight:bold;&quot;&gt;&amp;#8212;&amp;nbsp;Tu cuenta Masherr&lt;/p&gt;
+      &lt;h1 style=&quot;margin:0 0 16px;font-size:30px;line-height:1.1;color:#08090B;font-weight:bold;&quot;&gt;Ingresá a tu cuenta&lt;/h1&gt;
+      &lt;p style=&quot;margin:0 0 28px;font-size:16px;line-height:1.6;color:#50566A;&quot;&gt;Tocá el botón para ingresar a tu cuenta de Masherr. El enlace vence en un rato.&lt;/p&gt;
+      &lt;table role=&quot;presentation&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td align=&quot;center&quot; bgcolor=&quot;#17256B&quot; style=&quot;border-radius:999px;&quot;&gt;
+        &lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;display:inline-block;padding:15px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;&quot;&gt;Ingresar a Masherr&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+      &lt;p style=&quot;margin:24px 0 0;font-size:13px;line-height:1.6;color:#50566A;&quot;&gt;Si el botón no funciona, copiá y pegá este enlace en tu navegador:&lt;br&gt;&lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;color:#17256B;word-break:break-all;&quot;&gt;{{ .ConfirmationURL }}&lt;/a&gt;&lt;/p&gt;
+      &lt;p style=&quot;margin:20px 0 0;font-size:13px;line-height:1.6;color:#8A90A2;&quot;&gt;Si no pediste ingresar, ignorá este mensaje.&lt;/p&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:28px 40px 36px;font-family:Arial,Helvetica,sans-serif;&quot;&gt;
+      &lt;table role=&quot;presentation&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; style=&quot;border-top:1px solid #D9DCE4;&quot;&gt;&lt;tr&gt;&lt;td style=&quot;padding-top:22px;font-size:14px;line-height:1.6;color:#50566A;&quot;&gt;
+        ¿Dudas? Escribinos por &lt;a href=&quot;https://wa.me/5491131826166&quot; style=&quot;color:#128C3E;font-weight:bold;text-decoration:none;&quot;&gt;WhatsApp 11 3182-6166&lt;/a&gt;
+      &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;background:#17256B;padding:20px 40px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#C9CDDA;&quot;&gt;
+      &lt;b style=&quot;color:#FFFFFF;&quot;&gt;Ferretería Industrial Masherr&lt;/b&gt;&lt;br&gt;
+      Calle 38 (ex Hipólito Yrigoyen) 4335 · Villa Lynch, San Martín&lt;br&gt;
+      &lt;a href=&quot;https://masherrferreteria.com.ar&quot; style=&quot;color:#9AAEFF;text-decoration:none;&quot;&gt;masherrferreteria.com.ar&lt;/a&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/body&gt;&lt;/html&gt;
+</textarea>
+<button onclick="cp('b4',this)">Copiar cuerpo</button></section></main>
+<script>function cp(id,btn){var t=document.getElementById(id);t.select();t.setSelectionRange(0,999999);(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(function(){document.execCommand('copy')}).finally(function(){var o=btn.textContent;btn.textContent='¡Copiado!';setTimeout(function(){btn.textContent=o},1500)})}</script></body></html>
