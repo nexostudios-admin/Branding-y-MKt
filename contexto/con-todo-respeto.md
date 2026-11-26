@@ -4,6 +4,7 @@ Resumen de referencia armado a partir de dos PDFs entregados (nov. 2026), guarda
 
 - `Plan_60_dias_Con_Todo_Respeto_YouTube.pdf`: plan completo, 19 páginas, documento interno preparado para Mica y el equipo de Nexo Studios.
 - `Con_Todo_Respeto_Plan_60_Dias_Resumen_Meet.pdf`: resumen en 5 slides para la reunión (Meet) de arranque.
+- `Nexo_Con_Todo_Respeto_Plan_de_Lanzamiento.pdf` (fuente: `plan-lanzamiento.html`): plan de Nexo en 18 páginas verticales 9:16. Siete etapas con puertas (0 Llave, 30/11–6/12 · 1 Cimientos, días 1–7 desde el lun 7/12 · 2 Ignición · 3 Tracción, control día 30 = 5/1 · 4 Puente streamer, grabación 19–21/1 · 5 Estreno, Premiere jue 28/1 · 6 Expansión internacional, días 61–150), escenarios piso 2.800 / base 4.000 / techo 6.000, parámetros técnicos y tablero con semáforo.
 
 > **Estado (nov. 2026): plan propuesto, sin arrancar.** Las cifras de conversión, CTR y retención son referencias del mercado para canales de entrevistas, no datos del canal. Se recalibran con métricas reales desde la semana 2.
 
