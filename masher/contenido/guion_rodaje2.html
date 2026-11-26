@@ -1,0 +1,215 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Masherr · Guion de rodaje · nuevos videos</title><style>@font-face { font-family: "Cond"; src: url(../catalogo/fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans.ttf); font-weight: 400; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+:root { --azul: #17256B; --negro: #08090B; --celeste: #9AA8FF; --gris: #EEF0F4; --tinta: #1A1C22; --texto2: #50566A; --linea: #D9DCE4; --verde: #146C43; --m: 48px; }
+@page { size: 540pt 960pt; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "Texto", sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: none; } .hoja { margin: 0 !important; box-shadow: none !important; } }
+.hoja { width: 720px; height: 1280px; position: relative; overflow: hidden; background: #fff; margin: 20px auto; box-shadow: 0 2px 16px rgba(0,0,0,.25); break-after: page; padding: 0 var(--m); }
+.oscura { background: var(--negro); color: #fff; }
+.rayas { position: absolute; background: repeating-linear-gradient(to bottom, currentColor 0 9px, transparent 9px 15px); }
+h1, h2 { font-family: "Cond"; font-weight: 700; }
+.rotulo { font-family: "Cond"; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.oscura .rotulo { color: var(--celeste); }
+.cab { position: absolute; left: var(--m); right: var(--m); top: 34px; height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--azul); }
+.cab img { width: 240px; margin-bottom: 6px; }
+.cab span { font-family: "Cond"; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.pie { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: var(--negro); color: #A9ADB8; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--m); font-size: 17px; }
+.pie b { font-family: "Cond"; color: var(--celeste); font-size: 20px; letter-spacing: .06em; }
+.cuerpo { position: absolute; left: var(--m); right: var(--m); top: 136px; bottom: 76px; }
+h2 { font-size: 48px; line-height: 1.04; margin: 6px 0 14px; color: var(--negro); }
+h2.idea { font-size: 42px; margin-top: 10px; }
+.lead { font-size: 21px; line-height: 1.45; color: var(--texto2); margin-bottom: 16px; }
+.ayuda { font-size: 16px; color: var(--texto2); margin-top: 12px; }
+
+/* tapa */
+.barra { position: absolute; left: var(--m); top: 64px; width: 56px; height: 7px; background: var(--celeste); }
+.sup { position: absolute; left: 124px; top: 57px; font-family: "Cond"; font-size: 19px; letter-spacing: .08em; color: #C9CCD6; }
+.oscura .logo { position: absolute; left: var(--m); top: 150px; width: 480px; }
+.oscura .rayas { color: var(--azul); right: 0; top: 330px; width: 260px; height: 230px; clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%); }
+.eyebrow { position: absolute; left: var(--m); top: 600px; }
+.oscura h1 { position: absolute; left: var(--m); top: 640px; font-size: 76px; line-height: 1.0; }
+.bajada { position: absolute; left: var(--m); right: var(--m); top: 980px; font-size: 24px; line-height: 1.45; color: #B9BDC8; }
+.pie-t { position: absolute; left: var(--m); right: var(--m); bottom: 44px; display: flex; justify-content: space-between; font-size: 19px; color: #9095A3; }
+.pie-t b { font-family: "Cond"; color: var(--celeste); }
+
+/* tablas y bloques */
+.tabla { width: 100%; border-collapse: collapse; font-size: 17px; margin: 8px 0 14px; }
+.tabla th { background: var(--azul); color: #fff; font-family: "Cond"; font-weight: 700; text-align: left; padding: 9px 10px; font-size: 16px; }
+.tabla td { border-bottom: 1px solid var(--linea); padding: 9px 10px; vertical-align: top; line-height: 1.38; }
+.tabla td.pr { font-family: "Cond"; font-size: 20px; color: var(--azul); white-space: nowrap; text-align: right; }
+.estructura td:first-child { font-family: "Cond"; font-size: 20px; color: var(--azul); white-space: nowrap; width: 110px; }
+.cal td { font-size: 14.5px; }
+.cal td b { font-family: "Cond"; color: var(--azul); }
+.cal td.s { font-family: "Cond"; font-size: 16px; color: var(--negro); white-space: nowrap; }
+.ctas { display: grid; gap: 10px; margin: 8px 0 16px; }
+.ctas div { display: flex; gap: 16px; align-items: baseline; border: 2px solid var(--azul); padding: 12px 16px; }
+.ctas b { font-family: "Cond"; color: var(--azul); font-size: 20px; width: 112px; flex: none; }
+.ctas span { font-size: 17px; line-height: 1.4; }
+.nota { background: var(--gris); border-left: 6px solid var(--azul); padding: 14px 16px; font-size: 17px; line-height: 1.45; }
+.nota b { font-family: "Cond"; }
+ol.pasos { list-style: none; counter-reset: p; margin: 4px 0 8px; }
+ol.pasos li { counter-increment: p; position: relative; padding: 0 0 11px 50px; font-size: 18px; line-height: 1.4; }
+ol.pasos li::before { content: counter(p); position: absolute; left: 0; top: -3px; width: 36px; height: 36px; border-radius: 50%; background: var(--azul); color: #fff; font-family: "Cond"; font-size: 19px; display: grid; place-items: center; }
+ol.pasos li b { font-family: "Cond"; color: var(--azul); }
+
+/* índice */
+.indice { list-style: none; border-top: 2px solid var(--negro); }
+.indice li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linea); }
+.indice i { font-style: normal; font-family: "Cond"; color: var(--celeste); font-size: 19px; width: 30px; }
+.indice .t { font-family: "Cond"; font-size: 20px; flex: 1; line-height: 1.2; }
+.indice .c { font-size: 13px; color: var(--texto2); width: 120px; text-align: right; }
+.obj { font-family: "Cond"; font-size: 13px; letter-spacing: .06em; padding: 4px 8px; width: 70px; text-align: center; color: #fff; }
+.web { background: var(--azul); } .local { background: var(--negro); } .ambos { background: var(--verde); }
+
+/* página de idea */
+.meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chip { font-family: "Cond"; font-size: 14px; letter-spacing: .06em; padding: 4px 10px; color: #fff; }
+.chip.gris { background: var(--gris); color: var(--negro); }
+.gancho { background: var(--negro); color: #fff; padding: 16px 18px; font-size: 19px; line-height: 1.42; margin-bottom: 14px; }
+.gancho b { display: block; font-family: "Cond"; color: var(--celeste); font-size: 15px; letter-spacing: .08em; margin-bottom: 4px; }
+.cta { border: 3px solid var(--azul); padding: 14px 16px; font-size: 19px; line-height: 1.4; font-family: "Cond"; color: var(--negro); margin-bottom: 14px; }
+.cta b { display: block; color: var(--azul); font-size: 15px; letter-spacing: .08em; margin-bottom: 4px; }
+.cta span { display: block; font-family: "Texto"; font-size: 15px; color: var(--azul); margin-top: 6px; word-break: break-all; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 15.5px; line-height: 1.42; color: var(--texto2); }
+.dos b { display: block; font-family: "Cond"; color: var(--negro); font-size: 17px; margin-bottom: 4px; }
+
+mark { background: #FFE58A; color: inherit; padding: 0 3px; }
+.gancho mark { color: var(--negro); }
+.dos > div { min-width: 0; overflow-wrap: anywhere; }
+.ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; font-size: 16px; }
+.ficha div { background: var(--gris); padding: 10px 12px; }
+.ficha b { display: block; font-family: "Cond"; color: var(--azul); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.guion p, .dialogo p { font-size: 18px; line-height: 1.42; margin-bottom: 9px; }
+.guion { border-left: 4px solid var(--azul); padding-left: 16px; margin-bottom: 12px; }
+.dialogo { margin-bottom: 12px; }
+.dialogo p b { font-family: "Cond"; color: var(--azul); font-size: 18px; }
+.chip.producto { background: var(--azul); } .chip.humor { background: #B4531A; } .chip.consejos { background: var(--verde); } .chip.empresas { background: #4A3A8C; }
+.indice .dur { font-family: "Cond"; font-size: 15px; color: var(--azul); width: 54px; text-align: right; }
+.indice .c { width: 190px; } .indice li { padding-top: 6px; padding-bottom: 6px; } .indice i { width: 44px; flex: none; }
+.prods { list-style: none; border-top: 1px solid var(--linea); columns: 2; column-gap: 18px; }
+.prods li { break-inside: avoid; display: flex; gap: 8px; padding: 3px 0; border-bottom: 1px solid var(--linea); font-size: 13px; line-height: 1.28; }
+.prods li b { font-family: "Cond"; color: var(--celeste); width: 24px; flex: none; }
+.lista-prod { background: var(--gris); padding: 10px 14px; margin-bottom: 12px; font-size: 15px; }
+.lista-prod b { font-family: "Cond"; color: var(--azul); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.lista-prod ul { margin: 4px 0 0 18px; } .lista-prod li { margin: 2px 0; }
+.nota.ojo { border-left-color: #B42318; background: #FDECEA; }
+</style></head><body><section class="hoja oscura"><div class="barra"></div><div class="sup">MASHERR / GUION DE RODAJE</div>
+<img class="logo" src="../catalogo/img/masher-logo-blanco.png" alt="Masherr máquinas - herramientas"><div class="rayas"></div>
+<div class="eyebrow rotulo">Noviembre semana 4 · Diciembre semanas 1 y 2</div>
+<h1>14 VIDEOS<br>NUEVOS PARA<br>GRABAR.</h1>
+<p class="bajada">Guiones, tomas y productos de cada video, listos para el día de rodaje.</p>
+<div class="pie-t"><span>Ferretería industrial</span><b>@masherrferreteria</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Índice</span></div>
+<div class="cuerpo"><div class="rotulo">Los 14 videos</div><h2>QUÉ GRABAMOS.</h2>
+<div class="rotulo" style="margin-top:6px">Noviembre · semana 4</div><ul class="indice"><li><i>15</i><span class="t">“¿Venden cinta?”</span><span class="c">Noviembre S4 · Humor</span><span class="dur">~20 s</span></li><li><i>16</i><span class="t">¿Vas a soldar? Elegí bien el equipo</span><span class="c">Noviembre S4 · Producto</span><span class="dur">~50 s</span></li><li><i>17</i><span class="t">Aspiradoras para sólidos y líquidos</span><span class="c">Noviembre S4 · Producto</span><span class="dur">~40 s</span></li><li><i>18</i><span class="t">Hidrolavadora Nebraska 2200 W · 160 bar</span><span class="c">Noviembre S4 · Producto</span><span class="dur">~55 s</span></li><li><i>19</i><span class="t">¿Taladro con cable o inalámbrico?</span><span class="c">Noviembre S4 · Consejos</span><span class="dur">~50 s</span></li><li><i>20</i><span class="t">“Si hace este ruido… necesitás”</span><span class="c">Noviembre S4 · Humor</span><span class="dur">~30 s</span></li></ul>
+<div class="rotulo" style="margin-top:12px">Diciembre · semanas 1 y 2</div><ul class="indice"><li><i>D01</i><span class="t">¿Comprás para tu empresa? Cotizá con Masherr</span><span class="c">Diciembre S1 · Empresas</span><span class="dur">~40 s</span></li><li><i>D02</i><span class="t">¿Sos soldador? En Masherr tenés todo</span><span class="c">Diciembre S1 · Producto</span><span class="dur">~35 s</span></li><li><i>D03</i><span class="t">3 cosas que no pueden faltar en tu taller</span><span class="c">Diciembre S1 · Consejos</span><span class="dur">~45 s</span></li><li><i>D05</i><span class="t">Video humor: “estamos grabando”</span><span class="c">Diciembre S1 · Humor</span><span class="dur">~15 s</span></li><li><i>D06</i><span class="t">Combo rotomartillo SDS Plus + cinceles</span><span class="c">Diciembre S2 · Producto</span><span class="dur">~40 s</span></li><li><i>D07</i><span class="t">Combo Milwaukee: dos herramientas para equiparte</span><span class="c">Diciembre S2 · Producto</span><span class="dur">~35 s</span></li><li><i>D08</i><span class="t">¿Todavía llevás tus herramientas así?</span><span class="c">Diciembre S2 · Producto</span><span class="dur">~35 s</span></li><li><i>D09</i><span class="t">“Dale, confiá”</span><span class="c">Diciembre S2 · Humor</span><span class="dur">~20 s</span></li></ul>
+<p class="ayuda">Duración estimada leyendo a ritmo natural. El texto en pantalla de cada video va en mayúsculas. En la planificación de diciembre no hay video 4.</p></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>02 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Antes de grabar</span></div>
+<div class="cuerpo"><div class="rotulo">Checklist del día</div><h2>ANTES DE GRABAR.</h2>
+<div class="nota ojo"><span><b>Confirmar la antigüedad.</b> Los videos D01 y D09 dicen <mark>“más de 53 años”</mark>. Confirmar el año de fundación antes de publicar (Google dice 1969, los videos ya grabados dicen 1973 y el posteo fijado de Instagram, 56 años).</span></div>
+<div class="nota" style="margin-top:10px"><span><b>Sin precios</b> en ningún video: todo cierra con “consultanos por WhatsApp”. Tapar etiquetas de precio en góndola. Confirmar también el caudal de la hidrolavadora (video 18) y definir el guion del video D05 a partir de su referencia.</span></div>
+<div class="rotulo" style="margin-top:14px">Productos a tener listos</div>
+<ul class="prods"><li><b>15</b> Cintas métricas Stanley, Bremen y Evel (exhibidas detrás del mostrador)</li><li><b>16</b> Soldadora Inverter SI 140 Pegaso</li><li><b>16</b> Soldadora Inverter SI 160 PRO Pegaso</li><li><b>16</b> Soldadora Inverter SI 190 PRO Pegaso</li><li><b>16</b> Soldadora Inverter SI C250 PRO Pegaso</li><li><b>16</b> Soldadora Inverter 130 A MMA/TIG/MIG Flux Braber</li><li><b>16</b> Máscara fotosensible EDGE-500S Foxtter</li><li><b>16</b> Máscara fotosensible OPERA-400S Foxtter</li><li><b>17</b> Aspiradora 1100W 15 L sólidos y líquidos NEAS101100 Nebraska</li><li><b>17</b> Aspiradora 1200W 40 L sólidos y líquidos NEAS351200 Nebraska</li><li><b>18</b> Hidrolavadora 2200W 160 bar NEMEHL2200 Nebraska</li><li><b>19</b> Taladro percutor Bosch 13 mm 550W GSB 550 RE</li><li><b>19</b> Taladro percutor atornillador inalámbrico Stanley 20V 45 Nm SCH201C2K</li><li><b>20</b> Lubricante multiuso WD-40</li><li><b>20</b> Cueritos para canilla</li><li><b>20</b> Juego de destornilladores</li><li><b>D02</b> Soldadoras inverter Pegaso y Braber</li><li><b>D02</b> Electrodos</li><li><b>D02</b> Discos de corte</li><li><b>D02</b> Máscaras fotosensibles Foxtter (EDGE-500S y OPERA-400S)</li><li><b>D03</b> Cajas y organizadores (Packout Milwaukee, Stanley)</li><li><b>D03</b> Kits de discos, mechas y puntas</li><li><b>D03</b> Guantes, antiparras y protección auditiva</li><li><b>D05</b> Un producto destacado: combo, máquina u organizador (por ejemplo, Combo Milwaukee 3697-259A o carro Packout)</li><li><b>D06</b> Combo Rotomartillo SDS Plus + Cincel Punta + Cincel Plano Electroneum</li><li><b>D07</b> Combo Taladro Percutor + Llave de Impacto Milwaukee 3697-259A</li><li><b>D08</b> Mochilas Milwaukee (48-22-8200, 48-22-8202, Packout 48-22-8301)</li><li><b>D08</b> Cajas Packout Milwaukee</li><li><b>D08</b> Cajas de herramientas Stanley</li><li><b>D08</b> Bolsos Emtop</li></ul>
+<div class="rotulo" style="margin-top:12px">Orden sugerido para grabar</div>
+<ol class="pasos"><li><b>Humor (2 empleados + cliente):</b> 15, 20, D05 y D09.</li>
+<li><b>Mostrador y banco:</b> 16, 19, D02, D03, D06, D07 y D08.</li>
+<li><b>Guido a cámara:</b> D01. <b>Taller o depósito:</b> 17. <b>Vereda:</b> 18.</li></ol></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>03 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video 15</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video 15 · Noviembre · Semana 4</span><span class="chip humor">Humor</span><span class="chip gris">~20 s</span></div>
+<h2 class="idea">“¿VENDEN CINTA?”</h2>
+<div class="ficha"><div><b>Quién</b>Cliente + 2 empleados</div><div><b>Dónde</b>Mostrador</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿VENDEN CINTA? 🤨</div>
+<div class="dialogo"><p><b>Escena:</b> Entra un cliente y se acerca al mostrador, donde hay dos empleados. Detrás del Empleado 1 se ven bien las cintas métricas exhibidas.</p><p><b>Cliente:</b> ¡Hola, buenas! ¿Venden cinta?</p><p><b>Empleado 1:</b> Nooo, ¿no ves que acá solamente vendemos…</p><p><b>Empleado 2:</b> (Lo interrumpe.) ¡Sí, claro! Tenemos varias marcas y modelos. ¿Buscabas alguna en particular?</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Cintas métricas Stanley, Bremen y Evel (exhibidas detrás del mostrador)</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Plano fijo del mostrador. Las cintas tienen que quedar visibles detrás del Empleado 1 para reforzar el remate. La interrupción del Empleado 2 tiene que ser rápida, sin dejar terminar la frase al primero.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria<br><br><b>Referencia</b>tiktok.com/@inversiones_joa55/video/7466497854119349509</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>04 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video 16</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video 16 · Noviembre · Semana 4</span><span class="chip producto">Producto</span><span class="chip gris">~50 s</span></div>
+<h2 class="idea">¿VAS A SOLDAR? ELEGÍ BIEN EL EQUIPO</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Mostrador con las soldadoras en fila</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿VAS A SOLDAR? ELEGÍ BIEN EL EQUIPO</div>
+<div class="guion"><p>Si trabajás con hierro, la soldadora que elegís define cómo te va a salir el trabajo, y también cuánto vas a tardar en terminarlo.</p><p>En Masherr tenemos soldadoras inverter Pegaso en cuatro modelos: la SI 140, la SI 160 PRO, la SI 190 PRO y la C250 PRO, para que elijas según la exigencia de tu trabajo.</p><p>Además, tenemos la soldadora inverter Braber de 130 amperes, que trabaja con electrodo, TIG y MIG Flux.</p><p>Y no todo se trata de la máquina: para soldar tenés que proteger bien la vista. Por eso también tenemos máscaras fotosensibles Foxtter, en dos modelos: la EDGE-500S y la OPERA-400S.</p><p>Si es tu primera soldadora, o la tenés que cambiar porque ya no rinde para tu trabajo, escribinos y te ayudamos a elegir la tuya.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Soldadora Inverter SI 140 Pegaso</li><li>Soldadora Inverter SI 160 PRO Pegaso</li><li>Soldadora Inverter SI 190 PRO Pegaso</li><li>Soldadora Inverter SI C250 PRO Pegaso</li><li>Soldadora Inverter 130 A MMA/TIG/MIG Flux Braber</li><li>Máscara fotosensible EDGE-500S Foxtter</li><li>Máscara fotosensible OPERA-400S Foxtter</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Las 5 soldadoras en fila, de menor a mayor · detalle del panel de cada una · las dos máscaras · Guido se pone la máscara al cierre.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>05 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video 17</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video 17 · Noviembre · Semana 4</span><span class="chip producto">Producto</span><span class="chip gris">~40 s</span></div>
+<h2 class="idea">ASPIRADORAS PARA SÓLIDOS Y LÍQUIDOS</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Taller o depósito</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>ASPIRADORAS PARA SÓLIDOS Y LÍQUIDOS: ELEGÍ EL TAMAÑO</div>
+<div class="guion"><p>Hay limpiezas que una escoba no resuelve: el polvo del taller, el agua derramada, los restos de obra.</p><p>Para eso tenemos aspiradoras Nebraska de sólidos y líquidos, en dos tamaños.</p><p>La de 15 litros y 1100 watts, práctica para espacios chicos y fácil de guardar. Y la de 40 litros y 1200 watts, para trabajos más grandes o de más duración.</p><p>Las dos aspiran sólidos y líquidos, tienen base con ruedas para moverlas fácil y vienen con boquillas para distintas superficies.</p><p>Contanos dónde la vas a usar y te decimos cuál te conviene. Consultá por WhatsApp o pasá por Masherr.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Aspiradora 1100W 15 L sólidos y líquidos NEAS101100 Nebraska</li><li>Aspiradora 1200W 40 L sólidos y líquidos NEAS351200 Nebraska</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Las dos aspiradoras lado a lado · aspirar aserrín o polvo · aspirar agua derramada · detalle de ruedas y boquillas.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>06 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video 18</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video 18 · Noviembre · Semana 4</span><span class="chip producto">Producto</span><span class="chip gris">~55 s</span></div>
+<h2 class="idea">HIDROLAVADORA NEBRASKA 2200 W · 160 BAR</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Vereda o patio</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>LLEGA EL CALOR: PATIO, VEREDA Y AUTO EN MINUTOS</div>
+<div class="guion"><p>Llega el calor y es momento de limpiar el patio, la vereda o el auto. Te presento una máquina que te va a ahorrar horas: la hidrolavadora Nebraska de 2200 watts.</p><p>Tiene una presión máxima de 160 bar y <mark>un caudal de 6,5 litros</mark>, para limpiar bien sin gastar de más.</p><p>Trae sistema Auto-Stop, manguera de alta presión de 5 metros, dosificador de detergente, lanza turbo y boquilla regulable. Y viene con ruedas y carrete para la manguera, así la movés y la guardás fácil.</p><p>Sirve para vehículos, patios, veredas, herramientas y otras superficies. Es ideal para uso doméstico intensivo y también profesional.</p><p>Y si buscás otra opción, en el local tenemos más modelos, de distintas marcas y potencias. Vení a conocerlos y te ayudamos a elegir.</p><p>Masherr, Calle 38 4335, Villa Lynch, o consultá por WhatsApp.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Hidrolavadora 2200W 160 bar NEMEHL2200 Nebraska</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Antes/después en una franja de vereda (cámara fija) · detalle de lanza turbo, dosificador y carrete · cierre con otras hidrolavadoras del local.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>07 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video 19</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video 19 · Noviembre · Semana 4</span><span class="chip consejos">Consejos</span><span class="chip gris">~50 s</span></div>
+<h2 class="idea">¿TALADRO CON CABLE O INALÁMBRICO?</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Banco de trabajo</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿TALADRO CON CABLE O INALÁMBRICO?</div>
+<div class="guion"><p>¿Estás buscando un taladro y no sabés si elegir uno con cable o inalámbrico? Te mostramos dos opciones que tenemos en Masherr.</p><p>Si querés trabajar sin preocuparte por la batería y tenés un enchufe cerca, el taladro percutor Bosch de 550 watts es una buena alternativa: mandril de 13 mm, velocidad variable y percusión, ideal para madera, metal y mampostería.</p><p>Si necesitás más libertad de movimiento y no depender de un enchufe, tenemos el taladro percutor atornillador inalámbrico Stanley de 20 V y 45 Nm: dos velocidades, 22 posiciones de torque y luz LED. Viene con dos baterías, cargador rápido y maletín.</p><p>Dos opciones diferentes para distintas necesidades.</p><p>En Masherr tenemos estos y muchos modelos más. Escribinos o pasá por el local y te ayudamos a elegir el que mejor se adapte a tu trabajo.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Taladro percutor Bosch 13 mm 550W GSB 550 RE</li><li>Taladro percutor atornillador inalámbrico Stanley 20V 45 Nm SCH201C2K</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Pantalla dividida: cable a la izquierda, inalámbrico a la derecha · perforación con cada uno · detalle del selector de torque y la luz LED.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>08 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video 20</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video 20 · Noviembre · Semana 4</span><span class="chip humor">Humor</span><span class="chip gris">~30 s</span></div>
+<h2 class="idea">“SI HACE ESTE RUIDO… NECESITÁS”</h2>
+<div class="ficha"><div><b>Quién</b>2 empleados</div><div><b>Dónde</b>Local (Empleado 2 de fondo)</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>SI HACE ESTE RUIDO… NECESITÁS ESTO</div>
+<div class="dialogo"><p><b>Empleado 1:</b> Si las puertas de tu casa hacen…</p><p><b>Empleado 2:</b> (De fondo, haciendo otra cosa: imita el chirrido de una bisagra.)</p><p><b>Empleado 1:</b> …vas a necesitar WD-40.</p><p><b>Empleado 1:</b> Si las canillas de tu casa hacen…</p><p><b>Empleado 2:</b> (Imita el goteo de una canilla.)</p><p><b>Empleado 1:</b> …vas a necesitar cambiar los cueritos.</p><p><b>Empleado 1:</b> Si los muebles de tu casa hacen…</p><p><b>Empleado 2:</b> (Imita el crujido de un mueble flojo.)</p><p><b>Empleado 1:</b> …vas a necesitar ajustar los tornillos (muestra el destornillador), o tal vez cambiarlos.</p><p><b>Empleado 1:</b> Para cada problema, una solución. En Masherr tenemos lo que necesitás. ¡Consultanos!</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Lubricante multiuso WD-40</li><li>Cueritos para canilla</li><li>Juego de destornilladores</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Empleado 1 a cámara en primer plano, Empleado 2 desenfocado de fondo · cada producto en primer plano al nombrarlo · texto en pantalla con el nombre del producto.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria<br><br><b>Referencia</b>tiktok.com/@sos.ferreteria/video/7677591297867271444</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>09 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D01</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D01 · Diciembre · Semana 1</span><span class="chip empresas">Empresas</span><span class="chip gris">~40 s</span></div>
+<h2 class="idea">¿COMPRÁS PARA TU EMPRESA? COTIZÁ CON MASHERR</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Mostrador y depósito</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿COMPRÁS PARA TU EMPRESA? COTIZÁ CON MASHERR</div>
+<div class="guion"><p>¿Tenés una empresa, un taller o una industria y necesitás comprar herramientas e insumos en cantidad?</p><p>En Masherr te ayudamos a cotizar tus pedidos para que resuelvas tus compras de manera más práctica.</p><p>Solo tenés que mandarnos tu lista de productos y cantidades por WhatsApp, o cargarla en masherrferreteria.com.ar, en la sección Empresas, y nuestro equipo prepara la cotización.</p><p>Trabajamos con distintas marcas y categorías: herramientas eléctricas y manuales, discos, brocas, soldadura, seguridad industrial y mucho más.</p><p>Además, <mark>tenemos más de 53 años de experiencia</mark> acompañando a empresas, talleres y profesionales.</p><p>Si necesitás abastecer tu negocio, escribinos y pedí tu cotización.</p></div>
+
+<div class="dos"><div><b>Tomas</b>Guido revisando una lista larga · pantalla del formulario de Empresas · pedidos armados en el mostrador · góndolas por categoría.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>10 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D02</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D02 · Diciembre · Semana 1</span><span class="chip producto">Producto</span><span class="chip gris">~35 s</span></div>
+<h2 class="idea">¿SOS SOLDADOR? EN MASHERR TENÉS TODO</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Mostrador con todo el equipo de soldadura</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿SOS SOLDADOR? EN MASHERR TENÉS TODO PARA TRABAJAR</div>
+<div class="guion"><p>Si trabajás en herrería o soldadura, sabés que no alcanza con tener una buena máquina: también necesitás los insumos y accesorios para trabajar.</p><p>En Masherr tenemos distintas opciones para equiparte: soldadoras inverter, electrodos, discos de corte, accesorios y elementos de protección.</p><p>También tenemos máscaras fotosensibles Foxtter, para proteger tu vista mientras soldás.</p><p>Ya sea que estés empezando, tengas tu propio taller o trabajes profesionalmente, vas a encontrar alternativas según lo que necesitás.</p><p>¿Buscás algún insumo o querés equipar tu taller? Escribinos y te ayudamos a encontrarlo.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Soldadoras inverter Pegaso y Braber</li><li>Electrodos</li><li>Discos de corte</li><li>Máscaras fotosensibles Foxtter (EDGE-500S y OPERA-400S)</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Grabar video detalle de cada producto (planos cerrados, girando, con el logo visible). Armar un “kit del soldador” sobre el mostrador: soldadora, electrodos, discos, máscara y guantes.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>11 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D03</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D03 · Diciembre · Semana 1</span><span class="chip consejos">Consejos</span><span class="chip gris">~45 s</span></div>
+<h2 class="idea">3 COSAS QUE NO PUEDEN FALTAR EN TU TALLER</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Mostrador y góndolas</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>3 COSAS QUE NO PUEDEN FALTAR EN TU TALLER</div>
+<div class="guion"><p>Si tenés un taller, hay tres cosas que te facilitan mucho el trabajo y que no deberían faltar.</p><p>Primero: organización. Tener tus herramientas ordenadas y a mano te ahorra tiempo y evita que se pierdan. En Masherr tenemos cajas, bolsos y sistemas de almacenamiento.</p><p>Segundo: consumibles. No esperes a quedarte sin discos, mechas o puntas para reponerlos. Los usás todo el tiempo, y tener variedad y stock te permite seguir trabajando sin interrupciones.</p><p>Tercero: protección. Guantes, antiparras, protección auditiva y los elementos adecuados para cada tarea son fundamentales para trabajar seguro.</p><p>En Masherr encontrás todo esto y mucho más para equipar tu taller.</p><p>¿Qué es lo que nunca puede faltar en tu espacio de trabajo? ¡Contanos en los comentarios!</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Cajas y organizadores (Packout Milwaukee, Stanley)</li><li>Kits de discos, mechas y puntas</li><li>Guantes, antiparras y protección auditiva</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Número grande en pantalla (1, 2, 3) · 1: detalle de organizadores · 2: detalle de kits con variedad de discos, mechas o puntas · 3: detalle de guantes, antiparras y protección auditiva.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>12 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D05</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D05 · Diciembre · Semana 1</span><span class="chip humor">Humor</span><span class="chip gris">~15 s</span></div>
+<h2 class="idea">VIDEO HUMOR: “ESTAMOS GRABANDO”</h2>
+<div class="ficha"><div><b>Quién</b>Equipo de Masherr</div><div><b>Dónde</b>Local</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b><mark>DEFINIR SEGÚN LA REFERENCIA</mark></div>
+<div class="guion"><p>Recrear la referencia con el equipo de Masherr.</p><p>Aprovechar la situación para que, al enfocar, se vea que están grabando con un producto destacado (un combo, una máquina o un organizador) que genere interés.</p><p>Cierre: “En Masherr tenemos lo que necesitás. Consultanos por WhatsApp.”</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Un producto destacado: combo, máquina u organizador (por ejemplo, Combo Milwaukee 3697-259A o carro Packout)</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Mirar la referencia antes de grabar y repetir su ritmo · el producto destacado tiene que verse claro cuando la cámara “descubre” la grabación.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria<br><br><b>Referencia</b>tiktok.com/@sos.ferreteria/video/7692554732593876245</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>13 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D06</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D06 · Diciembre · Semana 2</span><span class="chip producto">Producto</span><span class="chip gris">~40 s</span></div>
+<h2 class="idea">COMBO ROTOMARTILLO SDS PLUS + CINCELES</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Banco de trabajo o pared de hormigón</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿TENÉS QUE PERFORAR, PICAR O DEMOLER?</div>
+<div class="guion"><p>¿Tenés que perforar, picar o hacer trabajos de demolición? Este combo puede ser justo lo que necesitás.</p><p>En Masherr tenemos este combo de rotomartillo SDS Plus Electroneum de 850 watts y 3 joules de impacto.</p><p>Tiene velocidad variable y tres funciones: perforación con percusión, rotación simple y demolición liviana.</p><p>¡Y eso no es todo! También trae un cincel de punta y uno plano de 250 milímetros, ideales para picar, remover material y abrir canaletas.</p><p>Además viene con brocas, accesorios y maletín para tener todo organizado.</p><p>Una solución muy completa para obra, reformas e instalaciones. ¿Te interesa? Escribinos por WhatsApp y consultá disponibilidad y precio.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Combo Rotomartillo SDS Plus + Cincel Punta + Cincel Plano Electroneum</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Grabar video detalle de cada producto (planos cerrados, girando, con el logo visible). Perforación y picado de una canaleta con los cinceles (anteojos, guantes y protección auditiva).</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>14 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D07</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D07 · Diciembre · Semana 2</span><span class="chip producto">Producto</span><span class="chip gris">~35 s</span></div>
+<h2 class="idea">COMBO MILWAUKEE: DOS HERRAMIENTAS PARA EQUIPARTE</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Banco de trabajo</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>DOS HERRAMIENTAS MILWAUKEE EN UN SOLO COMBO</div>
+<div class="guion"><p>Si estás buscando equipar tu taller con herramientas profesionales, mirá este combo Milwaukee que tenemos en Masherr.</p><p>Incluye dos herramientas fundamentales: un taladro percutor y una llave de impacto.</p><p>El taladro percutor es para perforar. La llave de impacto, para ajustar y aflojar fijaciones con mucha menos fuerza.</p><p>Dos herramientas que se complementan y te permiten resolver distintas tareas con más practicidad.</p><p>Si trabajás en mantenimiento, mecánica o construcción, este combo puede ser una gran incorporación para tu equipo.</p><p>¿Querés conocer más? Escribinos por WhatsApp y consultá precio y disponibilidad.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Combo Taladro Percutor + Llave de Impacto Milwaukee 3697-259A</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Grabar video detalle de cada producto (planos cerrados, girando, con el logo visible). Perforación en madera con el taladro · aflojar un bulón con la llave de impacto · todo guardado en el bolso al cierre.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>15 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D08</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D08 · Diciembre · Semana 2</span><span class="chip producto">Producto</span><span class="chip gris">~35 s</span></div>
+<h2 class="idea">¿TODAVÍA LLEVÁS TUS HERRAMIENTAS ASÍ?</h2>
+<div class="ficha"><div><b>Quién</b>Guido a cámara</div><div><b>Dónde</b>Mostrador y góndola de almacenamiento</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>¿TODAVÍA LLEVÁS TUS HERRAMIENTAS ASÍ?</div>
+<div class="guion"><p>¿Todavía llevás todas tus herramientas sueltas o mezcladas en cualquier bolso?</p><p>Si trabajás trasladándote entre obras, talleres o distintos lugares, sabés lo importante que es tener todo organizado y a mano.</p><p>En Masherr tenemos mochilas, cajas y bolsos para transportar y guardar tus herramientas.</p><p>Elegís según la cantidad de herramientas que llevás, el espacio que tenés y el tipo de trabajo que hacés.</p><p>Trabajamos con marcas como Milwaukee, Stanley y Emtop, entre otras.</p><p>Dejá de perder tiempo buscando tus herramientas y empezá a llevar todo organizado. Escribinos o pasá por el local y te ayudamos a elegir.</p></div>
+<div class="lista-prod"><b>Productos</b><ul><li>Mochilas Milwaukee (48-22-8200, 48-22-8202, Packout 48-22-8301)</li><li>Cajas Packout Milwaukee</li><li>Cajas de herramientas Stanley</li><li>Bolsos Emtop</li></ul></div>
+<div class="dos"><div><b>Tomas</b>Arranque: herramientas sueltas en una bolsa de supermercado · corte a las mochilas, cajas y bolsos · Grabar video detalle de cada producto (planos cerrados, girando, con el logo visible).</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>16 / 17</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Video D09</span></div>
+<div class="cuerpo"><div class="meta"><span class="rotulo">Video D09 · Diciembre · Semana 2</span><span class="chip humor">Humor</span><span class="chip gris">~20 s</span></div>
+<h2 class="idea">“DALE, CONFIÁ”</h2>
+<div class="ficha"><div><b>Quién</b>2 empleados</div><div><b>Dónde</b>Local</div></div>
+<div class="gancho"><b>TEXTO EN PANTALLA</b>HOY ESTÁ DIFÍCIL ENCONTRAR ALGUIEN DE CONFIANZA</div>
+<div class="dialogo"><p><b>Empleado 1:</b> Dale, confiá.</p><p><b>Empleado 2:</b> (Se deja caer de espaldas… y nadie lo agarra. Caída simulada y segura.)</p><p><b>Empleado 1:</b> (A cámara.) Hoy en día está difícil encontrar a alguien de confianza. Por eso tenés que venir a Masherr.</p><p><b>Empleado 1:</b> <mark>Tenemos más de 53 años de experiencia</mark> y trabajamos con más de 55 marcas. ¡Vení a visitarnos!</p></div>
+
+<div class="dos"><div><b>Tomas</b>Plano fijo para la caída (usar colchoneta fuera de cuadro) · después Empleado 1 habla caminando y recorriendo el local · cierre en la puerta.</div><div><b>Placa final</b>masherrferreteria.com.ar · Calle 38 4335, Villa Lynch · @masherrferreteria<br><br><b>Referencia</b>tiktok.com/@sos.ferreteria/video/7627578220526849300</div></div></div><div class="pie"><span>Masherr · Guion de rodaje · nuevos videos</span><b>17 / 17</b></div></section></body></html>
