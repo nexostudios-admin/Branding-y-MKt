@@ -1,0 +1,169 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Videos de diciembre · TikTok e Instagram</title><style>@font-face { font-family: "Cond"; src: url(../catalogo/fonts/DejaVuSansCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans.ttf); font-weight: 400; }
+@font-face { font-family: "Texto"; src: url(../catalogo/fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+:root { --azul: #17256B; --negro: #08090B; --celeste: #9AA8FF; --gris: #EEF0F4; --tinta: #1A1C22; --texto2: #50566A; --linea: #D9DCE4; --verde: #146C43; --m: 48px; }
+@page { size: 540pt 960pt; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "Texto", sans-serif; color: var(--tinta); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: none; } .hoja { margin: 0 !important; box-shadow: none !important; } }
+.hoja { width: 720px; height: 1280px; position: relative; overflow: hidden; background: #fff; margin: 20px auto; box-shadow: 0 2px 16px rgba(0,0,0,.25); break-after: page; padding: 0 var(--m); }
+.oscura { background: var(--negro); color: #fff; }
+.rayas { position: absolute; background: repeating-linear-gradient(to bottom, currentColor 0 9px, transparent 9px 15px); }
+h1, h2 { font-family: "Cond"; font-weight: 700; }
+.rotulo { font-family: "Cond"; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.oscura .rotulo { color: var(--celeste); }
+.cab { position: absolute; left: var(--m); right: var(--m); top: 34px; height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--azul); }
+.cab img { width: 240px; margin-bottom: 6px; }
+.cab span { font-family: "Cond"; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+.pie { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: var(--negro); color: #A9ADB8; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--m); font-size: 17px; }
+.pie b { font-family: "Cond"; color: var(--celeste); font-size: 20px; letter-spacing: .06em; }
+.cuerpo { position: absolute; left: var(--m); right: var(--m); top: 136px; bottom: 76px; }
+h2 { font-size: 48px; line-height: 1.04; margin: 6px 0 14px; color: var(--negro); }
+h2.idea { font-size: 42px; margin-top: 10px; }
+.lead { font-size: 21px; line-height: 1.45; color: var(--texto2); margin-bottom: 16px; }
+.ayuda { font-size: 16px; color: var(--texto2); margin-top: 12px; }
+
+/* tapa */
+.barra { position: absolute; left: var(--m); top: 64px; width: 56px; height: 7px; background: var(--celeste); }
+.sup { position: absolute; left: 124px; top: 57px; font-family: "Cond"; font-size: 19px; letter-spacing: .08em; color: #C9CCD6; }
+.oscura .logo { position: absolute; left: var(--m); top: 150px; width: 480px; }
+.oscura .rayas { color: var(--azul); right: 0; top: 330px; width: 260px; height: 230px; clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%); }
+.eyebrow { position: absolute; left: var(--m); top: 600px; }
+.oscura h1 { position: absolute; left: var(--m); top: 640px; font-size: 76px; line-height: 1.0; }
+.bajada { position: absolute; left: var(--m); right: var(--m); top: 980px; font-size: 24px; line-height: 1.45; color: #B9BDC8; }
+.pie-t { position: absolute; left: var(--m); right: var(--m); bottom: 44px; display: flex; justify-content: space-between; font-size: 19px; color: #9095A3; }
+.pie-t b { font-family: "Cond"; color: var(--celeste); }
+
+/* tablas y bloques */
+.tabla { width: 100%; border-collapse: collapse; font-size: 17px; margin: 8px 0 14px; }
+.tabla th { background: var(--azul); color: #fff; font-family: "Cond"; font-weight: 700; text-align: left; padding: 9px 10px; font-size: 16px; }
+.tabla td { border-bottom: 1px solid var(--linea); padding: 9px 10px; vertical-align: top; line-height: 1.38; }
+.tabla td.pr { font-family: "Cond"; font-size: 20px; color: var(--azul); white-space: nowrap; text-align: right; }
+.estructura td:first-child { font-family: "Cond"; font-size: 20px; color: var(--azul); white-space: nowrap; width: 110px; }
+.cal td { font-size: 14.5px; }
+.cal td b { font-family: "Cond"; color: var(--azul); }
+.cal td.s { font-family: "Cond"; font-size: 16px; color: var(--negro); white-space: nowrap; }
+.ctas { display: grid; gap: 10px; margin: 8px 0 16px; }
+.ctas div { display: flex; gap: 16px; align-items: baseline; border: 2px solid var(--azul); padding: 12px 16px; }
+.ctas b { font-family: "Cond"; color: var(--azul); font-size: 20px; width: 112px; flex: none; }
+.ctas span { font-size: 17px; line-height: 1.4; }
+.nota { background: var(--gris); border-left: 6px solid var(--azul); padding: 14px 16px; font-size: 17px; line-height: 1.45; }
+.nota b { font-family: "Cond"; }
+ol.pasos { list-style: none; counter-reset: p; margin: 4px 0 8px; }
+ol.pasos li { counter-increment: p; position: relative; padding: 0 0 11px 50px; font-size: 18px; line-height: 1.4; }
+ol.pasos li::before { content: counter(p); position: absolute; left: 0; top: -3px; width: 36px; height: 36px; border-radius: 50%; background: var(--azul); color: #fff; font-family: "Cond"; font-size: 19px; display: grid; place-items: center; }
+ol.pasos li b { font-family: "Cond"; color: var(--azul); }
+
+/* índice */
+.indice { list-style: none; border-top: 2px solid var(--negro); }
+.indice li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linea); }
+.indice i { font-style: normal; font-family: "Cond"; color: var(--celeste); font-size: 19px; width: 30px; }
+.indice .t { font-family: "Cond"; font-size: 20px; flex: 1; line-height: 1.2; }
+.indice .c { font-size: 13px; color: var(--texto2); width: 120px; text-align: right; }
+.obj { font-family: "Cond"; font-size: 13px; letter-spacing: .06em; padding: 4px 8px; width: 70px; text-align: center; color: #fff; }
+.web { background: var(--azul); } .local { background: var(--negro); } .ambos { background: var(--verde); }
+
+/* página de idea */
+.meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.chip { font-family: "Cond"; font-size: 14px; letter-spacing: .06em; padding: 4px 10px; color: #fff; }
+.chip.gris { background: var(--gris); color: var(--negro); }
+.gancho { background: var(--negro); color: #fff; padding: 16px 18px; font-size: 19px; line-height: 1.42; margin-bottom: 14px; }
+.gancho b { display: block; font-family: "Cond"; color: var(--celeste); font-size: 15px; letter-spacing: .08em; margin-bottom: 4px; }
+.cta { border: 3px solid var(--azul); padding: 14px 16px; font-size: 19px; line-height: 1.4; font-family: "Cond"; color: var(--negro); margin-bottom: 14px; }
+.cta b { display: block; color: var(--azul); font-size: 15px; letter-spacing: .08em; margin-bottom: 4px; }
+.cta span { display: block; font-family: "Texto"; font-size: 15px; color: var(--azul); margin-top: 6px; word-break: break-all; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 15.5px; line-height: 1.42; color: var(--texto2); }
+.dos b { display: block; font-family: "Cond"; color: var(--negro); font-size: 17px; margin-bottom: 4px; }
+
+.cuerpo { display: flex; flex-direction: column; gap: 14px; }
+.tit { border-bottom: 2px solid var(--negro); padding-bottom: 6px; }
+.tit b { display: block; font-family: "Cond"; font-size: 24px; color: var(--negro); text-transform: uppercase; }
+.tit span { font-size: 13px; color: #5A6072; }
+.v { flex: 1; border: 1px solid var(--linea); border-top: 4px solid var(--azul); padding: 10px 14px; display: flex; flex-direction: column; min-height: 0; }
+.vcab { display: flex; align-items: center; gap: 10px; }
+.vcab .num { font-family: "Cond"; font-size: 26px; color: var(--celeste); }
+.vcab h2 { font-family: "Cond"; font-size: 21px; line-height: 1.1; text-transform: uppercase; flex: 1; margin: 0; }
+.chips i { font-style: normal; font-family: "Cond"; font-size: 12px; background: var(--azul); color: #fff; padding: 3px 7px; margin-left: 4px; white-space: nowrap; }
+.chips i.g { background: var(--gris); color: var(--negro); }
+.info { font-size: 12px; color: #3A4052; margin: 5px 0 6px; line-height: 1.35; }
+.pant { background: var(--negro); color: #fff; font-size: 13.5px; padding: 6px 10px; margin-bottom: 6px; }
+.guion { border-left: 3px solid var(--azul); padding-left: 10px; margin-bottom: 6px; }
+.guion p { font-size: 14.5px; line-height: 1.38; margin: 0 0 3px; }
+.guion p b { font-family: "Cond"; color: var(--azul); }
+.pie2 { font-size: 11.5px; line-height: 1.35; color: #3A4052; margin-top: auto; }
+.pie2 div { margin-top: 3px; } .pie2 b { color: var(--negro); }
+mark { background: #FFE58A; color: inherit; padding: 0 2px; }
+</style></head><body><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Resumen</span></div>
+<div class="cuerpo"><div class="tit"><b>Videos de diciembre · TikTok e Instagram</b><span>12 videos · 3 por semana · sin precios · placa final: masherrferreteria.com.ar</span></div><article class="v"><div class="vcab"><span class="num">01</span><h2>Comprá online y retirá en el local</h2>
+<span class="chips"><i>Semana 1 · Compra online</i><i class="g">~35 s</i></span></div>
+<div class="info"><b>Formato:</b> Tutorial POV en 4 pasos &nbsp;·&nbsp; <b>Quién/dónde:</b> Cliente (actor) + Guido · Casa del cliente (celular) y mostrador</div>
+<div class="pant">CÓMO COMPRAR EN MASHERR SIN HACER FILA</div>
+<div class="guion"><p>¿Sabías que podés armar tu pedido desde el celular y pasar solo a retirarlo?</p><p>Uno: entrás a masherrferreteria.com.ar y buscás lo que necesitás.</p><p>Dos: lo agregás al carrito y elegís “Retiro en el local”.</p><p>Tres: tocás “Enviar pedido por WhatsApp”. Te respondemos por WhatsApp para confirmar stock, precio y forma de pago.</p><p>Cuatro: pasás por Calle 38 4335, decís tu nombre y tu pedido ya está listo.</p><p>(Guido entrega la bolsa) — Listo, ¿algo más? — No, esto era todo. ¡Gracias!</p><p>Comprá online, retirá en Masherr. El link está en nuestro perfil.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Grabación de pantalla del celular en cada paso (buscador, carrito, opción “Retiro en el local”, botón verde de WhatsApp) · mensaje de confirmación llegando · el cliente entra al local · bolsa con el nombre del cliente lista en el mostrador · entrega y saludo.</div><div><b>Productos:</b> Cualquier producto chico y visible (por ejemplo, Juego de 6 destornilladores Milwaukee 48-22-2706)</div></div></article><article class="v"><div class="vcab"><span class="num">02</span><h2>Armando un Packout pieza por pieza</h2>
+<span class="chips"><i>Semana 1 · ASMR</i><i class="g">~20 s</i></span></div>
+<div class="info"><b>Formato:</b> Satisfying / ASMR sin voz &nbsp;·&nbsp; <b>Quién/dónde:</b> Solo manos (Guido) · Banco de trabajo con fondo limpio</div>
+<div class="pant">SONIDO ACTIVADO 🔊</div>
+<div class="guion"><p>Sin voz: solo el sonido real de cada encastre, traba y cierre.</p><p>Texto final en pantalla: “¿Lo querés para tu obra? Escribinos por WhatsApp.”</p></div>
+<div class="pie2"><div><b>Tomas:</b> Plataforma dolly en el piso · se apoya la caja con ruedas: clic · encima la caja mediana: clic · organizador arriba: clic · abrir el organizador y acomodar puntas y tornillos · tirar de la manija telescópica y llevarlo rodando. Micrófono cerca, sin música.</div><div><b>Productos:</b> Carro de Herramientas Modular Packout – 3 Módulos Milwaukee · Caja Organizador Herramientas Packout Milwaukee 48-22-8430 · Milwaukee Packout Plataforma Dolly Base Rodante 48-22-8410</div></div></article></div>
+<div class="pie"><span>Masherr · Resumen de videos</span><b>01 / 06</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Resumen</span></div>
+<div class="cuerpo"><article class="v"><div class="vcab"><span class="num">03</span><h2>¿Para qué sirve esto?</h2>
+<span class="chips"><i>Semana 1 · Comunidad</i><i class="g">~15 s</i></span></div>
+<div class="info"><b>Formato:</b> Adiviná para qué sirve (pide comentarios) &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido a cámara · Mostrador</div>
+<div class="pant">SI ADIVINÁS PARA QUÉ SIRVE, SOS DEL OFICIO</div>
+<div class="guion"><p>Te muestro tres herramientas. Si sabés para qué sirven, dejalo en los comentarios.</p><p>Número uno… (muestra la remachadora sin decir el nombre).</p><p>Número dos… (muestra la multiherramienta oscilante).</p><p>Número tres… (muestra la engrampadora).</p><p>Las respuestas, en el próximo video. ¿Cuántas sacaste?</p></div>
+<div class="pie2"><div><b>Tomas:</b> Plano medio fijo · cada herramienta en primer plano girando · número grande en pantalla · en la segunda parte, Guido responde usando “Responder comentario” y hace una demostración corta de cada una.</div><div><b>Productos:</b> Remachadora Inalámbrica Milwaukee 2550-20 M12 · Multiherramienta Oscilante Sierra Milwaukee M12 2426-159 · Engrapadora Milwaukee M12 Batería Con Kit Completo 2447-159</div></div></article><article class="v"><div class="vcab"><span class="num">04</span><h2>Taladro percutor vs. rotomartillo</h2>
+<span class="chips"><i>Semana 2 · Esto vs. esto</i><i class="g">~25 s</i></span></div>
+<div class="info"><b>Formato:</b> Comparación con prueba real &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido a cámara · Bloque o pared de hormigón</div>
+<div class="pant">MISMO AGUJERO, DOS HERRAMIENTAS. MIRÁ LA DIFERENCIA.</div>
+<div class="guion"><p>Mismo bloque de hormigón, misma medida de mecha. Taladro percutor de este lado, rotomartillo de este otro.</p><p>(Perfora con el percutor.) Entra, pero cuesta y hace fuerza.</p><p>(Perfora con el rotomartillo.) Entra solo, sin apretar.</p><p>¿Entonces? Si hacés algunos agujeros en casa, el percutor te sobra. Si perforás todo el día o tenés que picar, rotomartillo.</p><p>Contanos qué trabajo vas a hacer y te decimos cuál te conviene.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Pantalla dividida con cronómetro en cada perforación · detalle del polvo saliendo · anteojos, guantes y protección auditiva a la vista.</div><div><b>Productos:</b> Taladro Bosch Con Percusión GSB 13 RE 750W 13mm · Rotomartillo Bosch Professional GBH 2-26 DRE 800W</div></div></article></div>
+<div class="pie"><span>Masherr · Resumen de videos</span><b>02 / 06</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Resumen</span></div>
+<div class="cuerpo"><article class="v"><div class="vcab"><span class="num">05</span><h2>El tarugo equivocado</h2>
+<span class="chips"><i>Semana 2 · Consejos</i><i class="g">~30 s</i></span></div>
+<div class="info"><b>Formato:</b> Serie “Error de ferretero” (capítulo 1) &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido a cámara · Mostrador con tres tipos de pared (ladrillo, hormigón, durlock)</div>
+<div class="pant">POR ESTO SE TE CAEN LOS ESTANTES</div>
+<div class="guion"><p>Si se te cayó un estante, el problema casi nunca es el tornillo: es el tarugo.</p><p>Para ladrillo y hormigón, tarugo de nylon como el Fischer SX.</p><p>Si no sabés bien qué pared tenés, el DuoPower se adapta a casi todas.</p><p>Y para durlock, uno que se abra detrás de la placa, como el DuoTec.</p><p>Traé una foto de tu pared y te decimos cuál llevar. Error de ferretero, capítulo uno. ¿Qué error querés que expliquemos en el próximo?</p></div>
+<div class="pie2"><div><b>Tomas:</b> Tarugo cortado al medio para mostrar cómo se abre · prueba de colgar peso en cada pared · placa “ERROR DE FERRETERO · CAP. 1”.</div><div><b>Productos:</b> Tarugo Fischer Universal SX 8 · Tarugo Nylon Taco DuoPower 10x80 · Tarugos DuoTec 10 mm Fischer</div></div></article><article class="v"><div class="vcab"><span class="num">06</span><h2>POV: sos herrero</h2>
+<span class="chips"><i>Semana 2 · POV</i><i class="g">~30 s</i></span></div>
+<div class="info"><b>Formato:</b> POV: sos herrero y entrás a Masherr &nbsp;·&nbsp; <b>Quién/dónde:</b> Cliente (actor, herrero) + Guido · Puerta, góndolas y mostrador</div>
+<div class="pant">POV: SOS HERRERO Y ENTRÁS A MASHERR</div>
+<div class="guion"><p><b>Herrero:</b> (Entra con ropa de trabajo.) Buenas. Me agarró una reja grande y la soldadora me dejó tirado.</p><p><b>Guido:</b> Para eso, esta inverter: liviana, la llevás a la obra y te banca electrodo de los gruesos.</p><p><b>Herrero:</b> Y necesito cortar y emparejar sin estar buscando enchufe.</p><p><b>Guido:</b> Amoladora inalámbrica con discos de corte y flap. Y para escuadrar rápido, estas magnéticas.</p><p><b>Herrero:</b> ¿Todo eso me lo puedo pedir por WhatsApp la próxima?</p><p><b>Guido:</b> Desde la web, y pasás a retirar. Te lo dejamos listo.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Cámara en primera persona (desde los ojos del herrero) al entrar · cortes rápidos a cada producto sobre el mostrador · cierre con el herrero saliendo cargado.</div><div><b>Productos:</b> Soldadora Inverter SI 160 PRO Pegaso · Amoladora Inalámbrica 20V Brushless 115 mm Nebraska + set de discos flap + pack corte · Juego de escuadras magnéticas 4 piezas Emtop EMWH4002</div></div></article></div>
+<div class="pie"><span>Masherr · Resumen de videos</span><b>03 / 06</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Resumen</span></div>
+<div class="cuerpo"><article class="v"><div class="vcab"><span class="num">07</span><h2>Abrimos el combo Milwaukee M18</h2>
+<span class="chips"><i>Semana 3 · Unboxing</i><i class="g">~20 s</i></span></div>
+<div class="info"><b>Formato:</b> Unboxing en primera persona &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido (manos y voz) · Banco de trabajo</div>
+<div class="pant">ESTO ES TODO LO QUE TRAE</div>
+<div class="guion"><p>Abrimos el combo Milwaukee M18: te muestro todo lo que trae.</p><p>Taladro atornillador, atornillador de impacto, dos baterías, cargador y bolso.</p><p>Las dos herramientas usan la misma batería, y la batería sirve para toda la línea M18.</p><p>Primera prueba: tornillo largo en madera, de una.</p><p>Si lo querés, escribinos por WhatsApp o armá el pedido desde la web.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Cenital: caja cerrada, se abre y se va sacando pieza por pieza · cada pieza se apoya en fila · prueba rápida en madera · cierre con todo guardado en el bolso.</div><div><b>Productos:</b> Combo Taladro Atornillador Impacto 18V Milwaukee 2691-259A</div></div></article><article class="v"><div class="vcab"><span class="num">08</span><h2>Del cajón desordenado al maletín</h2>
+<span class="chips"><i>Semana 3 · Antes/después</i><i class="g">~15 s</i></span></div>
+<div class="info"><b>Formato:</b> Transformación antes/después &nbsp;·&nbsp; <b>Quién/dónde:</b> Solo manos (Guido) · Banco de trabajo</div>
+<div class="pant">TU CAJÓN DE HERRAMIENTAS HOY VS. MAÑANA</div>
+<div class="guion"><p>Antes: llaves sueltas, tubos que nunca aparecen y el número que necesitás, perdido.</p><p>(Corte con chasquido.)</p><p>Después: 150 piezas, cada una en su lugar, en un solo maletín.</p><p>Texto final: “¿Cuál es tu cajón? ¿El de antes o el de después? Comentá.”</p></div>
+<div class="pie2"><div><b>Tomas:</b> Cajón real desordenado, tirado sobre el banco · transición en un golpe de mano · maletín abierto en toma cenital · detalle de cada sección.</div><div><b>Productos:</b> Juego de herramientas mecánicas 150 piezas R99150 Stanley</div></div></article></div>
+<div class="pie"><span>Masherr · Resumen de videos</span><b>04 / 06</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Resumen</span></div>
+<div class="cuerpo"><article class="v"><div class="vcab"><span class="num">09</span><h2>Un día en Masherr</h2>
+<span class="chips"><i>Semana 3 · Detrás de escena</i><i class="g">~30 s</i></span></div>
+<div class="info"><b>Formato:</b> Un día en Masherr &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido y equipo · Todo el local</div>
+<div class="pant">UN DÍA EN UNA FERRETERÍA INDUSTRIAL DE VILLA LYNCH</div>
+<div class="guion"><p>8 de la mañana: subimos la persiana.</p><p>Primeros clientes: el que viene por un tornillo y se lleva tres cosas.</p><p>Pedidos que entraron por la web: los preparamos y les ponemos el nombre.</p><p>Una consulta difícil: ¿qué disco va para este material?</p><p>Mediodía, cortamos. A la tarde, de nuevo.</p><p>Así es un día en Masherr. Si nunca viniste, te esperamos en Calle 38 4335. Y si querés enterarte primero de promos y rifas, sumate a la comunidad de WhatsApp.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Tomas cortas de 1–2 segundos con la hora en pantalla · persiana · mostrador · bolsas de pedidos web con nombre · cierre del día. Pedir permiso a cada cliente que aparezca.</div></div></article><article class="v"><div class="vcab"><span class="num">10</span><h2>“¿Tienen medidor láser?”</h2>
+<span class="chips"><i>Semana 4 · Respuesta</i><i class="g">~20 s</i></span></div>
+<div class="info"><b>Formato:</b> Responder un comentario con video &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido a cámara · Mostrador</div>
+<div class="pant">RESPUESTA A: “¿TIENEN MEDIDOR LÁSER?”</div>
+<div class="guion"><p>Nos preguntaron si tenemos medidor láser. Tenemos de cuarenta, sesenta y cien metros.</p><p>Para medir ambientes de una casa, el de cuarenta te sobra.</p><p>Para obra, galpones o terrenos, el de cien.</p><p>Apuntás, apretás y listo: sin cinta y sin pedirle a nadie que te sostenga la punta.</p><p>¿Qué querés que te mostremos ahora? Dejalo en los comentarios.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Usar la función “Responder comentario” de TikTok (aparece el comentario en pantalla) · medición real de pared a pared · los tres medidores en fila. Si todavía no hay ese comentario, usar una pregunta real que llegue por WhatsApp.</div><div><b>Productos:</b> Medidor de distancia láser 40 m Emtop EMDL1504 · Medidor de distancia láser 60 m Emtop EMDL1516 · Medidor de distancia láser 100 m Emtop EMDL1520</div></div></article></div>
+<div class="pie"><span>Masherr · Resumen de videos</span><b>05 / 06</b></div></section><section class="hoja"><div class="cab"><img src="../catalogo/img/masher-logo-azul.png" alt="Masherr"><span>Resumen</span></div>
+<div class="cuerpo"><article class="v"><div class="vcab"><span class="num">11</span><h2>Regalos para el que tiene todo</h2>
+<span class="chips"><i>Semana 4 · Fin de año</i><i class="g">~35 s</i></span></div>
+<div class="info"><b>Formato:</b> Guía de regalos &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido a cámara · Mostrador con los productos en fila</div>
+<div class="pant">REGALOS PARA EL QUE “YA TIENE TODO”</div>
+<div class="guion"><p>¿Tenés que regalarle a alguien que dice que ya tiene todo? Te doy cinco ideas.</p><p>Para el que trabaja de noche: linterna de casco recargable.</p><p>Para el que siempre pide destornilladores prestados: juego de seis, con punta magnética.</p><p>Para el que mide a ojo: medidor láser.</p><p>Para el que anda con todo encima: mochila para herramientas con 22 bolsillos.</p><p>Y para el que tiene taller: una caja Packout.</p><p>Escribinos por WhatsApp y te lo dejamos listo para retirar. Las promos de fin de año, en la comunidad de WhatsApp.</p></div>
+<div class="pie2"><div><b>Tomas:</b> Producto por producto, con número en pantalla (1 a 5) · Guido lo levanta y lo nombra · cierre con todos en fila con un moño.</div><div><b>Productos:</b> Linterna de casco recargable USB Milwaukee 2116-21 · Juego 6 destornilladores Milwaukee 48-22-2706 punta magnética · Medidor de distancia láser 40 m Emtop EMDL1504 · Mochila para herramientas Milwaukee 22 bolsillos 48-22-8202 · Caja Organizador Packout Milwaukee 48-22-8430</div></div></article><article class="v"><div class="vcab"><span class="num">12</span><h2>La vereda antes del verano</h2>
+<span class="chips"><i>Semana 4 · Antes/después</i><i class="g">~20 s</i></span></div>
+<div class="info"><b>Formato:</b> Satisfying antes/después (temporada de verano) &nbsp;·&nbsp; <b>Quién/dónde:</b> Guido o alguien del equipo · Vereda del local o patio</div>
+<div class="pant">¿TU VEREDA TAMBIÉN ESTÁ ASÍ?</div>
+<div class="guion"><p>Sin voz: una franja de vereda sucia y la hidrolavadora pasando de una punta a la otra.</p><p>Texto en pantalla al final: “Antes del verano: vereda, patio, pileta y auto. Consultanos por WhatsApp.”</p></div>
+<div class="pie2"><div><b>Tomas:</b> Cámara fija en trípode, plano cenital de la franja · una sola pasada lenta que deja la línea limpia · repetir con baldosas del patio · cierre mostrando las dos hidrolavadoras.</div><div><b>Productos:</b> Hidrolavadora 1500W 120 bar K3 Black Edition Kärcher · Hidrolavadora 2200W 160 bar Nebraska NEMEHL2200</div></div></article></div>
+<div class="pie"><span>Masherr · Resumen de videos</span><b>06 / 06</b></div></section></body></html>
