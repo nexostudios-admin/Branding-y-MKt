@@ -8,6 +8,11 @@ Cada fila se vincula con el producto que ya existía por nombre + opción, así 
 import csv, hashlib, io, re, sys, unicodedata, urllib.request, zlib
 from collections import Counter
 
+# Fotos oficiales de fabricantes ya descargadas en sitio/img/productos (nombre normalizado -> rutas base).
+import json, os
+_OF = os.path.join(os.path.dirname(__file__), 'fotos_oficiales.json')
+OFICIALES = json.load(open(_OF, encoding='utf-8')) if os.path.exists(_OF) else {}
+
 UA = {'User-Agent': 'Mozilla/5.0 (compatible; web-masherr/1.0)'}
 
 
@@ -111,7 +116,7 @@ def desde_planilla(fuente, base, categorias, categoria_por_nombre, marca_por_nom
             if cat_txt:
                 avisos.append(f'fila {filas_g[0][0]}: categoría "{f0.get("Categoría")}" no reconocida, uso "{cat}"')
         fotos_nuevas = [u for u in re.split(r'[\s,]+', ' '.join(f.get('Fotos nuevas', '') for _, f, _ in filas_g)) if u.startswith('http')]
-        imgs = bajar_fotos(fotos_nuevas, slug, sitio) if fotos_nuevas else (p0['imgs'] if p0 else [])
+        imgs = bajar_fotos(fotos_nuevas, slug, sitio) if fotos_nuevas else (p0['imgs'] if p0 else OFICIALES.get(norm(nombre), []))
         desc = next((f['Descripción nueva'] for _, f, _ in filas_g if f.get('Descripción nueva')), None) or (p0['_desc'] if p0 else '')
         variantes = []
         for n, f, pv in filas_g:
