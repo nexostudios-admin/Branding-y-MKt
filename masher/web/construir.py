@@ -117,8 +117,11 @@ sys.path.insert(0, str(AQUI / 'planilla'))
 from planilla import desde_planilla
 FUENTE = os.environ.get('PLANILLA_CSV') or (f"https://docs.google.com/spreadsheets/d/{CFG['planilla_id']}/export?format=csv" if CFG.get('planilla_id') else '')
 # Segunda planilla (catálogo ampliado): se suma a la principal con las mismas columnas.
-if FUENTE and CFG.get('planilla_ampliada_id') and not os.environ.get('PLANILLA_CSV'):
-    FUENTE = [FUENTE, f"https://docs.google.com/spreadsheets/d/{CFG['planilla_ampliada_id']}/export?format=csv"]
+if FUENTE and not os.environ.get('PLANILLA_CSV'):
+    # Catálogo ampliado: la planilla de Google si está compartida; si no, la copia guardada en planilla/catalogo_ampliado.csv
+    _amp = f"https://docs.google.com/spreadsheets/d/{CFG['planilla_ampliada_id']}/export?format=csv" if CFG.get('planilla_ampliada_id') else ''
+    _local = str(AQUI / 'planilla' / 'catalogo_ampliado.csv')
+    FUENTE = [FUENTE, (_amp, _local) if _amp else _local]
 elif '|' in FUENTE:  # pruebas locales: PLANILLA_CSV="principal.csv|ampliada.csv"
     FUENTE = FUENTE.split('|')
 if FUENTE:
