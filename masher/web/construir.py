@@ -34,6 +34,9 @@ CATEGORIAS = [
     ('agua-jardin', 'Agua, limpieza y jardín', 'Bombas, hidrolavadoras, aspiradoras'),
     ('adhesivos', 'Adhesivos y selladores', 'Adhesivos de contacto, colas y espumas'),
     ('almacenamiento', 'Cajas y almacenamiento', 'Cajas, bolsos y sistemas modulares'),
+    ('seguridad', 'Seguridad industrial', 'Guantes, cascos, calzado y protección'),
+    ('fijaciones', 'Fijaciones y bulonería', 'Tornillos, bulones, tarugos y anclajes'),
+    ('ferreteria', 'Ferretería industrial', 'Candados, cerraduras, ruedas, lubricantes y más'),
     ('otros', 'Otros productos', 'Escaleras, calefacción y más'),
 ]
 POR_CRUMB = {
@@ -113,6 +116,11 @@ import sys
 sys.path.insert(0, str(AQUI / 'planilla'))
 from planilla import desde_planilla
 FUENTE = os.environ.get('PLANILLA_CSV') or (f"https://docs.google.com/spreadsheets/d/{CFG['planilla_id']}/export?format=csv" if CFG.get('planilla_id') else '')
+# Segunda planilla (catálogo ampliado): se suma a la principal con las mismas columnas.
+if FUENTE and CFG.get('planilla_ampliada_id') and not os.environ.get('PLANILLA_CSV'):
+    FUENTE = [FUENTE, f"https://docs.google.com/spreadsheets/d/{CFG['planilla_ampliada_id']}/export?format=csv"]
+elif '|' in FUENTE:  # pruebas locales: PLANILLA_CSV="principal.csv|ampliada.csv"
+    FUENTE = FUENTE.split('|')
 if FUENTE:
     try:
         productos = desde_planilla(FUENTE, productos, CATEGORIAS, lambda n: categoria({'categorias': None, 'nombre': n}), marca, SITIO)
@@ -147,9 +155,13 @@ for p in productos:
         fotos.append(dst)
     p['imgs'] = fotos
 if _nuevas: print(f'Fotos con marco nuevas: {_nuevas}')
+# Productos todavía sin foto: imagen de marca "foto próximamente" (no se indexa como foto del producto).
+for p in productos:
+    p['_sinfoto'] = not p['imgs']
+    if not p['imgs']: p['imgs'] = ['img/marca/sin-foto']
 
 # Orden de "Relevancia": rubros principales primero y, dentro de cada rubro, los productos más buscados.
-ORDEN_CAT = ['herramientas-electricas', 'inalambricas', 'maquinas', 'medicion', 'accesorios', 'agua-jardin', 'herramientas-manuales', 'almacenamiento', 'adhesivos', 'otros']
+ORDEN_CAT = ['herramientas-electricas', 'inalambricas', 'maquinas', 'medicion', 'accesorios', 'agua-jardin', 'herramientas-manuales', 'almacenamiento', 'adhesivos', 'seguridad', 'fijaciones', 'ferreteria', 'otros']
 CLAVES = {'herramientas-electricas': ['amoladora', 'taladro', 'rotomartillo', 'sierra', 'atornillador', 'lijadora'], 'inalambricas': ['taladro', 'amoladora', 'atornillador'],
           'maquinas': ['soldadora', 'compresor', 'mascara'], 'medicion': ['cinta', 'nivel laser', 'medidor', 'nivel'], 'accesorios': ['disco', 'juego de mechas', 'mecha', 'broca', 'copa'],
           'agua-jardin': ['hidrolavadora', 'aspiradora', 'bomba'], 'herramientas-manuales': ['juego', 'set', 'pinza', 'llave'], 'almacenamiento': ['caja', 'bolso', 'carro'],
@@ -159,7 +171,7 @@ def _puntaje(p):
     n = norm(p['nombre']); ks = CLAVES.get(p['cat'], [])
     kw = next((i for i, k in enumerate(ks) if k in n), len(ks))
     mk = MARCAS_TOP_ORDEN.index(p['marca']) if p['marca'] in MARCAS_TOP_ORDEN else len(MARCAS_TOP_ORDEN)
-    return (ORDEN_CAT.index(p['cat']) if p['cat'] in ORDEN_CAT else 99, not p['disponible'], not p['imgs'], kw, mk, n)
+    return (ORDEN_CAT.index(p['cat']) if p['cat'] in ORDEN_CAT else 99, not p['disponible'], p.get('_sinfoto', False), kw, mk, n)
 productos.sort(key=_puntaje)
 cats_usadas = [c for c in CATEGORIAS if any(p['cat'] == c[0] for p in productos)]
 
@@ -593,14 +605,14 @@ for p in productos:
               'availability': 'https://schema.org/' + ('InStock' if p['disponible'] else 'OutOfStock')}
     if CFG['dominio']: oferta['url'] = CFG['dominio'].rstrip('/') + f'/producto/{p["slug"]}/'
     ld = {'@context': 'https://schema.org', '@graph': [
-        {'@type': 'Product', 'name': p['nombre'], 'image': [((CFG['dominio'].rstrip('/') + '/') if CFG['dominio'] else '') + u + '-1024-1024.webp' for u in imgs], 'description': resumen(p['_desc'], 300),
+        {'@type': 'Product', 'name': p['nombre'], 'image': [((CFG['dominio'].rstrip('/') + '/') if CFG['dominio'] else '') + u + '-1024-1024.webp' for u in ([] if p.get('_sinfoto') else imgs)], 'description': resumen(p['_desc'], 300),
          **({'brand': {'@type': 'Brand', 'name': p['marca']}} if p['marca'] else {}), **({'sku': v0['sku']} if v0['sku'] else {}), 'offers': oferta},
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Tienda', 'item': (CFG['dominio'].rstrip('/') + '/tienda/') if CFG['dominio'] else 'tienda/'},
             {'@type': 'ListItem', 'position': 2, 'name': p['catNombre']}, {'@type': 'ListItem', 'position': 3, 'name': p['nombre']}]}]}
     if not MP: ld['@graph'] = ld['@graph'][1:]  # sin precio, Google no acepta la ficha de producto: solo migas de pan
     pagina(f'producto/{p["slug"]}/index.html', f'{p["nombre"]} · Masherr', (resumen(p['_desc'], 120) or p['nombre']) + ' En Masherr, Villa Lynch, San Martín.', ficha, actual='tienda/', jsonld=ld, scripts=['producto.js'],
-           imagen=og_producto(imgs[0]) if imgs else None, tipo='product')
+           imagen=og_producto(imgs[0]) if imgs and not p.get('_sinfoto') else None, tipo='product')
 
 # ---------------------------------------------------------------- Carrito
 carrito = f"""

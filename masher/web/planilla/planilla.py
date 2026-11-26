@@ -64,7 +64,13 @@ def bajar_fotos(urls, slug, sitio):
 
 
 def desde_planilla(fuente, base, categorias, categoria_por_nombre, marca_por_nombre, sitio):
-    filas = leer(fuente)
+    fuentes = fuente if isinstance(fuente, list) else [fuente]
+    filas = leer(fuentes[0])
+    for u in fuentes[1:]:  # planillas extra: si una falla, se sigue con las demás
+        try:
+            filas += leer(u)
+        except Exception as ex:
+            print(f'  ! No se pudo leer la planilla extra {u} ({ex})', file=sys.stderr)
     if not filas or 'Producto' not in filas[0]:
         raise RuntimeError('la planilla no tiene la columna "Producto"')
     nombres_cat = {norm(n): slug for slug, n, _ in categorias}
