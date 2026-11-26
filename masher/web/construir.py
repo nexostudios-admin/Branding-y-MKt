@@ -167,6 +167,16 @@ if CFG.get('ocultar_sin_foto'):
     _ocultos = sum(1 for p in productos if p['_sinfoto'])
     productos = [p for p in productos if not p['_sinfoto']]
     if _ocultos: print(f'Ocultos por no tener foto: {_ocultos}')
+# Categorías con pocos productos (con foto) no se muestran: sus productos pasan a "Otros productos" hasta llegar al mínimo.
+_MIN = CFG.get('min_productos_categoria', 0)
+if _MIN:
+    from collections import Counter as _C
+    _n = _C(p['cat'] for p in productos)
+    _chicas = {c for c, k in _n.items() if k < _MIN and c != 'otros'}
+    for p in productos:
+        if p['cat'] in _chicas:
+            p['cat'], p['catNombre'], p['sub'] = 'otros', next(c[1] for c in CATEGORIAS if c[0] == 'otros'), None
+    if _chicas: print(f'Categorías ocultas por tener menos de {_MIN} productos: {", ".join(sorted(_chicas))}')
 
 # Orden de "Relevancia": rubros principales primero y, dentro de cada rubro, los productos más buscados.
 ORDEN_CAT = ['herramientas-electricas', 'inalambricas', 'maquinas', 'medicion', 'accesorios', 'agua-jardin', 'herramientas-manuales', 'almacenamiento', 'adhesivos', 'seguridad', 'fijaciones', 'ferreteria', 'otros']
