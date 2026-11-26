@@ -162,6 +162,11 @@ if _nuevas: print(f'Fotos con marco nuevas: {_nuevas}')
 for p in productos:
     p['_sinfoto'] = not p['imgs']
     if not p['imgs']: p['imgs'] = ['img/marca/sin-foto']
+# "ocultar_sin_foto": true -> los productos sin foto no se publican (vuelven solos cuando tengan foto).
+if CFG.get('ocultar_sin_foto'):
+    _ocultos = sum(1 for p in productos if p['_sinfoto'])
+    productos = [p for p in productos if not p['_sinfoto']]
+    if _ocultos: print(f'Ocultos por no tener foto: {_ocultos}')
 
 # Orden de "Relevancia": rubros principales primero y, dentro de cada rubro, los productos más buscados.
 ORDEN_CAT = ['herramientas-electricas', 'inalambricas', 'maquinas', 'medicion', 'accesorios', 'agua-jardin', 'herramientas-manuales', 'almacenamiento', 'adhesivos', 'seguridad', 'fijaciones', 'ferreteria', 'otros']
