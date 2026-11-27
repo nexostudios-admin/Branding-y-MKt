@@ -87,3 +87,13 @@ Media kit (2–4 págs.) · caso de crecimiento · deck "Con Todo Respeto · Edi
 - **Capacidad y compromiso:** equipo, horas, presupuesto total, calendario mínimo de Andrea.
 - **Objetivo y venta:** validar línea base y metas; nombrar responsable del piloto y del paquete comercial.
 - Por verificar con acceso de administrador: métricas reales de YouTube Studio (90 días) e Insights de las dos cuentas de IG.
+
+## Base del formato (nov. 2026)
+
+`propuestas/con-todo-respeto/Nexo_Con_Todo_Respeto_Base_del_Formato.pdf` (fuente `formato-base.html` + `estilo-base.css`): biblia corta de 8 páginas verticales para el formato nuevo, con la estructura de un late night actual (referencia: *Otro Día Perdido*, según notas de prensa 2026) pero con el tono íntimo de Con Todo Respeto.
+
+- **Elenco:** Andrea (conductora) · streamer coconductor (por temporada o rotativo) · panel de 2 voces (investigación / chat y público) · DJ o músico en vivo · público de 30–40 personas en Nexo.
+- **Escaleta de 60 min (se graban 90):** cold open 1' · "Con todo respeto…" (monólogo de Andrea) 5' · El archivo (reacción) 6' · Entrevista central 25' (cierra con La pregunta final) · La silla caliente (juego) 7' · Historias de al lado (segunda charla) 8' · La pregunta del chat 5' · Cierre 3'.
+- **Salidas por episodio:** largo en YouTube, 12–15 verticales, "Lo que no salió al aire", podcast y 4–6 piezas en el IG de Andrea.
+- **Temporada:** 8 episodios, 1 grabación por semana (miércoles), 2 de colchón. Arranque en 4 semanas: definir, piloto, medir, ajustar y vender.
+

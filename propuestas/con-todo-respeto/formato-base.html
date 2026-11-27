@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Con Todo Respeto · Base del formato · Nexo Studios</title>
+<link href="fonts/lato.css" rel="stylesheet">
+<link href="estilo-base.css" rel="stylesheet">
+<style>
+  /* Agregados de la base del formato (8 páginas). */
+  .big { font-family: var(--sora); font-weight: 900; font-size: 128px; line-height: .92; letter-spacing: -.03em; margin: 0 0 30px; }
+  .big em { font-style: normal; color: var(--rojo); }
+  .formula { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 10px; margin: 26px 0 8px; }
+  .formula .card { text-align: center; padding: 22px 12px; }
+  .formula .card b { font-size: 30px; }
+  .formula .card span { font-size: 23px; }
+  .formula i { font-style: normal; font-family: var(--sora); font-weight: 900; font-size: 44px; color: var(--oro); }
+
+  /* Anatomía de la referencia */
+  .anat { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .anat .card b { font-size: 28px; }
+  .anat .card .n { display: inline; font-size: inherit; font-family: var(--sora); font-weight: 900; color: var(--rojo); margin-right: 10px; }
+
+  /* Tomamos / no tomamos */
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  .vs .col { background: var(--card); border-radius: 18px; padding: 22px 24px; border-top: 6px solid var(--azul); }
+  .vs .col.no { border-top-color: var(--rojo); }
+  .vs h4 { margin: 0 0 10px; font-family: var(--cond); font-weight: 900; font-size: 24px; letter-spacing: .12em; text-transform: uppercase; color: var(--oro); }
+  .vs ul { margin: 0; padding: 0; list-style: none; }
+  .vs li { font-size: 27px; line-height: 1.38; padding: 7px 0; border-bottom: 1px solid var(--linea); }
+  .vs li:last-child { border-bottom: 0; }
+
+  /* Elenco */
+  .rol { display: grid; grid-template-columns: 120px 1fr; gap: 22px; align-items: center; background: var(--card); border-radius: 18px; padding: 20px 24px; margin-bottom: 14px; border-left: 6px solid var(--rojo); }
+  .rol:nth-child(even) { border-left-color: var(--azul); }
+  .rol .ic { width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; background: var(--card2); font-family: var(--sora); font-weight: 900; font-size: 44px; color: var(--oro); }
+  .rol b { font-family: var(--sora); font-weight: 900; font-size: 34px; display: block; }
+  .rol .q { font-family: var(--cond); font-weight: 700; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; color: var(--acento); display: block; margin: 2px 0 6px; }
+  .rol span.d { font-size: 27px; line-height: 1.4; color: var(--tx2); display: block; }
+
+  /* Escaleta / reloj */
+  .reloj { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .blq { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: stretch; }
+  .blq .min { font-family: var(--sora); font-weight: 900; font-size: 30px; color: var(--tx); padding-top: 14px; text-align: right; }
+  .blq .min small { display: block; font-size: 20px; color: var(--mut); font-weight: 700; }
+  .blq .cuerpo { background: var(--card); border-radius: 16px; padding: 20px 22px; border-left: 6px solid var(--azul); position: relative; overflow: hidden; }
+  .blq.hot .cuerpo { border-left-color: var(--rojo); background: color-mix(in srgb, var(--rojo) 10%, var(--card)); }
+  .blq .cuerpo b { font-family: var(--sora); font-weight: 900; font-size: 30px; }
+  .blq .cuerpo span { display: block; font-size: 27px; line-height: 1.36; color: var(--tx2); margin-top: 2px; }
+  .blq .barra-min { position: absolute; right: 16px; top: 16px; height: 10px; border-radius: 5px; background: var(--oro); opacity: .85; }
+
+  /* Secciones */
+  .secc { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .secc .card { padding: 20px 22px; }
+  .secc .card .tag { display: inline-block; font-family: var(--cond); font-weight: 900; font-size: 20px; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--rojo); border-radius: 6px; padding: 3px 10px; margin-bottom: 10px; }
+  .secc .card:nth-child(even) .tag { background: var(--azul); }
+  .secc .card b { font-size: 31px; }
+  .secc .card .clip { margin-top: 10px; font-size: 22px; color: var(--oro); font-weight: 700; }
+
+  /* Cascada */
+  .cascada { display: grid; gap: 0; }
+  .salida { display: grid; grid-template-columns: 150px 1fr 150px; gap: 18px; align-items: center; background: var(--card); border-radius: 18px; padding: 24px 22px; border-left: 6px solid var(--azul); }
+  .salida.ppal { border-left-color: var(--rojo); background: color-mix(in srgb, var(--rojo) 12%, var(--card)); }
+  .salida .cu { font-family: var(--cond); font-weight: 900; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; color: var(--oro); }
+  .salida b { font-family: var(--sora); font-weight: 900; font-size: 30px; display: block; }
+  .salida span { font-size: 26px; line-height: 1.36; color: var(--tx2); display: block; }
+  .salida .cant { font-family: var(--sora); font-weight: 900; font-size: 40px; text-align: right; color: var(--acento); line-height: 1; }
+  .salida .cant small { display: block; font-size: 19px; color: var(--mut); font-weight: 700; margin-top: 4px; }
+  .flecha-v { text-align: center; color: var(--rojo); font-size: 34px; line-height: 1; padding: 8px 0; font-weight: 900; }
+
+  /* Set */
+  .plano { width: 100%; height: auto; display: block; border-radius: 18px; }
+  .semana { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .dia { background: var(--card); border-radius: 14px; padding: 18px 10px; text-align: center; border-top: 5px solid var(--azul); min-height: 230px; }
+  .dia.g { border-top-color: var(--rojo); background: color-mix(in srgb, var(--rojo) 12%, var(--card)); }
+  .dia b { font-family: var(--cond); font-weight: 900; font-size: 22px; letter-spacing: .1em; text-transform: uppercase; color: var(--oro); display: block; margin-bottom: 8px; }
+  .dia span { font-size: 23px; line-height: 1.3; color: var(--tx2); display: block; }
+
+  .fuente { font-size: 20px; line-height: 1.4; color: var(--mut); margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="pag oscura">
+  <span class="num">01 / 08</span>
+  <img class="logo-portada" src="img/nexo.png" alt="Nexo Studios">
+  <div class="kick">Base del formato · Biblia corta</div>
+  <h1 class="big">Con Todo <em>Respeto</em>.</h1>
+  <p class="lead">La estructura completa del programa: quién está, qué pasa minuto a minuto, qué secciones tiene y cómo una sola grabación se convierte en todo lo que se publica en la semana.</p>
+  <div class="formula">
+    <div class="card"><b>Confesión</b><span>el corazón</span></div><i>+</i>
+    <div class="card"><b>Late night</b><span>la estructura</span></div><i>+</i>
+    <div class="card"><b>Streaming</b><span>la audiencia</span></div>
+  </div>
+  <p class="nota" style="margin-top:30px"><b>La idea en una línea:</b> la estructura de un late night argentino de hoy, con secciones fijas, elenco con roles, público y clips diarios, pero con el tono de Con Todo Respeto: íntimo, honesto y sin burla.</p>
+  <div class="et">Lo que hay adentro</div>
+  <div class="grid2">
+    <div class="card"><b>02 · La referencia</b><span>Cómo está armado hoy un late night.</span></div>
+    <div class="card"><b>03 · El elenco</b><span>Quién está y qué hace cada uno.</span></div>
+    <div class="card"><b>04 · La escaleta</b><span>60 minutos, bloque por bloque.</span></div>
+    <div class="card"><b>05 · Las secciones</b><span>Seis momentos fijos con nombre.</span></div>
+    <div class="card"><b>06 · Las salidas</b><span>Una grabación, toda la semana.</span></div>
+    <div class="card"><b>07–08 · Set y arranque</b><span>Estudio, semana tipo y piloto.</span></div>
+  </div>
+  <div class="pie"><span>Nexo Studios × Con Todo Respeto</span><span>Documento interno · Nov. 2026</span></div>
+</section>
+
+<!-- 2 · La referencia -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">02 / 08</span>
+  <div class="kick">La referencia · Otro Día Perdido</div>
+  <h2>Qué tiene hoy un late night que funciona.</h2>
+  <p class="lead">El programa de Mario Pergolini en El Trece mide 4–5 puntos, pero sus clips se viralizan: más de 19 millones de visualizaciones online, según la producción.</p>
+  <div class="anat">
+    <div class="card"><b><span class="n">01</span>Monólogo</b><span>El conductor abre con su mirada crítica de la actualidad.</span></div>
+    <div class="card"><b><span class="n">02</span>Entrevista central</b><span>Una figura principal: es el eje del programa.</span></div>
+    <div class="card"><b><span class="n">03</span>Segunda charla</b><span>Un perfil menos conocido, con una actividad concreta.</span></div>
+    <div class="card"><b><span class="n">04</span>Panel con roles</b><span>Panelistas con funciones fijas; en 2026 el panel se renovó.</span></div>
+    <div class="card"><b><span class="n">05</span>Juegos</b><span>Secciones lúdicas con los invitados.</span></div>
+    <div class="card"><b><span class="n">06</span>Banda en vivo</b><span>Música en el set, que da ritmo y pasa a los cortes.</span></div>
+    <div class="card"><b><span class="n">07</span>Público y set</b><span>Tribuna, pantallas gigantes e iluminación inteligente.</span></div>
+    <div class="card"><b><span class="n">08</span>Redes</b><span>Clips diarios y pedidos directos de suscripción.</span></div>
+  </div>
+  <div class="et">Qué tomamos y qué no</div>
+  <div class="vs">
+    <div class="col"><h4>Tomamos</h4><ul><li>Secciones fijas y reconocibles</li><li>Elenco con roles claros</li><li>Pensar cada bloque como clip</li><li>Pedir la suscripción en cámara</li></ul></div>
+    <div class="col no"><h4>No tomamos</h4><ul><li>El tono de comedia</li><li>Nombres, gráfica o secciones de ese programa</li><li>El ritmo de chiste por minuto</li><li>La banda completa (costo)</li></ul></div>
+  </div>
+  <p class="fuente">Fuente: notas de prensa de 2026 (Infobae, Perfil, El Economista, Derecha Diario). Es la descripción pública del programa, no la escaleta oficial.</p>
+  <div class="pie"><span>La referencia</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 3 · El elenco -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">03 / 08</span>
+  <div class="kick">El elenco</div>
+  <h2>Cinco piezas en el aire. Cada una tiene una función.</h2>
+  <div class="rol"><div class="ic">A</div><div><b>Andrea Rincón</b><span class="q">Conductora · la voz</span><span class="d">Abre con su mirada, hace la entrevista central y la pregunta final. Habla en primera persona: su historia es la llave de las confesiones.</span></div></div>
+  <div class="rol"><div class="ic">S</div><div><b>El streamer</b><span class="q">Coconductor · el puente</span><span class="d">Un streamer o youtuber por temporada (o rotativo). Trae a la audiencia joven, reacciona al archivo y lleva los juegos.</span></div></div>
+  <div class="rol"><div class="ic">P</div><div><b>El panel</b><span class="q">2 voces · contrapunto</span><span class="d">Una persona que investiga (datos, archivo y contexto) y otra que representa al público y lee el chat. Ninguno compite con el invitado.</span></div></div>
+  <div class="rol"><div class="ic">♪</div><div><b>La música</b><span class="q">DJ o músico en vivo · el pulso</span><span class="d">En vez de una banda, una sola persona con cortinas propias, entradas de invitados y el cierre. Más barato y da identidad sonora.</span></div></div>
+  <div class="rol"><div class="ic">40</div><div><b>El público</b><span class="q">30–40 personas en Nexo · la reacción</span><span class="d">Público joven en el estudio. Su reacción es parte del clip y da energía a la grabación.</span></div></div>
+  <p class="nota"><b>Regla del elenco:</b> el invitado es el protagonista. El panel pregunta poco y bien; el streamer suma humor, pero nunca a costa del dolor de otro.</p>
+  <div class="pie"><span>El elenco</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 4 · La escaleta -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">04 / 08</span>
+  <div class="kick">La escaleta · 60 minutos</div>
+  <h2>Ocho bloques, de la frase más fuerte al cierre.</h2>
+  <div class="reloj">
+    <div class="blq hot"><div class="min">00:00<small>1 min</small></div><div class="cuerpo"><i class="barra-min" style="width:12px"></i><b>Cold open</b><span>La frase más fuerte del episodio, antes de la presentación.</span></div></div>
+    <div class="blq"><div class="min">00:01<small>5 min</small></div><div class="cuerpo"><i class="barra-min" style="width:60px"></i><b>"Con todo respeto…"</b><span>Monólogo de Andrea: su mirada de la semana, en primera persona.</span></div></div>
+    <div class="blq"><div class="min">00:06<small>6 min</small></div><div class="cuerpo"><i class="barra-min" style="width:72px"></i><b>El archivo</b><span>Un momento del archivo de TV; el streamer y el panel reaccionan.</span></div></div>
+    <div class="blq hot"><div class="min">00:12<small>25 min</small></div><div class="cuerpo"><i class="barra-min" style="width:300px"></i><b>Entrevista central</b><span>Tres actos: quién sos, lo que nunca contaste y la pregunta final.</span></div></div>
+    <div class="blq"><div class="min">00:37<small>7 min</small></div><div class="cuerpo"><i class="barra-min" style="width:84px"></i><b>La silla caliente</b><span>Juego de preguntas rápidas con el invitado, conducido por el streamer.</span></div></div>
+    <div class="blq"><div class="min">00:44<small>8 min</small></div><div class="cuerpo"><i class="barra-min" style="width:96px"></i><b>Historias de al lado</b><span>Segunda charla: alguien desconocido con una historia fuerte.</span></div></div>
+    <div class="blq"><div class="min">00:52<small>5 min</small></div><div class="cuerpo"><i class="barra-min" style="width:60px"></i><b>La pregunta del chat</b><span>El panel lee lo que preguntó la gente; responden los dos invitados.</span></div></div>
+    <div class="blq hot"><div class="min">00:57<small>3 min</small></div><div class="cuerpo"><i class="barra-min" style="width:36px"></i><b>Cierre</b><span>Música en vivo, pedido de suscripción y adelanto del próximo invitado.</span></div></div>
+  </div>
+  <p class="nota"><b>Se graban 90 minutos para editar 60.</b> Lo que se corta en edición alimenta la serie "Lo que no salió al aire".</p>
+  <div class="pie"><span>La escaleta</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 5 · Las secciones -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">05 / 08</span>
+  <div class="kick">Las secciones fijas</div>
+  <h2>Seis momentos con nombre. Cada uno da su clip.</h2>
+  <p class="lead">Una sección con nombre se vuelve una cita: la gente la espera, la busca y la comparte.</p>
+  <div class="secc">
+    <div class="card"><span class="tag">Apertura</span><b>Con todo respeto…</b><span>Andrea opina de un tema de la semana con una frase que empieza siempre igual.</span><div class="clip">Clip: la opinión en 40 s</div></div>
+    <div class="card"><span class="tag">Archivo</span><b>El archivo</b><span>Un fragmento de TV que hoy se ve distinto. Reacción del estudio en cámara.</span><div class="clip">Clip: reacción a pantalla partida</div></div>
+    <div class="card"><span class="tag">Central</span><b>La pregunta final</b><span>Cierre de la entrevista: una sola pregunta, siempre la misma, para todos.</span><div class="clip">Clip: la respuesta completa</div></div>
+    <div class="card"><span class="tag">Juego</span><b>La silla caliente</b><span>10 preguntas en 60 segundos. "Paso" se puede decir una sola vez.</span><div class="clip">Clip: el "paso" o la respuesta inesperada</div></div>
+    <div class="card"><span class="tag">Segunda charla</span><b>Historias de al lado</b><span>Gente común con historias extraordinarias. Trae a otro público.</span><div class="clip">Clip: la historia en 50 s</div></div>
+    <div class="card"><span class="tag">Exclusivo</span><b>Lo que no salió al aire</b><span>Solo en YouTube: lo que se cortó de la grabación.</span><div class="clip">Clip: "esto no salió en el programa"</div></div>
+  </div>
+  <p class="nota"><b>Regla de oro:</b> cada sección tiene que poder entenderse sola, sin haber visto el resto del programa. Eso es lo que la convierte en un clip.</p>
+  <div class="pie"><span>Las secciones</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 6 · Las salidas -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">06 / 08</span>
+  <div class="kick">Una grabación, toda la semana</div>
+  <h2>De 90 minutos grabados a 20 publicaciones.</h2>
+  <div class="cascada">
+    <div class="salida ppal"><div class="cu">Día 0</div><div><b>La grabación</b><span>90 minutos en Nexo, 3 cámaras más una vertical, audio por pista.</span></div><div class="cant">1<small>grabación</small></div></div>
+    <div class="flecha-v">↓</div>
+    <div class="salida"><div class="cu">Estreno</div><div><b>Episodio completo</b><span>YouTube con capítulos; en TV si hay pantalla. Estreno con chat en vivo.</span></div><div class="cant">1<small>largo</small></div></div>
+    <div class="flecha-v">↓</div>
+    <div class="salida"><div class="cu">+24 h</div><div><b>Shorts, Reels y TikTok</b><span>Uno por sección y los mejores momentos de la entrevista, 2 o 3 por día.</span></div><div class="cant">12–15<small>clips</small></div></div>
+    <div class="flecha-v">↓</div>
+    <div class="salida"><div class="cu">+3 días</div><div><b>Lo que no salió al aire</b><span>8–15 minutos exclusivos de YouTube, armados con lo que se cortó.</span></div><div class="cant">1<small>exclusivo</small></div></div>
+    <div class="flecha-v">↓</div>
+    <div class="salida"><div class="cu">+3 días</div><div><b>Podcast</b><span>El episodio en audio: Spotify y YouTube Music.</span></div><div class="cant">1<small>audio</small></div></div>
+    <div class="flecha-v">↓</div>
+    <div class="salida"><div class="cu">Semana</div><div><b>Instagram de Andrea</b><span>Stories con link, un Reel en colaboración con el invitado y un carrusel de frases.</span></div><div class="cant">4–6<small>piezas</small></div></div>
+  </div>
+  <p class="nota"><b>El clip invita y el largo retiene.</b> Cada Short va vinculado a su episodio, y cada episodio pide la suscripción.</p>
+  <div class="pie"><span>Las salidas</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 7 · Set y semana -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">07 / 08</span>
+  <div class="kick">El set y la semana</div>
+  <h2>Tres zonas en el estudio, una grabación por semana.</h2>
+  <svg class="plano" viewBox="0 0 912 470" aria-label="Plano del set">
+    <rect x="0" y="0" width="912" height="470" rx="18" fill="#22222a"/>
+    <rect x="40" y="36" width="832" height="70" rx="10" fill="#2a2a33" stroke="#6e8efb" stroke-width="3"/>
+    <text x="456" y="80" fill="#c4c6cf" font-family="Lato" font-weight="700" font-size="24" text-anchor="middle">PANTALLA: archivo, chat y nombre del invitado</text>
+    <rect x="320" y="150" width="272" height="170" rx="16" fill="#f0344a" fill-opacity=".18" stroke="#f0344a" stroke-width="3"/>
+    <text x="456" y="208" fill="#ffffff" font-family="Lato" font-weight="900" font-size="28" text-anchor="middle">LOS SILLONES</text>
+    <text x="456" y="244" fill="#c4c6cf" font-family="Lato" font-size="22" text-anchor="middle">Andrea + invitado</text>
+    <text x="456" y="276" fill="#c4c6cf" font-family="Lato" font-size="22" text-anchor="middle">luz cálida, íntima</text>
+    <rect x="40" y="150" width="240" height="170" rx="16" fill="#6e8efb" fill-opacity=".15" stroke="#6e8efb" stroke-width="3"/>
+    <text x="160" y="220" fill="#ffffff" font-family="Lato" font-weight="900" font-size="26" text-anchor="middle">EL PANEL</text>
+    <text x="160" y="256" fill="#c4c6cf" font-family="Lato" font-size="22" text-anchor="middle">streamer + 2 voces</text>
+    <rect x="632" y="150" width="240" height="170" rx="16" fill="#e9c6a0" fill-opacity=".14" stroke="#e9c6a0" stroke-width="3"/>
+    <text x="752" y="220" fill="#ffffff" font-family="Lato" font-weight="900" font-size="26" text-anchor="middle">LA MÚSICA</text>
+    <text x="752" y="256" fill="#c4c6cf" font-family="Lato" font-size="22" text-anchor="middle">DJ o músico</text>
+    <rect x="40" y="360" width="832" height="74" rx="10" fill="#2a2a33"/>
+    <text x="456" y="406" fill="#c4c6cf" font-family="Lato" font-weight="700" font-size="24" text-anchor="middle">PÚBLICO · 30–40 personas · cámaras de frente</text>
+  </svg>
+  <p style="font-size:25px;color:var(--tx2);margin:16px 0 0;line-height:1.4">El momento de la pregunta final tiene su propia luz: baja el general y queda solo el foco cálido sobre los sillones. Es la firma visual del formato.</p>
+  <div class="et">La semana de producción</div>
+  <div class="semana">
+    <div class="dia"><b>Lun</b><span>Reunión y cierre de invitados</span></div>
+    <div class="dia"><b>Mar</b><span>Investigación y preguntas</span></div>
+    <div class="dia g"><b>Mié</b><span>Grabación en Nexo</span></div>
+    <div class="dia"><b>Jue</b><span>Edición del largo y clips</span></div>
+    <div class="dia"><b>Vie</b><span>Estreno y primeros clips</span></div>
+    <div class="dia"><b>Sáb</b><span>Clips y redes</span></div>
+    <div class="dia"><b>Dom</b><span>"Lo que no salió" y métricas</span></div>
+  </div>
+  <p class="nota"><b>Ritmo de temporada:</b> 8 episodios, uno por semana. Se graban 2 de colchón antes del estreno para que nunca falte un episodio.</p>
+  <div class="et">La temporada en números</div>
+  <div class="grid3">
+    <div class="stat"><div class="v ro">90'</div><div class="l">de grabación por episodio</div></div>
+    <div class="stat"><div class="v az">60'</div><div class="l">de episodio editado</div></div>
+    <div class="stat"><div class="v or">8</div><div class="l">episodios por temporada</div></div>
+  </div>
+  <div class="pie"><span>Set y semana</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 8 · Cómo arrancamos -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">08 / 08</span>
+  <div class="kick">Cómo arrancamos</div>
+  <h2>Del piloto a la temporada en cuatro pasos.</h2>
+  <div class="ruta">
+    <div class="paso hot" data-n="1"><div class="top"><b>Definir</b><span class="d">Semana 1</span></div><span>Elegir al streamer, al panel y a la música. Cerrar los nombres de las secciones y la pregunta final.</span></div>
+    <div class="paso" data-n="2"><div class="top"><b>Grabar el piloto</b><span class="d">Semana 2</span></div><span>Un episodio completo en Nexo con un invitado fuerte, como prueba del formato y de los tiempos.</span></div>
+    <div class="paso" data-n="3"><div class="top"><b>Medir</b><span class="d">Semana 3</span></div><span>Publicar el piloto y sus clips. Comparar con el archivo de TV: retención, suscriptores y edad del público.</span></div>
+    <div class="paso hot" data-n="4"><div class="top"><b>Ajustar y vender</b><span class="d">Semana 4</span></div><span>Corregir lo que no funcionó y presentar la temporada de 8 episodios a productores comerciales.</span></div>
+  </div>
+  <div class="et">Qué miramos en el piloto</div>
+  <div class="grid3">
+    <div class="stat"><div class="v az">35%+</div><div class="l">del episodio visto en promedio</div></div>
+    <div class="stat"><div class="v az">65%+</div><div class="l">de la gente sigue a los 30 s</div></div>
+    <div class="stat"><div class="v or">×2</div><div class="l">rendimiento frente al archivo de TV</div></div>
+  </div>
+  <p class="nota"><b>Lo que vendemos:</b> un formato de entrevistas con la estructura de un late night, una conductora de 1,4 M de seguidores y un sistema que convierte cada grabación en una semana entera de contenido.</p>
+  <div class="pie"><span>Nexo Studios · nexostudios.com.ar</span><span>IG @nexo.studios.ar</span></div>
+</section>
+
+</body>
+</html>
