@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Con Todo Respeto · Paso a paso hacia los suscriptores · Nexo Studios</title>
+<link href="fonts/lato.css" rel="stylesheet">
+<link href="fonts/dmserif.css" rel="stylesheet">
+<style>
+  /* Paso a paso (8 páginas, 1080×1920). Base madre: "Plan de acción 60 días en YouTube" y "Resumen para la reunión".
+     Paleta de esos documentos (rojo, azul, beige sobre negro), títulos en serif editorial y texto en Lato. */
+  @page { size: 1080px 1920px; margin: 0; }
+  :root {
+    --bg: #0c0c10; --card: rgba(255,255,255,.045); --card2: rgba(255,255,255,.075); --linea: rgba(255,255,255,.10);
+    --tx: #f6f4f0; --tx2: #c9c7c2; --mut: #8f8d89;
+    --rojo: #f0344a; --azul: #6e8efb; --oro: #e9c6a0;
+    --serif: "DM Serif Display", Georgia, serif; --sans: "Lato", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); font-family: var(--sans); color: var(--tx); }
+  .pag { width: 1080px; height: 1920px; position: relative; overflow: hidden; break-after: page; padding: 190px 90px 150px;
+         background:
+           radial-gradient(760px 620px at 108% -6%, rgba(240,52,74,.22), transparent 62%),
+           radial-gradient(700px 600px at -12% 104%, rgba(110,142,251,.18), transparent 60%),
+           var(--bg); }
+  .pag:last-child { break-after: auto; }
+  .pag > * { position: relative; z-index: 1; }
+
+  /* Marco editorial */
+  .filete { position: absolute !important; left: 0; right: 0; top: 0; height: 8px; background: linear-gradient(90deg, var(--azul) 0 18%, var(--rojo) 18% 100%); }
+  .marca { position: absolute !important; left: 90px; top: 64px; width: 128px; }
+  .cab { position: absolute !important; right: 90px; top: 74px; font-size: 20px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--mut); }
+  .cab b { color: var(--oro); font-weight: 700; }
+  .pie { position: absolute !important; left: 90px; right: 90px; bottom: 60px; display: flex; justify-content: space-between; gap: 20px;
+         border-top: 1px solid var(--linea); padding-top: 18px; font-size: 19px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); }
+  .numero { position: absolute !important; right: 90px; top: 150px; font-family: var(--serif); font-size: 360px; line-height: .8; letter-spacing: -.04em; z-index: 0 !important; color: rgba(240,52,74,.16); }
+
+  /* Tipografía */
+  .kick { font-size: 22px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--oro); margin: 0 0 22px; display: flex; align-items: center; gap: 16px; }
+  .kick::before { content: ""; width: 56px; height: 2px; background: var(--rojo); }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: 132px; line-height: .95; letter-spacing: -.015em; margin: 0 0 34px; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 82px; line-height: 1; letter-spacing: -.01em; margin: 0 0 26px; max-width: 820px; }
+  h1 em, h2 em { color: var(--rojo); }
+  .lead { font-size: 31px; line-height: 1.5; color: var(--tx2); margin: 0 0 34px; max-width: 880px; }
+  .rot { font-size: 20px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--mut); margin: 36px 0 16px; display: flex; align-items: center; gap: 14px; }
+  .rot::after { content: ""; flex: 1; height: 1px; background: var(--linea); }
+
+  /* Medidor de suscriptores */
+  .meter { margin: 6px 0 34px; }
+  .meter .top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+  .meter .meta { font-family: var(--serif); font-size: 64px; line-height: 1; }
+  .meter .meta small { font-family: var(--sans); font-size: 22px; color: var(--mut); letter-spacing: .14em; text-transform: uppercase; font-weight: 700; margin-left: 14px; }
+  .meter .opt { font-size: 22px; color: var(--tx2); }
+  .meter .opt b { color: var(--oro); }
+  .track { position: relative; height: 14px; border-radius: 7px; background: var(--card2); }
+  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: var(--p); border-radius: 7px; background: linear-gradient(90deg, var(--azul), var(--rojo)); }
+  .track .ghost { position: absolute; left: 0; top: 0; bottom: 0; width: var(--o, 0%); border-radius: 7px; border: 2px dashed rgba(233,198,160,.55); }
+  .track .pin { position: absolute; left: var(--p); top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--tx); box-shadow: 0 0 0 6px rgba(240,52,74,.35); }
+  .ticks { position: relative; height: 30px; margin-top: 12px; font-size: 19px; font-weight: 700; letter-spacing: .08em; color: var(--mut); }
+  .ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+  .ticks span:first-child { transform: none; }
+  .ticks span:last-child { transform: translateX(-100%); }
+
+  /* Acciones */
+  .acc { list-style: none; margin: 0; padding: 0; counter-reset: a; }
+  .acc li { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--linea); font-size: 29px; line-height: 1.42; color: var(--tx2); }
+  .acc li::before { counter-increment: a; content: counter(a, decimal-leading-zero); font-family: var(--serif); font-size: 40px; line-height: 1; color: var(--rojo); padding-top: 2px; }
+  .acc li b { color: var(--tx); font-weight: 700; }
+
+  /* Datos */
+  .datos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .dato { background: var(--card); border: 1px solid var(--linea); border-radius: 22px; padding: 22px 22px 24px; }
+  .dato .l { font-size: 18px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--oro); }
+  .dato .v { font-family: var(--serif); font-size: 50px; line-height: 1.05; margin: 10px 0 6px; }
+  .dato .d { font-size: 22px; line-height: 1.38; color: var(--tx2); }
+
+  /* Capa digital */
+  .digital { margin-top: 26px; border-radius: 24px; padding: 24px 28px; border: 1px solid rgba(110,142,251,.45);
+             background: linear-gradient(135deg, rgba(110,142,251,.14), rgba(110,142,251,.03)); display: grid; grid-template-columns: 170px 1fr; gap: 20px; align-items: start; }
+  .digital .t { font-size: 18px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--azul); padding-top: 6px; }
+  .digital p { margin: 0; font-size: 26px; line-height: 1.45; color: var(--tx2); }
+  .digital p b { color: var(--tx); }
+
+  /* Cita a la base madre */
+  .madre { position: absolute !important; left: 90px; right: 90px; bottom: 116px; display: flex; gap: 14px; align-items: center; font-size: 20px; color: var(--mut); line-height: 1.35; }
+  .madre i { font-style: normal; flex: none; font-size: 17px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--bg); background: var(--oro); border-radius: 999px; padding: 5px 14px; }
+
+  /* Portada */
+  .logo-portada { width: 300px; margin: 10px 0 120px; }
+  .indice { border-top: 1px solid var(--linea); margin-top: 10px; }
+  .indice div { display: grid; grid-template-columns: 80px 1fr auto; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--linea); }
+  .indice .n { font-family: var(--serif); font-size: 40px; color: var(--rojo); line-height: 1; }
+  .indice b { font-size: 30px; font-weight: 700; }
+  .indice span { font-size: 21px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); white-space: nowrap; }
+
+  /* Matemática: rangos */
+  .rangos { display: grid; gap: 18px; }
+  .rg { display: grid; grid-template-columns: 300px 1fr; gap: 20px; align-items: center; }
+  .rg .nom { font-size: 26px; line-height: 1.25; font-weight: 700; }
+  .rg .nom small { display: block; font-size: 20px; font-weight: 400; color: var(--mut); margin-top: 2px; }
+  .rg .bar { position: relative; height: 54px; border-radius: 12px; background: var(--card); border: 1px solid var(--linea); }
+  .rg .bar i { position: absolute; top: 8px; bottom: 8px; border-radius: 8px; background: linear-gradient(90deg, rgba(110,142,251,.9), rgba(240,52,74,.9)); }
+  .rg .bar em { position: absolute; top: 50%; transform: translateY(-50%); font-style: normal; font-size: 20px; font-weight: 900; color: #fff; white-space: nowrap; }
+  .escala { display: grid; grid-template-columns: 300px 1fr; gap: 20px; font-size: 18px; color: var(--mut); font-weight: 700; letter-spacing: .08em; }
+  .escala div { display: flex; justify-content: space-between; }
+  .hitos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .hito { background: var(--card); border: 1px solid var(--linea); border-radius: 20px; padding: 18px 12px; text-align: center; }
+  .hito .d { font-size: 18px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--oro); }
+  .hito .v { font-family: var(--serif); font-size: 46px; line-height: 1.05; margin: 8px 0 2px; }
+  .hito .o { font-size: 20px; color: var(--mut); }
+  .hito.hot { border-color: rgba(240,52,74,.6); background: linear-gradient(180deg, rgba(240,52,74,.16), rgba(240,52,74,.03)); }
+
+  /* Cita */
+  .cita { margin: 24px 0 0; padding: 26px 30px; border-radius: 24px; background: var(--card); border: 1px solid var(--linea); font-family: var(--serif); font-style: italic; font-size: 36px; line-height: 1.3; color: var(--tx); }
+  .cita small { display: block; font-family: var(--sans); font-style: normal; font-size: 20px; letter-spacing: .16em; text-transform: uppercase; color: var(--mut); font-weight: 700; margin-top: 12px; }
+
+  /* Línea de estreno */
+  .linea { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .linea div { background: var(--card); border: 1px solid var(--linea); border-radius: 16px; padding: 14px 10px; text-align: center; }
+  .linea div.hot { border-color: rgba(240,52,74,.6); background: linear-gradient(180deg, rgba(240,52,74,.2), rgba(240,52,74,.04)); }
+  .linea b { display: block; font-family: var(--serif); font-weight: 400; font-size: 34px; }
+  .linea span { display: block; font-size: 19px; line-height: 1.3; color: var(--tx2); margin-top: 4px; }
+  .mix { display: flex; height: 62px; border-radius: 16px; overflow: hidden; border: 1px solid var(--linea); }
+  .mix div { display: grid; place-items: center; text-align: center; font-size: 18px; font-weight: 700; line-height: 1.15; color: #fff; padding: 0 6px; }
+  .leyenda { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; font-size: 19px; line-height: 1.3; color: var(--tx2); }
+
+  /* Tablero */
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kpi { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; background: var(--card); border: 1px solid var(--linea); border-radius: 18px; padding: 18px 22px; }
+  .kpi span { font-size: 24px; color: var(--tx2); line-height: 1.3; }
+  .kpi b { font-family: var(--serif); font-weight: 400; font-size: 34px; color: var(--tx); white-space: nowrap; }
+  .reglas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .regla { border-radius: 20px; padding: 20px 22px; border: 1px solid var(--linea); background: var(--card); }
+  .regla b { display: block; font-family: var(--serif); font-weight: 400; font-size: 36px; color: var(--oro); line-height: 1.05; margin-bottom: 6px; }
+  .regla span { font-size: 23px; line-height: 1.4; color: var(--tx2); }
+  .hoy { margin-top: 26px; border-radius: 24px; padding: 26px 30px; background: linear-gradient(135deg, rgba(240,52,74,.22), rgba(240,52,74,.05)); border: 1px solid rgba(240,52,74,.5); }
+  .hoy .t { font-size: 19px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--oro); margin-bottom: 10px; }
+  .hoy p { margin: 0; font-size: 27px; line-height: 1.45; color: var(--tx); }
+</style>
+</head>
+<body>
+
+<!-- 01 · Portada -->
+<section class="pag">
+  <i class="filete"></i>
+  <span class="cab">Nexo Studios <b>×</b> Con Todo Respeto</span>
+  <img class="logo-portada" src="img/nexo.png" alt="Nexo Studios">
+  <div class="kick">Paso a paso · 60 días en YouTube</div>
+  <h1>El camino a los <em>4.000.</em></h1>
+  <p class="lead">Seis pasos para llevar el canal de 1.300 a 4.000 suscriptores. Cada paso tiene una meta, acciones concretas y la capa digital que lo empuja.</p>
+  <div class="meter" style="--p:57.4%; --o:100%">
+    <div class="top"><div class="meta">4.000<small>Meta base · día 60</small></div><div class="opt">Optimista: <b>6.000</b></div></div>
+    <div class="track"><i class="ghost"></i><i class="fill"></i><i class="pin"></i></div>
+    <div class="ticks"><span style="left:0">1.300 hoy</span><span style="left:27.7%">2.600 · día 30</span><span style="left:100%">6.000</span></div>
+  </div>
+  <div class="indice">
+    <div><span class="n">01</span><b>Preparar la casa</b><span>Días 1–7</span></div>
+    <div><span class="n">02</span><b>Encender la fábrica</b><span>Días 8–21</span></div>
+    <div><span class="n">03</span><b>Activar a Andrea</b><span>Desde el día 8</span></div>
+    <div><span class="n">04</span><b>Cruzar con streamers</b><span>Días 15–51</span></div>
+    <div><span class="n">05</span><b>Estrenar y amplificar</b><span>Días 52–60</span></div>
+    <div><span class="n">06</span><b>Medir y decidir</b><span>Todos los días</span></div>
+  </div>
+  <div class="madre"><i>Base madre</i><span>Plan de acción 60 días en YouTube (19 págs.) y Resumen para la reunión (5 págs.).</span></div>
+  <div class="pie"><span>Documento interno</span><span>Nov. 2026</span></div>
+</section>
+
+<!-- 02 · La matemática -->
+<section class="pag">
+  <i class="filete"></i><img class="marca" src="img/nexo.png" alt=""><span class="cab">La <b>matemática</b></span>
+  <div class="kick">De dónde salen los suscriptores</div>
+  <h2>Ningún canal solo alcanza. <em>Juntos, sí.</em></h2>
+  <p class="lead">Hay que sumar entre 2.700 y 4.700 suscriptores netos en 60 días: de 45 a 80 por día. Así se reparte la meta entre las fuentes.</p>
+  <div class="escala"><span></span><div><span>0</span><span>1.000</span><span>2.000</span><span>3.000</span></div></div>
+  <div class="rangos" style="margin-top:8px">
+    <div class="rg"><div class="nom">Instagram de Andrea<small>40–50 Stories + 8 Reels</small></div><div class="bar"><i style="left:33.3%;right:0"></i><em style="left:35%">1.000 – 3.000</em></div></div>
+    <div class="rg"><div class="nom">Shorts de YouTube<small>120–150 piezas</small></div><div class="bar"><i style="left:30%;right:16.7%"></i><em style="left:32%">900 – 2.500</em></div></div>
+    <div class="rg"><div class="nom">Largos re-editados<small>25–30 videos</small></div><div class="bar"><i style="left:23.3%;right:33.3%"></i><em style="left:25.3%">700 – 2.000</em></div></div>
+    <div class="rg"><div class="nom">Streamers<small>4–6 colaboraciones</small></div><div class="bar"><i style="left:10%;right:50%"></i><em style="left:12%">300 – 1.500</em></div></div>
+    <div class="rg"><div class="nom">IG del programa, TikTok y Facebook<small>clips diarios</small></div><div class="bar"><i style="left:10%;right:73.3%"></i><em style="left:28.5%;color:var(--tx2)">300 – 800</em></div></div>
+  </div>
+  <div class="cita">"Si 1 de cada 500 seguidores de Andrea se suscribe, son 2.800 suscriptores."<small>La palanca más grande y más barata</small></div>
+  <div class="rot">Los hitos · base / optimista</div>
+  <div class="hitos">
+    <div class="hito"><div class="d">Día 0</div><div class="v">1.300</div><div class="o">punto de partida</div></div>
+    <div class="hito"><div class="d">Día 15</div><div class="v">1.900</div><div class="o">2.200</div></div>
+    <div class="hito hot"><div class="d">Día 30</div><div class="v">2.600</div><div class="o">3.300</div></div>
+    <div class="hito"><div class="d">Día 45</div><div class="v">3.300</div><div class="o">4.500</div></div>
+    <div class="hito hot"><div class="d">Día 60</div><div class="v">4.000</div><div class="o">6.000</div></div>
+  </div>
+  <div class="datos" style="margin-top:14px">
+    <div class="dato"><div class="l">Total bruto</div><div class="v" style="font-size:42px">3.000–7.000</div><div class="d">sumando todas las fuentes</div></div>
+    <div class="dato"><div class="l">Total neto</div><div class="v" style="font-size:42px">4.000–6.000</div><div class="d">descontando a quien llega por más de una vía</div></div>
+    <div class="dato"><div class="l">Sin Andrea</div><div class="v" style="font-size:42px">2.500–3.000</div><div class="d">si no hay 4 Stories y 1 Reel por semana</div></div>
+  </div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 03 "La matemática del objetivo" · Resumen pág. 01–02.</span></div>
+  <div class="pie"><span>Con Todo Respeto</span><span>02 / 08</span></div>
+</section>
+
+<!-- 03 · Paso 1 -->
+<section class="pag">
+  <i class="filete"></i><span class="numero">01</span><img class="marca" src="img/nexo.png" alt=""><span class="cab">Paso <b>01</b> · Días 1–7</span>
+  <div class="kick">Preparar la casa</div>
+  <h2>Antes de mandar gente, el canal <em>tiene que convertir.</em></h2>
+  <div class="meter" style="--p:3.2%; --o:5.3%">
+    <div class="top"><div class="meta">1.450<small>Meta · día 7</small></div><div class="opt">Optimista: <b>1.550</b></div></div>
+    <div class="track"><i class="ghost"></i><i class="fill"></i><i class="pin"></i></div>
+  </div>
+  <ul class="acc">
+    <li><span><b>Destrabar lo crítico:</b> derechos del archivo y los crudos por escrito con Canal 9, y exportar las métricas de los últimos 90 días.</span></li>
+    <li><span><b>Ordenar el canal:</b> nombre y handle limpios, banner con promesa y días de publicación, playlists por invitado y por tema.</span></li>
+    <li><span><b>Tráiler de 60–90 s</b> con las seis confesiones más fuertes y Andrea pidiendo la suscripción.</span></li>
+    <li><span><b>Plantillas</b> de miniatura y clip vertical, y los primeros 10 Shorts publicados.</span></li>
+  </ul>
+  <div class="digital"><div class="t">Capa digital</div><p><b>Landing con un solo link</b> para todas las bios: tráiler, botón de suscripción directa y medición de qué pieza trae a cada persona.</p></div>
+  <div class="rot">Cómo sabemos que está listo</div>
+  <div class="datos">
+    <div class="dato"><div class="l">Shorts</div><div class="v">10</div><div class="d">publicados la primera semana</div></div>
+    <div class="dato"><div class="l">Invitados</div><div class="v">20</div><div class="d">ordenados según lo más buscado hoy</div></div>
+    <div class="dato"><div class="l">Condición</div><div class="v">Derechos</div><div class="d">sin permiso escrito no se publica archivo</div></div>
+  </div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 04 Motor 1 y § 13 Checklist · Resumen pág. 05.</span></div>
+  <div class="pie"><span>Con Todo Respeto</span><span>03 / 08</span></div>
+</section>
+
+<!-- 04 · Paso 2 -->
+<section class="pag">
+  <i class="filete"></i><span class="numero">02</span><img class="marca" src="img/nexo.png" alt=""><span class="cab">Paso <b>02</b> · Días 8–21</span>
+  <div class="kick">Encender la fábrica</div>
+  <h2>El archivo, convertido en <em>un clip por día.</em></h2>
+  <div class="meter" style="--p:19.1%; --o:27.7%">
+    <div class="top"><div class="meta">2.200<small>Meta · día 21</small></div><div class="opt">Optimista: <b>2.600</b></div></div>
+    <div class="track"><i class="ghost"></i><i class="fill"></i><i class="pin"></i></div>
+  </div>
+  <ul class="acc">
+    <li><span><b>2 o 3 Shorts por día:</b> la confesión, la pregunta incómoda, el quiebre, la frase bomba, Andrea cuenta y el inédito.</span></li>
+    <li><span><b>Reglas de cada clip:</b> 25–50 s, arranca en el pico, subtítulos grandes y cada Short vinculado a su episodio.</span></li>
+    <li><span><b>3 largos por semana:</b> "Versión YouTube", "Lo que no salió al aire" y un compilado temático.</span></li>
+    <li><span><b>Probar de 3 en 3:</b> el tipo de clip que supera el promedio se repite 5 veces más esa semana.</span></li>
+  </ul>
+  <div class="digital"><div class="t">Capa digital</div><p><b>El mismo clip, un corte por red:</b> Shorts, Reels y TikTok con texto adaptado, y siempre el mismo llamado: "La entrevista completa, en YouTube".</p></div>
+  <div class="rot">Cómo sabemos que funciona</div>
+  <div class="datos">
+    <div class="dato"><div class="l">Shorts</div><div class="v">+70%</div><div class="d">de las personas ven el clip en vez de deslizarlo</div></div>
+    <div class="dato"><div class="l">CTR de largos</div><div class="v">5–8%</div><div class="d">si baja de 3% a las 72 h, cambia la miniatura</div></div>
+    <div class="dato"><div class="l">Volumen</div><div class="v">35+</div><div class="d">Shorts publicados al día 15</div></div>
+  </div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 04 Motores 2 y 3, § 05 y § 06 S2–S3 · Resumen pág. 01.</span></div>
+  <div class="pie"><span>Con Todo Respeto</span><span>04 / 08</span></div>
+</section>
+
+<!-- 05 · Paso 3 -->
+<section class="pag">
+  <i class="filete"></i><span class="numero">03</span><img class="marca" src="img/nexo.png" alt=""><span class="cab">Paso <b>03</b> · Desde el día 8</span>
+  <div class="kick">Activar a Andrea</div>
+  <h2>1,4 millones de seguidores, <em>un pedido claro.</em></h2>
+  <div class="meter" style="--p:27.7%; --o:42.6%">
+    <div class="top"><div class="meta">2.600<small>Control · día 30</small></div><div class="opt">Alerta: <b>menos de 2.300</b></div></div>
+    <div class="track"><i class="ghost"></i><i class="fill"></i><i class="pin"></i></div>
+  </div>
+  <ul class="acc">
+    <li><span><b>4 a 6 Stories por semana</b> con sticker de enlace al video: Andrea a cámara, 10–15 segundos.</span></li>
+    <li><span><b>1 o 2 Reels en colaboración</b> por semana con el programa.</span></li>
+    <li><span><b>YouTube primero en la bio</b> y Story destacada "YouTube".</span></li>
+    <li><span><b>Un vivo cada 15 días</b> con un invitado, y los hitos públicos del día 30 y del día 60.</span></li>
+  </ul>
+  <div class="cita">"Subí a YouTube la entrevista completa. Me contó cosas que en la tele no salieron nunca."<small>Guion de Story · Anexo A1</small></div>
+  <div class="digital"><div class="t">Capa digital</div><p><b>Anuncios de colaboración en Meta:</b> los Reels de Andrea que mejor funcionan, promocionados con link a la landing.</p></div>
+  <div class="rot">Cómo sabemos que funciona</div>
+  <div class="datos">
+    <div class="dato"><div class="l">Clics</div><div class="v">1–3%</div><div class="d">de las vistas de cada Story tocan el link</div></div>
+    <div class="dato"><div class="l">Mínimo</div><div class="v">4 + 1</div><div class="d">Stories y Reel por semana, condición crítica</div></div>
+    <div class="dato"><div class="l">Formato</div><div class="v">A cámara</div><div class="d">en primera persona: es lo que más convierte</div></div>
+  </div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 04 Motor 4 y Anexo A1 · Resumen pág. 01 y 05.</span></div>
+  <div class="pie"><span>Con Todo Respeto</span><span>05 / 08</span></div>
+</section>
+
+<!-- 06 · Paso 4 -->
+<section class="pag">
+  <i class="filete"></i><span class="numero">04</span><img class="marca" src="img/nexo.png" alt=""><span class="cab">Paso <b>04</b> · Días 15–51</span>
+  <div class="kick">Cruzar con streamers</div>
+  <h2>Su audiencia joven, <em>conociendo a Andrea.</em></h2>
+  <div class="meter" style="--p:50%; --o:80.9%">
+    <div class="top"><div class="meta">3.650<small>Meta · día 51</small></div><div class="opt">Optimista: <b>5.100</b></div></div>
+    <div class="track"><i class="ghost"></i><i class="fill"></i><i class="pin"></i></div>
+  </div>
+  <ul class="acc">
+    <li><span><b>Lista de 30 objetivos:</b> canales como Olga, Luzu TV, Blender, Gelatina y Vorterix, y streamers de Twitch, Kick y YouTube.</span></li>
+    <li><span><b>Andrea invitada en 3 o 4 streams,</b> con mención y link al canal.</span></li>
+    <li><span><b>Clips cruzados y reacciones:</b> cada aparición se recorta para nuestros Shorts, etiquetando al anfitrión.</span></li>
+    <li><span><b>Semana 7, el piloto:</b> se graba en Nexo la primera entrevista con un streamer reconocido.</span></li>
+  </ul>
+  <div class="digital"><div class="t">Capa digital</div><p><b>YouTube Ads:</b> el tráiler, mostrado a quienes miran canales de streaming argentinos y al streamer invitado de cada semana.</p></div>
+  <div class="rot">Cómo sabemos que funciona</div>
+  <div class="datos">
+    <div class="dato"><div class="l">Colaboraciones</div><div class="v">4–6</div><div class="d">apariciones o clips cruzados</div></div>
+    <div class="dato"><div class="l">Pico</div><div class="v">48 h</div><div class="d">suscriptores sumados después de cada aparición</div></div>
+    <div class="dato"><div class="l">Regla</div><div class="v">Valor</div><div class="d">la colaboración le sirve a los dos</div></div>
+  </div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 04 Motor 5, § 06 S3–S7 y Anexo A3 · Resumen pág. 01–02.</span></div>
+  <div class="pie"><span>Con Todo Respeto</span><span>06 / 08</span></div>
+</section>
+
+<!-- 07 · Paso 5 -->
+<section class="pag">
+  <i class="filete"></i><span class="numero">05</span><img class="marca" src="img/nexo.png" alt=""><span class="cab">Paso <b>05</b> · Días 52–60</span>
+  <div class="kick">Estrenar y amplificar</div>
+  <h2>El piloto como evento, <em>no como una subida.</em></h2>
+  <div class="meter" style="--p:57.4%; --o:100%">
+    <div class="top"><div class="meta">4.000<small>Meta · día 60</small></div><div class="opt">Optimista: <b>6.000</b></div></div>
+    <div class="track"><i class="ghost"></i><i class="fill"></i><i class="pin"></i></div>
+  </div>
+  <div class="rot" style="margin-top:4px">La secuencia del estreno</div>
+  <div class="linea">
+    <div><b>−72 h</b><span>Estreno programado y tráiler</span></div>
+    <div><b>−24 h</b><span>Teasers de los dos canales</span></div>
+    <div><b>−1 h</b><span>Story con link de Andrea</span></div>
+    <div class="hot"><b>Día 53</b><span>Premiere con chat en vivo</span></div>
+    <div><b>+24 h</b><span>Primeros 3 Shorts</span></div>
+    <div><b>+7 días</b><span>10+ Shorts y métricas</span></div>
+  </div>
+  <div class="rot">Publicidad: solo para amplificar lo que ya funciona</div>
+  <div class="mix">
+    <div style="width:20%;background:#5b77e6">Shorts<br>20%</div>
+    <div style="width:25%;background:#d92f45">Tráiler<br>25%</div>
+    <div style="width:15%;background:#7a6fd8">Remarketing<br>15%</div>
+    <div style="width:25%;background:#b8475a">Meta<br>25%</div>
+    <div style="width:15%;background:#4b4f60">TikTok<br>15%</div>
+  </div>
+  <p style="font-size:24px;line-height:1.45;color:var(--tx2);margin:14px 0 0">Pauta opcional de <b style="color:var(--tx)">USD 300 a 800 en 60 días</b>, solo en piezas con buena retención. No se compran suscriptores: se paga para que el episodio llegue a quien corresponde.</p>
+  <div class="rot">Lo que queda el día 60</div>
+  <div class="datos">
+    <div class="dato"><div class="l">Piloto</div><div class="v">7 días</div><div class="d">de métricas al cierre</div></div>
+    <div class="dato"><div class="l">Media kit</div><div class="v">2–4 pp.</div><div class="d">alcance y audiencia combinados</div></div>
+    <div class="dato"><div class="l">Deck</div><div class="v">Formato</div><div class="d">"Edición Streamers" para vender</div></div>
+  </div>
+  <div class="cita">"Un formato probado en televisión, con una conductora de 1,4 millones de seguidores, que en 60 días multiplicó por 3 a 4 su comunidad en YouTube."<small>El relato que vendemos · Plan 60 días § 12</small></div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 04 Motor 7, § 06 S8–S9 y § 12 · Resumen pág. 02 y 05.</span></div>
+  <div class="pie"><span>Con Todo Respeto</span><span>07 / 08</span></div>
+</section>
+
+<!-- 08 · Paso 6 -->
+<section class="pag">
+  <i class="filete"></i><span class="numero">06</span><img class="marca" src="img/nexo.png" alt=""><span class="cab">Paso <b>06</b> · Todos los días</span>
+  <div class="kick">Medir y decidir</div>
+  <h2>Lo que funciona se repite. <em>Lo que no, se corta.</em></h2>
+  <div class="kpis">
+    <div class="kpi"><span>Suscriptores netos por día</span><b>+45 a +80</b></div>
+    <div class="kpi"><span>CTR de los largos</span><b>5–8%</b></div>
+    <div class="kpi"><span>Retención a los 30 s</span><b>+65%</b></div>
+    <div class="kpi"><span>Duración media</span><b>35–45%</b></div>
+    <div class="kpi"><span>Clics en Stories</span><b>1–3%</b></div>
+    <div class="kpi"><span>Público de 18 a 34</span><b>+10 pts</b></div>
+  </div>
+  <div class="rot">Cuatro reglas de decisión</div>
+  <div class="reglas">
+    <div class="regla"><b>72 horas</b><span>CTR menor a 3%: se cambian la miniatura y el título.</span></div>
+    <div class="regla"><b>Duplicar</b><span>Si una pieza duplica el promedio, se hacen 3 a 5 más.</span></div>
+    <div class="regla"><b>Cortar</b><span>Un formato tres semanas debajo del promedio se reemplaza.</span></div>
+    <div class="regla"><b>Día 30</b><span>Debajo de 2.300: más Stories y vivos, pauta y piloto adelantado.</span></div>
+  </div>
+  <div class="rot">El ritmo del equipo</div>
+  <div class="datos">
+    <div class="dato"><div class="l">Diario</div><div class="v">15'</div><div class="d">métricas, publicaciones y bloqueos</div></div>
+    <div class="dato"><div class="l">Viernes</div><div class="v">45'</div><div class="d">qué funcionó y grilla siguiente</div></div>
+    <div class="dato"><div class="l">Equipo</div><div class="v">5</div><div class="d">personas para arrancar</div></div>
+  </div>
+  <div class="hoy"><div class="t">Lo que hay que aprobar hoy</div><p>Derechos del archivo, equipo y horas, presupuesto total, el calendario mínimo de Andrea (4 Stories y 1 Reel por semana) y quién es responsable del piloto y del paquete comercial.</p></div>
+  <div class="madre"><i>Base madre</i><span>Plan 60 días § 07, § 08 y § 10 · Resumen pág. 03, 04 y 05.</span></div>
+  <div class="pie"><span>Nexo Studios · nexostudios.com.ar</span><span>08 / 08</span></div>
+</section>
+
+</body>
+</html>

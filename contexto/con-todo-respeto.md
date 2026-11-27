@@ -108,3 +108,11 @@ Media kit (2–4 págs.) · caso de crecimiento · deck "Con Todo Respeto · Edi
 - **Semana on demand:** dom TV + clips · mar "Versión YouTube" · mié grabación con streamer en Nexo · jue "Lo que no salió al aire" · vie estreno con streamer 19 h · sáb clips cruzados.
 - **Fases:** Encender (días 1–30, 2.600) · Mudar (31–60, 4.000 / techo 6.000) · Instalar (61–150, 8.000–12.000 a recalibrar).
 
+## Paso a paso hacia los suscriptores (nov. 2026)
+
+`propuestas/con-todo-respeto/Nexo_Con_Todo_Respeto_Paso_a_Paso.pdf` (fuente `paso-a-paso.html`): 8 páginas verticales con diseño editorial (títulos en DM Serif Display, texto en Lato, paleta de la base madre). **Base madre:** los dos PDFs originales (Plan 60 días y Resumen para la reunión); cada página cita la sección de donde sale.
+
+- Portada con medidor 1.300 → 4.000 (optimista 6.000) · La matemática (fuentes de suscriptores en rangos, hitos día 0/15/30/45/60, totales y escenario sin Andrea).
+- Pasos: 01 Preparar la casa (días 1–7, 1.450) · 02 Encender la fábrica (8–21, 2.200) · 03 Activar a Andrea (desde el día 8, control día 30: 2.600, alerta 2.300) · 04 Cruzar con streamers (15–51, 3.650) · 05 Estrenar y amplificar (52–60, 4.000) · 06 Medir y decidir (KPIs, reglas, ritmo y lo que hay que aprobar).
+- Cada paso suma una "capa digital" (landing, corte por red, anuncios de colaboración en Meta, YouTube Ads, mix de pauta).
+
