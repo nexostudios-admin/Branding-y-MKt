@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Con Todo Respeto · Propuesta digital on demand · Nexo Studios</title>
+<link href="fonts/lato.css" rel="stylesheet">
+<link href="estilo-base.css" rel="stylesheet">
+<style>
+  /* Propuesta digital (8 páginas). Usa la base visual de los documentos del plan. */
+  .big { font-family: var(--sora); font-weight: 900; font-size: 118px; line-height: .94; letter-spacing: -.03em; margin: 0 0 30px; }
+  .big em { font-style: normal; color: var(--rojo); }
+  .fuente { font-size: 20px; line-height: 1.4; color: var(--mut); margin-top: 14px; }
+
+  /* Tesis de portada */
+  .tesis { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: stretch; margin: 10px 0 0; }
+  .tesis .card { text-align: center; padding: 28px 16px; }
+  .tesis .card .v { font-family: var(--sora); font-weight: 900; font-size: 46px; line-height: 1.05; }
+  .tesis .card span { font-size: 25px; margin-top: 8px; }
+  .tesis .x { align-self: center; font-family: var(--sora); font-weight: 900; font-size: 54px; color: var(--oro); }
+
+  /* Embudo */
+  .embudo { display: grid; gap: 10px; justify-items: center; margin: 8px 0 0; }
+  .embudo .e { border-radius: 16px; padding: 16px 24px; text-align: center; background: var(--card); border-left: 0 !important; border-top: 5px solid var(--azul); }
+  .embudo .e:nth-child(odd) { border-top-color: var(--rojo); }
+  .embudo .e b { font-family: var(--sora); font-weight: 900; font-size: 30px; display: block; }
+  .embudo .e span { font-size: 24px; color: var(--tx2); display: block; line-height: 1.32; margin-top: 2px; }
+  .embudo .e.fin { background: color-mix(in srgb, var(--rojo) 16%, var(--card)); }
+
+  /* Principios */
+  .prin { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .prin .card .n { display: inline; font-family: var(--sora); font-weight: 900; color: var(--rojo); margin-right: 10px; font-size: inherit; }
+
+  /* Plataformas */
+  .plat { display: grid; gap: 12px; }
+  .pl { display: grid; grid-template-columns: 210px 1fr; gap: 20px; background: var(--card); border-radius: 18px; padding: 18px 22px; border-left: 6px solid var(--azul); align-items: center; }
+  .pl:nth-child(odd) { border-left-color: var(--rojo); }
+  .pl .nom { font-family: var(--sora); font-weight: 900; font-size: 32px; line-height: 1.05; }
+  .pl .nom small { display: block; font-family: var(--cond); font-weight: 900; font-size: 20px; letter-spacing: .12em; text-transform: uppercase; color: var(--oro); margin-top: 6px; }
+  .pl .det { font-size: 25px; line-height: 1.38; color: var(--tx2); }
+  .pl .det b { color: var(--tx); }
+  .pl .kpi { display: inline-block; margin-top: 6px; font-size: 21px; font-weight: 700; color: var(--acento); }
+
+  /* Anatomía de un Short */
+  .short { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: start; }
+  .tel { width: 300px; height: 533px; border-radius: 34px; background: var(--card); border: 3px solid var(--card2); position: relative; overflow: hidden; }
+  .tel .z { position: absolute; left: 14px; right: 14px; border-radius: 12px; display: grid; place-items: center; text-align: center; font-family: var(--cond); font-weight: 900; font-size: 19px; letter-spacing: .08em; text-transform: uppercase; padding: 6px; }
+  .tel .z1 { top: 40px; height: 70px; background: color-mix(in srgb, var(--azul) 35%, transparent); }
+  .tel .z2 { top: 124px; height: 250px; background: var(--card2); color: var(--mut); }
+  .tel .z3 { top: 388px; height: 60px; background: color-mix(in srgb, var(--oro) 35%, transparent); }
+  .tel .z4 { bottom: 14px; height: 52px; background: color-mix(in srgb, var(--rojo) 40%, transparent); }
+  .tl { list-style: none; margin: 0; padding: 0; }
+  .tl li { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--linea); font-size: 26px; line-height: 1.36; color: var(--tx2); }
+  .tl li b.t { font-family: var(--sora); font-weight: 900; color: var(--rojo); font-size: 26px; }
+  .tl li span b { color: var(--tx); }
+  .tipos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tipos div { background: var(--card); border-radius: 14px; padding: 14px 16px; font-size: 23px; line-height: 1.3; color: var(--tx2); border-top: 4px solid var(--azul); }
+  .tipos div:nth-child(odd) { border-top-color: var(--rojo); }
+  .tipos b { display: block; color: var(--tx); font-size: 25px; margin-bottom: 2px; }
+
+  /* Landing */
+  .landing { display: grid; grid-template-columns: 330px 1fr; gap: 30px; align-items: start; }
+  .movil { width: 330px; border-radius: 34px; background: #0f0f13; border: 3px solid var(--card2); padding: 18px 14px; display: grid; gap: 8px; }
+  .movil div { border-radius: 10px; padding: 10px 12px; font-size: 18px; line-height: 1.25; color: var(--tx2); background: var(--card); }
+  .movil .hero { height: 150px; display: grid; place-items: center; text-align: center; background: linear-gradient(160deg, color-mix(in srgb, var(--rojo) 40%, var(--card)), var(--card)); color: #fff; font-weight: 900; font-size: 22px; }
+  .movil .btn { background: var(--rojo); color: #fff; text-align: center; font-weight: 900; font-size: 20px; }
+  .movil .cd { border: 2px solid var(--azul); text-align: center; }
+  .movil .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: none; padding: 0; }
+  .movil .grid i { display: block; height: 58px; border-radius: 8px; background: var(--card2); }
+  .movil .wa { border: 2px solid var(--oro); text-align: center; }
+  .bloques { list-style: none; margin: 0; padding: 0; counter-reset: b; }
+  .bloques li { position: relative; padding: 10px 0 10px 50px; border-bottom: 1px solid var(--linea); font-size: 25px; line-height: 1.36; color: var(--tx2); }
+  .bloques li::before { counter-increment: b; content: counter(b); position: absolute; left: 0; top: 10px; width: 36px; height: 36px; border-radius: 50%; background: var(--rojo); color: #fff; font-weight: 900; font-size: 20px; display: grid; place-items: center; }
+  .bloques li b { color: var(--tx); }
+
+  /* Publicidad */
+  .camp { display: grid; gap: 12px; }
+  .cp { background: var(--card); border-radius: 18px; padding: 18px 22px; border-left: 6px solid var(--azul); }
+  .cp:nth-child(odd) { border-left-color: var(--rojo); }
+  .cp .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .cp b { font-family: var(--sora); font-weight: 900; font-size: 30px; }
+  .cp .pct { font-family: var(--sora); font-weight: 900; font-size: 34px; color: var(--oro); white-space: nowrap; }
+  .cp .meta { font-family: var(--cond); font-weight: 900; font-size: 20px; letter-spacing: .12em; text-transform: uppercase; color: var(--acento); margin: 4px 0 6px; }
+  .cp span { display: block; font-size: 24px; line-height: 1.38; color: var(--tx2); }
+  .barra-pres { display: flex; height: 46px; border-radius: 12px; overflow: hidden; margin: 6px 0 4px; font-weight: 900; font-size: 20px; color: #fff; }
+  .barra-pres div { display: grid; place-items: center; }
+
+  /* On demand: semana y canal */
+  .semana { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .dia { background: var(--card); border-radius: 14px; padding: 14px 8px; text-align: center; border-top: 5px solid var(--azul); min-height: 200px; }
+  .dia.tv { border-top-color: var(--oro); background: color-mix(in srgb, var(--oro) 10%, var(--card)); }
+  .dia.g { border-top-color: var(--rojo); background: color-mix(in srgb, var(--rojo) 12%, var(--card)); }
+  .dia b { font-family: var(--cond); font-weight: 900; font-size: 22px; letter-spacing: .1em; text-transform: uppercase; color: var(--oro); display: block; margin-bottom: 8px; }
+  .dia span { font-size: 21px; line-height: 1.28; color: var(--tx2); display: block; }
+  .niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  /* Fases */
+  .fases { display: grid; gap: 12px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Portada -->
+<section class="pag oscura">
+  <span class="num">01 / 08</span>
+  <img class="logo-portada" src="img/nexo.png" alt="Nexo Studios">
+  <div class="kick">Propuesta digital · On demand</div>
+  <h1 class="big">De la tele <em>al teléfono.</em></h1>
+  <p class="lead">Una estrategia para que Con Todo Respeto deje de depender del domingo en El Nueve y viva toda la semana en YouTube, Shorts y redes, con streamers como puente hacia una audiencia nueva.</p>
+  <div class="tesis">
+    <div class="card"><div class="v">La TV</div><span>es la vidriera: da prestigio y alcance.</span></div>
+    <div class="x">→</div>
+    <div class="card" style="border-color:var(--rojo)"><div class="v" style="color:var(--rojo)">YouTube</div><span>es la casa: ahí se suscriben y vuelven.</span></div>
+  </div>
+  <div class="et">Lo que integra esta propuesta</div>
+  <div class="grid2">
+    <div class="card"><b>El modelo</b><span>Cómo la TV actual ya vive en redes.</span></div>
+    <div class="card"><b>El ecosistema</b><span>Qué hace cada red y cómo se conectan.</span></div>
+    <div class="card"><b>Shorts y landing</b><span>La fábrica de clips y la página que convierte.</span></div>
+    <div class="card"><b>Publicidad</b><span>YouTube Ads, Meta y TikTok con un mismo objetivo.</span></div>
+  </div>
+  <p class="nota" style="margin-top:24px"><b>Una sola meta:</b> pasar la audiencia de la televisión al canal de YouTube y sumar público joven entrevistando a streamers.</p>
+  <div class="pie"><span>Nexo Studios × Con Todo Respeto</span><span>Documento interno · Nov. 2026</span></div>
+</section>
+
+<!-- 2 · El modelo -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">02 / 08</span>
+  <div class="kick">El modelo · La tendencia Pergolini</div>
+  <h2>El rating es la vidriera. El negocio está en las redes.</h2>
+  <p class="lead">Otro Día Perdido mide 4–5 puntos en El Trece, pero sus fragmentos se viralizan: la producción informa más de 19 millones de visualizaciones online, y el propio Pergolini pide suscriptores en cámara y en TikTok.</p>
+  <div class="et">Cuatro reglas que tomamos</div>
+  <div class="prin">
+    <div class="card"><b><span class="n">01</span>Cada bloque es un clip</b><span>Se graba pensando en el recorte, no solo en el aire.</span></div>
+    <div class="card"><b><span class="n">02</span>La conductora pide</b><span>Andrea pide la suscripción con su cara y con su voz.</span></div>
+    <div class="card"><b><span class="n">03</span>Un corte por red</b><span>El mismo momento, editado distinto para cada plataforma.</span></div>
+    <div class="card"><b><span class="n">04</span>Vive toda la semana</b><span>El programa no se termina cuando sale de la pantalla.</span></div>
+  </div>
+  <div class="et">El recorrido de Con Todo Respeto</div>
+  <div class="embudo">
+    <div class="e" style="width:100%"><b>TV · El Nueve, domingo</b><span>Público de 45 a 70 años que ya conoce el ciclo</span></div>
+    <div class="e" style="width:90%"><b>Instagram · Andrea 1,4 M + programa 15,7 K</b><span>Stories con link, Reels en colaboración</span></div>
+    <div class="e" style="width:80%"><b>Shorts, Reels y TikTok</b><span>2 o 3 clips por día para descubrir el programa</span></div>
+    <div class="e" style="width:70%"><b>Landing + YouTube</b><span>Suscripción en un toque</span></div>
+    <div class="e fin" style="width:60%"><b>Episodio con streamer</b><span>On demand, todas las semanas</span></div>
+  </div>
+  <p class="fuente">Fuente de la referencia: notas de prensa de 2026 (Perfil, El Economista, Infobae).</p>
+  <div class="pie"><span>El modelo</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 3 · El ecosistema -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">03 / 08</span>
+  <div class="kick">El ecosistema</div>
+  <h2>Cada red tiene un trabajo distinto.</h2>
+  <p class="lead">No se publica lo mismo en todos lados. Cada plataforma cumple un rol dentro del recorrido y se mide por una sola cosa.</p>
+  <div class="plat">
+    <div class="pl"><div class="nom">YouTube<small>La casa</small></div><div class="det"><b>Episodios con streamers, "Versión YouTube", "Lo que no salió al aire", Shorts y podcast.</b> 3 largos por semana.<br><span class="kpi">Mide: suscriptores y horas de visualización</span></div></div>
+    <div class="pl"><div class="nom">TikTok<small>El descubrimiento</small></div><div class="det"><b>Los mismos clips, con texto y audio adaptados.</b> Donde más rápido se llega a 18–30 años.<br><span class="kpi">Mide: vistas y clics al perfil</span></div></div>
+    <div class="pl"><div class="nom">Instagram<small>La comunidad</small></div><div class="det"><b>Andrea + cuenta del programa:</b> 4–6 Stories con link, 1–2 Reels en colaboración, vivos cada 15 días.<br><span class="kpi">Mide: toques en el enlace</span></div></div>
+    <div class="pl"><div class="nom">Facebook<small>El público de TV</small></div><div class="det"><b>Reels y episodios largos</b> para el público de 45 a 70 años que hoy mira El Nueve.<br><span class="kpi">Mide: minutos vistos</span></div></div>
+    <div class="pl"><div class="nom">Twitch, Kick y YouTube<small>Los streamers</small></div><div class="det"><b>Andrea invitada en sus streams</b> y reacciones cruzadas. Cada aparición se recorta para nuestros Shorts.<br><span class="kpi">Mide: picos de suscriptores en 48 h</span></div></div>
+  </div>
+  <div class="et">El volumen de una semana</div>
+  <div class="grid3">
+    <div class="stat"><div class="v ro">15–21</div><div class="l">verticales en Shorts, Reels y TikTok</div></div>
+    <div class="stat"><div class="v az">3</div><div class="l">largos en YouTube</div></div>
+    <div class="stat"><div class="v or">4–6</div><div class="l">Stories de Andrea con link</div></div>
+  </div>
+  <p class="nota"><b>Todo apunta al mismo lugar:</b> cada pieza, en cualquier red, termina con un mismo llamado: "La entrevista completa, en YouTube".</p>
+  <div class="pie"><span>El ecosistema</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 4 · Shorts -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">04 / 08</span>
+  <div class="kick">La fábrica de Shorts</div>
+  <h2>Un clip por momento fuerte, todos los días.</h2>
+  <div class="short">
+    <div class="tel">
+      <div class="z z1">Invitado + promesa</div>
+      <div class="z z2">El momento<br>(arranca en el pico)</div>
+      <div class="z z3">Subtítulos</div>
+      <div class="z z4">"Completa en YouTube"</div>
+    </div>
+    <ul class="tl">
+      <li><b class="t">0–2 s</b><span><b>El gancho:</b> la frase más fuerte, sin contexto previo.</span></li>
+      <li><b class="t">2–40 s</b><span><b>El momento:</b> la confesión, la reacción o la respuesta.</span></li>
+      <li><b class="t">40–50 s</b><span><b>Final abierto</b> o en loop, para que se vea dos veces.</span></li>
+      <li><b class="t">Después</b><span><b>Video relacionado</b> que lleva al episodio y un comentario fijado.</span></li>
+    </ul>
+  </div>
+  <div class="et">Seis tipos de clip para rotar</div>
+  <div class="tipos">
+    <div><b>La confesión</b>"Nunca le conté esto a nadie…"</div>
+    <div><b>La pregunta incómoda</b>Andrea pregunta, el invitado duda.</div>
+    <div><b>El quiebre</b>Silencio, llanto o risa nerviosa.</div>
+    <div><b>La frase bomba</b>Texto grande que abre el debate.</div>
+    <div><b>El streamer reacciona</b>Al archivo de TV, a pantalla partida.</div>
+    <div><b>Inédito</b>"Esto no salió en la tele."</div>
+  </div>
+  <div class="et">El ritmo</div>
+  <div class="grid3">
+    <div class="stat"><div class="v ro">24 h</div><div class="l">del domingo de TV a los primeros 3 clips</div></div>
+    <div class="stat"><div class="v az">2–3</div><div class="l">clips por día en Shorts, Reels y TikTok</div></div>
+    <div class="stat"><div class="v or">3 en 3</div><div class="l">el tipo que funciona se repite 5 veces más</div></div>
+  </div>
+  <div class="pie"><span>Shorts</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 5 · Landing -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">05 / 08</span>
+  <div class="kick">La landing</div>
+  <h2>Un solo link que convierte en un toque.</h2>
+  <p class="lead">El link de todas las bios y de toda la publicidad. Una página pensada para el celular, con un único objetivo: suscribirse al canal.</p>
+  <div class="landing">
+    <div class="movil">
+      <div class="hero">Tráiler 30 s<br>"Lo que nunca se animaron a contar"</div>
+      <div class="btn">Suscribite en YouTube</div>
+      <div class="cd">Próximo streamer · viernes 19 h</div>
+      <div class="grid"><i></i><i></i><i></i><i></i></div>
+      <div>Lo que no salió al aire</div>
+      <div class="wa">Proponé tu streamer · canal de WhatsApp</div>
+      <div>Escuchalo en podcast · Sponsors</div>
+    </div>
+    <ul class="bloques">
+      <li><b>Tráiler arriba,</b> con sonido opcional y subtítulos.</li>
+      <li><b>Botón de suscripción directa</b> al canal (con el enlace que abre la confirmación).</li>
+      <li><b>Cuenta regresiva</b> al próximo episodio con streamer.</li>
+      <li><b>Los 4 episodios más vistos</b> y la serie "Lo que no salió al aire".</li>
+      <li><b>Participación:</b> votar al próximo streamer y sumarse al canal de difusión.</li>
+      <li><b>Podcast y espacio para sponsors.</b></li>
+    </ul>
+  </div>
+  <div class="et">Medición desde el día 1</div>
+  <div class="grid3">
+    <div class="card"><b>UTM por pieza</b><span>Sabemos qué Story, Reel o anuncio trajo a cada persona.</span></div>
+    <div class="card"><b>Píxeles</b><span>Google y Meta instalados para armar audiencias de remarketing.</span></div>
+    <div class="card"><b>Dominio propio</b><span>Corto y fácil de decir en TV y en los vivos.</span></div>
+  </div>
+  <div class="pie"><span>Landing</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 6 · Publicidad -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">06 / 08</span>
+  <div class="kick">Publicidad · YouTube Ads, Meta y TikTok</div>
+  <h2>Pagar solo para amplificar lo que ya funciona.</h2>
+  <p class="lead">Se promocionan las piezas que ya demostraron buena retención. Nunca se compran suscriptores: se paga para que la persona correcta vea el episodio correcto.</p>
+  <div class="barra-pres">
+    <div style="width:20%;background:var(--azul)">1 · 20%</div>
+    <div style="width:25%;background:var(--rojo)">2 · 25%</div>
+    <div style="width:15%;background:#8b5cf6">3 · 15%</div>
+    <div style="width:25%;background:#c2410c">4 · 25%</div>
+    <div style="width:15%;background:#5c6070">5 · 15%</div>
+  </div>
+  <div class="camp">
+    <div class="cp"><div class="top"><b>1 · Descubrimiento en Shorts</b><span class="pct">20%</span></div><div class="meta">YouTube Ads · vistas · Argentina 18–34</div><span>Los mejores Shorts como anuncio, para que YouTube aprenda a quién mostrar el canal.</span></div>
+    <div class="cp"><div class="top"><b>2 · El tráiler para fans de streamers</b><span class="pct">25%</span></div><div class="meta">YouTube Ads · in-stream omitible · segmentos personalizados</div><span>Personas que buscan o miran canales de streaming argentinos y al streamer invitado de la semana.</span></div>
+    <div class="cp"><div class="top"><b>3 · Remarketing a la suscripción</b><span class="pct">15%</span></div><div class="meta">YouTube Ads · audiencias del canal</div><span>A quien ya vio un Short o un episodio, se le muestra el siguiente episodio completo.</span></div>
+    <div class="cp"><div class="top"><b>4 · Anuncios de colaboración en Meta</b><span class="pct">25%</span></div><div class="meta">Instagram y Facebook · Reels de Andrea</div><span>Los Reels de Andrea promocionados con link a la landing, para su audiencia y públicos parecidos.</span></div>
+    <div class="cp"><div class="top"><b>5 · Spark Ads en TikTok</b><span class="pct">15%</span></div><div class="meta">TikTok · clips orgánicos que ya funcionan</div><span>Se impulsa el clip que ya rinde, desde la cuenta del programa o del streamer.</span></div>
+  </div>
+  <div class="grid3" style="margin-top:16px">
+    <div class="stat"><div class="v az">USD 300</div><div class="l">mínimo en 60 días</div></div>
+    <div class="stat"><div class="v ro">USD 800</div><div class="l">recomendado en 60 días</div></div>
+    <div class="stat"><div class="v or">72 h</div><div class="l">para cortar el anuncio que no rinde</div></div>
+  </div>
+  <div class="pie"><span>Publicidad</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 7 · On demand + streamers -->
+<section class="pag oscura">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">07 / 08</span>
+  <div class="kick">On demand · El puente con streamers</div>
+  <h2>Un programa que se mira cuando cada uno quiere.</h2>
+  <div class="et">La semana de un episodio</div>
+  <div class="semana">
+    <div class="dia tv"><b>Dom</b><span>El Nueve en TV y primeros clips</span></div>
+    <div class="dia"><b>Lun</b><span>Clips del domingo y encuesta</span></div>
+    <div class="dia"><b>Mar</b><span>"Versión YouTube" del archivo</span></div>
+    <div class="dia"><b>Mié</b><span>Grabación con streamer en Nexo</span></div>
+    <div class="dia"><b>Jue</b><span>"Lo que no salió al aire"</span></div>
+    <div class="dia g"><b>Vie</b><span>Estreno con streamer, 19 h</span></div>
+    <div class="dia"><b>Sáb</b><span>Clips cruzados con el streamer</span></div>
+  </div>
+  <div class="et">Por qué streamers</div>
+  <ul class="lista">
+    <li>Traen <b>una audiencia de 18 a 34 años</b> que no mira El Nueve.</li>
+    <li>Cada episodio se publica <b>en colaboración</b>: aparece en el canal y en las redes de los dos.</li>
+    <li>El streamer reacciona al archivo de TV: <b>el pasado del programa se vuelve contenido nuevo.</b></li>
+  </ul>
+  <div class="et">Tres niveles de invitados</div>
+  <div class="niveles">
+    <div class="card"><b>Grandes</b><span>1 por mes. Arrastran audiencia y abren la temporada.</span></div>
+    <div class="card"><b>Medianos</b><span>2 por mes. Comunidad fiel y más disponibilidad.</span></div>
+    <div class="card"><b>Emergentes</b><span>1 por mes. Crecen con nosotros y comparten todo.</span></div>
+  </div>
+  <div class="et">Así se ordena el canal</div>
+  <div class="grid2">
+    <div class="card"><b>Edición Streamers</b><span>La temporada nueva, en orden y con tráiler.</span></div>
+    <div class="card"><b>Lo que no salió al aire</b><span>La serie exclusiva: la razón para suscribirse.</span></div>
+    <div class="card"><b>Por invitado y por tema</b><span>Adicciones, amor, fama, familia: para buscar y quedarse.</span></div>
+    <div class="card"><b>Podcast</b><span>Los episodios en audio, también en YouTube Music.</span></div>
+  </div>
+  <p class="nota"><b>La regla:</b> que cada colaboración le sirva a los dos. Si hay pago o canje, se declara como publicidad.</p>
+  <div class="pie"><span>On demand</span><span>Con Todo Respeto</span></div>
+</section>
+
+<!-- 8 · Fases y medición -->
+<section class="pag clara">
+  <img class="marca" src="img/nexo.png" alt=""><span class="num">08 / 08</span>
+  <div class="kick">Fases y medición</div>
+  <h2>Tres fases, una pregunta: ¿se mudó la audiencia?</h2>
+  <div class="ruta">
+    <div class="paso hot" data-n="1"><div class="top"><b>Encender</b><span class="d">Días 1–30</span></div><span>Canal optimizado, landing activa, fábrica de clips diaria y primeras apariciones de Andrea en streams.</span><div class="m">Meta: 2.600 suscriptores</div></div>
+    <div class="paso" data-n="2"><div class="top"><b>Mudar</b><span class="d">Días 31–60</span></div><span>Primer episodio con streamer, publicidad en marcha y estreno como evento.</span><div class="m">Meta: 4.000 (techo 6.000)</div></div>
+    <div class="paso hot" data-n="3"><div class="top"><b>Instalar</b><span class="d">Días 61–150</span></div><span>Temporada de 8 episodios con streamers, sponsors y expansión al resto del mundo hispano.</span><div class="m">Meta: 8.000–12.000, a recalibrar</div></div>
+  </div>
+  <div class="et">Cómo sabemos que funciona</div>
+  <table class="t">
+    <tr><th>Señal</th><th>Objetivo</th></tr>
+    <tr><td>Suscriptores netos por día</td><td>+45 a +80</td></tr>
+    <tr><td>Tráfico al canal desde Instagram y la landing</td><td>En subida semana a semana</td></tr>
+    <tr><td>Público de 18 a 34 años en el canal</td><td>+10 puntos en 60 días</td></tr>
+    <tr><td>Episodio con streamer vs. archivo de TV</td><td>Rinde el doble</td></tr>
+    <tr><td>Costo por suscriptor que llega por publicidad</td><td>Bajando cada semana</td></tr>
+  </table>
+  <p class="nota"><b>Para aprobar hoy:</b> presupuesto de publicidad, compromiso de Andrea (4 Stories y 1 Reel por semana), dominio de la landing y lista de los primeros 10 streamers.</p>
+  <div class="pie"><span>Nexo Studios · nexostudios.com.ar</span><span>IG @nexo.studios.ar</span></div>
+</section>
+
+</body>
+</html>

@@ -97,3 +97,14 @@ Media kit (2–4 págs.) · caso de crecimiento · deck "Con Todo Respeto · Edi
 - **Salidas por episodio:** largo en YouTube, 12–15 verticales, "Lo que no salió al aire", podcast y 4–6 piezas en el IG de Andrea.
 - **Temporada:** 8 episodios, 1 grabación por semana (miércoles), 2 de colchón. Arranque en 4 semanas: definir, piloto, medir, ajustar y vender.
 
+## Propuesta digital on demand (nov. 2026)
+
+`propuestas/con-todo-respeto/Nexo_Con_Todo_Respeto_Propuesta_Digital.pdf` (fuente `propuesta-digital.html`): propuesta general de 8 páginas verticales que integra el plan de 60 días, el plan de lanzamiento y la base del formato. Objetivo: pasar la audiencia de TV (El Nueve) al canal de YouTube y sumar público joven entrevistando a streamers. Toma la tendencia del modelo de Pergolini (TV como vidriera, clips y redes como negocio, el conductor pide la suscripción).
+
+- **Recorrido:** TV El Nueve → IG de Andrea y del programa → Shorts, Reels y TikTok → landing + YouTube → episodio con streamer on demand.
+- **Roles por red:** YouTube = la casa · TikTok = descubrimiento · Instagram = comunidad · Facebook = público de TV · Twitch/Kick/YouTube de streamers = puente.
+- **Landing:** link único en bios y anuncios; tráiler, botón de suscripción directa, cuenta regresiva al próximo streamer, top episodios, "proponé tu streamer", podcast y sponsors; UTM, píxeles de Google y Meta, dominio propio.
+- **Publicidad (USD 300 mínimo / 800 recomendado en 60 días):** 20% Shorts como anuncio (AR 18–34) · 25% tráiler in-stream a fans de streamers · 15% remarketing a audiencias del canal · 25% anuncios de colaboración en Meta con Reels de Andrea · 15% Spark Ads en TikTok. Se corta a las 72 h lo que no rinde; nunca se compran suscriptores.
+- **Semana on demand:** dom TV + clips · mar "Versión YouTube" · mié grabación con streamer en Nexo · jue "Lo que no salió al aire" · vie estreno con streamer 19 h · sáb clips cruzados.
+- **Fases:** Encender (días 1–30, 2.600) · Mudar (31–60, 4.000 / techo 6.000) · Instalar (61–150, 8.000–12.000 a recalibrar).
+
